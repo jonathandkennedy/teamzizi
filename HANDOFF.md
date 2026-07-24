@@ -2,7 +2,7 @@
 
 **Client:** Team Azizi (Compass) · San Diego · **CitedRealty customer #1**
 **Domain:** teamazizi.com (Jon controls registrar; site currently DOWN) · **Planned host:** Vercel
-**Project dir:** `/Users/jonkennedy/team-azizi-website/` · **Brief:** `retainer-reach/briefs/team-azizi/san-diego/location.brief.md`
+**Project dir:** `/Users/jonkennedy/team-azizi-website/` · **Repo:** [github.com/jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) (public — client-facing docs are visible; note the repo name is missing the "a") · **Brief:** `retainer-reach/briefs/team-azizi/san-diego/location.brief.md`
 **Strategy doc:** [GAMEPLAN.md](GAMEPLAN.md) — this file is *state + decisions + why*; GAMEPLAN is *the plan*.
 **Last updated:** 2026-07-24
 
@@ -23,7 +23,8 @@ Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2
 | **Client brief** | ✅ Filed — `retainer-reach/briefs/team-azizi/` |
 | **AI baseline** | ✅ Captured (absent from 14/14 queries) — `research/aiBaseline.md` |
 | **Code / site** | ❌ Not started — Phase 1 is next |
-| **Repo** | ❌ Not initialized (`git init` when Phase 1 starts) |
+| **Repo** | ✅ [jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — public, `main` |
+| **Brand assets** | ✅ Recovered from Wayback — all 34 identified assets, `assets/recovered/` (compressed copies; request originals) |
 | **GBP** | ❌ Does not exist — Phase 2 |
 
 **Next action:** Phase 1 build — design-system port → homepage → 6 neighborhood pages. Nothing blocks it.
@@ -145,7 +146,7 @@ Full detail in GAMEPLAN §4. The parts most easily got wrong:
 
 **Ours:**
 - [ ] `git init` + Vercel project at Phase 1 start
-- [ ] Recover all Wayback assets before any further link rot
+- [x] Recover all Wayback assets — done 2026-07-24, all 34 identified assets in `assets/recovered/`
 - [ ] Point DNS to Vercel at launch (Jon controls registrar)
 - [ ] Submit to GSC + Bing Webmaster immediately at launch; request re-indexing of preserved URLs
 - [ ] Lead form endpoint decision (Formspree — watch the ~50/mo free cap — vs. client CRM webhook)
