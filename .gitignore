@@ -1,0 +1,23 @@
+# Secrets — never commit
+.env
+.env.*
+*.key
+*.pem
+credentials.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Build / deps
+node_modules/
+.vercel/
+__pycache__/
+*.pyc
+
+# Working files
+*_tmp.bin
+*_tmp2.bin
