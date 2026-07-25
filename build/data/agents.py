@@ -53,6 +53,7 @@ ROSTER: list[dict] = [
         "compass": "sofia-azizi",
         "photo": "/assets/img/team/headshot-sofia-azizi.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Sofia%20azizi",
     },
     {
         "slug": "zohra-azizi",
@@ -64,6 +65,7 @@ ROSTER: list[dict] = [
         "compass": "zohra-legler",  # Compass slug uses a surname variant
         "photo": "/assets/img/team/headshot-zohra-azizi.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/ZohraA",
     },
     {
         "slug": "masooma-azizi",
@@ -91,6 +93,7 @@ ROSTER: list[dict] = [
         "compass": "dari-ahranjani",
         "photo": "/assets/img/team/headshot-dari-ahranjani.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Dari%20Ahranjani",
     },
     {
         "slug": "candice-casares",
@@ -171,6 +174,7 @@ ROSTER: list[dict] = [
         "compass": "nicholas-miele",
         "photo": "/assets/img/team/headshot-nicholas-miele.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Nicholas%20Miele",
     },
     {
         "slug": "jared-stransky",
@@ -182,6 +186,7 @@ ROSTER: list[dict] = [
         "compass": "jared-stransky",
         "photo": "/assets/img/team/headshot-jared-stransky.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Jared%20Stransky",
     },
     {
         "slug": "gabriela-santiago",
@@ -242,6 +247,7 @@ ROSTER: list[dict] = [
         "compass": "michael-angotta",
         "photo": "/assets/img/team/headshot-michael-angotta.jpg",
         "farms": "del-mar",  # confirmed by client 2026-07-25
+        "zillow": "https://www.zillow.com/profile/Angotta33",
     },
     {
         "slug": "mahan-taleshpour",
