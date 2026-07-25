@@ -43,6 +43,44 @@ Del Sur Town Center · the pools and parks the community is built around · Del 
 ### Scripps Ranch (92131)
 **Lake Miramar** — the hook every ranking page leads with · the eucalyptus groves · Scripps Ranch Library · Scripps Ranch High School · Hoyt Park · the village centre
 
+---
+
+## North County — ten communities, no imagery at all
+
+Added 2026-07-25. These ten pages ship with **no hero photograph** — they render without one rather than borrowing a stock image of somewhere else. That is the honest failure mode, but it is still a failure mode, and it is now the largest visual gap on the site.
+
+**Shoot these first.** Escondido is the single largest market in the team's book (~96 closed sales) and currently has no image on a 988-word page. The priority order below is the sales record, not the scenery.
+
+### Escondido (92025, 92026, 92027, 92029) — highest priority
+**Grand Avenue in downtown Escondido** — the recognisable civic frame · the California Center for the Arts · Old Escondido Historic District streetscapes · Escondido Transit Center with a SPRINTER at the platform (it makes the rail point visually) · Daley Ranch trailhead · Kit Carson Park · the I-15/SR-78 interchange from a safe vantage · Harmony Grove Village
+
+### Oceanside (92054, 92056, 92057, 92058)
+**Oceanside Pier** — the unambiguous hook · Oceanside Harbor · the Oceanside Transit Center platforms, ideally showing more than one service (four rail lines meet there and no other North County city can say that) · South Oceanside / "South O" streetscapes on Coast Highway · Fire Mountain residential streets · Rancho del Oro
+
+### Fallbrook (92028)
+**Avocado groves on the rolling hillsides** — the identity of the place · Main Avenue in the village · Live Oak Park · Santa Margarita River Trail · large-parcel rural streetscapes showing the well-and-septic reality the page describes
+
+### San Marcos (92069, 92078)
+**San Elijo Hills town centre and the hilltop view** — this is the CFD-heavy area the 91-district page is really about · Cal State San Marcos campus · Discovery Lake · the SPRINTER at Cal State San Marcos station · older San Marcos along Mission Road, for the contrast the page draws
+
+### Carlsbad (92008, 92009, 92010, 92011)
+**Carlsbad Village and the COASTER station** · the seawall and beach at Carlsbad Boulevard · Batiquitos Lagoon · Agua Hedionda Lagoon · La Costa residential streetscapes (92009) · Bressi Ranch village centre · Aviara (92011). **Shoot all four ZIPs separately** — the page's whole argument is that they are four different markets, and one Village photo standing for all of them undercuts it.
+
+### Vista (92081, 92083, 92084)
+**Vista Village and the SPRINTER at Vista Transit Center** · the Moonlight Amphitheatre · Brengle Terrace Park · Shadowridge residential streetscapes · Guajome Regional Park
+
+### Poway (92064)
+**Old Poway Park** — the "City in the Country" motto made visible · Lake Poway · Blue Sky Ecological Reserve trailhead · Iron Mountain trailhead · rural-residential streetscapes with horse property and trail easements, which is the zoning point the page makes · Poway Road
+
+### Encinitas (92024)
+**The Cardiff Kook and the Cardiff coastline** · Swami's / Self-Realization Fellowship gardens · Moonlight Beach · Highway 101 through Leucadia under the eucalyptus · Encinitas Station · **Olivenhain separately** — semi-rural, large-lot, and the community buyers most often misjudge. Five recognised communities, so five distinct looks.
+
+### Valley Center (92082)
+**Citrus and avocado groves on large parcels** · Valley Center Community Hall · Bates Nut Farm · the SR-76 / Valley Center Road rural corridor · a Valley Center Fire Protection District station, which is the subject of the page's most distinctive passage
+
+### Ramona (92065)
+**Main Street Ramona** · the Santa Maria Valley and the surrounding hills · San Diego Country Estates · Ramona Grasslands Preserve · horse properties on acreage · Ramona Airport and the CAL FIRE Air Attack Base, which the fire passage names directly
+
 ### Also worth capturing
 Drone footage of each community for the neighborhood-page video slot — no competitor has one. The office exterior and interior at 12860 El Camino Real, for GBP. Team-at-work frames: open houses, closings, listing prep.
 
@@ -63,3 +101,5 @@ Every image that ships:
 ## Currently blocked
 
 Two recovered images show the wrong places and are held out of `site/` — the Carmel Valley one is Monterey County wine country, the 4S Ranch one is a mid-century suburb. Those two cards render a "photography pending" placeholder until replaced. See [assets/recovered/README.md](../assets/recovered/README.md).
+
+**Twelve of sixteen guides currently have no hero image**: the two above, plus all ten North County communities. `site/assets/img/neighborhoods/` holds four usable files. This is the largest open item in the brief and it is entirely a shooting problem, not a build one — `build/generate.py:HOOD_IMAGE_MISSING` lists the twelve, and removing a slug from that list is the only change needed once a photograph exists.
