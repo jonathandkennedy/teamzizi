@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import components as c  # noqa: E402
 import schema  # noqa: E402
 import textures  # noqa: E402
-from data import agents, guides, site, taxes  # noqa: E402
+from data import agents, guides, site, taxes, testimonials  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 TODAY = date.today().isoformat()
@@ -1897,6 +1897,105 @@ def build_mello_roos() -> None:
     )
 
 
+def build_testimonials() -> None:
+    """Only generated when there are real testimonials to show.
+
+    An empty testimonials page is worse than no testimonials page — it
+    advertises that nobody said anything. So if `testimonials.ENTRIES` is
+    empty this writes nothing, and the nav and footer entries stay absent
+    because validate.py's link audit would fail the build otherwise.
+
+    Note what is deliberately NOT here: no `Review` nodes, no
+    `aggregateRating`. Google prohibits aggregating reviews from other sites
+    and makes self-controlled reviews ineligible for the star feature
+    regardless. See build/data/testimonials.py for the citation.
+    """
+    if not testimonials.ENTRIES:
+        print("  (no testimonials yet — /testimonials not generated)")
+        return
+
+    lead = agents.team_lead()
+    cards = []
+    for t in testimonials.ENTRIES:
+        who = agents.by_slug(t["agent"]) if t.get("agent") else None
+        attrib = [c.esc(t["name"])]
+        if t.get("hood"):
+            attrib.append(c.esc(hood(t["hood"])["name"]))
+        if t.get("date"):
+            attrib.append(c.esc(t["date"]))
+        src = (
+            f' &middot; <a href="{t["source_url"]}" rel="nofollow noopener" '
+            f'target="_blank">{c.esc(t.get("source", "source"))}</a>'
+            if t.get("source_url") else ""
+        )
+        agent_line = (
+            f'<p class="updated">Worked with '
+            f'<a href="/agent/{who["slug"]}">{c.esc(who["name"])}</a></p>'
+            if who else ""
+        )
+        cards.append(f"""      <figure class="quote">
+        <blockquote><p>{c.esc(t["quote"])}</p></blockquote>
+        <figcaption>{" &middot; ".join(attrib)}{src}</figcaption>
+        {agent_line}
+      </figure>""")
+
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Testimonials
+    </nav>
+    <p class="eyebrow">Testimonials</p>
+    <h1>What clients have said</h1>
+    <p class="lede">
+      Every one of these was written by a client on a third-party profile,
+      and every one links back to it. Nothing here was written by us, and
+      nothing has been edited for tone.
+    </p>
+
+    <div class="quotes">
+{chr(10).join(cards)}
+    </div>
+
+    <p class="answer__source" style="margin-top:2.5rem">
+      These are reproduced from the agents&rsquo; own third-party profiles
+      with a link to each source. They deliberately carry no review
+      structured data: Google prohibits aggregating reviews from other sites,
+      and makes a business marking up reviews of itself ineligible for the
+      star feature regardless. Verify them at the source rather than taking
+      our word for it.
+    </p>
+    <p class="updated">Last updated {TODAY}</p>
+  </div>
+</section>"""
+
+    write(
+        "/testimonials",
+        c.page(
+            title="Client Testimonials | Team Azizi",
+            description=(
+                "What Team Azizi clients have said, reproduced from "
+                "third-party agent profiles with a link to each source."
+            ),
+            path="/testimonials",
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.web_page(
+                    url=f"{site.DOMAIN}/testimonials",
+                    name="Client Testimonials",
+                    author_slug=lead["slug"],
+                    updated=TODAY,
+                ),
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Testimonials", f"{site.DOMAIN}/testimonials"),
+                ]),
+            ],
+        ),
+        changefreq="monthly",
+        priority="0.7",
+    )
+
+
 def build_contact() -> None:
     """/contact was in the primary nav on all 43 pages, linking at nothing."""
     path = "/contact"
@@ -2155,6 +2254,137 @@ def build_team() -> None:
     )
 
 
+def agent_record_block(agent: dict) -> str | None:
+    """What this person has actually closed — including when we cannot say.
+
+    A zero in `sales` does NOT mean "has never sold anything". Only 779 of
+    the team's 1,009 records carry an individual attribution
+    (research/salesRecord.md), and a team lead's production is routinely
+    recorded against the team rather than the person. Printing "0 sales" for
+    Nilab Azizi would be both false and damaging, so a zero on a licensee
+    gets the team's record instead, and a zero on operations staff gets no
+    volume claim at all.
+    """
+    name = c.esc(agent["name"])
+    sales = agent.get("sales") or 0
+
+    if agent.get("operations"):
+        return c.answer_block(
+            anchor="role",
+            question=f"What does {agent['name']} do at Team Azizi?",
+            lead=(
+                f"{name} works in operations for Team Azizi in San Diego "
+                f"rather than as a licensed agent &mdash; the reason there is "
+                f"no DRE number on this page. {name} does not represent "
+                f"buyers or sellers."
+            ),
+            heading="h2",
+        )
+
+    if sales >= 1:
+        plural = "s" if sales != 1 else ""
+        return c.answer_block(
+            anchor="record",
+            question=f"How many homes has {agent['name']} sold?",
+            lead=(
+                f"{name} has {sales} closed sale{plural} recorded against "
+                f"their name in Team Azizi's San Diego County transaction "
+                f"history. That is an individual figure, not a share of the "
+                f"team total."
+            ),
+            body=(
+                "<p>Team-wide, Team Azizi has "
+                f"{site.PROOF['closed_sales']} closed sales and 2025 "
+                f"production of {site.PROOF['volume_2025']} across "
+                f"{site.PROOF['sides_2025']} sides &mdash; "
+                f"{site.PROOF['ca_rank']} on RealTrends Verified&rsquo;s "
+                f"{c.esc(site.PROOF['list_name'])}.</p>"
+            ),
+            heading="h2",
+        )
+
+    # A licensee with no attributed count. Say what is true rather than zero.
+    return c.answer_block(
+        anchor="record",
+        question=f"What is {agent['name']}'s track record?",
+        lead=(
+            f"{name} is a licensed agent with Team Azizi in San Diego "
+            f"County. Individual transaction counts are not published here "
+            f"for every member of the team, because only part of the "
+            f"team&rsquo;s history carries a per-agent attribution and a "
+            f"partial number would understate the person rather than "
+            f"inform you."
+        ),
+        body=(
+            "<p>The team&rsquo;s own record is "
+            f"{site.PROOF['closed_sales']} closed sales, with 2025 "
+            f"production of {site.PROOF['volume_2025']} across "
+            f"{site.PROOF['sides_2025']} sides &mdash; "
+            f"{site.PROOF['ca_rank']} on RealTrends "
+            f"Verified&rsquo;s {c.esc(site.PROOF['list_name'])}. Ask "
+            f"{name} directly for their own closings in your area; it is a "
+            "fair question and there is a real answer.</p>"
+        ),
+        heading="h2",
+    )
+
+
+def agent_language_block(agent: dict) -> str | None:
+    """Only for agents who speak something beyond English.
+
+    "Does anyone at Team Azizi speak Spanish?" is a real query with a real
+    answer, and it is the kind of thing a buyer needs and cannot easily find.
+    """
+    other = [
+        lang for lang in (agent.get("languages") or []) if lang != "English"
+    ]
+    if not other:
+        return None
+    spoken = " and ".join(other)
+    return c.answer_block(
+        anchor="languages",
+        question=f"Does {agent['name']} speak {other[0]}?",
+        lead=(
+            f"{c.esc(agent['name'])} works with clients in {c.esc(spoken)} as "
+            f"well as English, across Team Azizi&rsquo;s San Diego County "
+            f"markets."
+        ),
+        heading="h2",
+    )
+
+
+def agent_reach_block(agent: dict, hood_obj: dict | None) -> str:
+    name = c.esc(agent["name"])
+    dre = (
+        f"Their California DRE licence number is {agent['dre']}, which can be "
+        "checked against the state register."
+        if agent.get("dre")
+        else ""
+    )
+    where = (
+        f' They write the <a href="/neighborhoods/{hood_obj["slug"]}">'
+        f'{c.esc(hood_obj["name"])} guide</a>.'
+        if hood_obj else ""
+    )
+    return c.answer_block(
+        anchor="contact",
+        question=f"How do I contact {agent['name']} directly?",
+        lead=(
+            f"{name} of Team Azizi in San Diego County can be reached on "
+            f"{c.esc(agent['phone'])} &mdash; a direct line to the person, "
+            f"not a call centre or a shared team inbox. {dre}"
+        ),
+        body=(
+            f"<p>Team Azizi works out of the Compass office at "
+            f"{c.esc(site.STREET)}, {c.esc(site.CITY)}, across "
+            f"{len(site.ALL_AREAS)} North San Diego County communities.{where} "
+            f"Every <a href=\"/neighborhoods\">neighborhood guide</a> names "
+            f"the agent who covers that area.</p>"
+        ),
+        heading="h2",
+    )
+
+
 def build_agents() -> None:
     """One page per agent, at the old /agent/{slug} paths, which are indexed."""
     for agent in agents.ROSTER:
@@ -2179,6 +2409,12 @@ def build_agents() -> None:
             "confirmation.</p>"
         )
 
+        blocks = "\n\n".join(filter(None, [
+            agent_record_block(agent),
+            agent_language_block(agent),
+            agent_reach_block(agent, hood_obj),
+        ]))
+
         body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
   <div class="container">
     <nav aria-label="Breadcrumb" class="updated">
@@ -2197,6 +2433,12 @@ def build_agents() -> None:
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow">
+{blocks}
   </div>
 </section>"""
 
@@ -2312,6 +2554,7 @@ def main() -> int:
     build_sell()
     build_buy()
     build_concierge()
+    build_testimonials()
     build_contact()
     build_thank_you()
     build_404()

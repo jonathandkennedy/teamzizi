@@ -870,3 +870,30 @@
   .cfd-tool { padding: 1.25rem; }
   .cfd { display: block; overflow-x: auto; white-space: nowrap; }
 }
+
+/* ---- Testimonials ------------------------------------------- */
+
+.quotes { display: grid; gap: 2.5rem; margin-top: 2.5rem; }
+
+.quote {
+  margin: 0;
+  padding: 1.75rem 2rem;
+  border-left: 2px solid var(--c-gold);
+  background: var(--c-panel);
+}
+
+.quote blockquote { margin: 0; }
+
+.quote blockquote p {
+  margin: 0;
+  font-family: var(--f-display);
+  font-size: 1.1875rem;
+  line-height: 1.55;
+}
+
+.quote figcaption {
+  margin-top: 1rem;
+  font-size: var(--t-small);
+  letter-spacing: 0.04em;
+  color: var(--c-neutral);
+}
