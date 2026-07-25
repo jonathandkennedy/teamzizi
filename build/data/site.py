@@ -316,6 +316,128 @@ NEIGHBORHOODS = [
     },
 ]
 
+
+# --------------------------------------------------------------------------
+# North County expansion, added 2026-07-25.
+#
+# Ordered by the team's ACTUAL transaction record (research/salesRecord.md),
+# not by prestige. Escondido leads because ~96 of their 1,009 sales are there
+# — more than all six original target communities combined.
+#
+# `sold` is None where the per-community count has not been verified from the
+# full sales export. The page omits the track-record claim entirely rather
+# than inventing a number, which is the same rule the original six follow.
+# --------------------------------------------------------------------------
+
+NORTH_COUNTY = [
+    {
+        "slug": "escondido",
+        "name": "Escondido",
+        "zip": "92025, 92026, 92027, 92029",
+        "district": "Escondido Union School District (K-8) and Escondido Union High School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Escondido,_California",
+        "video": None,
+        "priority": 1,
+        "angle": "~96 team sales — the single largest market in the book, and no competitor in the research owns it.",
+    },
+    {
+        "slug": "oceanside",
+        "name": "Oceanside",
+        "zip": "92054, 92056, 92057, 92058",
+        "district": "Oceanside Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Oceanside,_California",
+        "video": None,
+        "priority": 2,
+        "angle": "Consistent volume across all four ZIPs; coastal North County at attainable prices.",
+    },
+    {
+        "slug": "fallbrook",
+        "name": "Fallbrook",
+        "zip": "92028",
+        "district": "Fallbrook Union Elementary and Fallbrook Union High School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Fallbrook,_California",
+        "video": None,
+        "priority": 3,
+        "angle": "Real repeat volume. Rural-residential and acreage buyers ask different questions than tract buyers.",
+    },
+    {
+        "slug": "san-marcos",
+        "name": "San Marcos",
+        "zip": "92069, 92078",
+        "district": "San Marcos Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/San_Marcos,_California",
+        "video": None,
+        "priority": 4,
+        "angle": "91 active CFDs — the most Mello-Roos-complex city in the county, and the single best place for the tax-data moat.",
+    },
+    {
+        "slug": "carlsbad",
+        "name": "Carlsbad",
+        "zip": "92008, 92009, 92010, 92011",
+        "district": "Carlsbad Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Carlsbad,_California",
+        "video": None,
+        "priority": 5,
+        "angle": "Holds the team's top sale ever ($6.1M, Obelisco Circle). Coastal at a range they genuinely transact in.",
+    },
+    {
+        "slug": "vista",
+        "name": "Vista",
+        "zip": "92081, 92083, 92084",
+        "district": "Vista Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Vista,_California",
+        "video": None,
+        "priority": 6,
+        "angle": "No CFD in the county's active list — a clean answer to the tax question, unlike its neighbours.",
+    },
+    {
+        "slug": "poway",
+        "name": "Poway",
+        "zip": "92064",
+        "district": "Poway Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Poway,_California",
+        "video": None,
+        "priority": 7,
+        "angle": "Poway Unified without the 92127 Mello-Roos load — the comparison inland buyers actually run.",
+    },
+    {
+        "slug": "encinitas",
+        "name": "Encinitas",
+        "zip": "92024",
+        "district": "Encinitas Union School District (K-6) and San Dieguito Union High School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Encinitas,_California",
+        "video": None,
+        "priority": 8,
+        "angle": "Multiple sales above $3M. The coastal market where their record is strongest after Del Mar.",
+    },
+    {
+        "slug": "valley-center",
+        "name": "Valley Center",
+        "zip": "92082",
+        "district": "Valley Center-Pauma Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Valley_Center,_California",
+        "video": None,
+        "priority": 9,
+        "angle": "Acreage buyers. Well, septic and fire-zone questions no tract-focused competitor answers.",
+    },
+    {
+        "slug": "ramona",
+        "name": "Ramona",
+        "zip": "92065",
+        "district": "Ramona Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Ramona,_California",
+        "video": None,
+        "priority": 10,
+        "angle": "Large-parcel rural. Same well/septic/fire questions as Valley Center, different market.",
+    },
+]
+
+# Everything the site covers. The original six stay first in navigation
+# because the client claims them; North County follows in record order.
+ALL_AREAS = NEIGHBORHOODS + NORTH_COUNTY
+
+NORTH_COUNTY_ORDER = [a["slug"] for a in sorted(NORTH_COUNTY, key=lambda x: x["priority"])]
+
 NAV_ORDER = [
     "carmel-valley",
     "del-mar",

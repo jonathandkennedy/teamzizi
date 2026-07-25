@@ -159,6 +159,19 @@ EXTRA = {
 }
 
 
+# North County's community-specific sub-queries are derived from the passages
+# that answer them rather than listed twice. `build/data/guides.py` holds both
+# the question and its answer, so deriving here makes drift between the two
+# impossible: a sub-query cannot exist without a passage, and a passage cannot
+# exist without being counted as coverage.
+from . import guides  # noqa: E402
+
+EXTRA.update({
+    slug: [(b["anchor"], b["question"]) for b in blocks]
+    for slug, blocks in guides.GUIDES.items()
+})
+
+
 def for_neighborhood(hood: dict) -> list[dict]:
     """Every sub-query a page must answer, with the block that owns it."""
     queries = [

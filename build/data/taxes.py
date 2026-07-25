@@ -118,3 +118,104 @@ PUSD_ADMIN = ("KeyAnalytics", "(877) 575-0265")
 
 def for_hood(slug: str) -> dict | None:
     return DISTRICTS.get(slug)
+
+# --------------------------------------------------------------------------
+# North County, added 2026-07-25 from the same County Auditor report.
+#
+# The headline: San Marcos runs 91 active districts — by far the most
+# CFD-complex city in the county, and therefore the single best place for
+# this data to be worth something.
+#
+# A caution recorded so nobody repeats the mistake: searching the report for
+# "Vista" matches CHULA VISTA, which is South Bay. Vista proper has none.
+# --------------------------------------------------------------------------
+
+DISTRICTS.update({
+    "san-marcos": {
+        "has_cfd": True,
+        "districts": [
+            ("San Marcos CFD 98-02 — dozens of numbered improvement areas", "6090-xx", "CFD Administration", "(760) 744-1050"),
+        ],
+        "note": (
+            "San Marcos carries 91 active community facilities districts in "
+            "the County Auditor's list — more than any other city in San Diego "
+            "County. Most are improvement areas within CFD 98-02, numbered "
+            "individually, and which one applies is a question about the "
+            "parcel rather than the city. Anyone quoting a single 'San Marcos "
+            "Mello-Roos figure' has not looked."
+        ),
+    },
+    "escondido": {
+        "has_cfd": True,
+        "districts": [
+            ("Escondido Union SD CFD No. 2019-1", "6121-01", "KeyAnalytics", "(877) 575-0265"),
+        ],
+        "note": (
+            "Escondido has one active district in the county list, a school "
+            "district CFD formed in 2019, so it applies to newer development "
+            "rather than the older housing stock that makes up most of the "
+            "city. Most Escondido homes carry no CFD at all."
+        ),
+    },
+    "carlsbad": {
+        "has_cfd": True,
+        "districts": [
+            ("Carlsbad CFD #1", "6010-15", "Special District Financing", "(760) 233-2630"),
+            ("Carlsbad Unified CFD #1 and #4", "6115-01 / 6115-04", "Willdan Public Info", "(866) 807-6864"),
+        ],
+        "note": (
+            "Carlsbad has three active districts — one city, two school. "
+            "Coverage is uneven across the four ZIPs, so the tax bill is the "
+            "only reliable answer for a specific address."
+        ),
+    },
+    "encinitas": {
+        "has_cfd": True,
+        "districts": [
+            ("Encinitas CFD #1", "6036-42", "Willdan Financial", "(866) 807-6864"),
+        ],
+        "note": (
+            "Encinitas has a single active district in the county list. Most "
+            "of the city's housing predates CFD formation and carries none."
+        ),
+    },
+    "valley-center": {
+        "has_cfd": True,
+        "districts": [
+            ("Valley Center Fire Protection District CFD 2000-1", "3150-02", "Joe Napier", "(760) 751-7600"),
+        ],
+        "note": (
+            "Valley Center's active district is a fire protection CFD rather "
+            "than a school or development one — which is itself the useful "
+            "signal for a buyer weighing a rural parcel: fire service here is "
+            "funded, and separately assessed."
+        ),
+    },
+    # Verified absences. Each is a fact about the county's district list, and
+    # each is more useful to a buyer than the silence every competitor offers.
+    "oceanside": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the County Auditor's active "
+        "FY 2025-26 list is named for Oceanside. For a buyer comparing "
+        "Oceanside against San Marcos or 92127, that is a real monthly "
+        "difference and it is rarely mentioned.")},
+    "vista": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "Vista. Note that searching that list for 'Vista' returns Chula Vista "
+        "districts, which are in South Bay — a confusion worth avoiding.")},
+    "fallbrook": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "Fallbrook. Rural parcels there raise different cost questions "
+        "instead — well, septic and fire insurance.")},
+    "ramona": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "Ramona. As with Fallbrook, the real cost questions on a large parcel "
+        "are well, septic and fire insurance rather than Mello-Roos.")},
+    "poway": {"has_cfd": True, "districts": [
+        ("Poway Unified CFDs — 19 active districts across the boundary", "6122-xx", "KeyAnalytics", "(877) 575-0265"),
+    ], "note": (
+        "Poway is inside Poway Unified, which administers 19 active districts "
+        "— but most of that CFD load sits in the newer 92127 communities "
+        "rather than in the city of Poway itself. That distinction is exactly "
+        "the comparison inland buyers are trying to make, and almost nobody "
+        "spells it out.")},
+})

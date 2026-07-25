@@ -161,7 +161,17 @@ def check_answer_blocks(pages: list[Path]) -> None:
     """
     from components import ANAPHORA  # noqa: PLC0415
 
-    hood_names = {h["name"].lower() for h in site.NEIGHBORHOODS}
+    hood_names = {h["name"].lower() for h in site.ALL_AREAS}
+    # A subtler failure than an opening pronoun, and one I shipped three times
+    # before catching it: the lead answers the heading conversationally and
+    # refers back to it. On the page it reads fine. Lifted into a sub-query
+    # result, where the heading is gone, "that reason" refers to nothing.
+    BACKREF = (
+        "that reason", "this reason", "for that", "the above", "said above",
+        "the question above", "that question", "this question",
+        "as the heading", "the answer is no", "the answer is yes",
+        "what you found", "what you searched",
+    )
     anchors_seen: dict[str, list[str]] = defaultdict(list)
 
     for page in pages:
@@ -182,6 +192,12 @@ def check_answer_blocks(pages: list[Path]) -> None:
                     f"{rel(page)}#{anchor}: lead answer never names the "
                     f"neighborhood, so it loses its geography when lifted: "
                     f"{lead[:70]!r}"
+                )
+            if (hit := next((b for b in BACKREF if b in lowered[:160]), None)):
+                errors.append(
+                    f"{rel(page)}#{anchor}: lead answer points back at its own "
+                    f"heading ({hit!r}) — the heading does not travel with the "
+                    f"passage, so the reference dangles: {lead[:70]!r}"
                 )
 
         for page_name, anchors in anchors_seen.items():

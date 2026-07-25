@@ -11,8 +11,10 @@ Run build/validate.py before every push.
 
 from __future__ import annotations
 
+import re
 import sys
 from datetime import date
+from html import unescape
 from pathlib import Path
 from xml.sax.saxutils import escape as xml_escape
 
@@ -20,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 import components as c  # noqa: E402
 import schema  # noqa: E402
-from data import agents, site, taxes  # noqa: E402
+from data import agents, guides, site, taxes  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 TODAY = date.today().isoformat()
@@ -38,14 +40,16 @@ def write(path: str, html: str, *, changefreq="monthly", priority="0.6") -> None
 
 
 def hood(slug: str) -> dict:
-    return next(h for h in site.NEIGHBORHOODS if h["slug"] == slug)
+    return next(h for h in site.ALL_AREAS if h["slug"] == slug)
 
 
 # Carmel Valley and 4S Ranch were removed from the recovered asset set: the
 # archived images depict Carmel Valley, Monterey County and a mid-century
 # suburb respectively. An honest placeholder beats a wrong-place photograph
 # on the page whose entire SEO problem is being confused with Monterey.
-HOOD_IMAGE_MISSING = {"carmel-valley", "4s-ranch"}
+HOOD_IMAGE_MISSING = {"carmel-valley", "4s-ranch"} | {
+    a["slug"] for a in site.NORTH_COUNTY
+}
 
 
 # --------------------------------------------------------------------------
@@ -92,7 +96,14 @@ def stat(value: str, label: str) -> str:
 
 def build_home() -> None:
     path = "/"
-    cards = "\n".join(hood_card(slug) for slug in site.NAV_ORDER)
+    # Six cards, chosen by the sold record rather than by aspiration. The full
+    # set lives on /neighborhoods; the homepage leads with the communities the
+    # team can actually evidence, which is why Escondido is first.
+    featured = sorted(
+        (s for s in SOLD_RECORD if SOLD_RECORD[s]),
+        key=lambda s: -SOLD_RECORD[s],
+    )[:6]
+    cards = "\n".join(hood_card(slug) for slug in featured)
     stats = "\n".join(
         [
             stat(site.PROOF["volume_2025"], "2025 sales volume"),
@@ -124,10 +135,12 @@ def build_home() -> None:
     <p class="eyebrow">North San Diego County</p>
     <h2>From the coast to the corridor</h2>
     <p class="lede" style="margin-inline:auto">
-      Team Azizi represents buyers and sellers across six North San Diego
-      communities &mdash; Carmel Valley, Del Mar, Rancho Santa Fe, Del Sur,
-      4S&nbsp;Ranch and Scripps Ranch &mdash; from the Compass office at
-      {c.esc(site.STREET)} in Carmel&nbsp;Valley.
+      Team Azizi represents buyers and sellers across {len(site.ALL_AREAS)}
+      North San Diego communities &mdash; from Oceanside, Carlsbad and
+      Encinitas on the coast, inland through Vista, San&nbsp;Marcos,
+      Escondido and Poway, out to Fallbrook, Valley&nbsp;Center and Ramona
+      &mdash; from the Compass office at {c.esc(site.STREET)} in
+      Carmel&nbsp;Valley.
     </p>
 
     <div class="stats">
@@ -149,15 +162,20 @@ def build_home() -> None:
 <section class="section section--panel">
   <div class="container">
     <p class="eyebrow">Neighborhood guides</p>
-    <h2 class="rule-gold">Six communities, in depth</h2>
+    <h2 class="rule-gold">{len(site.ALL_AREAS)} communities, in depth</h2>
     <p>
-      Each guide carries current market conditions, the Mello-Roos and
-      property-tax math for that community, which streets feed which schools,
-      and what we have sold there &mdash; not a search widget and a paragraph.
+      Each guide carries the Mello-Roos position for that community traced to
+      the County Auditor&rsquo;s active district list, which district assigns
+      the schools and where the boundaries actually run, and what we have sold
+      there &mdash; not a search widget and a paragraph. The six below are the
+      ones where our transaction record runs deepest.
     </p>
     <div class="grid grid--3" style="margin-top:2.5rem">
 {cards}
     </div>
+    <p style="margin-top:2rem">
+      <a class="btn" href="/neighborhoods">All {len(site.ALL_AREAS)} neighborhood guides</a>
+    </p>
   </div>
 </section>
 
@@ -237,7 +255,9 @@ def build_home() -> None:
 
 def build_neighborhood_hub() -> None:
     path = "/neighborhoods"
-    cards = "\n".join(hood_card(slug) for slug in site.NAV_ORDER)
+    corridor = "\n".join(hood_card(slug) for slug in site.NAV_ORDER)
+    north = "\n".join(hood_card(slug) for slug in site.NORTH_COUNTY_ORDER)
+    total = len(site.ALL_AREAS)
 
     body = f"""<section class="band band--hero" style="padding-top:calc(var(--nav-h) + 4rem)">
   <img class="band__media" src="/assets/img/neighborhoods/_hub-hero.jpg" alt=""
@@ -245,7 +265,7 @@ def build_neighborhood_hub() -> None:
   <div class="container">
     <h1>North San Diego Neighborhood Guides</h1>
     <p style="margin-inline:auto">
-      Six communities, from the Del Mar coast to the I&#8209;15 corridor.
+      {total} communities, from the Del Mar coast to the Ramona backcountry.
     </p>
   </div>
 </section>
@@ -258,13 +278,35 @@ def build_neighborhood_hub() -> None:
     <h2 class="rule-gold">Choose a community</h2>
     <p class="lede">
       These guides are maintained, not published once and abandoned. Each one
-      carries a dated market snapshot, the Mello-Roos and effective
-      property-tax math for that community, school attendance-boundary
-      specifics, and the homes Team Azizi has actually sold there.
+      carries the Mello-Roos position for that community traced to the County
+      Auditor&rsquo;s active district list, which district assigns the schools
+      and how the boundaries actually run, and what Team Azizi has actually
+      done there &mdash; including where that record is thin.
     </p>
-    <div class="grid grid--3" style="margin-top:2.5rem">
-{cards}
+
+    <h3 id="north-county" class="rule-gold" style="margin-top:3rem">
+      North County
+    </h3>
+    <p>
+      Inland and coastal North County &mdash; Escondido out to Ramona, and
+      the coast from Oceanside down to Encinitas. This is where the largest
+      part of the team&rsquo;s transaction history sits.
+    </p>
+    <div class="grid grid--3" style="margin-top:2rem">
+{north}
     </div>
+
+    <h3 id="i15-corridor" class="rule-gold" style="margin-top:3.5rem">
+      The I&#8209;15 corridor and the coast
+    </h3>
+    <p>
+      The 92127 master-planned communities, Scripps Ranch, and the coastal
+      stretch from Carmel Valley through Del Mar to Rancho Santa Fe.
+    </p>
+    <div class="grid grid--3" style="margin-top:2rem">
+{corridor}
+    </div>
+
     <p class="updated" style="margin-top:2.5rem">Last updated {TODAY}</p>
   </div>
 </section>"""
@@ -282,13 +324,13 @@ def build_neighborhood_hub() -> None:
         path,
         c.page(
             title=(
-                "North San Diego Neighborhood Guides — Carmel Valley, Del Mar, "
-                "Del Sur & More | Team Azizi"
+                "North San Diego Neighborhood Guides — Escondido, Carlsbad, "
+                "Oceanside, Poway & More | Team Azizi"
             ),
             description=(
-                "Maintained guides to six North San Diego communities: market "
-                "conditions, Mello-Roos and property-tax math, school "
-                "attendance boundaries and recent sales. From Team Azizi at "
+                f"Maintained guides to {total} North San Diego communities: "
+                "which Mello-Roos districts apply, which district assigns the "
+                "schools, and Team Azizi's record in each. From Team Azizi at "
                 "Compass."
             ),
             path=path,
@@ -311,7 +353,20 @@ def build_neighborhood_hub() -> None:
 SOLD_RECORD = {
     "del-sur": 18, "4s-ranch": 18,   # 92127 — not separable by ZIP
     "carmel-valley": 11, "scripps-ranch": 9, "del-mar": 6, "rancho-santa-fe": 1,
+    # North County. Escondido is the one count salesRecord.md documents; the
+    # others need the full sales export. None means the page says nothing
+    # about volume rather than guessing at it.
+    "escondido": 96,
+    "oceanside": None, "fallbrook": None, "san-marcos": None,
+    "carlsbad": None, "vista": None, "poway": None, "encinitas": None,
+    "valley-center": None, "ramona": None,
 }
+
+
+def plain(html: str) -> str:
+    """Markup and entities out, readable sentence in — for JSON-LD text."""
+    text = re.sub(r"<[^>]+>", "", html)
+    return re.sub(r"\s+", " ", unescape(text)).strip()
 
 
 def tax_block(h: dict) -> str:
@@ -364,7 +419,7 @@ def build_neighborhood(slug: str) -> None:
     agent, confirmed = agents.for_neighborhood(slug)
     name = c.esc(h["name"])
     path = f"/neighborhoods/{slug}"
-    sold = SOLD_RECORD.get(slug, 0)
+    sold = SOLD_RECORD.get(slug)
 
     video_html = ""
     if h.get("video"):
@@ -386,8 +441,11 @@ def build_neighborhood(slug: str) -> None:
   </div>
 </section>"""
 
-    # Track record, stated plainly. One sale is one sale.
-    if sold >= 9:
+    # Track record, stated plainly. One sale is one sale, and an unverified
+    # count is silence rather than a guess.
+    if sold is None:
+        record = None
+    elif sold >= 9:
         record = (
             f"Team Azizi has closed {sold} sales in {name} across the team's "
             f"Compass history."
@@ -420,11 +478,14 @@ def build_neighborhood(slug: str) -> None:
                 "relying on it."
             ),
         ),
+        # Community-specific depth. Structural facts only — which district,
+        # which boundary, which agency. See build/data/guides.py.
+        *[c.answer_block(**b) for b in guides.for_hood(slug)],
         c.answer_block(
             anchor="track-record",
             question=f"Has Team Azizi actually sold in {h['name']}?",
             lead=record,
-        ),
+        ) if record else None,
     ]))
 
     faq = [
@@ -433,6 +494,14 @@ def build_neighborhood(slug: str) -> None:
         {"q": f"What school district serves {h['name']}?",
          "a": f"{h['name']} is served by {h['district']}. Attendance is "
               "assigned by address, not by ZIP code."},
+    ]
+    # Every community-specific passage also goes into the FAQ graph. The lead
+    # is written to stand alone on the page, which is the same property the
+    # schema answer needs, so it transfers without rewriting. Entities are
+    # unescaped because JSON-LD carries text, not markup.
+    faq += [
+        {"q": b["question"], "a": plain(b["lead"])}
+        for b in guides.for_hood(slug)
     ]
 
     hero = (
@@ -529,7 +598,7 @@ def build_neighborhood(slug: str) -> None:
 
 
 def build_neighborhoods() -> None:
-    for slug in site.NAV_ORDER:
+    for slug in site.NAV_ORDER + site.NORTH_COUNTY_ORDER:
         build_neighborhood(slug)
 
 
@@ -639,10 +708,20 @@ def build_home_valuation() -> None:
         ),
     ])
 
-    hood_options = "\n".join(
-        f'          <option value="{h["slug"]}">{c.esc(h["name"])}</option>'
-        for h in [hood(s) for s in site.NAV_ORDER]
-    )
+    # Grouped rather than a flat list of sixteen: a homeowner scanning for
+    # their own city finds it faster, and the group label tells the agent
+    # reading the lead email roughly where the property is before they open it.
+    def _optgroup(label: str, slugs: list[str]) -> str:
+        opts = "\n".join(
+            f'            <option value="{h["slug"]}">{c.esc(h["name"])}</option>'
+            for h in [hood(s) for s in slugs]
+        )
+        return f'          <optgroup label="{c.esc(label)}">\n{opts}\n          </optgroup>'
+
+    hood_options = "\n".join([
+        _optgroup("North County", site.NORTH_COUNTY_ORDER),
+        _optgroup("I-15 corridor & coast", site.NAV_ORDER),
+    ])
 
     body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
   <div class="container">
