@@ -129,7 +129,8 @@ ROSTER: list[dict] = [
         "dre": None,
         "phone": "619.300.5530",
         "compass": "charisma-gallegos-sd",
-        "photo": None,
+        # From the recovered Luxury Presence assets, client-pointed 2026-07-25.
+        "photo": "/assets/img/team/headshot-charisma-gallegos.jpg",
         "farms": None,
         "operations": True,
     },
