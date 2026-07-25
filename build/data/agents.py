@@ -66,8 +66,11 @@ ROSTER: list[dict] = [
         "dre": None,
         "phone": "619.746.3669",
         "compass": "masooma-azizi",
-        "photo": None,
+        # Client-supplied studio headshot, 2026-07-25.
+        "photo": "/assets/img/team/headshot-masooma-azizi.jpg",
         "farms": None,
+        # Operations rather than a licensee — no DRE, and no farm. The page
+        # must not imply she represents buyers or sellers.
         "operations": True,
     },
     {
