@@ -317,6 +317,47 @@ def check_internal_links(pages: list[Path]) -> None:
         )
 
 
+def check_faq_matches_visible(pages: list[Path]) -> None:
+    """Every FAQPage answer must appear in the page's visible text.
+
+    Google requires FAQ structured data to match content visible on the
+    page, and the honest reason to care is simpler than the policy: markup
+    that says something the page does not say is a claim nobody can check.
+
+    This used to fail. Three FAQ lists were hand-written alongside the
+    passages they described and had drifted into paraphrase — the guides'
+    Mello-Roos answer used the note from taxes.py while the page displayed a
+    different lead sentence. They are derived from the rendered blocks now,
+    which makes a mismatch impossible by construction; this check is what
+    catches anyone reintroducing a hand-written one.
+    """
+    import html as html_mod  # noqa: PLC0415
+
+    for page in pages:
+        raw = page.read_text(encoding="utf-8")
+        stripped = re.sub(r"(?s)<script.*?</script>", "", raw)
+        visible = re.sub(
+            r"\s+", " ", html_mod.unescape(TAGS.sub(" ", stripped))
+        )
+
+        for block in LD_BLOCK.findall(raw):
+            try:
+                data = json.loads(block)
+            except json.JSONDecodeError:
+                continue  # check_jsonld already reported this
+            for node in data.get("@graph", [data]):
+                if not isinstance(node, dict) or node.get("@type") != "FAQPage":
+                    continue
+                for entry in node.get("mainEntity", []):
+                    answer = entry.get("acceptedAnswer", {}).get("text", "")
+                    probe = re.sub(r"\s+", " ", answer)[:70]
+                    if probe and probe not in visible:
+                        errors.append(
+                            f"{rel(page)}: FAQ answer is not in the visible "
+                            f"text — {probe[:60]!r}"
+                        )
+
+
 def check_headings(pages: list[Path]) -> None:
     """Exactly one h1 per page, and no skipped heading level.
 
@@ -441,6 +482,7 @@ def main() -> int:
     check_internal_links(pages)
     check_sitemap()
     check_unverified()
+    check_faq_matches_visible(pages)
     check_headings(pages)
     check_testimonials()
     check_footer_licensees()

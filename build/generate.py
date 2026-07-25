@@ -371,6 +371,33 @@ def plain(html: str) -> str:
     return re.sub(r"\s+", " ", unescape(text)).strip()
 
 
+ANSWER_Q = re.compile(
+    r'<h[1-6] class="answer__q">(?P<q>.*?)</h[1-6]>\s*'
+    r'<p class="answer__lead">(?P<a>.*?)</p>',
+    re.DOTALL,
+)
+
+
+def faq_from_blocks(blocks_html: str) -> list[dict[str, str]]:
+    """Derive the FAQPage graph from the answer blocks already on the page.
+
+    Hand-maintaining a parallel FAQ list is how the markup and the visible
+    text drift apart, and Google is explicit that FAQ structured data must
+    match content visible on the page. Reading it back out of the rendered
+    blocks makes that impossible by construction: if the passage changes,
+    the schema changes with it.
+
+    This closed a real gap. /sell, /buy, /concierge, both /properties pages
+    and all 19 agent pages carried question-and-answer content with no
+    FAQPage node at all, while the guides had one — roughly 25 pages of
+    extractable answers invisible to anything reading the graph.
+    """
+    return [
+        {"q": plain(m.group("q")), "a": plain(m.group("a"))}
+        for m in ANSWER_Q.finditer(blocks_html)
+    ]
+
+
 def tax_block(h: dict) -> str:
     """The Mello-Roos answer — the single most-asked question in 92127 and,
     per the competitor teardown, not addressed on one competitor page."""
@@ -493,21 +520,11 @@ def build_neighborhood(slug: str) -> None:
         ) if record else None,
     ]))
 
-    faq = [
-        {"q": f"Does {h['name']} have Mello-Roos?",
-         "a": (taxes.for_hood(slug) or {}).get("note", "")},
-        {"q": f"What school district serves {h['name']}?",
-         "a": f"{h['name']} is served by {h['district']}. Attendance is "
-              "assigned by address, not by ZIP code."},
-    ]
-    # Every community-specific passage also goes into the FAQ graph. The lead
-    # is written to stand alone on the page, which is the same property the
-    # schema answer needs, so it transfers without rewriting. Entities are
-    # unescaped because JSON-LD carries text, not markup.
-    faq += [
-        {"q": b["question"], "a": plain(b["lead"])}
-        for b in guides.for_hood(slug)
-    ]
+    # Derived from the rendered blocks, not hand-written alongside them.
+    # The previous version paraphrased: the Mello-Roos answer used the note
+    # from taxes.py while the page displayed a different lead sentence, which
+    # is exactly the visible-content mismatch Google's FAQ guidance forbids.
+    faq = faq_from_blocks(blocks)
 
     # Twelve communities have no photograph and are not getting a fabricated
     # one (docs/photography-brief.md). Instead of an empty band they get a
@@ -921,21 +938,7 @@ def build_home_valuation() -> None:
   </div>
 </section>"""
 
-    faq = [
-        {"q": "Why is my Zestimate wrong?",
-         "a": "An automated valuation has never been inside the house. It "
-              "works from public records and nearby sales, so it cannot see a "
-              "remodel, a view, a lot position, or which side of a school "
-              "boundary an address falls on."},
-        {"q": "Does an online estimate account for Mello-Roos?",
-         "a": "No. In Del Sur and 4S Ranch, Mello-Roos obligations vary by "
-              "community facilities district and build phase, which changes "
-              "the monthly payment a buyer can carry and therefore the price."},
-        {"q": "What do I get instead of an instant number?",
-         "a": "A comparative market analysis from the Team Azizi agent who "
-              "works your neighborhood, built from MLS sales and current "
-              "competing inventory, with the reasoning shown."},
-    ]
+    faq = faq_from_blocks(blocks)
 
     nodes = c.base_nodes() + [
         schema.web_page(
@@ -1105,6 +1108,7 @@ def build_properties() -> None:
                     author_slug=lead["slug"],
                     updated=TODAY,
                 ),
+                schema.faq_page(faq_from_blocks(sale_blocks)),
                 schema.breadcrumbs([
                     ("Home", f"{site.DOMAIN}/"),
                     ("For sale", f"{site.DOMAIN}{path}"),
@@ -1206,6 +1210,7 @@ def build_properties() -> None:
                     author_slug=lead["slug"],
                     updated=TODAY,
                 ),
+                schema.faq_page(faq_from_blocks(sold_blocks)),
                 schema.breadcrumbs([
                     ("Home", f"{site.DOMAIN}/"),
                     ("Sold", f"{site.DOMAIN}{path}"),
@@ -1298,6 +1303,7 @@ def simple_page(
                     url=f"{site.DOMAIN}{path}", name=h1,
                     author_slug=lead["slug"], updated=TODAY,
                 ),
+                schema.faq_page(faq_from_blocks(blocks)),
                 schema.breadcrumbs([
                     ("Home", f"{site.DOMAIN}/"),
                     (crumb, f"{site.DOMAIN}{path}"),
@@ -1852,22 +1858,7 @@ def build_mello_roos() -> None:
   </div>
 </section>"""
 
-    faq = [
-        {"q": "What is Mello-Roos?",
-         "a": "Mello-Roos is an additional property tax levied inside a "
-              "community facilities district, used to pay for the schools, "
-              "roads and parks a new development required. It is charged on "
-              "top of ordinary property tax and is set per parcel."},
-        {"q": "How much is Mello-Roos in San Diego County?",
-         "a": "No single figure exists. The amount varies by district, by "
-              "improvement area and by the phase a home was built in. The "
-              "authoritative number is the line item on the property tax "
-              "bill, which names the district and gives a contact number."},
-        {"q": "Which San Diego city has the most Mello-Roos districts?",
-         "a": "San Marcos, with 91 active community facilities districts in "
-              "the County Auditor's FY 2025-26 list — more than any other "
-              "city in San Diego County."},
-    ]
+    faq = faq_from_blocks(blocks)
 
     write(
         path,
@@ -2450,6 +2441,7 @@ def build_agents() -> None:
 
         nodes = c.base_nodes() + [
             schema.agent(agent, hood=hood_obj),
+            schema.faq_page(faq_from_blocks(blocks)),
             schema.breadcrumbs(
                 [
                     ("Home", f"{site.DOMAIN}/"),
