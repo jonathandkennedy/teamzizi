@@ -826,3 +826,47 @@
   /* Stop the bar covering the last line of the footer. */
   .footer { padding-bottom: 5rem; }
 }
+
+/* ---- Mello-Roos lookup --------------------------------------- */
+
+.cfd-tool {
+  margin: 2.5rem 0 3rem;
+  padding: 2rem;
+  border: 1px solid var(--c-rule);
+  background: var(--c-panel);
+}
+
+/* Panels are server-rendered and hidden, not built on demand — an AI
+   fetcher does not run JS, and an answer that only exists after a click is
+   an answer nothing can cite. */
+.cfd-panel[hidden] { display: none; }
+.cfd-panel { margin-top: 2rem; }
+
+.cfd {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-size: var(--t-small);
+  text-align: left;
+}
+
+.cfd th,
+.cfd td {
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--c-rule);
+  vertical-align: top;
+}
+
+.cfd th {
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-neutral);
+}
+
+/* A three-column table does not fit a phone; let it scroll rather than
+   forcing the page to. */
+@media (max-width: 40rem) {
+  .cfd-tool { padding: 1.25rem; }
+  .cfd { display: block; overflow-x: auto; white-space: nowrap; }
+}

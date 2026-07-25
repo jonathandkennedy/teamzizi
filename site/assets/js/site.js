@@ -176,6 +176,23 @@
     });
   }
 
+  /* Mello-Roos lookup: reveal the panel for the chosen community.
+   *
+   * All sixteen panels are already in the HTML, hidden. Nothing is fetched
+   * and nothing is built — an AI fetcher does not run JavaScript, and a
+   * lookup tool whose answers only exist after a click is a tool no model
+   * can ever cite. This is a convenience for people, not the data source. */
+  var cfdSelect = document.querySelector("[data-cfd-select]");
+  if (cfdSelect) {
+    var panels = document.querySelectorAll("[data-cfd]");
+    cfdSelect.addEventListener("change", function () {
+      var want = cfdSelect.value;
+      Array.prototype.forEach.call(panels, function (panel) {
+        panel.hidden = panel.getAttribute("data-cfd") !== want;
+      });
+    });
+  }
+
   /* Copyright year — one less thing to go stale, since the old site shipped
    * "Copyright © 2022" for four years. */
   var year = document.querySelector("[data-year]");
