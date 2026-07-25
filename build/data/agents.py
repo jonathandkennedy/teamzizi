@@ -31,6 +31,13 @@ ROSTER: list[dict] = [
         "dre": "02047962",
         "phone": "858.847.8067",
         "compass": "nilab-azizi",
+        # Zillow profile, for the "review me on Zillow" call to action on the
+        # agent page. See ZILLOW_NOTE at the bottom of this file: this is the
+        # ONLY confirmed one. Handles are not derivable from names — Melissa
+        # Lopez's Compass handle is "melissa-gutierrez" — so the other 18 stay
+        # None until the client supplies them rather than being guessed at a
+        # URL that could point to a stranger.
+        "zillow": "https://www.zillow.com/profile/nilabazizi",
         "photo": "/assets/img/team/headshot-nilab-azizi.jpg",
         "farms": None,
         "lead": True,
@@ -358,3 +365,28 @@ def unassigned() -> list[str]:
     from data import site  # local import keeps this module dependency-light
 
     return [h["slug"] for h in site.NEIGHBORHOODS if h["slug"] not in assigned]
+
+
+# --------------------------------------------------------------------------
+# Zillow profiles — CLIENT ACTION
+# --------------------------------------------------------------------------
+# Each agent page carries a "Review me on Zillow" call to action, but only
+# when a real profile URL exists on the roster entry. Right now that is one
+# person: Nilab Azizi.
+#
+# Why they are not filled in programmatically. Zillow handles do not follow
+# from names or from Compass handles — Melissa Lopez's Compass handle is
+# "melissa-gutierrez" — and Zillow returns 403 to automated requests, so
+# there is no way to look them up. A guessed URL is a link to a stranger's
+# profile with our client's name above it, which is worse than no link.
+#
+# To fill in: each agent opens their own Zillow profile and copies the URL
+# from the address bar. Add it as "zillow" on their roster entry. The CTA
+# appears on their page automatically; nothing else needs changing.
+#
+# Worth doing properly. Reviews solicited to Zillow rather than collected
+# on-site is the right pattern here on two counts: the site cannot carry
+# review schema for third-party reviews anyway (see data/testimonials.py),
+# and a populated Zillow profile is a sameAs signal that helps consolidate
+# the entity — which is the whole problem this rebuild exists to fix.
+ZILLOW_PENDING = [a["slug"] for a in ROSTER if not a.get("zillow")]

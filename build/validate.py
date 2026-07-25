@@ -275,6 +275,28 @@ def check_unverified() -> None:
     for url, reason in site.SAME_AS_PENDING:
         warnings.append(f"sameAs withheld — {url}: {reason}")
 
+    # The "review me on Zillow" CTA only renders where a real profile URL
+    # exists, so a missing one is a silently absent call to action rather
+    # than a broken page. Surfaced on every build so it does not stay
+    # forgotten, and the URL shape is checked so a typo cannot ship a link
+    # pointing at a stranger's profile under an agent's name.
+    from data import agents as _agents  # noqa: PLC0415
+
+    for person in _agents.ROSTER:
+        url = person.get("zillow")
+        if url and not url.startswith("https://www.zillow.com/profile/"):
+            errors.append(
+                f"{person['name']}'s zillow URL is not a Zillow profile URL: "
+                f"{url!r}"
+            )
+    if _agents.ZILLOW_PENDING:
+        warnings.append(
+            f"{len(_agents.ZILLOW_PENDING)} of {len(_agents.ROSTER)} agents "
+            "have no Zillow profile URL, so their pages carry no 'review me' "
+            "call to action. Each agent can copy their own profile URL from "
+            "the address bar — they cannot be guessed or looked up."
+        )
+
 
 def check_internal_links(pages: list[Path]) -> None:
     """Every internal href must resolve to a file that exists.

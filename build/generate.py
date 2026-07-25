@@ -2350,6 +2350,42 @@ def agent_language_block(agent: dict) -> str | None:
     )
 
 
+def agent_zillow_block(agent: dict) -> str | None:
+    """"Review me on Zillow" — only when a real profile URL exists.
+
+    Soliciting reviews to Zillow rather than collecting them on-site is the
+    right pattern on two counts. The site cannot carry review schema for
+    third-party reviews anyway (Google prohibits aggregating them, see
+    data/testimonials.py), and a populated Zillow profile is a `sameAs`
+    signal that helps consolidate the entity — which is the problem this
+    rebuild exists to fix.
+
+    Eighteen of nineteen agents have no URL yet. Zillow handles do not follow
+    from names or Compass handles, and Zillow 403s automated lookups, so
+    guessing one means publishing a link to a stranger's profile under our
+    client's name. Those pages simply omit the block.
+    """
+    url = agent.get("zillow")
+    if not url:
+        return None
+    name = c.esc(agent["name"])
+    return f"""<section class="answer" id="review">
+  <h2 class="answer__q">Worked with {name}? Leave a review</h2>
+  <p class="answer__lead">
+    Reviews for {name} live on Zillow rather than on this site, where they
+    can be read next to every other agent in San Diego County and where
+    nobody at Team Azizi can edit them. If {name} handled your sale or
+    purchase, that is the place to say so.
+  </p>
+  <p style="margin-top:1.25rem">
+    <a class="btn btn--filled" href="{url}" rel="nofollow noopener"
+       target="_blank">Review {name} on Zillow</a>
+    <a class="btn" href="{url}" rel="nofollow noopener"
+       target="_blank">Read existing reviews</a>
+  </p>
+</section>"""
+
+
 def agent_reach_block(agent: dict, hood_obj: dict | None) -> str:
     name = c.esc(agent["name"])
     dre = (
@@ -2410,6 +2446,7 @@ def build_agents() -> None:
             agent_record_block(agent),
             agent_language_block(agent),
             agent_reach_block(agent, hood_obj),
+            agent_zillow_block(agent),
         ]))
 
         body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
