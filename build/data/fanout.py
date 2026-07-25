@@ -162,13 +162,19 @@ EXTRA = {
 # North County's community-specific sub-queries are derived from the passages
 # that answer them rather than listed twice. `build/data/guides.py` holds both
 # the question and its answer, so deriving here makes drift between the two
-# impossible: a sub-query cannot exist without a passage, and a passage cannot
-# exist without being counted as coverage.
+# impossible: a sub-query cannot exist without a passage answering it.
+#
+# The six entries above are NOT derived, deliberately. Those came out of the
+# keyword research in research/keywords.md — they are observed demand, and
+# guides.py was written to answer them. Overwriting them with the questions we
+# chose to answer would destroy that provenance and turn an evidence list into
+# a self-graded one. They stay as the record of what people actually ask.
 from . import guides  # noqa: E402
 
 EXTRA.update({
     slug: [(b["anchor"], b["question"]) for b in blocks]
     for slug, blocks in guides.GUIDES.items()
+    if slug not in EXTRA
 })
 
 

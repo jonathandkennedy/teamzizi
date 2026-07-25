@@ -663,7 +663,8 @@ def build_home_valuation() -> None:
             anchor="mello-roos",
             question="Does an online estimate account for Mello-Roos?",
             lead=(
-                "No. In Del Sur and 4S Ranch, two homes on the same street "
+                "An automated estimate does not account for Mello-Roos. In "
+                "Del Sur and 4S Ranch, two homes on the same street "
                 "with the same square footage can carry materially different "
                 "Mello-Roos obligations depending on the community facilities "
                 "district and the phase they were built in &mdash; which "

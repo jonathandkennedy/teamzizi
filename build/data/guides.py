@@ -882,6 +882,592 @@ GUIDES: dict[str, list[dict]] = {
 }
 
 
+# --------------------------------------------------------------------------
+# The original six. `fanout.py` has carried researched sub-queries for these
+# since the first build and nothing answered them — the generator emitted the
+# same three blocks here as everywhere else. These are those sub-queries,
+# answered, under the same evidence rules as the North County set above.
+# --------------------------------------------------------------------------
+
+GUIDES.update({
+    "del-sur": [
+        {
+            "anchor": "cfd-term",
+            "question": "When does Mello-Roos end in Del Sur?",
+            "lead": (
+                "A Del Sur Mello-Roos levy ends when the bonds it services "
+                "are retired, and the remaining term is set in the formation "
+                "documents for the specific district rather than being a "
+                "single Del Sur-wide date. Because Del Sur homes can sit "
+                "inside both Poway Unified CFD&nbsp;#12 and Black Mountain "
+                "Ranch Villages CFD&nbsp;#4, a parcel can have two terms "
+                "running on two different schedules."
+            ),
+            "body": (
+                "<p>One distinction is worth understanding before assuming an "
+                "end date. Many community facilities districts levy for two "
+                "things: a bond component that retires when the debt is paid, "
+                "and a services component that funds ongoing maintenance and "
+                "does not expire. A district can therefore &ldquo;end&rdquo; "
+                "and still leave an annual charge on the bill.</p>"
+                "<p>The district administrators named on the tax bill will "
+                "state the remaining term for a specific parcel. That is the "
+                "only answer worth acting on.</p>"
+            ),
+        },
+        {
+            "anchor": "vs-4s-ranch",
+            "question": "Del Sur or 4S Ranch — what actually differs?",
+            "lead": (
+                "Del Sur and 4S Ranch share a ZIP code, a school district and "
+                "a Mello-Roos burden, and differ mainly in age and layout. Del "
+                "Sur is the newer of the two, built out through the 2000s and "
+                "2010s inside the Black Mountain Ranch master plan around an "
+                "unusually large program of pools, parks, gardens and trails. "
+                "4S Ranch is slightly older and organised around a larger "
+                "retail core."
+            ),
+            "body": (
+                "<p>The tax detail differs too, and it is not a matter of one "
+                "being cheaper. Del Sur parcels can carry Poway Unified "
+                "CFD&nbsp;#12 alongside Black Mountain Ranch Villages "
+                "CFD&nbsp;#4; 4S Ranch parcels sit under Poway Unified "
+                "CFD&nbsp;#6 or #10 and their improvement areas. Which "
+                "specific districts apply, and at what amount, is a "
+                "parcel-level fact on the tax bill rather than a community "
+                "characteristic.</p>"
+                "<p>Buyers weighing either against a lower tax bill in the "
+                "same school district should also look at "
+                "<a href=\"/neighborhoods/poway\">the city of Poway</a>, which "
+                "is inside Poway Unified but largely predates these "
+                "districts.</p>"
+            ),
+        },
+        {
+            "anchor": "climate",
+            "question": "Is Del Sur hotter than the coast?",
+            "lead": (
+                "Del Sur sits inland of the coastal ridgelines, and summer "
+                "afternoons there run warmer than Del Mar or Carmel Valley "
+                "while the marine layer clears earlier in the day. That is the "
+                "standard inland-versus-coastal pattern in San Diego County "
+                "rather than anything specific to the community, and the "
+                "National Weather Service San Diego office publishes the "
+                "actual climate normals for anyone who wants the figures "
+                "instead of the impression."
+            ),
+            "body": (
+                "<p>The practical consequence is cooling load. An inland home "
+                "of the same size and vintage will generally run its air "
+                "conditioning more than a coastal one, which is worth asking "
+                "a seller about directly &mdash; utility history is "
+                "disclosable and far more informative than a temperature "
+                "average.</p>"
+            ),
+        },
+        {
+            "anchor": "amenities",
+            "question": "What amenities does Del Sur have?",
+            "lead": (
+                "Del Sur was planned around a shared amenity program rather "
+                "than a single clubhouse: multiple neighborhood pools, a trail "
+                "network connecting the villages, parks and community gardens, "
+                "all administered by the Del Sur Community Association. "
+                "Access comes with the property rather than by separate "
+                "membership."
+            ),
+            "body": (
+                "<p>That program is funded by the HOA assessment, which sits "
+                "alongside the Mello-Roos levy rather than replacing it. A "
+                "true cost comparison against a community with fewer shared "
+                "facilities has to count both, and the association&rsquo;s "
+                "current budget and reserve study &mdash; both disclosable "
+                "documents &mdash; are where the real numbers are.</p>"
+            ),
+        },
+    ],
+
+    "4s-ranch": [
+        {
+            "anchor": "cfd-worth-it",
+            "question": "Is the Mello-Roos in 4S Ranch worth it?",
+            "lead": (
+                "Whether 4S Ranch Mello-Roos is worth paying is arithmetic "
+                "rather than opinion, and the comparison most buyers skip is "
+                "the useful one: 4S Ranch against a home in the same Poway "
+                "Unified boundary that carries no community facilities "
+                "district. The districts financed the schools, roads and "
+                "parks that made the community; the question is what the same "
+                "school access costs elsewhere."
+            ),
+            "body": (
+                "<p>Run it as total monthly cost &mdash; principal, interest, "
+                "base property tax, the CFD levy and the HOA assessment "
+                "&mdash; against the same figure for "
+                "<a href=\"/neighborhoods/poway\">the city of Poway</a>, which "
+                "sits in the same district and was largely built before these "
+                "CFDs were formed. The trade is usually newer construction "
+                "and walkable retail on one side against a lower monthly "
+                "obligation, older stock and larger lots on the other. Both "
+                "are defensible; only one is usually presented.</p>"
+            ),
+        },
+        {
+            "anchor": "vs-del-sur",
+            "question": "4S Ranch or Del Sur — taxes and amenities compared?",
+            "lead": (
+                "4S Ranch and Del Sur are adjacent, share the 92127 ZIP code "
+                "and both sit in Poway Unified, so the choice between them is "
+                "not about schools. 4S Ranch is organised around 4S Commons "
+                "Town Center and its everyday retail; Del Sur is newer and "
+                "organised around a distributed program of pools, parks and "
+                "trails run by its community association."
+            ),
+            "body": (
+                "<p>On tax, neither is categorically cheaper. 4S Ranch parcels "
+                "sit under Poway Unified CFD&nbsp;#6 or #10 and their "
+                "improvement areas; Del Sur parcels can carry CFD&nbsp;#12 "
+                "plus the Black Mountain Ranch Villages district. Comparing "
+                "two specific tax bills settles it; comparing two community "
+                "reputations does not.</p>"
+            ),
+        },
+        {
+            "anchor": "walkability",
+            "question": "What can you walk to in 4S Ranch?",
+            "lead": (
+                "4S Commons Town Center is the reason walkability comes up in "
+                "4S Ranch at all: a grocery-anchored retail centre with "
+                "everyday services, restaurants and a cinema, sited so that "
+                "much of the surrounding residential development reaches it "
+                "on foot or by bike through the trail and sidewalk network."
+            ),
+            "body": (
+                "<p>How much that is worth depends entirely on which part of "
+                "the community an address sits in &mdash; 92127 is large and "
+                "hilly, and a half-mile on the map can be a serious climb. "
+                "Walking the actual route from a specific house, once, is "
+                "worth more than any published walkability score.</p>"
+            ),
+        },
+        {
+            "anchor": "fire-insurance",
+            "question": "Is 4S Ranch in a fire zone, and can you insure it?",
+            "lead": (
+                "4S Ranch borders open space and canyon terrain on its "
+                "northern and eastern edges, and parts of the 92127 area fall "
+                "within or adjacent to state-designated fire hazard severity "
+                "zones. CAL FIRE publishes those maps by parcel, and the "
+                "designation for a specific address is checkable before an "
+                "offer rather than after."
+            ),
+            "body": (
+                "<p>The designation matters mostly through insurance. "
+                "Carriers have narrowed what they write near open space, and "
+                "a quote on the specific address during the contingency "
+                "period is the difference between a smooth close and a "
+                "financing problem at the end of escrow &mdash; a lender will "
+                "not fund without bound coverage. Defensible space condition, "
+                "roof type and access are all inspectable and all affect what "
+                "a carrier will offer.</p>"
+            ),
+        },
+    ],
+
+    "scripps-ranch": [
+        {
+            "anchor": "which-district",
+            "question": "Is Scripps Ranch in Poway Unified or San Diego Unified?",
+            "lead": (
+                "Scripps Ranch is in San Diego Unified School District, not "
+                "Poway Unified &mdash; a distinction that catches buyers "
+                "comparing it against the 92127 communities a few miles north, "
+                "which are in Poway Unified. Scripps Ranch High School, "
+                "Marshall Middle and the community&rsquo;s elementary schools "
+                "are all San Diego Unified schools."
+            ),
+            "body": (
+                "<p>That single fact explains the other one buyers notice: "
+                "Scripps Ranch carries no community facilities district named "
+                "for it in the County Auditor&rsquo;s active list, while the "
+                "Poway Unified communities to the north carry several. "
+                "Different district, different financing history, different "
+                "tax bill. "
+                f"{CONFIRM_SCHOOL}</p>"
+            ),
+        },
+        {
+            "anchor": "wildfire",
+            "question": "What is the wildfire risk in Scripps Ranch?",
+            "lead": (
+                "Scripps Ranch has a documented fire history: the 2003 Cedar "
+                "Fire burned into the community and destroyed homes there. "
+                "That is a matter of public record rather than a hypothetical, "
+                "and it is the honest starting point for anyone buying against "
+                "the canyon edges the community is built around."
+            ),
+            "body": (
+                "<p>What follows from it is practical. CAL FIRE publishes fire "
+                "hazard severity zone maps by parcel; the City of San Diego "
+                "enforces brush management requirements on properties adjacent "
+                "to open space; and insurance availability should be quoted on "
+                "the specific address early rather than assumed from a "
+                "neighbouring one. Homes rebuilt since 2003 were built to "
+                "later codes than those around them, which is worth "
+                "establishing from the permit history.</p>"
+            ),
+        },
+        {
+            "anchor": "jet-noise",
+            "question": "Is MCAS Miramar jet noise a problem in Scripps Ranch?",
+            "lead": (
+                "Scripps Ranch sits north of Marine Corps Air Station Miramar, "
+                "and aircraft noise is a real and legally recognised factor "
+                "rather than a matter of opinion. San Diego County adopted an "
+                "Airport Land Use Compatibility Plan for MCAS Miramar that "
+                "maps noise contours and an airport influence area, and "
+                "California law requires disclosure when a property sits "
+                "within that influence area."
+            ),
+            "body": (
+                "<p>Exposure varies sharply across the community depending on "
+                "position relative to the flight paths, so the answer for one "
+                "street is not the answer for another. The compatibility plan "
+                "maps are public, the disclosure is part of the transaction, "
+                "and standing on the property at different times of day is "
+                "the check no document replaces.</p>"
+            ),
+        },
+        {
+            "anchor": "lake-miramar",
+            "question": "What can you do at Lake Miramar?",
+            "lead": (
+                "Lake Miramar is a City of San Diego reservoir on the edge of "
+                "Scripps Ranch with a paved loop road of roughly five miles "
+                "used for walking, running and cycling, plus shore and boat "
+                "fishing with a city permit and seasonal boat rental. Being "
+                "a working reservoir rather than a park, it is city-managed "
+                "open space and not subject to a developer&rsquo;s "
+                "entitlement."
+            ),
+            "body": (
+                "<p>For a buyer, that permanence is the point. The loop and "
+                "the water are a durable feature of the community rather than "
+                "an amenity that could be built over, which is a different "
+                "kind of value from a private clubhouse.</p>"
+            ),
+        },
+    ],
+
+    "carmel-valley": [
+        {
+            "anchor": "not-monterey",
+            "question": "Is Carmel Valley near Carmel-by-the-Sea?",
+            "lead": (
+                "Carmel Valley in this context is a community of the City of "
+                "San Diego in the 92130 ZIP code, roughly 20 miles north of "
+                "downtown San Diego. It is unrelated to Carmel Valley in "
+                "Monterey County, some 400 miles north, and searches for the "
+                "name return both &mdash; which is worth knowing before "
+                "trusting a photograph or a market figure attached to it."
+            ),
+        },
+        {
+            "anchor": "schools-structure",
+            "question": "Do Carmel Valley homes fall in the Del Mar Union district?",
+            "lead": (
+                "Much of Carmel Valley is served by Del Mar Union School "
+                "District for kindergarten through sixth grade and San "
+                "Dieguito Union High School District for grades seven through "
+                "twelve &mdash; despite the homes carrying City of San Diego "
+                "addresses. A San Diego address does not mean San Diego "
+                "Unified here, and that surprises buyers who assume the city "
+                "name settles the district."
+            ),
+            "body": (
+                "<p>The boundaries do not follow the ZIP code, so two homes a "
+                "few streets apart can be assigned differently, and buyers pay "
+                "for the assignment. "
+                f"{CONFIRM_SCHOOL}</p>"
+            ),
+        },
+        {
+            "anchor": "torrey-pines",
+            "question": "Which Carmel Valley homes feed Torrey Pines High School?",
+            "lead": (
+                "Torrey Pines High School is a San Dieguito Union High School "
+                "District school, and assignment to it is set by the "
+                "district&rsquo;s attendance areas rather than by being in "
+                "Carmel Valley. San Dieguito Union also runs a school choice "
+                "process, so the school a student is assigned to and the "
+                "school a student attends are two separate questions with two "
+                "separate answers."
+            ),
+            "body": (
+                "<p>Anyone buying specifically for a named high school should "
+                "confirm the current attendance area for the exact address "
+                "with the district, and understand how the choice process "
+                "works before treating an assignment as guaranteed. "
+                "Attendance areas are redrawn from time to time.</p>"
+            ),
+        },
+        {
+            "anchor": "pacific-highlands-ranch",
+            "question": "Is Pacific Highlands Ranch part of Carmel Valley?",
+            "lead": (
+                "Pacific Highlands Ranch is a separate master-planned "
+                "community immediately north-east of Carmel Valley, inside "
+                "the City of San Diego, and it is frequently marketed as part "
+                "of Carmel Valley because the two share the 92130 ZIP code. "
+                "Structurally they are not the same place: Pacific Highlands "
+                "Ranch is newer, built under its own subarea plan, and has "
+                "its own community governance."
+            ),
+            "body": (
+                "<p>The distinction reaches the tax bill. Carmel Valley proper "
+                "has no community facilities district named for it in the "
+                "County Auditor&rsquo;s active list, while the Black Mountain "
+                "Ranch villages that adjoin Pacific Highlands Ranch do carry "
+                "districts. Where a specific parcel falls is therefore worth "
+                "establishing rather than assuming from the ZIP code.</p>"
+            ),
+        },
+        {
+            "anchor": "marine-layer",
+            "question": "How bad is the marine layer in Carmel Valley?",
+            "lead": (
+                "Carmel Valley sits close enough to the coast to get the "
+                "regional late-spring and early-summer marine layer &mdash; "
+                "the overcast mornings locally called May Gray and June Gloom "
+                "&mdash; and far enough inland that it burns off earlier than "
+                "it does in Del Mar. Position within the community matters: "
+                "addresses on the western canyon rims hold cloud longer than "
+                "those on the eastern edge."
+            ),
+        },
+    ],
+
+    "del-mar": [
+        {
+            "anchor": "train-station",
+            "question": "Does Del Mar have a train station?",
+            "lead": (
+                "Del Mar has no passenger rail station. The rail corridor runs "
+                "along the Del Mar bluff and through the city, but trains do "
+                "not stop there &mdash; the nearest station is Solana Beach, "
+                "immediately north, which serves the COASTER commuter line and "
+                "Amtrak&rsquo;s Pacific Surfliner."
+            ),
+            "body": (
+                "<p>The bluff section carries a second consequence worth "
+                "knowing about. That stretch of track sits on an eroding "
+                "coastal bluff and is the subject of long-running regional "
+                "planning work on stabilisation and eventual realignment, "
+                "which is a live public process rather than a settled one. "
+                "Anyone buying near the corridor should read the current "
+                "SANDAG planning material rather than rely on how things look "
+                "today.</p>"
+            ),
+        },
+        {
+            "anchor": "coastal-zone",
+            "question": "What does the Coastal Zone mean for remodeling in Del Mar?",
+            "lead": (
+                "Del Mar lies almost entirely within the California Coastal "
+                "Zone, which means most exterior alterations, additions and "
+                "rebuilds require a coastal development permit in addition to "
+                "an ordinary building permit. Del Mar administers that through "
+                "its own certified Local Coastal Program, with some categories "
+                "of decision appealable to the California Coastal Commission."
+            ),
+            "body": (
+                "<p>For a buyer intending to change a house, that is a "
+                "timeline, a cost and a risk that an inland comparable does "
+                "not carry &mdash; and it is the single largest reason two "
+                "similar Del Mar homes can be worth materially different "
+                "amounts. What has already been permitted, and what has been "
+                "refused, is on file with the city and worth reading before "
+                "an offer rather than after.</p>"
+            ),
+        },
+        {
+            "anchor": "view-premium",
+            "question": "How much more does an ocean view cost in Del Mar?",
+            "lead": (
+                "An ocean view in Del Mar carries a premium that no formula "
+                "captures, because the durable question is not how good the "
+                "view is today but whether it is protected. A view secured by "
+                "topography &mdash; nothing can be built in front of it "
+                "&mdash; is a different asset from one that depends on a "
+                "neighbour&rsquo;s roofline staying where it is."
+            ),
+            "body": (
+                "<p>Del Mar regulates building height and applies design "
+                "review, and the city&rsquo;s rules on view impacts are part "
+                "of the record for any specific parcel. Establishing what "
+                "could be built on the lots between a house and the water, "
+                "under current zoning, is the analysis worth paying for. A "
+                "comparative market analysis that prices the view without "
+                "answering that question is pricing an assumption.</p>"
+            ),
+        },
+        {
+            "anchor": "days-on-market",
+            "question": "Why do Del Mar homes sit on the market so long?",
+            "lead": (
+                "Del Mar is a small, high-price market, and both of those "
+                "facts lengthen marketing times independently of how any "
+                "individual home is priced. Few homes trade in a given year, "
+                "so the pool of buyers for any one of them is small, and the "
+                "comparable sales an appraiser or a pricing analysis can draw "
+                "on are correspondingly thin."
+            ),
+            "body": (
+                "<p>Days-on-market figures for a market this size swing hard "
+                "from quarter to quarter for that reason, which is why no "
+                "number is published here &mdash; a stale one would be worse "
+                "than none. The current figure is available from the MLS on "
+                "request for a specific price band and property type, which "
+                "is the only form in which it means anything.</p>"
+            ),
+        },
+        {
+            "anchor": "vs-encinitas-solana",
+            "question": "Del Mar, Encinitas or Solana Beach — how do they differ?",
+            "lead": (
+                "Del Mar, Solana Beach and Encinitas are three adjacent "
+                "coastal cities that differ on two structural points buyers "
+                "can actually check. Rail: Solana Beach and Encinitas each "
+                "have a COASTER station, Del Mar has none. Schools: Del Mar "
+                "and Solana Beach feed different elementary districts &mdash; "
+                "Del Mar Union and Solana Beach School District respectively "
+                "&mdash; while Encinitas splits between Encinitas Union and "
+                "the separate Cardiff School District."
+            ),
+            "body": (
+                "<p>All three then feed San Dieguito Union High School "
+                "District, and all three sit substantially inside the Coastal "
+                "Zone with the permitting consequences that carries. The "
+                "choice between them is generally made on price point, on lot "
+                "and street character, and on which elementary assignment "
+                "applies &mdash; not on any citywide characterisation.</p>"
+            ),
+        },
+    ],
+
+    "rancho-santa-fe": [
+        {
+            "anchor": "the-covenant",
+            "question": "What is the Covenant in Rancho Santa Fe?",
+            "lead": (
+                "The Covenant is the original core of Rancho Santa Fe: roughly "
+                "6,200 acres governed by a protective covenant recorded in the "
+                "1920s and administered today by the Rancho Santa Fe "
+                "Association. Membership is not optional &mdash; it runs with "
+                "the land &mdash; and it brings both the Association&rsquo;s "
+                "assessment and its architectural review process."
+            ),
+            "body": (
+                "<p>Not every property with a Rancho Santa Fe address is in "
+                "the Covenant, and the difference is substantial: different "
+                "governance, different assessments, different rules about what "
+                "can be built. Establishing whether a specific parcel is "
+                "inside it is the first question on any Rancho Santa Fe "
+                "purchase, not a detail for later.</p>"
+            ),
+        },
+        {
+            "anchor": "art-jury",
+            "question": "How strict is the Rancho Santa Fe Art Jury?",
+            "lead": (
+                "The Art Jury is the Rancho Santa Fe Association&rsquo;s "
+                "architectural review body, and within the Covenant its "
+                "approval is required for exterior work &mdash; new "
+                "construction, additions, significant remodels, and in many "
+                "cases landscape and hardscape changes. Review is against the "
+                "community&rsquo;s adopted regulations rather than against "
+                "individual taste, but it is a real approval process with real "
+                "timelines."
+            ),
+            "body": (
+                "<p>For a buyer planning to renovate, that process sits on "
+                "top of County permitting rather than replacing it, and both "
+                "have to be budgeted. The Association publishes its "
+                "regulations and its meeting schedule; reading them before "
+                "committing to a project is considerably cheaper than "
+                "discovering them afterwards.</p>"
+            ),
+        },
+        {
+            "anchor": "sewer-septic",
+            "question": "Do Rancho Santa Fe homes have sewer or septic?",
+            "lead": (
+                "Rancho Santa Fe has both, and which one applies is a "
+                "parcel-level fact rather than a community-wide one. Many "
+                "properties there, particularly larger Covenant lots, are on septic "
+                "systems rather than connected to a sewer, while other parts "
+                "of the community are served by the Rancho Santa Fe Community "
+                "Services District. Water comes from the Santa Fe Irrigation "
+                "District."
+            ),
+            "body": (
+                "<p>On septic, the diligence is a functional inspection and "
+                "locating the leach field, and the system&rsquo;s capacity "
+                "constrains what can be added to the house &mdash; a bedroom "
+                "count is a septic question before it is an architectural one. "
+                "That constraint is invisible in an automated valuation and "
+                "decisive for anyone planning to expand.</p>"
+            ),
+        },
+        {
+            "anchor": "communities",
+            "question": "Covenant, The Bridges, Cielo or Fairbanks Ranch — what is the difference?",
+            "lead": (
+                "Several distinct communities share the Rancho Santa Fe "
+                "mailing address and are governed very differently. The "
+                "Covenant is the historic core under the Rancho Santa Fe "
+                "Association and its Art Jury. The Bridges and Fairbanks Ranch "
+                "are gated homeowner associations, The Bridges built around a "
+                "private golf club with its own membership structure. Cielo "
+                "sits further east on higher ground with its own association."
+            ),
+            "body": (
+                "<p>The differences that matter are governance and obligation: "
+                "who reviews exterior changes, what the annual assessment "
+                "covers, and whether a club membership is required, optional "
+                "or unavailable. Those are answered by the governing documents "
+                "for the specific community, all of which are disclosable in "
+                "a transaction. The Auditor&rsquo;s active district list shows "
+                "one community facilities district for Rancho Santa Fe, "
+                "administered by the Community Service District, but "
+                "association and club obligations are usually the larger "
+                "recurring cost in this market.</p>"
+            ),
+        },
+        {
+            "anchor": "days-on-market",
+            "question": "Why do Rancho Santa Fe homes take so long to sell?",
+            "lead": (
+                "Rancho Santa Fe is a low-volume, high-price market on large "
+                "parcels, and each of those attributes lengthens marketing "
+                "time on its own. The buyer pool for any individual property "
+                "is small, the homes are highly differentiated from one "
+                "another, and thin comparable data makes pricing genuinely "
+                "harder than in a tract market where twenty near-identical "
+                "homes trade a year."
+            ),
+            "body": (
+                "<p>No days-on-market figure is published here because in a "
+                "market this size the number swings hard between quarters and "
+                "a stale one would mislead. The current figure for a specific "
+                "price band is available from the MLS on request, which is the "
+                "only form in which it is worth anything.</p>"
+            ),
+        },
+    ],
+})
+
+
 def for_hood(slug: str) -> list[dict]:
     """Extra answer blocks for a community, in page order. May be empty."""
     return GUIDES.get(slug, [])

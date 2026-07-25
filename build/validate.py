@@ -172,6 +172,14 @@ def check_answer_blocks(pages: list[Path]) -> None:
         "as the heading", "the answer is no", "the answer is yes",
         "what you found", "what you searched",
     )
+    # Only the *bare* reply counts. "No community facilities district in the
+    # active list is named for Vista" opens with "No" as a determiner and is
+    # completely self-contained; "No. In Del Sur…" is a reply to a heading that
+    # will not be there. The difference is length, so both tests must hold.
+    SHORT_ANSWER = {
+        "both", "neither", "either", "yes", "no", "not", "depends",
+        "sometimes", "correct", "sort", "kind",
+    }
     anchors_seen: dict[str, list[str]] = defaultdict(list)
 
     for page in pages:
@@ -198,6 +206,17 @@ def check_answer_blocks(pages: list[Path]) -> None:
                     f"{rel(page)}#{anchor}: lead answer points back at its own "
                     f"heading ({hit!r}) — the heading does not travel with the "
                     f"passage, so the reference dangles: {lead[:70]!r}"
+                )
+            # "Both, depending on the parcel." answers the heading and says
+            # nothing on its own. Any opening clause this short is answering a
+            # question the reader of the extracted passage cannot see.
+            opener = re.split(r"[.,;:]", lowered, 1)[0].strip()
+            words = opener.split()
+            if words and len(words) <= 3 and words[0].strip("&") in SHORT_ANSWER:
+                errors.append(
+                    f"{rel(page)}#{anchor}: lead answer opens with a bare "
+                    f"reply to its own heading ({opener!r}) — meaningless once "
+                    f"the heading is gone: {lead[:70]!r}"
                 )
 
         for page_name, anchors in anchors_seen.items():
