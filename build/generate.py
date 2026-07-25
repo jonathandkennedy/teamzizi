@@ -696,7 +696,16 @@ def build_team() -> None:
             [("Home", f"{site.DOMAIN}/"), ("Team", f"{site.DOMAIN}/team")]
         )
     ]
-    nodes += [schema.agent(a) for a in agents.ROSTER]
+    nodes += [
+        schema.agent(
+            a,
+            hood=next(
+                (h for h in site.NEIGHBORHOODS if h['slug'] == a.get('farms')),
+                None,
+            ),
+        )
+        for a in agents.ROSTER
+    ]
 
     write(
         path,

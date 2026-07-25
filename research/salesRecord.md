@@ -251,3 +251,42 @@ already said publicly.
 "TOP 1.5% In the country." That is by far the largest audience in the entity
 graph — four and a half times the team account. It is a family decision, not
 an SEO one.
+
+---
+
+## 13. Neighborhood video — the asset that was hiding (added 2026-07-25)
+
+The client confirms **the team paid for the video** on @lifeinsandiego, so it
+is usable. Channel-searched and resolved to specific videos:
+
+| Community | Video | ID |
+|---|---|---|
+| Carmel Valley | "EVERYTHING You NEED to Know About Living in Carmel Valley in San Diego" (plus 2 more) | `IGpVk4vTGjg` |
+| Rancho Santa Fe | "Living in Rancho Santa Fe California" (**5 videos total** — the most of any community) | `LXO2cS7l36Q` |
+| Del Sur + 4S Ranch | "INSANE Community in San Diego You HAVE to See \| 4S Ranch & Del Sur" (one video covers both) | `6nrzXgXyngA` |
+| Del Mar | "Living in Solana Beach & Del Mar California" (shared with Solana Beach) | `G-12EJiUSsw` |
+| **Scripps Ranch** | **None** | — commission one |
+
+This matters more than it looks. `research/competitors.md` found that **not one
+competitor embeds neighborhood video on a neighborhood page** — not O'Byrne
+with an HGTV show, not Whissel with a YouTube machine. It is a documented open
+gap and the team already owns the content for four of six.
+
+`schema.video()` emits `VideoObject` with `contentLocation`, so the video is
+eligible to surface on its own rather than being a decorative iframe.
+
+**The Rancho Santa Fe irony is worth sitting with.** RSF has one lifetime sale
+(§1) and the *most* video content of any community — five dedicated videos.
+That complicates the earlier "drop RSF" recommendation: they have genuine
+content authority there without transaction authority. A guide built on the
+video, honest about the team's record, is defensible in a way a fabricated
+track-record block is not.
+
+Not added to `sameAs`: paying for production is a licence to use, not a claim
+that the channel is a Team Azizi entity. It is embedded with credit instead.
+
+The most recent 30 uploads are county-level market commentary published
+roughly weekly — "Ranking San Diego's WORST to BEST Master-Planned
+Communities", "Where To Live In San Diego For The HIGHEST ROI In 2026". That
+is the content engine GAMEPLAN §7 wants, already running. It is not on the
+team's domain, where it would compound.

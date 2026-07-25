@@ -302,6 +302,42 @@ def image(
     return node
 
 
+def video(hood: dict[str, Any]) -> dict[str, Any] | None:
+    """`VideoObject` for a neighborhood tour.
+
+    The competitor teardown found that **no competitor embeds neighborhood
+    video on a neighborhood page at all** — not O'Byrne with an HGTV show, not
+    Whissel with a YouTube machine. Marking it up rather than dropping in a
+    bare iframe is what makes it eligible to surface as video on its own.
+
+    Hosted on the team's videographer's channel; the client paid for the
+    production, so it is embedded with credit. `contentLocation` ties the
+    video to the place, which is the whole point.
+    """
+    v = hood.get("video")
+    if not v:
+        return None
+    place: dict[str, Any] = {
+        "@type": "Place",
+        "name": f"{hood['name']}, {site.CITY}, {site.REGION}",
+    }
+    if hood.get("wikipedia"):
+        place["sameAs"] = hood["wikipedia"]
+    return {
+        "@type": "VideoObject",
+        "@id": f"{site.DOMAIN}/neighborhoods/{hood['slug']}#video",
+        "name": v["title"],
+        "description": (
+            f"A tour of {hood['name']}, {site.CITY} — housing, schools, "
+            "amenities and what living there is actually like."
+        ),
+        "embedUrl": f"https://www.youtube.com/embed/{v['id']}",
+        "thumbnailUrl": f"https://i.ytimg.com/vi/{v['id']}/maxresdefault.jpg",
+        "contentLocation": place,
+        "publisher": {"@id": ORG_ID},
+    }
+
+
 def render(nodes: list[dict[str, Any]]) -> str:
     """Serialise a list of nodes as one `@graph` block.
 

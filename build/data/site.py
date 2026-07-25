@@ -208,6 +208,32 @@ SAME_AS = [
     "https://www.zillow.com/profile/nilabazizi",
 ]
 
+# Client decision 2026-07-25: Sonia's profiles will not be used. Her YouTube
+# channel is therefore removed from consideration entirely rather than left
+# pending — the decision is made, not deferred.
+NOT_USING = [
+    (
+        "https://www.youtube.com/channel/UC31bOFUD8jFGMSiAhO45J2g",
+        "Sonia Azizi's channel — client has decided not to use her profiles.",
+    ),
+    (
+        "https://www.instagram.com/soniasellssd/",
+        "9,412 followers, the largest audience in the entity graph, but the "
+        "client has decided not to use it. Recorded so nobody 'discovers' it "
+        "again and reopens a settled family decision.",
+    ),
+]
+
+# The neighborhood tour videos are hosted on @lifeinsandiego — Nicholas
+# Miele's personal channel, 12.4K subscribers. The client confirms the team
+# paid for the video, so the site embeds it with credit. Deliberately NOT
+# added to sameAs: paying for production is a licence to use, not a claim
+# that the channel is a Team Azizi entity, and asserting otherwise would be
+# exactly the sort of sloppy entity signal this build exists to avoid.
+VIDEO_CHANNEL = "https://www.youtube.com/@lifeinsandiego"
+VIDEO_CHANNEL_NAME = "Living in San Diego"
+VIDEO_CHANNEL_OWNER = "Nicholas Miele"
+
 SAME_AS_PENDING = [
     (
         "https://www.linkedin.com/company/teamazizirealestate",
@@ -218,11 +244,6 @@ SAME_AS_PENDING = [
         "https://www.yelp.com/biz/sonia-azizi-team-azizi-san-diego-3",
         "Listing carries the founder's name, the old Craftsman Way address and "
         "the old (619) phone. Needs the NAP fix and a family decision first.",
-    ),
-    (
-        "https://www.youtube.com/channel/UC31bOFUD8jFGMSiAhO45J2g",
-        "Sonia Azizi's channel. Real entity equity, but every decision about "
-        "her profiles routes through the client and family (HANDOFF §2).",
     ),
 ]
 
@@ -235,6 +256,7 @@ SAME_AS_PENDING = [
 NEIGHBORHOODS = [
     {
         "slug": "del-sur",
+        "video": {"id": "6nrzXgXyngA", "title": 'INSANE Community in San Diego You HAVE to See | 4S Ranch & Del Sur in San Diego'},
         "name": "Del Sur",
         "zip": "92127",
         "district": "Poway Unified School District",
@@ -244,6 +266,7 @@ NEIGHBORHOODS = [
     },
     {
         "slug": "4s-ranch",
+        "video": {"id": "6nrzXgXyngA", "title": 'INSANE Community in San Diego You HAVE to See | 4S Ranch & Del Sur in San Diego'},
         "name": "4S Ranch",
         "zip": "92127",
         "district": "Poway Unified School District",
@@ -253,6 +276,7 @@ NEIGHBORHOODS = [
     },
     {
         "slug": "scripps-ranch",
+        "video": None,  # no tour exists on the channel — commission one
         "name": "Scripps Ranch",
         "zip": "92131",
         "district": "San Diego Unified School District",
@@ -262,6 +286,7 @@ NEIGHBORHOODS = [
     },
     {
         "slug": "carmel-valley",
+        "video": {"id": "IGpVk4vTGjg", "title": 'EVERYTHING You NEED to Know About Living in Carmel Valley in San Diego'},
         "name": "Carmel Valley",
         "zip": "92130",
         "district": "Del Mar Union / San Dieguito Union (boundary-dependent)",
@@ -271,6 +296,7 @@ NEIGHBORHOODS = [
     },
     {
         "slug": "del-mar",
+        "video": {"id": "G-12EJiUSsw", "title": 'Living in Solana Beach & Del Mar California [Everything You Need to Know]'},
         "name": "Del Mar",
         "zip": "92014",
         "district": "Del Mar Union / San Dieguito Union",
@@ -280,6 +306,7 @@ NEIGHBORHOODS = [
     },
     {
         "slug": "rancho-santa-fe",
+        "video": {"id": "LXO2cS7l36Q", "title": 'Living in Rancho Santa Fe California [Everything You Need to Know]'},
         "name": "Rancho Santa Fe",
         "zip": "92067",
         "district": "Rancho Santa Fe School District (Roger Rowe, K-8)",

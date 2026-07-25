@@ -223,13 +223,15 @@ ROSTER: list[dict] = [
     {
         "slug": "michael-angotta",
         "sales": 177,
+        "instagram": "https://www.instagram.com/michael_angotta/",
+        "website": "https://mikeangottasellssandiego.com/",
         "name": "Michael Angotta",
         "title": "REALTOR® | DRE 02177007",
         "dre": "02177007",
         "phone": "323.533.9452",
         "compass": "michael-angotta",
         "photo": "/assets/img/team/headshot-michael-angotta.jpg",
-        "farms": None,
+        "farms": "del-mar",  # confirmed by client 2026-07-25
     },
     {
         "slug": "mahan-taleshpour",
@@ -272,21 +274,22 @@ PROPOSED = {
     # Sofia holds both top Scripps sales ($3.5M, $3.2M); Zohra leads by count.
     "scripps-ranch": ("sofia-azizi", "moderate", "9 team sales; holds both top sales in 92131"),
     # See the Angotta caution below before publishing this one.
-    "del-mar": ("michael-angotta", "moderate", "3 of 6 team sales, plus hosted the Mira Montana launch"),
+    "del-mar": ("michael-angotta", "CONFIRMED by client 2026-07-25", "3 of 6 team sales, plus hosted the Mira Montana launch"),
     "carmel-valley": (None, "low", "contested: Hernandez 3, Angotta 3, Miele 2 — Miele holds the $4.75M top sale"),
     # One sale in the entire 1,009-record history.
     "rancho-santa-fe": (None, "none", "ONE lifetime team sale (5918 Fairway Place, $2.9M). No basis for an expert page."),
 }
 
-# Michael Angotta is the best-supported Del Mar candidate on transaction
-# evidence and simultaneously the riskiest to build a page around:
-#   - 136 of his 177 sales are in CONNECTICUT (Norwalk, Fairfield, Bridgeport)
-#   - a second IG account, @realestatebuyangotta, links to YB Realty not
-#     Compass — possible brokerage change in progress
-#   - his Compass bio claims "$100,000,000 in transactions" individually,
-#     the same figure SDBJ credits to the whole team for 2025
-# Resolve with the client before he is published as a neighborhood specialist.
-ANGOTTA_CAUTION = True
+# RESOLVED 2026-07-25. The brokerage-change worry was a false alarm:
+# @realestatebuyangotta (YB Realty) is an OLD account. Current handles are
+# @michael_angotta and mikeangottasellssandiego.com, both Compass. Client
+# confirms he farms Del Mar, so `farms` is set above.
+#
+# One fact remains unaddressed and is worth knowing rather than acting on:
+# 136 of his 177 sales are in Connecticut. It does not contradict the Del Mar
+# assignment — a farm is where you work now — but the "recently sold in Del
+# Mar" block on his page draws from six team sales, not 177.
+ANGOTTA_CAUTION = False
 
 PROPOSED_ASSIGNMENTS = """\
 Confirm the agent who FARMS each community. We now have a proposal for four of
