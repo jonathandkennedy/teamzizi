@@ -296,6 +296,7 @@ def page(
     body: str,
     nodes: list[dict[str, Any]],
     hero: bool | str = False,
+    og_image: str = "/assets/img/logos/og-default.png",
 ) -> str:
     """`hero=True` tells the nav to start transparent over a full-bleed hero.
 
@@ -312,7 +313,7 @@ def page(
     return f"""<!doctype html>
 <html lang="en-US">
 <head>
-{head(title=title, description=description, path=path, nodes=nodes)}
+{head(title=title, description=description, path=path, nodes=nodes, og_image=og_image)}
 </head>
 <body{body_class}>
 <a class="skip-link" href="#main">Skip to content</a>
