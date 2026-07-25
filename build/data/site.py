@@ -72,7 +72,11 @@ ZILLOW_SEARCH = "https://www.zillow.com/homes/{address}_rb/"
 # same time as the page, not before.
 FOOTER_EXPLORE = (
     ("Neighborhood Guides", "/neighborhoods"),
+    ("Mello-Roos Lookup", "/mello-roos"),
     ("What's My Home Worth?", "/home-valuation"),
+    ("Sell Your Home", "/sell"),
+    ("Buy a Home", "/buy"),
+    ("Compass Concierge", "/concierge"),
     ("Homes for Sale", "/properties/sale"),
     ("Recently Sold", "/properties/sold"),
     ("Meet the Team", "/team"),

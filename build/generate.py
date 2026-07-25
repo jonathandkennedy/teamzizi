@@ -1214,6 +1214,689 @@ def build_properties() -> None:
     )
 
 
+def lead_form(*, kind: str, subject: str, cta: str, address: bool = True) -> str:
+    """The standard lead form. One implementation, so the TCPA consent, the
+    honeypot and the thank-you redirect cannot drift between pages."""
+    addr = f"""      <div class="field">
+        <label for="{kind}-address">Property address</label>
+        <input id="{kind}-address" name="address" type="text" required
+               autocomplete="street-address">
+      </div>
+""" if address else ""
+    return f"""<form class="valuation" method="POST" action="{site.LEAD_ENDPOINT}"
+          data-lead-form data-lead-kind="{kind}">
+      <input type="hidden" name="_subject" value="{c.esc(subject)}"
+             data-subject-prefix="{c.esc(subject)}">
+      <input type="hidden" name="_next" value="{site.DOMAIN}/thank-you">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+             aria-hidden="true"
+             style="position:absolute;left:-9999px;width:1px;height:1px">
+{addr}      <div class="grid grid--2">
+        <div class="field">
+          <label for="{kind}-name">Name</label>
+          <input id="{kind}-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="{kind}-email">Email</label>
+          <input id="{kind}-email" name="email" type="email" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="{kind}-phone">Phone</label>
+        <input id="{kind}-phone" name="phone" type="tel" autocomplete="tel">
+      </div>
+      <div class="consent">
+        <input id="{kind}-consent" name="consent" type="checkbox" required>
+        <p><label for="{kind}-consent" style="display:inline;font-size:inherit;
+           font-weight:400;letter-spacing:0;text-transform:none">
+           {c.esc(site.TCPA_CONSENT)}</label></p>
+      </div>
+      <button class="btn btn--filled" type="submit">{c.esc(cta)}</button>
+    </form>"""
+
+
+def simple_page(
+    *,
+    path: str,
+    eyebrow: str,
+    h1: str,
+    lede: str,
+    blocks: str,
+    tail: str,
+    title: str,
+    description: str,
+    crumb: str,
+) -> None:
+    lead = agents.team_lead()
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; {c.esc(crumb)}
+    </nav>
+    <p class="eyebrow">{c.esc(eyebrow)}</p>
+    <h1>{h1}</h1>
+    <p class="lede">{lede}</p>
+
+{blocks}
+
+{tail}
+    <p class="updated" style="margin-top:2.5rem">Last updated {TODAY}</p>
+  </div>
+</section>"""
+    write(
+        path,
+        c.page(
+            title=title,
+            description=description,
+            path=path,
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.web_page(
+                    url=f"{site.DOMAIN}{path}", name=h1,
+                    author_slug=lead["slug"], updated=TODAY,
+                ),
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    (crumb, f"{site.DOMAIN}{path}"),
+                ]),
+            ],
+        ),
+        changefreq="monthly",
+        priority="0.8",
+    )
+
+
+def build_sell() -> None:
+    blocks = "\n\n".join([
+        c.answer_block(
+            anchor="what-you-net",
+            question="What will I actually net selling my home in San Diego County?",
+            lead=(
+                "A San Diego County seller's net is the sale price minus the "
+                "mortgage payoff, commissions, county and city transfer tax, "
+                "escrow and title fees, any Mello-Roos or HOA owed through "
+                "close, and whatever the buyer negotiates after inspection. "
+                "The gap between the headline price and the wire that lands "
+                "is routinely six figures, and it is knowable in advance."
+            ),
+            body=(
+                "<p>City transfer tax is worth flagging early because it is "
+                "not uniform across the county, and inspection credits are the "
+                "line most sellers forget to plan for. A net sheet built "
+                "before listing &mdash; not after an offer &mdash; is what "
+                "turns those from surprises into decisions.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="pricing",
+            question="How should I price my home in North San Diego County?",
+            lead=(
+                "Pricing a North San Diego County home starts with the "
+                "specifics an automated estimate cannot see: which Mello-Roos "
+                "district the parcel sits in, which school boundary the street "
+                "falls on, whether a view is protected by topography or by "
+                "nothing, and what the Coastal Zone permits on that lot."
+            ),
+            body=(
+                "<p>Those four factors move price more than square footage "
+                "does in the communities we work, and they are why two "
+                "apparently identical homes trade at different numbers. See "
+                "the <a href=\"/mello-roos\">Mello-Roos lookup</a> for the "
+                "tax half of it.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="repairs",
+            question="Should I renovate before selling in San Diego County?",
+            lead=(
+                "Some San Diego County pre-sale work returns more than it "
+                "costs and some does not, and the split is local rather than "
+                "general. Compass Concierge exists to fund the work that does "
+                "&mdash; the brokerage fronts the cost and is repaid at "
+                "closing, so a seller is not choosing between their savings "
+                "and their sale price."
+            ),
+            body=(
+                "<p>The judgement is which work qualifies. Paint, flooring, "
+                "landscaping and staging usually earn their cost back; "
+                "structural and mechanical work usually does not, and is "
+                "better disclosed and priced in. Terms change, so ask for the "
+                "current ones. <a href=\"/concierge\">More on Concierge</a>.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="timing",
+            question="When is the best time to sell in San Diego County?",
+            lead=(
+                "San Diego County has a genuine spring selling season, but "
+                "the more useful answer for any individual seller is that "
+                "competing inventory in their own price band matters more "
+                "than the month. Six similar homes listed on the same street "
+                "is a harder market than February ever was."
+            ),
+            body=(
+                "<p>Current active and pending counts for a specific "
+                "neighborhood and price band come from the MLS on request. "
+                "No figure is published here because it would be stale within "
+                "weeks, and a stale number is worse than none.</p>"
+            ),
+            heading="h2",
+        ),
+    ])
+    tail = f"""    <h2 class="rule-gold" style="margin-top:3.5rem">Get a net sheet</h2>
+    <p>
+      Send the address and we will put together what the sale would actually
+      net you &mdash; price supported by real comparables, every cost line
+      itemised, and the local factors above priced in rather than assumed.
+      No obligation and no automated estimate.
+    </p>
+    {lead_form(kind="sell", subject="Net sheet request",
+               cta="Send me a net sheet")}"""
+    simple_page(
+        path="/sell",
+        eyebrow="Selling",
+        h1="Selling your home in North San Diego County",
+        lede=(
+            "What a sale actually nets, what pricing turns on here, and which "
+            "pre-sale work earns its cost back &mdash; before you commit to "
+            "anything."
+        ),
+        blocks=blocks,
+        tail=tail,
+        title="Sell Your Home in North San Diego County | Team Azizi",
+        description=(
+            "What you net, how to price against Mello-Roos and school "
+            "boundaries, and which pre-sale work pays for itself. Net sheets "
+            "from Team Azizi at Compass."
+        ),
+        crumb="Sell",
+    )
+
+
+def build_buy() -> None:
+    blocks = "\n\n".join([
+        c.answer_block(
+            anchor="true-cost",
+            question="What does a home in North San Diego County really cost per month?",
+            lead=(
+                "A North San Diego County monthly payment is principal and "
+                "interest, plus base property tax of roughly 1.1% of assessed "
+                "value, plus any Mello-Roos levy, plus HOA, plus insurance "
+                "&mdash; and the last three are where two similar homes "
+                "diverge by hundreds of dollars a month."
+            ),
+            body=(
+                "<p>Mello-Roos is the one buyers most often miss, because it "
+                "is invisible in a listing price and varies parcel by parcel. "
+                "The <a href=\"/mello-roos\">Mello-Roos lookup</a> gives the "
+                "active districts for all sixteen communities we cover, "
+                "including the seven where the answer is none.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="schools",
+            question="How do I check which school a San Diego County address feeds?",
+            lead=(
+                "School assignment is confirmed with the district office for "
+                "the exact address, never from the city name or the ZIP "
+                "code. In San Diego County "
+                "the boundaries routinely cross both: much of Carmel Valley "
+                "carries San Diego addresses but feeds Del Mar Union and San "
+                "Dieguito Union, and southern Carlsbad homes can be assigned "
+                "to Encinitas Union rather than Carlsbad Unified."
+            ),
+            body=(
+                "<p>Buyers pay for school assignment, so getting this wrong "
+                "is expensive in both directions. Each "
+                "<a href=\"/neighborhoods\">neighborhood guide</a> states "
+                "which districts serve that community and where the "
+                "boundaries are known to cross.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="insurance",
+            question="Can I get fire insurance in inland San Diego County?",
+            lead=(
+                "Quote it on the specific address before making an offer on "
+                "any inland San Diego County property. Much of Fallbrook, "
+                "Valley Center, Ramona and the canyon edges of Scripps Ranch "
+                "and 92127 sit in state-designated high or very high fire "
+                "hazard severity zones, where admitted carriers have narrowed "
+                "what they will write."
+            ),
+            body=(
+                "<p>The common outcome there is the California FAIR Plan plus "
+                "a difference-in-conditions policy, which costs materially "
+                "more than a standard homeowner's policy. A lender will not "
+                "fund without bound coverage, so this is a condition of the "
+                "purchase being affordable at all &mdash; not a formality for "
+                "the end of escrow.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="where-to-look",
+            question="Which North San Diego County community should I look in?",
+            lead=(
+                "The North San Diego County trade-offs are consistent enough "
+                "to name: coastal cities like Oceanside, Carlsbad and "
+                "Encinitas cost more per foot and add Coastal Zone permitting "
+                "on remodels; inland cities like Escondido, San Marcos and "
+                "Vista buy more house; and the unincorporated backcountry "
+                "&mdash; Fallbrook, Valley Center, Ramona &mdash; buys land "
+                "but brings well, septic and fire insurance into the "
+                "decision."
+            ),
+            body=(
+                "<p>All sixteen guides state the tax position, the school "
+                "districts and our actual record in that community, including "
+                "where it is thin. <a href=\"/neighborhoods\">Start "
+                "there</a>.</p>"
+            ),
+            heading="h2",
+        ),
+    ])
+    tail = f"""    <h2 class="rule-gold" style="margin-top:3.5rem">Tell us what you are looking for</h2>
+    <p>
+      Area, price range and timing is enough to start. You will hear from the
+      Team Azizi agent who works that area &mdash; with a DRE number and a
+      direct line, not a call centre.
+    </p>
+    {lead_form(kind="buy", subject="Buyer enquiry",
+               cta="Start the search", address=False)}"""
+    simple_page(
+        path="/buy",
+        eyebrow="Buying",
+        h1="Buying in North San Diego County",
+        lede=(
+            "What a home here actually costs per month, how to check the "
+            "school boundary properly, and why fire insurance belongs before "
+            "the offer rather than after it."
+        ),
+        blocks=blocks,
+        tail=tail,
+        title="Buying a Home in North San Diego County | Team Azizi",
+        description=(
+            "True monthly cost including Mello-Roos, how to verify school "
+            "boundaries, fire insurance before you offer, and which community "
+            "fits. From Team Azizi at Compass."
+        ),
+        crumb="Buy",
+    )
+
+
+def build_concierge() -> None:
+    blocks = "\n\n".join([
+        c.answer_block(
+            anchor="what-is-it",
+            question="What is Compass Concierge?",
+            lead=(
+                "Compass Concierge is a Compass programme that fronts the "
+                "cost of pre-sale home improvement work &mdash; the brokerage "
+                "pays the vendors up front and is repaid from the proceeds "
+                "when the home sells. For a San Diego County seller it means "
+                "the work that makes a house show well does not have to come "
+                "out of savings first."
+            ),
+            body=(
+                "<p>Eligibility, limits and repayment terms are set by "
+                "Compass and change from time to time, so treat anything you "
+                "read online &mdash; including this page &mdash; as the shape "
+                "of the programme rather than the current terms. Ask for "
+                "those in writing before committing to work.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="what-work",
+            question="What work is worth doing before selling?",
+            lead=(
+                "The San Diego County pre-sale work that reliably returns "
+                "more than it costs is cosmetic and presentational: paint, "
+                "flooring, landscaping, decluttering and staging. Structural, "
+                "mechanical and roofing work generally does not return its "
+                "cost and is usually better disclosed and priced in than "
+                "fixed."
+            ),
+            body=(
+                "<p>That split is the whole judgement, and it is the reason "
+                "to have someone walk the property before any money is "
+                "committed. Spending on the wrong category is worse than "
+                "spending nothing.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="risk",
+            question="What is the catch with fronting renovation costs?",
+            lead=(
+                "The honest risk in any pre-sale improvement programme is "
+                "that the work is an obligation regardless of what the San "
+                "Diego County home eventually sells for. It is repaid from "
+                "proceeds at closing, so a seller with thin equity, or one "
+                "who later decides not to sell, needs to understand that "
+                "commitment before the first vendor is booked."
+            ),
+            body=(
+                "<p>Which is a reason to scope the work narrowly and to the "
+                "categories above, not a reason to avoid it. Read the "
+                "agreement, and ask what happens if the home does not "
+                "sell.</p>"
+            ),
+            heading="h2",
+        ),
+    ])
+    tail = f"""    <h2 class="rule-gold" style="margin-top:3.5rem">Find out what your home needs</h2>
+    <p>
+      Send the address and a Team Azizi agent will walk it and tell you which
+      work would actually earn its cost back here &mdash; and which would
+      not. That conversation costs nothing and commits you to nothing.
+    </p>
+    {lead_form(kind="concierge", subject="Concierge enquiry",
+               cta="Book a walkthrough")}"""
+    simple_page(
+        path="/concierge",
+        eyebrow="Compass Concierge",
+        h1="Compass Concierge",
+        lede=(
+            "Pre-sale improvement work, funded up front by Compass and repaid "
+            "at closing &mdash; and an honest account of which work is worth "
+            "doing and what the commitment actually is."
+        ),
+        blocks=blocks,
+        tail=tail,
+        title="Compass Concierge — Pre-Sale Home Improvement | Team Azizi",
+        description=(
+            "How Compass Concierge fronts pre-sale improvement costs, which "
+            "work returns its cost in San Diego County, and the commitment "
+            "involved. From Team Azizi at Compass."
+        ),
+        crumb="Concierge",
+    )
+
+
+def build_mello_roos() -> None:
+    """The lead magnet, and the site's single strongest differentiator.
+
+    `research/competitors.md` found that **not one competitor page mentions
+    Mello-Roos at all**, despite it being the most-repeated buyer question in
+    92127. Everyone writes around it because getting it right means reading a
+    county PDF. `build/data/taxes.py` is that PDF, parsed.
+
+    Every one of the sixteen panels is server-rendered and present in the
+    HTML, hidden with CSS rather than built on demand. An AI fetcher does not
+    run JavaScript, and a lookup tool whose answers only exist after a click
+    is a lookup tool no model can ever cite. The <select> is a convenience
+    for people; the data is there for everyone.
+    """
+    path = "/mello-roos"
+    lead = agents.team_lead()
+
+    panels = []
+    options = []
+    for area in site.ALL_AREAS:
+        slug, name = area["slug"], area["name"]
+        cfd = taxes.for_hood(slug) or {}
+        options.append(
+            f'          <option value="{slug}">{c.esc(name)}</option>'
+        )
+
+        if cfd.get("districts"):
+            rows = "\n".join(
+                f"        <tr><td>{c.esc(d[0])}</td><td>{c.esc(d[1])}</td>"
+                f"<td>{c.esc(d[2])}<br><a href=\"tel:{d[3].replace(' ', '').replace('(', '').replace(')', '').replace('-', '')}\">{c.esc(d[3])}</a></td></tr>"
+                for d in cfd["districts"]
+            )
+            table = f"""      <table class="cfd">
+        <caption class="visually-hidden">Active community facilities
+          districts named for {c.esc(name)}</caption>
+        <thead><tr><th>District</th><th>Fund</th><th>Administrator</th></tr></thead>
+        <tbody>
+{rows}
+        </tbody>
+      </table>"""
+            verdict = f"{c.esc(name)} does carry Mello-Roos."
+        else:
+            table = ""
+            verdict = (
+                f"No active district in the county list is named for "
+                f"{c.esc(name)}."
+            )
+
+        panels.append(f"""    <div class="cfd-panel" data-cfd="{slug}" hidden>
+      <h3 class="rule-gold">{c.esc(name)}</h3>
+      <p class="lede">{verdict}</p>
+      <p>{cfd.get('note', '')}</p>
+{table}
+      <p class="answer__source">{taxes.VERIFY_NOTE}</p>
+      <p><a class="btn" href="/neighborhoods/{slug}">Full {c.esc(name)} guide</a></p>
+    </div>""")
+
+    blocks = "\n\n".join([
+        c.answer_block(
+            anchor="what-is-mello-roos",
+            question="What is Mello-Roos?",
+            lead=(
+                "Mello-Roos is an additional property tax levied inside a "
+                "community facilities district (CFD), used in San Diego "
+                "County and across California to pay for the schools, roads "
+                "and parks that a new development required. It is charged on "
+                "top of the ordinary property tax, it is set per parcel "
+                "rather than per neighborhood, and it appears as a separate "
+                "line item on the tax bill."
+            ),
+            body=(
+                "<p>The name comes from the Mello-Roos Community Facilities "
+                "Act of 1982, passed after Proposition&nbsp;13 limited what "
+                "cities could raise through ordinary property tax. The "
+                "practical effect for a buyer today: two similar homes on the "
+                "same street can carry materially different monthly costs, "
+                "and the difference is invisible in a listing price.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="how-much",
+            question="How much is Mello-Roos in San Diego County?",
+            lead=(
+                "No single San Diego County figure exists, and any source "
+                "quoting one for a whole city has not read the county's "
+                "list. A Mello-Roos "
+                "amount is specific to the parcel: it varies by district, by "
+                "improvement area within that district, and by the phase a "
+                "home was built in. The authoritative number is the line item "
+                "on that property's tax bill, which names the district and "
+                "gives a contact number."
+            ),
+            body=(
+                "<p>That is why this page gives you district names and "
+                "administrator phone numbers rather than a dollar figure. The "
+                "administrator can tell you the current levy and the "
+                "remaining term for a specific address; a website cannot.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="san-marcos-91",
+            question="Which San Diego city has the most Mello-Roos?",
+            lead=(
+                "San Marcos, by a wide margin. The County Auditor's active "
+                "FY&nbsp;2025-26 list carries 91 community facilities "
+                "districts for San Marcos &mdash; more than any other city in "
+                "San Diego County. Most are separately numbered improvement "
+                "areas within a small number of parent districts, which is "
+                "precisely why no single San Marcos figure exists."
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="pusd-vs-poway",
+            question="Can I get Poway Unified schools without a big Mello-Roos bill?",
+            lead=(
+                "The city of Poway is where to look. Poway Unified "
+                "administers 19 active districts, but the bulk of that load "
+                "sits in the newer 92127 communities the district also serves "
+                "&mdash; Del Sur, 4S Ranch, the Black Mountain Ranch villages "
+                "&mdash; rather than in the older city of Poway itself, which "
+                "was largely built before those districts were formed."
+            ),
+            body=(
+                "<p>Same school district, materially different total monthly "
+                "cost, older housing stock and larger lots in exchange. It is "
+                "a parcel-level question rather than a guarantee &mdash; the "
+                "tax bill confirms it &mdash; but it is real, checkable, and "
+                "almost nobody spells it out. See the "
+                "<a href=\"/neighborhoods/poway\">Poway guide</a>.</p>"
+            ),
+            heading="h2",
+        ),
+    ])
+
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Mello-Roos
+    </nav>
+    <p class="eyebrow">Property tax</p>
+    <h1>Mello-Roos in North San Diego County</h1>
+    <p class="lede">
+      The most-asked question in 92127, and the one almost no agent site
+      answers &mdash; because answering it means reading the County
+      Auditor&rsquo;s own district list rather than guessing. Below is that
+      list, for all {len(site.ALL_AREAS)} communities we cover, including the
+      seven where the honest answer is &ldquo;none.&rdquo;
+    </p>
+
+    <div class="cfd-tool">
+      <div class="field">
+        <label for="cfd-select">Choose a community</label>
+        <select id="cfd-select" data-cfd-select>
+          <option value="">Select&hellip;</option>
+{chr(10).join(options)}
+        </select>
+      </div>
+{chr(10).join(panels)}
+    </div>
+
+{blocks}
+
+    <h2 class="rule-gold" style="margin-top:3.5rem">
+      Want the number for a specific address?
+    </h2>
+    <p>
+      The district administrator can give you the current levy and remaining
+      term once you know which district applies. If you would rather we just
+      pulled it together &mdash; the districts, the schools, and what
+      comparable homes on that street actually sold for &mdash; send the
+      address.
+    </p>
+
+    <form class="valuation" method="POST" action="{site.LEAD_ENDPOINT}"
+          data-lead-form data-lead-kind="mello-roos">
+      <input type="hidden" name="_subject" value="Mello-Roos lookup request"
+             data-subject-prefix="Mello-Roos lookup">
+      <input type="hidden" name="_next" value="{site.DOMAIN}/thank-you">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+             aria-hidden="true"
+             style="position:absolute;left:-9999px;width:1px;height:1px">
+      <div class="field">
+        <label for="mr-address">Property address</label>
+        <input id="mr-address" name="address" type="text" required
+               autocomplete="street-address"
+               placeholder="1234 Example St, San Marcos CA 92078">
+      </div>
+      <div class="grid grid--2">
+        <div class="field">
+          <label for="mr-name">Name</label>
+          <input id="mr-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="mr-email">Email</label>
+          <input id="mr-email" name="email" type="email" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="mr-phone">Phone</label>
+        <input id="mr-phone" name="phone" type="tel" autocomplete="tel">
+      </div>
+      <div class="consent">
+        <input id="mr-consent" name="consent" type="checkbox" required>
+        <p><label for="mr-consent" style="display:inline;font-size:inherit;
+           font-weight:400;letter-spacing:0;text-transform:none">
+           {c.esc(site.TCPA_CONSENT)}</label></p>
+      </div>
+      <button class="btn btn--filled" type="submit">Send me the tax picture</button>
+    </form>
+
+    <p class="answer__source" style="margin-top:2.5rem">
+      Source: <a href="{taxes.SOURCE_URL}" rel="nofollow noopener"
+      target="_blank">{c.esc(taxes.SOURCE_NAME)}</a>, retrieved
+      {taxes.RETRIEVED}. The Auditor&rsquo;s list names <em>districts</em>; it
+      does not map <em>parcels</em>. &ldquo;No district is named for X&rdquo;
+      is a fact about that list, not a parcel-level guarantee &mdash; a
+      homeowner can sit inside a differently-named district. The tax bill is
+      where the truth for a given parcel lives.
+    </p>
+    <p class="updated">Last updated {TODAY}</p>
+  </div>
+</section>"""
+
+    faq = [
+        {"q": "What is Mello-Roos?",
+         "a": "Mello-Roos is an additional property tax levied inside a "
+              "community facilities district, used to pay for the schools, "
+              "roads and parks a new development required. It is charged on "
+              "top of ordinary property tax and is set per parcel."},
+        {"q": "How much is Mello-Roos in San Diego County?",
+         "a": "No single figure exists. The amount varies by district, by "
+              "improvement area and by the phase a home was built in. The "
+              "authoritative number is the line item on the property tax "
+              "bill, which names the district and gives a contact number."},
+        {"q": "Which San Diego city has the most Mello-Roos districts?",
+         "a": "San Marcos, with 91 active community facilities districts in "
+              "the County Auditor's FY 2025-26 list — more than any other "
+              "city in San Diego County."},
+    ]
+
+    write(
+        path,
+        c.page(
+            title=(
+                "Mello-Roos in North San Diego County — Every Active District "
+                "by Community | Team Azizi"
+            ),
+            description=(
+                "Which Mello-Roos districts apply in Escondido, San Marcos, "
+                "Carlsbad, Poway, Del Sur, 4S Ranch and 10 more communities — "
+                "from the County Auditor's active FY 2025-26 list, with "
+                "administrator contacts. Including the seven with none."
+            ),
+            path=path,
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.web_page(
+                    url=f"{site.DOMAIN}{path}",
+                    name="Mello-Roos in North San Diego County",
+                    author_slug=lead["slug"],
+                    updated=TODAY,
+                ),
+                schema.faq_page(faq),
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Mello-Roos", f"{site.DOMAIN}{path}"),
+                ]),
+            ],
+        ),
+        changefreq="monthly",
+        priority="0.9",
+    )
+
+
 def build_contact() -> None:
     """/contact was in the primary nav on all 43 pages, linking at nothing."""
     path = "/contact"
@@ -1625,6 +2308,10 @@ def main() -> int:
     build_neighborhoods()
     build_home_valuation()
     build_properties()
+    build_mello_roos()
+    build_sell()
+    build_buy()
+    build_concierge()
     build_contact()
     build_thank_you()
     build_404()

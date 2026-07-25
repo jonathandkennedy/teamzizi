@@ -25,8 +25,9 @@ SITE_ROOT = Path(__file__).resolve().parent.parent / "site"
 # internal link, which is what should have caught this the first time.
 NAV_LINKS = [
     ("Neighborhoods", "/neighborhoods"),
-    ("Properties", "/properties/sale"),
-    ("What's My Home Worth?", "/home-valuation"),
+    ("Buy", "/buy"),
+    ("Sell", "/sell"),
+    ("Mello-Roos", "/mello-roos"),
     ("Team", "/team"),
     ("Contact", "/contact"),
 ]
