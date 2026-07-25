@@ -125,7 +125,7 @@ def build_home() -> None:
     <p class="hero__sub">Who Represents You Matters</p>
     <div class="cta-row" style="justify-content:center">
       <a class="btn btn--light" href="/neighborhoods">Neighborhood guides</a>
-      <a class="btn btn--light" href="/sell">What's my home worth?</a>
+      <a class="btn btn--light" href="/home-valuation">What's my home worth?</a>
     </div>
   </div>
 </section>
@@ -730,16 +730,63 @@ def build_home_valuation() -> None:
       <a href="/">Home</a> &rsaquo; Home Valuation
     </nav>
     <p class="eyebrow">Home valuation</p>
-    <h1>Zillow has never seen your house</h1>
+    <h1>What's your home worth?</h1>
     <p class="lede">
-      It has not walked your street, it does not know which school your address
-      feeds, and it cannot tell a Mello-Roos district from an HOA. If you think
-      your home is worth more than the number online, you may well be right
-      &mdash; and the way to find out is to have someone who sells here
-      actually look.
+      Put in your address and we'll pull up your house and open your Zestimate
+      in a new tab, so you can see what the algorithm thinks. Then, if you want
+      a number that accounts for what you've actually done to the place, an
+      agent who sells on your street will come out and work it properly.
     </p>
 
-    <form class="valuation" method="POST" action="{site.LEAD_ENDPOINT}"
+    <!-- Step 1. Address only. Deliberately one field: this is the step that
+         has to convert, and every extra box costs completions. The address is
+         sent as a lead the moment it is submitted (see site.js) — before the
+         Zillow tab opens — because that is the point of highest intent and
+         highest abandonment. -->
+    <form class="valuation valuation--step1" data-address-step
+          data-zillow="{site.ZILLOW_SEARCH}"
+          data-endpoint="{site.LEAD_ENDPOINT}"
+          data-streetview-key="{site.GOOGLE_MAPS_KEY}">
+      <div class="field">
+        <label for="address-lookup">Your property address</label>
+        <input id="address-lookup" name="address" type="text" required
+               autocomplete="street-address"
+               placeholder="1234 Example St, Escondido CA 92025">
+      </div>
+      <button class="btn btn--filled" type="submit">See my home &amp; Zestimate</button>
+      <p class="updated" style="margin-top:1rem">
+        Opens Zillow in a new tab. Nothing is posted publicly and your address
+        is not sold on &mdash; it goes to a Team Azizi agent and nobody else.
+      </p>
+    </form>
+
+    <!-- Revealed after step 1, populated by site.js. -->
+    <div class="valuation__result" data-address-result hidden>
+      <figure class="valuation__shot">
+        <img data-streetview alt="" width="800" height="500" loading="lazy" hidden>
+        <figcaption data-address-echo class="updated"></figcaption>
+      </figure>
+      <div class="valuation__pitch">
+        <h2 class="rule-gold">Zillow has never been inside</h2>
+        <p>
+          Your Zestimate is open in the other tab. It was built from public
+          records and nearby sales &mdash; which means it has not seen your
+          kitchen, your addition, your lot, or which side of a school boundary
+          you sit on. Those are the things that move the number most in North
+          San Diego County.
+        </p>
+        <p>
+          For an accurate figure, a Team Azizi agent comes out, walks the
+          property, pulls real comparables from the MLS, and prices in the
+          upgrades and additions you have actually made &mdash; with the
+          reasoning shown rather than a single number asserted.
+        </p>
+        <p><a class="btn btn--filled" href="#full-valuation">Book that walkthrough</a></p>
+      </div>
+    </div>
+
+    <form class="valuation" id="full-valuation" method="POST"
+          action="{site.LEAD_ENDPOINT}"
           data-lead-form data-lead-kind="valuation">
       <!-- Formspree control fields. _subject is rewritten on submit to carry
            the address, so the notification email is scannable in an inbox
@@ -797,7 +844,7 @@ def build_home_valuation() -> None:
            font-weight:400;letter-spacing:0;text-transform:none">
            {c.esc(site.TCPA_CONSENT)}</label></p>
       </div>
-      <button class="btn btn--filled" type="submit">Request my valuation</button>
+      <button class="btn btn--filled" type="submit">Book my walkthrough</button>
       <p class="updated" style="margin-top:1rem">
         A real person reads every one of these. No automated estimate, no drip
         sequence, no selling your details on.
@@ -1122,6 +1169,103 @@ def build_properties() -> None:
     )
 
 
+def build_contact() -> None:
+    """/contact was in the primary nav on all 43 pages, linking at nothing."""
+    path = "/contact"
+    lead = agents.team_lead()
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 4rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Contact
+    </nav>
+    <p class="eyebrow">Contact</p>
+    <h1>Talk to a person</h1>
+    <p class="lede">
+      Team Azizi works out of the Compass office at {c.esc(site.STREET)} in
+      Carmel Valley, across North San Diego County from Oceanside to Ramona.
+      Call and you will get a licensee, not a call centre.
+    </p>
+
+    <div class="grid grid--2" style="margin-top:2.5rem">
+      <div>
+        <h2 class="rule-gold">Direct</h2>
+        <address style="font-style:normal">
+          <a href="{site.PHONE_HREF}">{site.PHONE_DISPLAY}</a><br>
+          <a href="mailto:{site.EMAIL}">{site.EMAIL}</a><br><br>
+          {c.esc(site.STREET)}<br>
+          {c.esc(site.CITY)}, {site.REGION} {site.POSTAL}
+        </address>
+        <p style="margin-top:1.5rem">
+          Looking for a specific area? Each
+          <a href="/neighborhoods">neighborhood guide</a> names the agent who
+          works it, with their own direct line and DRE number.
+        </p>
+      </div>
+
+      <form class="valuation" method="POST" action="{site.LEAD_ENDPOINT}"
+            data-lead-form data-lead-kind="contact">
+        <input type="hidden" name="_subject" value="Website enquiry"
+               data-subject-prefix="Enquiry">
+        <input type="hidden" name="_next" value="{site.DOMAIN}/thank-you">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+               aria-hidden="true"
+               style="position:absolute;left:-9999px;width:1px;height:1px">
+        <div class="field">
+          <label for="c-name">Name</label>
+          <input id="c-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="c-phone">Phone</label>
+          <input id="c-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="c-message">How can we help?</label>
+          <textarea id="c-message" name="message" rows="4"></textarea>
+        </div>
+        <div class="consent">
+          <input id="c-consent" name="consent" type="checkbox" required>
+          <p><label for="c-consent" style="display:inline;font-size:inherit;
+             font-weight:400;letter-spacing:0;text-transform:none">
+             {c.esc(site.TCPA_CONSENT)}</label></p>
+        </div>
+        <button class="btn btn--filled" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</section>"""
+    write(
+        path,
+        c.page(
+            title="Contact Team Azizi — North San Diego County | Team Azizi",
+            description=(
+                f"Reach Team Azizi at Compass: {site.PHONE_DISPLAY}, "
+                f"{site.STREET}, {site.CITY}. Serving North San Diego County "
+                "from Oceanside to Ramona."
+            ),
+            path=path,
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.web_page(
+                    url=f"{site.DOMAIN}{path}",
+                    name="Contact Team Azizi",
+                    author_slug=lead["slug"],
+                    updated=TODAY,
+                ),
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Contact", f"{site.DOMAIN}{path}"),
+                ]),
+            ],
+        ),
+        changefreq="yearly",
+        priority="0.8",
+    )
+
+
 def build_404() -> None:
     """Vercel serves site/404.html automatically for a static project.
 
@@ -1436,6 +1580,7 @@ def main() -> int:
     build_neighborhoods()
     build_home_valuation()
     build_properties()
+    build_contact()
     build_thank_you()
     build_404()
     build_team()

@@ -16,12 +16,14 @@ from typing import Any
 import schema
 from data import agents, site
 
+# Built pages only. Sell / Buy / Concierge were here linking at nothing, so
+# the primary navigation on all 43 pages offered three 404s. They come back
+# the moment those pages exist — validate.py now fails the build on a dead
+# internal link, which is what should have caught this the first time.
 NAV_LINKS = [
     ("Neighborhoods", "/neighborhoods"),
     ("Properties", "/properties/sale"),
-    ("Sell", "/sell"),
-    ("Buy", "/buy"),
-    ("Concierge", "/concierge"),
+    ("What's My Home Worth?", "/home-valuation"),
     ("Team", "/team"),
     ("Contact", "/contact"),
 ]
@@ -130,6 +132,15 @@ def footer() -> str:
         f"</a></li>"
         for slug in site.NAV_ORDER
     )
+    # Only pages that exist. This block previously linked seven — /sell, /buy,
+    # /concierge, /testimonials, /blog, /contact, /terms-and-conditions — none
+    # of which had been built, so every page on the site shipped seven 404s in
+    # its footer. site.FOOTER_EXPLORE is the built set; the rest come back as
+    # each page lands.
+    explore = "\n".join(
+        f'        <li><a href="{href}">{esc(label)}</a></li>'
+        for label, href in site.FOOTER_EXPLORE
+    )
     # Each named licensee links to their own page, so the DRE number and the
     # person it belongs to are one click apart rather than an orphan string.
     licensees = "<br>\n      ".join(
@@ -165,13 +176,7 @@ def footer() -> str:
     <div class="footer__nav">
       <h2 class="footer__heading">Explore</h2>
       <ul>
-        <li><a href="/sell">Sell Your Home</a></li>
-        <li><a href="/buy">Buy a Home</a></li>
-        <li><a href="/concierge">Compass Concierge</a></li>
-        <li><a href="/team">Meet the Team</a></li>
-        <li><a href="/testimonials">Testimonials</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/contact">Contact</a></li>
+{explore}
       </ul>
     </div>
   </div>
@@ -191,7 +196,6 @@ def footer() -> str:
     </div>
     <p class="footer__copyright">
       &copy; <span data-year>2026</span> {esc(site.NAME)}.
-      <a href="/terms-and-conditions">Privacy Policy</a>
     </p>
   </div>
 </footer>"""

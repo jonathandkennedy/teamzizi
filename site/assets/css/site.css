@@ -684,6 +684,40 @@
 
 .valuation .grid { gap: 0 1.25rem; }
 
+/* Step 1 is one field and a button. It gets the visual weight because it is
+   the step that has to convert; the full form below is the follow-through. */
+.valuation--step1 {
+  background: var(--c-panel, #f7f6f4);
+  border-color: var(--c-ink, #14110e);
+}
+
+.valuation__result {
+  max-width: 52rem;
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 48rem) {
+  .valuation__result { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+.valuation__shot { margin: 0; }
+
+.valuation__shot img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+/* The caption carries the address back, so the person can see we read it
+   correctly before they act on anything. */
+.valuation__shot figcaption { margin-top: 0.75rem; }
+
+.valuation__pitch > * + * { margin-top: 1rem; }
+
 /* ---- Video embed -------------------------------------------- */
 /* No competitor embeds neighborhood video on a neighborhood page. */
 
