@@ -276,6 +276,34 @@ def check_unverified() -> None:
         warnings.append(f"sameAs withheld — {url}: {reason}")
 
 
+def check_footer_licensees() -> None:
+    """The DRE line in the footer is a legal display, not decoration.
+
+    It renders on all 43 pages, so a wrong or missing number is wrong 43
+    times. These are hard errors rather than warnings: publishing a licence
+    number that does not belong to the named person is worse than publishing
+    no footer at all.
+    """
+    from data import agents  # noqa: PLC0415
+
+    roster = {a["slug"] for a in agents.ROSTER}
+    for slug in site.FOOTER_LICENSEES:
+        if slug not in roster:
+            errors.append(
+                f"site.FOOTER_LICENSEES names {slug!r}, who is not on the "
+                "roster — the footer would render a broken /agent link and a "
+                "licence number for nobody."
+            )
+            continue
+        person = agents.by_slug(slug)
+        if not person.get("dre"):
+            errors.append(
+                f"Footer licensee {person['name']} has no DRE number on the "
+                "roster. California requires it wherever the licensee is "
+                "named in advertising."
+            )
+
+
 def main() -> int:
     if not SITE.exists():
         print("site/ does not exist yet")
@@ -288,6 +316,7 @@ def main() -> int:
     check_stale_strings(pages)
     check_sitemap()
     check_unverified()
+    check_footer_licensees()
 
     for warning in warnings:
         print(f"  warn   {warning}")

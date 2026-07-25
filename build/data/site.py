@@ -44,6 +44,20 @@ LEAD_DRE = "02047962"
 BROKERAGE = "Compass California III, Inc."
 BROKERAGE_DRE = "01527365"
 
+# Licensees named in the footer of every page, in display order.
+#
+# California requires the responsible licensee's name and DRE number on
+# advertising. Naming more than one is a choice rather than an obligation, and
+# the reason to make it is that this is a family team: Nilab leads it, Sofia
+# and Zohra are the other two Azizi licensees, and a visitor who arrived from
+# an Instagram post by one of them should find that person's licence on the
+# page rather than only the team lead's.
+#
+# Slugs, not names and numbers. The DRE numbers live in agents.py and are
+# resolved from there, so there is exactly one place to correct one — and
+# validate.py fails the build if a slug here is not on the roster.
+FOOTER_LICENSEES = ("nilab-azizi", "sofia-azizi", "zohra-azizi")
+
 # Strings to purge on sight — every one of these is live somewhere on the
 # web today and is actively corrupting the entity (research/social.md §NAP).
 STALE_STRINGS = (

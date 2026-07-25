@@ -14,7 +14,7 @@ import html
 from typing import Any
 
 import schema
-from data import site
+from data import agents, site
 
 NAV_LINKS = [
     ("Neighborhoods", "/neighborhoods"),
@@ -130,6 +130,13 @@ def footer() -> str:
         f"</a></li>"
         for slug in site.NAV_ORDER
     )
+    # Each named licensee links to their own page, so the DRE number and the
+    # person it belongs to are one click apart rather than an orphan string.
+    licensees = "<br>\n      ".join(
+        f'<a href="/agent/{a["slug"]}">{esc(a["name"])}</a> '
+        f"&middot; CA DRE# {a['dre']}"
+        for a in (agents.by_slug(s) for s in site.FOOTER_LICENSEES)
+    )
     return f"""<footer class="footer">
   <div class="container footer__grid">
 
@@ -171,7 +178,7 @@ def footer() -> str:
 
   <div class="container footer__legal">
     <p class="footer__licence">
-      {esc(site.LEAD_AGENT)} &middot; CA DRE# {site.LEAD_DRE}<br>
+      {licensees}<br>
       {esc(site.BROKERAGE)} &middot; CA DRE# {site.BROKERAGE_DRE}
     </p>
     <p class="footer__disclaimer">{esc(site.DISCLAIMER)}</p>
