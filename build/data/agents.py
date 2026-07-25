@@ -31,7 +31,7 @@ ROSTER: list[dict] = [
         "dre": "02047962",
         "phone": "858.847.8067",
         "compass": "nilab-azizi",
-        "photo": "/assets/img/team/headshot-nilab-azizi.png",
+        "photo": "/assets/img/team/headshot-nilab-azizi.jpg",
         "farms": None,
         "lead": True,
     },

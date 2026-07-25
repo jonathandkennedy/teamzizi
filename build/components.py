@@ -11,10 +11,13 @@ trailing slashes — that would 301 away the equity we are rebuilding to keep.
 from __future__ import annotations
 
 import html
+from pathlib import Path
 from typing import Any
 
 import schema
 from data import agents, site
+
+SITE_ROOT = Path(__file__).resolve().parent.parent / "site"
 
 # Built pages only. Sell / Buy / Concierge were here linking at nothing, so
 # the primary navigation on all 43 pages offered three 404s. They come back
@@ -119,6 +122,60 @@ def nav(current: str = "") -> str:
     <a class="drawer__phone" href="{site.PHONE_HREF}">{site.PHONE_DISPLAY}</a>
   </div>
 </div>"""
+
+
+def picture(
+    src: str,
+    *,
+    alt: str = "",
+    width: int,
+    height: int,
+    cls: str = "",
+    eager: bool = False,
+    sizes: str = "",
+) -> str:
+    """<picture> with WebP first and the JPEG as fallback.
+
+    build/optimize.py writes a .webp alongside every photograph. WebP is
+    roughly 40-60% smaller than the equivalent JPEG here, and a browser that
+    cannot read it silently takes the <img>. Nothing is lost and nobody needs
+    a script.
+
+    `eager` marks the LCP candidate: fetchpriority high, no lazy attribute.
+    Everything else is lazy and async-decoded, because on a neighborhood page
+    the hero is the only image above the fold.
+    """
+    stem = src.rsplit(".", 1)[0]
+    klass = f' class="{cls}"' if cls else ""
+    loading = (
+        ' fetchpriority="high" decoding="async"'
+        if eager
+        else ' loading="lazy" decoding="async"'
+    )
+
+    # `sizes` is what stops the browser downloading a 1280px file for a 400px
+    # card. It is only correct when a narrow rendition exists, which
+    # build/optimize.py writes for the directories that need one.
+    narrow = Path(SITE_ROOT / f"{stem.lstrip('/')}-800.webp")
+    if sizes and narrow.exists():
+        webp_set = f"{stem}-800.webp 800w, {stem}.webp {width}w"
+        jpeg_set = f"{stem}-800.jpg 800w, {stem}.jpg {width}w"
+        return (
+            "<picture>"
+            f'<source srcset="{webp_set}" sizes="{sizes}" type="image/webp">'
+            f'<source srcset="{jpeg_set}" sizes="{sizes}" type="image/jpeg">'
+            f'<img{klass} src="{src}" alt="{esc(alt)}" '
+            f'width="{width}" height="{height}"{loading}>'
+            "</picture>"
+        )
+
+    return (
+        "<picture>"
+        f'<source srcset="{stem}.webp" type="image/webp">'
+        f'<img{klass} src="{src}" alt="{esc(alt)}" '
+        f'width="{width}" height="{height}"{loading}>'
+        "</picture>"
+    )
 
 
 def footer() -> str:
@@ -269,8 +326,8 @@ def expert_block(agent: dict[str, Any], hood: dict[str, Any], *, confirmed: bool
     says so plainly rather than implying a specialism nobody has claimed.
     """
     photo = (
-        f'<img class="expert__photo" src="{agent["photo"]}" '
-        f'alt="{esc(agent["name"])}" width="200" height="200" loading="lazy">'
+        picture(agent["photo"], alt=agent["name"], width=200, height=200,
+                cls="expert__photo")
         if agent.get("photo")
         else '<div class="expert__photo expert__photo--pending"></div>'
     )

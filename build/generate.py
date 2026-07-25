@@ -68,9 +68,11 @@ def hood_card(slug: str) -> str:
     else:
         media = (
             '<div class="card__media">'
-            f'<img src="/assets/img/neighborhoods/{slug}.jpg" alt="" '
-            'width="1280" height="800" loading="lazy">'
-            '<span class="card__overlay"><span class="btn btn--light btn--sm">'
+            + c.picture(
+                f"/assets/img/neighborhoods/{slug}.jpg", width=1280, height=800,
+                sizes="(min-width: 62rem) 30vw, (min-width: 40rem) 45vw, 92vw",
+            )
+            + '<span class="card__overlay"><span class="btn btn--light btn--sm">'
             "Explore</span></span>"
             "</div>"
         )
@@ -119,8 +121,8 @@ def build_home() -> None:
     )
 
     body = f"""<section class="hero">
-  <img class="hero__media" src="/assets/img/backgrounds/hero-poster.jpg" alt=""
-       width="1920" height="2880" fetchpriority="high" decoding="async">
+  {c.picture("/assets/img/backgrounds/hero-poster.jpg", width=1920, height=2880,
+             cls="hero__media", eager=True)}
   <div class="hero__inner">
     <h1>{c.esc(site.NAME)}</h1>
     <p class="hero__sub">Who Represents You Matters</p>
@@ -183,8 +185,8 @@ def build_home() -> None:
 <section class="section">
   <div class="container split">
     <div class="split__media">
-      <img src="/assets/img/team/team-group.jpg" alt="The Team Azizi team"
-           width="1920" height="1528" loading="lazy">
+      {c.picture("/assets/img/team/team-group.jpg", alt="The Team Azizi team",
+               width=1920, height=1528)}
     </div>
     <div class="split__body">
       <p class="eyebrow">Meet the team</p>
@@ -204,8 +206,7 @@ def build_home() -> None:
 </section>
 
 <section class="band band--heavy">
-  <img class="band__media" src="/assets/img/backgrounds/work-with-us.jpg" alt=""
-       width="1920" height="1200" loading="lazy">
+  {c.picture("/assets/img/backgrounds/work-with-us.jpg", width=1920, height=1200, cls="band__media")}
   <div class="container">
     <h2 class="rule-center">Work With Us</h2>
     <p style="margin-inline:auto">
@@ -261,8 +262,8 @@ def build_neighborhood_hub() -> None:
     total = len(site.ALL_AREAS)
 
     body = f"""<section class="band band--hero" style="padding-top:calc(var(--nav-h) + 4rem)">
-  <img class="band__media" src="/assets/img/neighborhoods/_hub-hero.jpg" alt=""
-       width="1920" height="1440" fetchpriority="high" decoding="async">
+  {c.picture("/assets/img/neighborhoods/_hub-hero.jpg", width=1920, height=1440,
+             cls="band__media", eager=True)}
   <div class="container">
     <h1>North San Diego Neighborhood Guides</h1>
     <p style="margin-inline:auto">
@@ -512,17 +513,17 @@ def build_neighborhood(slug: str) -> None:
     # photograph would, and it stops being needed the day a real photograph
     # of that street exists — remove the slug from HOOD_IMAGE_MISSING.
     if slug not in HOOD_IMAGE_MISSING:
-        hero_media = (
-            f'<img class="band__media" src="/assets/img/neighborhoods/{slug}.jpg"\n'
-            '       alt="" width="1280" height="800" fetchpriority="high">'
+        hero_media = c.picture(
+            f"/assets/img/neighborhoods/{slug}.jpg", width=1280, height=800,
+            cls="band__media", eager=True,
         )
         hero_facts = ""
         hero_class = "band band--hero"
     else:
         texture = textures.ASSIGNMENT.get(slug, "grain")
-        hero_media = (
-            f'<img class="band__media" src="/assets/img/textures/{texture}.jpg"\n'
-            '       alt="" width="1600" height="1067" fetchpriority="high">'
+        hero_media = c.picture(
+            f"/assets/img/textures/{texture}.jpg", width=1600, height=1067,
+            cls="band__media", eager=True,
         )
         hero_class = "band band--hero band--plate"
 
@@ -589,8 +590,7 @@ def build_neighborhood(slug: str) -> None:
 </section>
 
 <section class="band band--heavy">
-  <img class="band__media" src="/assets/img/backgrounds/work-with-us.jpg" alt=""
-       width="1920" height="1200" loading="lazy">
+  {c.picture("/assets/img/backgrounds/work-with-us.jpg", width=1920, height=1200, cls="band__media")}
   <div class="container">
     <h2 class="rule-center">Thinking about {name}?</h2>
     <div class="cta-row">
@@ -907,8 +907,8 @@ def build_home_valuation() -> None:
 </section>
 
 <section class="band band--heavy">
-  <img class="band__media" src="/assets/img/backgrounds/home-valuation.jpg" alt=""
-       width="2560" height="1708" loading="lazy">
+  {c.picture("/assets/img/backgrounds/home-valuation.jpg", width=1920, height=1281,
+             cls="band__media")}
   <div class="container">
     <h2 class="rule-center">Rather just talk it through?</h2>
     <div class="cta-row">
@@ -1358,8 +1358,9 @@ def build_404() -> None:
 
 def roster_card(agent: dict) -> str:
     photo = (
-        f'<img class="roster__photo" src="{agent["photo"]}" '
-        f'alt="{c.esc(agent["name"])}" width="400" height="400" loading="lazy">'
+        c.picture(agent["photo"], alt=agent["name"], width=400, height=400,
+                  cls="roster__photo",
+                  sizes="(min-width: 62rem) 22vw, (min-width: 40rem) 30vw, 45vw")
         if agent.get("photo")
         else '<div class="roster__photo roster__photo--pending"></div>'
     )
@@ -1479,9 +1480,8 @@ def build_agents() -> None:
         hood_obj = farmed[0] if farmed else None
 
         photo = (
-            f'<img class="expert__photo" src="{agent["photo"]}" '
-            f'alt="{c.esc(agent["name"])}" width="320" height="320" '
-            'fetchpriority="high">'
+            c.picture(agent["photo"], alt=agent["name"], width=320, height=320,
+                      cls="expert__photo", eager=True)
             if agent.get("photo")
             else '<div class="expert__photo expert__photo--pending"></div>'
         )
