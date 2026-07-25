@@ -80,6 +80,7 @@ FOOTER_EXPLORE = (
     ("Homes for Sale", "/properties/sale"),
     ("Recently Sold", "/properties/sold"),
     ("Meet the Team", "/team"),
+    ("Journal", "/blog"),
     ("Contact", "/contact"),
 )
 

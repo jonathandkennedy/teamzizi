@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import components as c  # noqa: E402
 import schema  # noqa: E402
 import textures  # noqa: E402
-from data import agents, guides, site, taxes, testimonials  # noqa: E402
+from data import agents, guides, posts, site, taxes, testimonials  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 TODAY = date.today().isoformat()
@@ -1894,6 +1894,119 @@ def build_mello_roos() -> None:
     )
 
 
+def build_blog() -> None:
+    """The blog index and one page per post.
+
+    Not generated when there are no posts, for the same reason /testimonials
+    is not: an empty index advertises an abandoned blog, which is a worse
+    signal than having none. The old Luxury Presence site shipped a
+    copyright notice reading 2022 for four years; nothing here should
+    telegraph neglect the same way.
+    """
+    if not posts.POSTS:
+        print("  (no posts yet — /blog not generated)")
+        return
+
+    ordered = sorted(posts.POSTS, key=lambda p: p["date"], reverse=True)
+
+    # ---- index ----------------------------------------------------------
+    cards = "\n".join(
+        f"""      <article class="postcard">
+        <h2><a href="/blog/{p['slug']}">{c.esc(p['title'])}</a></h2>
+        <p class="updated">{p['date']} &middot; {c.esc(agents.by_slug(p['author'])['name'])}</p>
+        <p>{p['dek']}</p>
+      </article>"""
+        for p in ordered
+    )
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Journal
+    </nav>
+    <p class="eyebrow">Journal</p>
+    <h1>Notes on North San Diego County</h1>
+    <p class="lede">
+      Questions that come up often enough to be worth writing down properly,
+      answered from primary sources rather than from what everyone else says.
+    </p>
+    <div class="postcards">
+{cards}
+    </div>
+    <p class="updated" style="margin-top:2.5rem">Last updated {TODAY}</p>
+  </div>
+</section>"""
+    write(
+        "/blog",
+        c.page(
+            title="Journal — Notes on North San Diego County | Team Azizi",
+            description=(
+                "Questions about buying and selling in North San Diego "
+                "County, answered from primary sources. From Team Azizi at "
+                "Compass."
+            ),
+            path="/blog",
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Journal", f"{site.DOMAIN}/blog"),
+                ]),
+            ],
+        ),
+        changefreq="weekly",
+        priority="0.7",
+    )
+
+    # ---- posts ----------------------------------------------------------
+    for post in ordered:
+        author = agents.by_slug(post["author"])
+        path = f"/blog/{post['slug']}"
+        blocks = "\n\n".join(
+            c.answer_block(heading="h2", **b) for b in post["blocks"]
+        )
+        body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; <a href="/blog">Journal</a> &rsaquo;
+      {c.esc(post['title'])}
+    </nav>
+    <p class="eyebrow">Journal</p>
+    <h1>{c.esc(post['title'])}</h1>
+    {c.byline(author, post['date'])}
+    <p class="lede">{post['dek']}</p>
+
+{blocks}
+
+    <p class="answer__source" style="margin-top:2.5rem">
+      District boundaries are set by the districts themselves and are redrawn
+      from time to time. Every assignment above should be confirmed with the
+      district office for the specific address before it is relied on.
+    </p>
+    <p class="updated">Published {post['date']}</p>
+  </div>
+</section>"""
+        write(
+            path,
+            c.page(
+                title=f"{post['title']} | Team Azizi",
+                description=post["description"],
+                path=path,
+                body=body,
+                nodes=c.base_nodes() + [
+                    schema.article(post, author),
+                    schema.faq_page(faq_from_blocks(blocks)),
+                    schema.breadcrumbs([
+                        ("Home", f"{site.DOMAIN}/"),
+                        ("Journal", f"{site.DOMAIN}/blog"),
+                        (post["title"], f"{site.DOMAIN}{path}"),
+                    ]),
+                ],
+            ),
+            changefreq="yearly",
+            priority="0.8",
+        )
+
+
 def build_testimonials() -> None:
     """Only generated when there are real testimonials to show.
 
@@ -2589,6 +2702,7 @@ def main() -> int:
     build_sell()
     build_buy()
     build_concierge()
+    build_blog()
     build_testimonials()
     build_contact()
     build_thank_you()

@@ -897,3 +897,17 @@
   letter-spacing: 0.04em;
   color: var(--c-neutral);
 }
+
+/* ---- Journal ------------------------------------------------ */
+
+.postcards { display: grid; gap: 2.5rem; margin-top: 2.5rem; }
+
+.postcard { padding-bottom: 2rem; border-bottom: 1px solid var(--c-rule); }
+
+.postcard:last-child { border-bottom: 0; }
+
+.postcard h2 { margin-bottom: 0.4rem; }
+
+.postcard h2 a { text-decoration: none; }
+
+.postcard h2 a:hover { text-decoration: underline; }
