@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import components as c  # noqa: E402
 import schema  # noqa: E402
 import textures  # noqa: E402
-from data import agents, guides, posts, site, taxes, testimonials  # noqa: E402
+from data import agents, guides, photos, posts, site, taxes, testimonials  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 TODAY = date.today().isoformat()
@@ -48,9 +48,9 @@ def hood(slug: str) -> dict:
 # archived images depict Carmel Valley, Monterey County and a mid-century
 # suburb respectively. An honest placeholder beats a wrong-place photograph
 # on the page whose entire SEO problem is being confused with Monterey.
-HOOD_IMAGE_MISSING = {"carmel-valley", "4s-ranch"} | {
+HOOD_IMAGE_MISSING = ({"carmel-valley", "4s-ranch"} | {
     a["slug"] for a in site.NORTH_COUNTY
-}
+}) - set(photos.CREDITS)
 
 
 # --------------------------------------------------------------------------
@@ -578,6 +578,21 @@ def build_neighborhood(slug: str) -> None:
         )
         hero_facts = f'\n    <div class="plate">\n{cells}\n    </div>'
 
+    credit = photos.for_hood(slug)
+    credit_html = ""
+    if credit:
+        lic = (
+            f'<a href="{credit["licence_url"]}" rel="nofollow noopener" '
+            f'target="_blank">{c.esc(credit["licence"])}</a>'
+            if credit.get("licence_url") else c.esc(credit["licence"])
+        )
+        credit_html = (
+            '\n<p class="photo-credit">Photograph: '
+            f'<a href="{credit["source"]}" rel="nofollow noopener" '
+            f'target="_blank">{c.esc(credit["title"])}</a> by '
+            f'{c.esc(credit["author"])}, {lic}. {c.esc(credit["depicts"])}</p>'
+        )
+
     body = f"""<section class="{hero_class}" style="padding-top:calc(var(--nav-h) + 4rem)">
   {hero_media}
   <div class="container">
@@ -592,7 +607,7 @@ def build_neighborhood(slug: str) -> None:
       <a href="/">Home</a> &rsaquo; <a href="/neighborhoods">Neighborhoods</a>
       &rsaquo; {name}
     </nav>
-    {c.byline(agent, TODAY)}
+    {c.byline(agent, TODAY)}{credit_html}
     <p class="lede">
       What follows is the part of a {name} search that is hard to look up:
       which tax districts apply, which district assigns the schools, and what

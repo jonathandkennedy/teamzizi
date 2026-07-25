@@ -911,3 +911,14 @@
 .postcard h2 a { text-decoration: none; }
 
 .postcard h2 a:hover { text-decoration: underline; }
+
+/* ---- Photo credit ------------------------------------------- */
+
+/* CC BY and CC BY-SA require attribution — this is a licence condition, not
+   a courtesy. It also lets a reader verify the photograph depicts the place
+   it claims to, which is the same standard every figure on this site meets. */
+.photo-credit {
+  margin: 0.75rem 0 0;
+  font-size: var(--t-small);
+  color: var(--c-neutral);
+}
