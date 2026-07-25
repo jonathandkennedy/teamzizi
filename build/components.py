@@ -204,11 +204,20 @@ def footer() -> str:
     GBP are one entity or they are three. Licence numbers and the Compass
     equal-housing / MLS marks are a California DRE requirement, not decoration.
     """
+    # Resolved against ALL_AREAS, not NEIGHBORHOODS — the latter is only the
+    # original six, which is exactly how the North County guides ended up
+    # unreachable from the footer. See site.FOOTER_HOODS.
     hoods = "\n".join(
-        f'        <li><a href="/neighborhoods/{slug}">'
-        f"{esc(next(h['name'] for h in site.NEIGHBORHOODS if h['slug'] == slug))}"
-        f"</a></li>"
-        for slug in site.NAV_ORDER
+        [
+            f'        <li><a href="/neighborhoods/{slug}">'
+            f"{esc(next(a['name'] for a in site.ALL_AREAS if a['slug'] == slug))}"
+            f"</a></li>"
+            for slug in site.FOOTER_HOODS
+        ]
+        + [
+            f'        <li><a href="/neighborhoods">All {len(site.ALL_AREAS)}'
+            f" guides</a></li>"
+        ]
     )
     # Only pages that exist. This block previously linked seven — /sell, /buy,
     # /concierge, /testimonials, /blog, /contact, /terms-and-conditions — none
