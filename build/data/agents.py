@@ -363,7 +363,11 @@ def for_neighborhood(slug: str) -> tuple[dict, bool]:
     for agent in ROSTER:
         if agent.get("farms") == slug:
             return agent, True
-    return team_lead(), False
+    # No confirmed assignment. Rotate across the three Azizi licensees rather
+    # than defaulting every one of the sixteen guides to the team lead — the
+    # page still says the specialism is unconfirmed, so this is which member
+    # of the team is the point of contact, not a farming claim.
+    return author_for(f"/neighborhoods/{slug}"), False
 
 
 def unassigned() -> list[str]:
@@ -396,3 +400,35 @@ def unassigned() -> list[str]:
 # and a populated Zillow profile is a sameAs signal that helps consolidate
 # the entity — which is the whole problem this rebuild exists to fix.
 ZILLOW_PENDING = [a["slug"] for a in ROSTER if not a.get("zillow")]
+
+
+# --------------------------------------------------------------------------
+# Byline rotation across the three Azizi licensees
+# --------------------------------------------------------------------------
+# Every page previously carried Nilab Azizi's byline, because she is the team
+# lead and the fallback for any unassigned area. One person credited on forty
+# pages is both a weaker E-E-A-T signal than three named licensees and, more
+# simply, not what the client wants.
+#
+# Weighted so Sofia carries most of it, with Nilab and Zohra mixed through —
+# the client's instruction. Deterministic, not random: the pick is a stable
+# hash of the page key, so a given page keeps the same byline across every
+# build. Random rotation would churn the schema `author` on every deploy and
+# make the attribution meaningless.
+#
+# hashlib rather than the builtin hash(), which is salted per process and
+# would give a different answer on every run.
+BYLINE_POOL = (
+    "sofia-azizi", "sofia-azizi", "sofia-azizi",
+    "sofia-azizi", "sofia-azizi", "sofia-azizi",
+    "nilab-azizi", "nilab-azizi",
+    "zohra-azizi", "zohra-azizi",
+)
+
+
+def author_for(key: str) -> dict:
+    """Stable byline for a page key. Same key always yields the same person."""
+    import hashlib  # noqa: PLC0415
+
+    digest = hashlib.sha256(key.encode("utf-8")).digest()
+    return by_slug(BYLINE_POOL[digest[0] % len(BYLINE_POOL)])

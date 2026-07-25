@@ -368,10 +368,13 @@ def expert_block(agent: dict[str, Any], hood: dict[str, Any], *, confirmed: bool
         if agent.get("dre")
         else ""
     )
+    # Not "team lead" any more: the fallback rotates across the three Azizi
+    # licensees, and Sofia and Zohra are not the team lead. Saying so would
+    # be a plain factual error on two thirds of the guides.
     role = (
         f"Your {esc(hood['name'])} specialist"
         if confirmed
-        else f"Team lead &middot; covering {esc(hood['name'])}"
+        else f"Team Azizi &middot; covering {esc(hood['name'])}"
     )
     tel = "tel:+1" + agent["phone"].replace(".", "")
     return f"""<aside class="expert">

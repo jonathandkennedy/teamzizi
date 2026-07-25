@@ -706,7 +706,7 @@ def build_home_valuation() -> None:
     """
     path = "/home-valuation"
     updated = TODAY
-    author = agents.team_lead()
+    author = agents.author_for("/home-valuation")
 
     blocks = "\n\n".join([
         c.answer_block(
@@ -1034,7 +1034,7 @@ def build_thank_you() -> None:
 
 
 def build_properties() -> None:
-    lead = agents.team_lead()
+    lead = agents.author_for("/properties")
 
     # ---- /properties/sale — where /home-search/* lands -------------------
     path = "/properties/sale"
@@ -1278,7 +1278,9 @@ def simple_page(
     description: str,
     crumb: str,
 ) -> None:
-    lead = agents.team_lead()
+    # Keyed on the page's own path so /sell, /buy and /concierge each get
+    # their own byline rather than sharing the helper's.
+    lead = agents.author_for(path)
     body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
   <div class="container container--narrow">
     <nav aria-label="Breadcrumb" class="updated">
@@ -1647,7 +1649,7 @@ def build_mello_roos() -> None:
     for people; the data is there for everyone.
     """
     path = "/mello-roos"
-    lead = agents.team_lead()
+    lead = agents.author_for("/mello-roos")
 
     panels = []
     options = []
@@ -2029,7 +2031,7 @@ def build_testimonials() -> None:
         print("  (no testimonials yet — /testimonials not generated)")
         return
 
-    lead = agents.team_lead()
+    lead = agents.author_for("/testimonials")
     cards = []
     for t in testimonials.ENTRIES:
         who = agents.by_slug(t["agent"]) if t.get("agent") else None
@@ -2114,7 +2116,7 @@ def build_testimonials() -> None:
 def build_contact() -> None:
     """/contact was in the primary nav on all 43 pages, linking at nothing."""
     path = "/contact"
-    lead = agents.team_lead()
+    lead = agents.author_for("/contact")
     body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 4rem)">
   <div class="container container--narrow">
     <nav aria-label="Breadcrumb" class="updated">
@@ -2287,7 +2289,8 @@ def build_team() -> None:
         else:
             body = (
                 '<p class="updated">Specialist assignment pending client '
-                f"confirmation. {c.esc(agents.team_lead()['name'])} covers "
+                "confirmation. "
+                f"{c.esc(agents.for_neighborhood(slug)[0]['name'])} covers "
                 f"{c.esc(h['name'])} enquiries in the meantime.</p>"
             )
         groups.append(f"""    <div class="area-group">
