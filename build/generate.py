@@ -297,6 +297,310 @@ def build_neighborhood_hub() -> None:
 
 
 # --------------------------------------------------------------------------
+# /home-valuation — the highest-traffic page they own
+# --------------------------------------------------------------------------
+
+
+def build_home_valuation() -> None:
+    """Lead magnet, built around the Zestimate rather than reproducing it.
+
+    Two things drove the design:
+
+    **It is the Instagram link-in-bio destination** — dead, and taking traffic
+    from 2,055 followers. Highest-traffic single page on the site.
+
+    **We cannot legally show a Zestimate.** Zillow retired the public Zestimate
+    API in September 2021; Bridge Interactive, its replacement, is enterprise-
+    only, MLS-gated, and does not generally expose the Zestimate at all.
+    Everything else on the market is a scraper, and Zillow's terms prohibit
+    automated access. Building the client's main lead magnet on a scraper is
+    the exact rented-vendor failure mode that killed their last website.
+
+    So the page makes the Zestimate the antagonist instead of the centrepiece.
+    That is the stronger play regardless of the legal question: reproducing a
+    competitor's number makes Zillow the authority on your client's home, on
+    your client's own site, and Zillow monetises by selling that homeowner back
+    to an agent. The differentiated page explains why the algorithm is wrong
+    *in these specific ZIP codes* — Mello-Roos districts, school attendance
+    boundaries, view premiums, Coastal Zone rules — which is precisely the
+    data no competitor publishes and precisely what an AVM handles worst.
+
+    One compliance note on the framing: "we'll get you more than Zillow says"
+    is a price promise a licensee cannot make. "Zillow has never seen your
+    house and does not know which school your street feeds" is a factual
+    differentiator that lands the same way.
+    """
+    path = "/home-valuation"
+    updated = TODAY
+    author = agents.team_lead()
+
+    blocks = "\n\n".join([
+        c.answer_block(
+            anchor="why-avms-miss",
+            question="Why is my Zestimate wrong?",
+            lead=(
+                "An automated valuation has never been inside the house. In "
+                "Carmel Valley and Del Mar it is working from public records "
+                "and recent nearby sales, so it cannot see a remodel, a view, "
+                "a canyon-rim lot versus an interior one, or which side of a "
+                "school boundary the address falls on &mdash; and those are "
+                "the variables that move price most here."
+            ),
+            body=(
+                "<p>Zillow publishes its own median error rate and is candid "
+                "that off-market homes are estimated far less accurately than "
+                "listed ones. That is not a criticism of the tool; it is what "
+                "an algorithm working from public data can do.</p>"
+            ),
+        ),
+        c.answer_block(
+            anchor="mello-roos",
+            question="Does an online estimate account for Mello-Roos?",
+            lead=(
+                "No. In Del Sur and 4S Ranch, two homes on the same street "
+                "with the same square footage can carry materially different "
+                "Mello-Roos obligations depending on the community facilities "
+                "district and the phase they were built in &mdash; which "
+                "changes the monthly payment a buyer can afford, and therefore "
+                "changes what the home actually sells for."
+            ),
+        ),
+        c.answer_block(
+            anchor="school-boundaries",
+            question="Do school boundaries change what my home is worth?",
+            lead=(
+                "In Carmel Valley they can change it by a great deal. Homes "
+                "carrying San Diego addresses can feed Del Mar Union schools "
+                "or San Dieguito Union depending on the street, and buyers pay "
+                "for the assignment &mdash; an automated estimate that treats "
+                "the ZIP code as uniform will miss that difference entirely."
+            ),
+        ),
+        c.answer_block(
+            anchor="coastal-zone",
+            question="How does the Coastal Zone affect value in Del Mar?",
+            lead=(
+                "Del Mar properties inside the Coastal Zone carry permitting "
+                "constraints on remodels and rebuilds that properties outside "
+                "it do not. Two otherwise comparable homes can be worth "
+                "meaningfully different amounts because of what a buyer is "
+                "allowed to do with them, and no automated model reads the "
+                "permit history."
+            ),
+        ),
+        c.answer_block(
+            anchor="what-you-get",
+            question="What do I get instead of an instant number?",
+            lead=(
+                "A comparative market analysis prepared by the Team Azizi "
+                "agent who works your neighborhood &mdash; Del Mar, Carmel "
+                "Valley, Rancho Santa Fe, Del Sur, 4S Ranch or Scripps Ranch "
+                "&mdash; built from MLS sales, current competing inventory and "
+                "the local factors above, with the reasoning shown rather than "
+                "a single figure asserted."
+            ),
+        ),
+    ])
+
+    hood_options = "\n".join(
+        f'          <option value="{h["slug"]}">{c.esc(h["name"])}</option>'
+        for h in [hood(s) for s in site.NAV_ORDER]
+    )
+
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Home Valuation
+    </nav>
+    <p class="eyebrow">Home valuation</p>
+    <h1>Zillow has never seen your house</h1>
+    <p class="lede">
+      It has not walked your street, it does not know which school your address
+      feeds, and it cannot tell a Mello-Roos district from an HOA. If you think
+      your home is worth more than the number online, you may well be right
+      &mdash; and the way to find out is to have someone who sells here
+      actually look.
+    </p>
+
+    <form class="valuation" method="POST" action="{site.LEAD_ENDPOINT}"
+          data-lead-form data-lead-kind="valuation">
+      <!-- Formspree control fields. _subject is rewritten on submit to carry
+           the address, so the notification email is scannable in an inbox
+           without opening it. _gotcha is a honeypot: bots fill it, humans
+           never see it. -->
+      <input type="hidden" name="_subject" value="Home valuation request"
+             data-subject-prefix="Valuation request">
+      <input type="hidden" name="_next"
+             value="{site.DOMAIN}/thank-you">
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+             aria-hidden="true"
+             style="position:absolute;left:-9999px;width:1px;height:1px">
+      <div class="field">
+        <label for="address">Property address</label>
+        <input id="address" name="address" type="text" autocomplete="street-address"
+               placeholder="12860 El Camino Real, San Diego CA 92130" required>
+      </div>
+      <div class="grid grid--2">
+        <div class="field">
+          <label for="hood">Neighborhood</label>
+          <select id="hood" name="neighborhood">
+            <option value="">Select&hellip;</option>
+{hood_options}
+            <option value="other">Somewhere else in San Diego County</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="timing">Timing</label>
+          <select id="timing" name="timing">
+            <option value="">Select&hellip;</option>
+            <option>Just curious what it is worth</option>
+            <option>Thinking about selling this year</option>
+            <option>Ready to list now</option>
+            <option>Refinancing or estate planning</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid grid--2">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" type="tel" autocomplete="tel">
+      </div>
+      <div class="consent">
+        <input id="consent" name="consent" type="checkbox" required>
+        <p><label for="consent" style="display:inline;font-size:inherit;
+           font-weight:400;letter-spacing:0;text-transform:none">
+           {c.esc(site.TCPA_CONSENT)}</label></p>
+      </div>
+      <button class="btn btn--filled" type="submit">Request my valuation</button>
+      <p class="updated" style="margin-top:1rem">
+        A real person reads every one of these. No automated estimate, no drip
+        sequence, no selling your details on.
+      </p>
+    </form>
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container container--narrow">
+    <h2 class="rule-gold">What an algorithm cannot see</h2>
+{blocks}
+    {c.byline(author, updated)}
+  </div>
+</section>
+
+<section class="band band--heavy">
+  <img class="band__media" src="/assets/img/backgrounds/home-valuation.jpg" alt=""
+       width="2560" height="1708" loading="lazy">
+  <div class="container">
+    <h2 class="rule-center">Rather just talk it through?</h2>
+    <div class="cta-row">
+      <a class="btn btn--light" href="{site.PHONE_HREF}">{site.PHONE_DISPLAY}</a>
+      <a class="btn btn--light" href="/contact">Send a message</a>
+    </div>
+  </div>
+</section>"""
+
+    faq = [
+        {"q": "Why is my Zestimate wrong?",
+         "a": "An automated valuation has never been inside the house. It "
+              "works from public records and nearby sales, so it cannot see a "
+              "remodel, a view, a lot position, or which side of a school "
+              "boundary an address falls on."},
+        {"q": "Does an online estimate account for Mello-Roos?",
+         "a": "No. In Del Sur and 4S Ranch, Mello-Roos obligations vary by "
+              "community facilities district and build phase, which changes "
+              "the monthly payment a buyer can carry and therefore the price."},
+        {"q": "What do I get instead of an instant number?",
+         "a": "A comparative market analysis from the Team Azizi agent who "
+              "works your neighborhood, built from MLS sales and current "
+              "competing inventory, with the reasoning shown."},
+    ]
+
+    nodes = c.base_nodes() + [
+        schema.web_page(
+            url=f"{site.DOMAIN}{path}",
+            name="Home Valuation",
+            author_slug=author["slug"],
+            updated=updated,
+        ),
+        schema.agent(author),
+        schema.faq_page(faq),
+        schema.breadcrumbs([
+            ("Home", f"{site.DOMAIN}/"),
+            ("Home Valuation", f"{site.DOMAIN}{path}"),
+        ]),
+    ]
+
+    write(
+        path,
+        c.page(
+            title=(
+                "What Is My Home Worth? North San Diego Home Valuation | Team Azizi"
+            ),
+            description=(
+                "Zillow has never seen your house. Get a comparative market "
+                "analysis from the Team Azizi agent who works Carmel Valley, "
+                "Del Mar, Rancho Santa Fe, Del Sur, 4S Ranch or Scripps Ranch. "
+                f"Call {site.PHONE_DISPLAY}."
+            ),
+            path=path,
+            body=body,
+            nodes=nodes,
+        ),
+        changefreq="monthly",
+        priority="0.9",
+    )
+
+
+
+def build_thank_you() -> None:
+    """Where lead forms land after posting. noindex — it is a confirmation,
+    not a destination, and it exists so a submitter gets a real acknowledgement
+    instead of Formspree's own branded page."""
+    path = "/thank-you"
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 5rem);min-height:60vh">
+  <div class="container container--narrow">
+    <p class="eyebrow">Received</p>
+    <h1>Thank you &mdash; that came through</h1>
+    <p class="lede">
+      A member of the team will read it and come back to you personally,
+      usually the same day. Nothing automated is going to happen in the
+      meantime: no instant estimate, no drip sequence.
+    </p>
+    <p>
+      If it is urgent, call {site.PHONE_DISPLAY} and you will get a person.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn--dark" href="{site.PHONE_HREF}">{site.PHONE_DISPLAY}</a>
+      <a class="btn btn--dark" href="/neighborhoods">Neighborhood guides</a>
+    </div>
+  </div>
+</section>"""
+    html = c.page(
+        title="Thank You | Team Azizi",
+        description="Your request has been received.",
+        path=path,
+        body=body,
+        nodes=c.base_nodes(),
+    )
+    html = html.replace(
+        "<title>", '<meta name="robots" content="noindex,follow">\n<title>', 1
+    )
+    target = SITE / "thank-you.html"
+    target.write_text(html, encoding="utf-8")
+    print(f"  {target.relative_to(SITE.parent)}  (noindex, not in sitemap)")
+
+
+# --------------------------------------------------------------------------
 # Team, grouped by the area each agent farms
 # --------------------------------------------------------------------------
 
@@ -558,6 +862,8 @@ def main() -> int:
     print("Generating site/\n")
     build_home()
     build_neighborhood_hub()
+    build_home_valuation()
+    build_thank_you()
     build_team()
     build_agents()
     build_sitemap()

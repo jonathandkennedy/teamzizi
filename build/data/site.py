@@ -311,5 +311,30 @@ TCPA_CONSENT = (
 )
 
 
+# --------------------------------------------------------------------------
+# Lead delivery
+#
+# Every form on this site posts here and the submission is emailed. The
+# valuation form in particular exists to capture one thing — a property
+# address — so a submission that does not reach a human is a lost listing,
+# not a lost newsletter signup.
+#
+# Formspree is the launch choice: no server, no build step, works with a
+# static host. Two things to watch:
+#   - The free tier caps around 50 submissions/month. This form is the
+#     Instagram link-in-bio destination for 2,055 followers; budget for the
+#     paid tier rather than silently dropping leads.
+#   - It is a third-party dependency, which this project is otherwise built
+#     to avoid. Swapping it for the client's CRM webhook is a one-line change
+#     here precisely so that stays cheap.
+#
+# LEAD_ENDPOINT must be replaced with the real form ID before launch —
+# validate.py fails the build while it still says PLACEHOLDER.
+# --------------------------------------------------------------------------
+
+LEAD_ENDPOINT = "https://formspree.io/f/PLACEHOLDER"
+LEAD_NOTIFY = EMAIL  # where submissions land
+
+
 def address_one_line() -> str:
     return f"{STREET}, {CITY}, {REGION} {POSTAL}"

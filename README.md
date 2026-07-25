@@ -19,9 +19,15 @@ Research and strategy complete. **Phase 1 in progress** — the design system, g
 ## Build
 
 ```bash
-python3 build/generate.py    # write site/
-python3 build/validate.py    # PRE-PUSH GATE — must exit 0
+python3 build/generate.py                # write site/
+python3 build/validate.py --prelaunch    # pre-push gate during the build
+python3 build/validate.py                # LAUNCH gate — no escape hatch
 ```
+
+`--prelaunch` demotes *launch blockers* (things fine mid-build but fatal in
+production, like a lead form posting at a placeholder endpoint) to loud
+warnings. The launch build runs without the flag, so shipping one takes a
+deliberate act rather than a quiet oversight.
 
 `validate.py` parses every JSON-LD block, rejects one `@id` describing two different things, checks `sitemap.xml` as XML against real files, and fails the build if any stale NAP string (old address, old phone, "Upstart", the "45 Ranch" typo) reaches the output.
 

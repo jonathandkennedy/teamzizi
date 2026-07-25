@@ -672,3 +672,14 @@
 }
 
 .area-group__head h2 { margin: 0; }
+
+/* ---- Valuation form ----------------------------------------- */
+
+.valuation {
+  max-width: 40rem;
+  margin-top: 2.5rem;
+  padding: 2rem;
+  border: 1px solid var(--c-rule);
+}
+
+.valuation .grid { gap: 0 1.25rem; }

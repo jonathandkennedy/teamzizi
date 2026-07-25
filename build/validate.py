@@ -41,6 +41,13 @@ LD_BLOCK = re.compile(
 errors: list[str] = []
 warnings: list[str] = []
 
+# Things that are fine mid-build but must never reach production. Running
+# with --prelaunch demotes these to loud warnings so development can proceed;
+# the launch build runs WITHOUT the flag, so shipping one requires a
+# deliberate act rather than a quiet oversight.
+blockers: list[str] = []
+PRELAUNCH = "--prelaunch" in sys.argv
+
 
 def rel(path: Path) -> str:
     return str(path.relative_to(ROOT))
@@ -184,6 +191,35 @@ def check_answer_blocks(pages: list[Path]) -> None:
         anchors_seen.clear()
 
 
+def check_lead_forms(pages: list[Path]) -> None:
+    """A form that does not deliver is worse than no form.
+
+    Every lead form must post somewhere real, carry TCPA consent, and — on the
+    valuation form — capture the address, which is the entire point of it.
+    Shipping any of these broken loses listings silently, which is the failure
+    mode nobody notices until a quarter has gone by.
+    """
+    if "PLACEHOLDER" in site.LEAD_ENDPOINT:
+        blockers.append(
+            "site.LEAD_ENDPOINT is still a placeholder — every lead form on "
+            "the site posts into nothing. Set the real Formspree ID (or the "
+            "client's CRM webhook) before launch."
+        )
+
+    for page in pages:
+        html = page.read_text(encoding="utf-8")
+        if "data-lead-form" not in html:
+            continue
+        if 'name="consent"' not in html:
+            errors.append(f"{rel(page)}: lead form has no TCPA consent field")
+        if "formspree.io" not in html and site.LEAD_ENDPOINT not in html:
+            errors.append(f"{rel(page)}: lead form has no delivery endpoint")
+        if 'data-lead-kind="valuation"' in html and 'name="address"' not in html:
+            errors.append(
+                f"{rel(page)}: valuation form does not capture an address"
+            )
+
+
 def check_unverified() -> None:
     if not site.GEO["verified"]:
         warnings.append(
@@ -206,20 +242,26 @@ def main() -> int:
     pages = sorted(SITE.rglob("*.html"))
     check_jsonld(pages)
     check_answer_blocks(pages)
+    check_lead_forms(pages)
     check_stale_strings(pages)
     check_sitemap()
     check_unverified()
 
     for warning in warnings:
-        print(f"  warn  {warning}")
+        print(f"  warn   {warning}")
+    for blocker in blockers:
+        print(f"  {'BLOCK ' if PRELAUNCH else 'FAIL  '} {blocker}")
     for error in errors:
-        print(f"  FAIL  {error}")
+        print(f"  FAIL   {error}")
 
+    failed = errors if PRELAUNCH else errors + blockers
     print(
-        f"\n{len(pages)} page(s) checked · "
-        f"{len(errors)} error(s) · {len(warnings)} warning(s)"
+        f"\n{len(pages)} page(s) checked · {len(failed)} error(s) · "
+        f"{len(blockers)} launch blocker(s) · {len(warnings)} warning(s)"
     )
-    return 1 if errors else 0
+    if PRELAUNCH and blockers:
+        print("running --prelaunch: launch blockers shown but not failing")
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
