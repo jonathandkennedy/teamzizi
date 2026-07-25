@@ -213,6 +213,45 @@ def agent(person: dict[str, Any]) -> dict[str, Any]:
     return node
 
 
+def image(
+    *,
+    url: str,
+    caption: str,
+    hood: dict[str, Any] | None = None,
+    credit: str | None = None,
+) -> dict[str, Any]:
+    """`ImageObject` with `contentLocation`.
+
+    Localized imagery is a first-hand signal the May 2026 core update rewards,
+    and no competitor publishes real neighborhood imagery at all. This makes
+    the image assert its own geography rather than inheriting it from whatever
+    page happens to embed it — which is what lets it surface independently in
+    image search and Lens.
+
+    `credit` is for licensed stock. Stating it costs nothing and keeps the
+    site's one real asset — being checkable — intact.
+    """
+    node: dict[str, Any] = {
+        "@type": "ImageObject",
+        "@id": f"{url}#image",
+        "contentUrl": url,
+        "caption": caption,
+    }
+    if hood:
+        location: dict[str, Any] = {
+            "@type": "Place",
+            "name": f"{hood['name']}, {site.CITY}, {site.REGION}",
+        }
+        if hood.get("wikipedia"):
+            location["sameAs"] = hood["wikipedia"]
+        node["contentLocation"] = location
+    if credit:
+        node["creditText"] = credit
+    else:
+        node["copyrightHolder"] = {"@id": ORG_ID}
+    return node
+
+
 def render(nodes: list[dict[str, Any]]) -> str:
     """Serialise a list of nodes as one `@graph` block.
 

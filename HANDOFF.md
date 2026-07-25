@@ -61,6 +61,10 @@ Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2
 | **Reem Kufi Fun's colour layer remapped to the brand gold `#8D7120`** | The typeface is a COLRv1 colour font — the tittles on i/j are small **red hearts**, which is the "Fun" in the name and which the old site shipped unremarked. Red appears nowhere else in the brand and fights the gold accent. Remapping the palette keeps the letterforms and the detail while resolving the clash. One CSS block to delete if the client wants the stock red back. |
 | **Neighborhood market data comes from public sources**, cited and dated: County Auditor CFD reports for Mello-Roos, district boundary maps for schools, published portal medians with named attribution | No client dependency, fully defensible under "no fabrication," and the Mello-Roos and school-boundary data *is* the moat — no competitor publishes it. Revisit if the client grants MLS access. |
 | **No generated imagery on neighborhood pages** | A synthetic photo of a real named community cuts against the no-fabrication doctrine the whole strategy rests on. Generated art is fine for abstract section bands. Wrong-place recovered photos render an honest "photography pending" placeholder instead. |
+| **Neighborhood pages are built as fan-out answer blocks, not narrative** | AI Mode decomposes a query into sub-queries and retrieves *passages*. A flowing page competes for one head term; the same content in self-contained blocks competes for ~19 retrievals. Map in `build/data/fanout.py`; `validate.py` rejects any lead answer that opens with a pronoun or omits the place name, because both make a passage useless once lifted. See GAMEPLAN §4.5. |
+| **Localized imagery, sourced from their own listing photography first** | Original local imagery is a first-hand signal the May 2026 update rewards, and **no competitor publishes any** — a documented open gap. 1,016 closed sales means they already own true street-level photography of every one of the six communities; that beats a shoot for a first pass. Shot list and technical spec: [docs/photography-brief.md](docs/photography-brief.md). |
+| **IndexNow at launch** (key `ce855552…`, `build/indexnow.py`) | ChatGPT retrieval leans on Bing's index, and IndexNow is how you tell Bing a URL changed without waiting to be crawled. Bing/Yandex/Seznam/Naver only — **Google does not participate**. Honest framing for the client: it accelerates discovery, it does not cause ranking or citation. |
+| **robots.txt names the AI crawlers explicitly and allows them** | Retrieval bots (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, Google-Extended) are what fetch a page in order to cite it — blocking any would forfeit the engagement. Training bots (GPTBot, ClaudeBot, Applebot-Extended) are also allowed: for a business whose problem is that models don't know it exists, being in the training data is upside. That one is a reversible client call. |
 
 ---
 
@@ -180,6 +184,8 @@ Full detail in GAMEPLAN §4. The parts most easily got wrong:
 - [x] Recover all Wayback assets — done 2026-07-24; **manifest corrected 2026-07-25**, see `assets/recovered/README.md`
 - [ ] Point DNS to Vercel at launch (Jon controls registrar)
 - [ ] Submit to GSC + Bing Webmaster immediately at launch; request re-indexing of preserved URLs
+- [ ] Run `python3 build/indexnow.py` at launch (full sitemap) and after every content deploy — will 422 until DNS points at Vercel and the key file is reachable
+- [ ] Ask the client for rights to their own listing photography — it is the fastest source of true localized neighborhood imagery and they already own 1,016 sales' worth
 - [ ] Lead form endpoint decision (Formspree — watch the ~50/mo free cap — vs. client CRM webhook)
 - [ ] Find owner of `greatersandiegohouses.com` staging site (broken `*.testintegration.com` SSL, indexed) → fix or noindex
 - [ ] Case-study log: screenshot the corrupted AI answers *now*, before they're fixed

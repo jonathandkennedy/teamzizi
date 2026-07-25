@@ -136,6 +136,54 @@ def check_sitemap() -> None:
             errors.append(f"sitemap.xml lists {url} but no file backs it")
 
 
+ANSWER_BLOCK = re.compile(
+    r'<section class="answer" id="(?P<anchor>[^"]+)">.*?'
+    r'<p class="answer__lead">(?P<lead>.*?)</p>',
+    re.DOTALL,
+)
+TAGS = re.compile(r"<[^>]+>")
+
+
+def check_answer_blocks(pages: list[Path]) -> None:
+    """Enforce fan-out discipline on every answer block.
+
+    AI Mode decomposes a query into sub-queries and retrieves passages, not
+    pages. A lead answer is therefore always read out of context, so it has to
+    survive being lifted: no pronoun opener, and it must name the place it is
+    about. See build/data/fanout.py for the reasoning.
+    """
+    from components import ANAPHORA  # noqa: PLC0415
+
+    hood_names = {h["name"].lower() for h in site.NEIGHBORHOODS}
+    anchors_seen: dict[str, list[str]] = defaultdict(list)
+
+    for page in pages:
+        html = page.read_text(encoding="utf-8")
+        for match in ANSWER_BLOCK.finditer(html):
+            anchor = match.group("anchor")
+            lead = TAGS.sub("", match.group("lead")).strip()
+            anchors_seen[rel(page)].append(anchor)
+
+            lowered = lead.lower()
+            if lowered.startswith(ANAPHORA):
+                errors.append(
+                    f"{rel(page)}#{anchor}: lead answer opens with an anaphor "
+                    f"— useless once extracted: {lead[:70]!r}"
+                )
+            if not any(name in lowered for name in hood_names):
+                errors.append(
+                    f"{rel(page)}#{anchor}: lead answer never names the "
+                    f"neighborhood, so it loses its geography when lifted: "
+                    f"{lead[:70]!r}"
+                )
+
+        for page_name, anchors in anchors_seen.items():
+            duplicates = {a for a in anchors if anchors.count(a) > 1}
+            for dupe in duplicates:
+                errors.append(f"{page_name}: duplicate anchor id #{dupe}")
+        anchors_seen.clear()
+
+
 def check_unverified() -> None:
     if not site.GEO["verified"]:
         warnings.append(
@@ -157,6 +205,7 @@ def main() -> int:
 
     pages = sorted(SITE.rglob("*.html"))
     check_jsonld(pages)
+    check_answer_blocks(pages)
     check_stale_strings(pages)
     check_sitemap()
     check_unverified()

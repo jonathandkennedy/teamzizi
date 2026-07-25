@@ -511,3 +511,45 @@
 .band .cta-row {
   justify-content: center;
 }
+
+/* ---- Answer blocks ------------------------------------------ */
+/* Each block fully answers one AI Mode fan-out sub-query and carries a
+   stable fragment id, so it can be retrieved and cited as a passage rather
+   than as "somewhere on this page". The lead sentence is styled larger
+   because it is doing double duty: it is the extractable answer and it is
+   what a skimming human reads. See build/data/fanout.py. */
+
+.answer {
+  padding-block: 1.75rem;
+  border-top: 1px solid var(--c-rule);
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.answer:first-of-type {
+  border-top: 0;
+}
+
+.answer__q {
+  margin-bottom: 0.5rem;
+  font-size: var(--t-h4);
+}
+
+.answer__lead {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  font-weight: 400;
+}
+
+.answer__lead strong {
+  font-weight: 700;
+}
+
+/* Source line — every number on this site traces to something. */
+.answer__source {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--c-neutral);
+}
+
+.answer__source a {
+  color: inherit;
+}

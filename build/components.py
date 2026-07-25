@@ -221,3 +221,44 @@ def page(
 def base_nodes() -> list[dict[str, Any]]:
     """Entity nodes that belong on every page."""
     return [schema.business(), schema.organization(), schema.website()]
+
+
+# --------------------------------------------------------------------------
+# Fan-out primitives
+# --------------------------------------------------------------------------
+
+# Openers that make a passage useless once it is lifted out of the page.
+# validate.py rejects a lead answer starting with any of these.
+ANAPHORA = (
+    "it ", "it's", "its ", "they ", "they're", "this ", "that ", "these ",
+    "those ", "there ", "there's", "here ", "he ", "she ", "as mentioned",
+    "as noted", "as above", "additionally", "however,", "also,",
+)
+
+
+def answer_block(
+    *,
+    anchor: str,
+    question: str,
+    lead: str,
+    body: str = "",
+    heading: str = "h3",
+) -> str:
+    """One passage that fully answers one fan-out sub-query.
+
+    `question` is the sub-query in the words a person would use — it becomes
+    the heading, because the heading is what tells a retriever what the
+    passage is for.
+
+    `lead` must stand completely alone: no pronoun opener, and it has to name
+    the place. It will be read out of context, because out of context is the
+    only way an AI Mode sub-query ever reads it.
+
+    `anchor` gives the passage a stable fragment URL, so it can be linked and
+    cited as a passage rather than as "somewhere on this page".
+    """
+    extra = f"\n  {body}" if body else ""
+    return f"""<section class="answer" id="{anchor}">
+  <{heading} class="answer__q">{esc(question)}</{heading}>
+  <p class="answer__lead">{lead}</p>{extra}
+</section>"""

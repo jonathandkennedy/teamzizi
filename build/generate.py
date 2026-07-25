@@ -309,13 +309,52 @@ def build_sitemap() -> None:
 
 
 def build_robots() -> None:
-    txt = f"""User-agent: *
-Allow: /
+    """Explicit about AI crawlers rather than relying on a blanket Allow.
+
+    The retrieval bots (OAI-SearchBot, ChatGPT-User, PerplexityBot,
+    Claude-SearchBot, Google-Extended) are the ones that fetch a page in order
+    to answer and cite. Blocking any of them would forfeit the entire premise
+    of this engagement, so they are named and allowed deliberately — a future
+    editor changing robots.txt should have to read that sentence first.
+
+    The training crawlers (GPTBot, ClaudeBot, Applebot-Extended) are also
+    allowed. For a business whose problem is that models do not know it exists,
+    being in the training data is upside, not leakage. That one is genuinely a
+    client call and is reversible at any time.
+
+    The old site served a 500 on robots.txt for a stretch, which is worth not
+    repeating.
+    """
+    agents = [
+        ("*", "Everything else."),
+        ("bingbot", "Bing — also the index ChatGPT retrieval leans on."),
+        ("OAI-SearchBot", "ChatGPT search retrieval. Required for citation."),
+        ("ChatGPT-User", "User-initiated fetch from a ChatGPT session."),
+        ("PerplexityBot", "Perplexity retrieval. Required for citation."),
+        ("Claude-SearchBot", "Claude search retrieval."),
+        ("Google-Extended", "Gemini / AI Overviews grounding."),
+        ("GPTBot", "OpenAI training. Allowed deliberately — see build/generate.py."),
+        ("ClaudeBot", "Anthropic training. Same reasoning."),
+        ("Applebot-Extended", "Apple Intelligence training. Same reasoning."),
+    ]
+    blocks = "\n\n".join(
+        f"# {note}\nUser-agent: {agent}\nAllow: /" for agent, note in agents
+    )
+    txt = f"""{blocks}
 
 Sitemap: {site.DOMAIN}/sitemap.xml
 """
     (SITE / "robots.txt").write_text(txt, encoding="utf-8")
     print("  site/robots.txt")
+
+
+def build_indexnow_key() -> None:
+    """IndexNow verifies domain control by fetching this file. Public by
+    design — it is a proof of control, not a credential."""
+    import indexnow
+
+    (SITE / f"{indexnow.KEY}.txt").write_text(indexnow.KEY, encoding="utf-8")
+    print(f"  site/{indexnow.KEY}.txt")
 
 
 def main() -> int:
@@ -324,6 +363,7 @@ def main() -> int:
     build_neighborhood_hub()
     build_sitemap()
     build_robots()
+    build_indexnow_key()
     print(f"\n{len(PAGES)} page(s) written.")
     return 0
 
