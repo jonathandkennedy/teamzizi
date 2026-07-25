@@ -31,6 +31,13 @@ ROSTER: list[dict] = [
         "dre": "02047962",
         "phone": "858.847.8067",
         "compass": "nilab-azizi",
+        # Zillow profile, for the "review me on Zillow" call to action on the
+        # agent page. See ZILLOW_NOTE at the bottom of this file: this is the
+        # ONLY confirmed one. Handles are not derivable from names — Melissa
+        # Lopez's Compass handle is "melissa-gutierrez" — so the other 18 stay
+        # None until the client supplies them rather than being guessed at a
+        # URL that could point to a stranger.
+        "zillow": "https://www.zillow.com/profile/nilabazizi",
         "photo": "/assets/img/team/headshot-nilab-azizi.jpg",
         "farms": None,
         "lead": True,
@@ -46,6 +53,7 @@ ROSTER: list[dict] = [
         "compass": "sofia-azizi",
         "photo": "/assets/img/team/headshot-sofia-azizi.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Sofia%20azizi",
     },
     {
         "slug": "zohra-azizi",
@@ -57,6 +65,7 @@ ROSTER: list[dict] = [
         "compass": "zohra-legler",  # Compass slug uses a surname variant
         "photo": "/assets/img/team/headshot-zohra-azizi.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/ZohraA",
     },
     {
         "slug": "masooma-azizi",
@@ -84,6 +93,7 @@ ROSTER: list[dict] = [
         "compass": "dari-ahranjani",
         "photo": "/assets/img/team/headshot-dari-ahranjani.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Dari%20Ahranjani",
     },
     {
         "slug": "candice-casares",
@@ -95,6 +105,9 @@ ROSTER: list[dict] = [
         "compass": "candice-medina",
         "photo": "/assets/img/team/headshot-candice-casares.jpg",
         "farms": None,
+        # No third-party review profile — Compass only,
+        # confirmed by the client 2026-07-25.
+        "no_review_profile": True,
     },
     {
         "slug": "sara-forgnone",
@@ -106,6 +119,7 @@ ROSTER: list[dict] = [
         "compass": "sara-forgnone",
         "photo": "/assets/img/team/headshot-sara-forgnone.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Sara%20Forgnone",
     },
     {
         "slug": "charisma-gallegos",
@@ -115,7 +129,8 @@ ROSTER: list[dict] = [
         "dre": None,
         "phone": "619.300.5530",
         "compass": "charisma-gallegos-sd",
-        "photo": None,
+        # From the recovered Luxury Presence assets, client-pointed 2026-07-25.
+        "photo": "/assets/img/team/headshot-charisma-gallegos.jpg",
         "farms": None,
         "operations": True,
     },
@@ -130,6 +145,7 @@ ROSTER: list[dict] = [
         "compass": "melissa-gutierrez",
         "photo": "/assets/img/team/headshot-melissa-lopez.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/melissalopezhomessd",
     },
     {
         "slug": "candace-kirk",
@@ -141,6 +157,7 @@ ROSTER: list[dict] = [
         "compass": "candace-kirk",
         "photo": "/assets/img/team/headshot-candace-kirk.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/CandaceKirkRE",
     },
     {
         "slug": "sarah-rivas",
@@ -152,6 +169,7 @@ ROSTER: list[dict] = [
         "compass": "sarah-rivas",
         "photo": "/assets/img/team/headshot-sarah-rivas.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/SarahNRivas",
     },
     {
         "slug": "nicholas-miele",
@@ -164,6 +182,7 @@ ROSTER: list[dict] = [
         "compass": "nicholas-miele",
         "photo": "/assets/img/team/headshot-nicholas-miele.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Nicholas%20Miele",
     },
     {
         "slug": "jared-stransky",
@@ -175,6 +194,7 @@ ROSTER: list[dict] = [
         "compass": "jared-stransky",
         "photo": "/assets/img/team/headshot-jared-stransky.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Jared%20Stransky",
     },
     {
         "slug": "gabriela-santiago",
@@ -187,6 +207,7 @@ ROSTER: list[dict] = [
         "compass": "gabriela-santiago",
         "photo": "/assets/img/team/headshot-gabriela-santiago.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Gabriela%20Santiago",
     },
     {
         "slug": "tiffney-cipriani",
@@ -197,8 +218,9 @@ ROSTER: list[dict] = [
         "dre": "02186323",
         "phone": "314.610.3554",
         "compass": "tiffney-cipriani",
-        "photo": None,
+        "photo": "/assets/img/team/headshot-tiffney-cipriani.jpg",
         "farms": None,
+        "realtor_com": "https://www.realtor.com/realestateagents/64ecea47bf666c98f0715e60",
     },
     {
         "slug": "javier-hernandez",
@@ -208,8 +230,9 @@ ROSTER: list[dict] = [
         "dre": "02004707",
         "phone": "619.738.4006",
         "compass": "javier-hernandez",
-        "photo": None,
+        "photo": "/assets/img/team/headshot-javier-hernandez.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/JaviSellsSD",
     },
     {
         "slug": "malcolm-schick",
@@ -220,8 +243,9 @@ ROSTER: list[dict] = [
         "dre": "02010355",
         "phone": "619.316.3223",
         "compass": "malcolm-schick",
-        "photo": None,
+        "photo": "/assets/img/team/headshot-malcolm-schick.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/SanDiegoMalcolm",
     },
     {
         "slug": "michael-angotta",
@@ -235,6 +259,7 @@ ROSTER: list[dict] = [
         "compass": "michael-angotta",
         "photo": "/assets/img/team/headshot-michael-angotta.jpg",
         "farms": "del-mar",  # confirmed by client 2026-07-25
+        "zillow": "https://www.zillow.com/profile/Angotta33",
     },
     {
         "slug": "mahan-taleshpour",
@@ -245,8 +270,9 @@ ROSTER: list[dict] = [
         "dre": "02050744",
         "phone": "818.939.1841",
         "compass": "mahan-taleshpour",
-        "photo": None,
+        "photo": "/assets/img/team/headshot-mahan-taleshpour.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/MahanTRealEstate",
     },
 ]
 
@@ -350,7 +376,11 @@ def for_neighborhood(slug: str) -> tuple[dict, bool]:
     for agent in ROSTER:
         if agent.get("farms") == slug:
             return agent, True
-    return team_lead(), False
+    # No confirmed assignment. Rotate across the three Azizi licensees rather
+    # than defaulting every one of the sixteen guides to the team lead — the
+    # page still says the specialism is unconfirmed, so this is which member
+    # of the team is the point of contact, not a farming claim.
+    return author_for(f"/neighborhoods/{slug}"), False
 
 
 def unassigned() -> list[str]:
@@ -358,3 +388,83 @@ def unassigned() -> list[str]:
     from data import site  # local import keeps this module dependency-light
 
     return [h["slug"] for h in site.NEIGHBORHOODS if h["slug"] not in assigned]
+
+
+# --------------------------------------------------------------------------
+# Zillow profiles — CLIENT ACTION
+# --------------------------------------------------------------------------
+# Each agent page carries a "Review me on Zillow" call to action, but only
+# when a real profile URL exists on the roster entry. Right now that is one
+# person: Nilab Azizi.
+#
+# Why they are not filled in programmatically. Zillow handles do not follow
+# from names or from Compass handles — Melissa Lopez's Compass handle is
+# "melissa-gutierrez" — and Zillow returns 403 to automated requests, so
+# there is no way to look them up. A guessed URL is a link to a stranger's
+# profile with our client's name above it, which is worse than no link.
+#
+# To fill in: each agent opens their own Zillow profile and copies the URL
+# from the address bar. Add it as "zillow" on their roster entry. The CTA
+# appears on their page automatically; nothing else needs changing.
+#
+# Worth doing properly. Reviews solicited to Zillow rather than collected
+# on-site is the right pattern here on two counts: the site cannot carry
+# review schema for third-party reviews anyway (see data/testimonials.py),
+# and a populated Zillow profile is a sameAs signal that helps consolidate
+# the entity — which is the whole problem this rebuild exists to fix.
+def review_profile(agent: dict) -> tuple[str, str] | None:
+    """(platform, url) for the "review me" CTA, or None.
+
+    Not Zillow-only. Tiffney Cipriani has no Zillow profile and her reviews
+    live on realtor.com; Candice Casares has no third-party review profile at
+    all and is flagged explicitly so nobody spends another round looking for
+    one. Both are client-confirmed rather than assumed from a failed lookup.
+    """
+    if agent.get("zillow"):
+        return "Zillow", agent["zillow"]
+    if agent.get("realtor_com"):
+        return "realtor.com", agent["realtor_com"]
+    return None
+
+
+# Licensees with no review profile recorded yet. Operations staff and anyone
+# explicitly confirmed as having none are excluded — they are answered, not
+# outstanding.
+ZILLOW_PENDING = [
+    a["slug"] for a in ROSTER
+    if not review_profile(a)
+    and not a.get("operations")
+    and not a.get("no_review_profile")
+]
+
+
+# --------------------------------------------------------------------------
+# Byline rotation across the three Azizi licensees
+# --------------------------------------------------------------------------
+# Every page previously carried Nilab Azizi's byline, because she is the team
+# lead and the fallback for any unassigned area. One person credited on forty
+# pages is both a weaker E-E-A-T signal than three named licensees and, more
+# simply, not what the client wants.
+#
+# Weighted so Sofia carries most of it, with Nilab and Zohra mixed through —
+# the client's instruction. Deterministic, not random: the pick is a stable
+# hash of the page key, so a given page keeps the same byline across every
+# build. Random rotation would churn the schema `author` on every deploy and
+# make the attribution meaningless.
+#
+# hashlib rather than the builtin hash(), which is salted per process and
+# would give a different answer on every run.
+BYLINE_POOL = (
+    "sofia-azizi", "sofia-azizi", "sofia-azizi",
+    "sofia-azizi", "sofia-azizi", "sofia-azizi",
+    "nilab-azizi", "nilab-azizi",
+    "zohra-azizi", "zohra-azizi",
+)
+
+
+def author_for(key: str) -> dict:
+    """Stable byline for a page key. Same key always yields the same person."""
+    import hashlib  # noqa: PLC0415
+
+    digest = hashlib.sha256(key.encode("utf-8")).digest()
+    return by_slug(BYLINE_POOL[digest[0] % len(BYLINE_POOL)])

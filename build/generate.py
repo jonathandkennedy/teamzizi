@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import components as c  # noqa: E402
 import schema  # noqa: E402
 import textures  # noqa: E402
-from data import agents, guides, site, taxes, testimonials  # noqa: E402
+from data import agents, guides, posts, site, taxes, testimonials  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 TODAY = date.today().isoformat()
@@ -244,6 +244,7 @@ def build_home() -> None:
             body=body,
             nodes=nodes,
             hero=True,
+            og_image="/assets/img/og/home.jpg",
         ),
         changefreq="weekly",
         priority="1.0",
@@ -339,6 +340,7 @@ def build_neighborhood_hub() -> None:
             body=body,
             nodes=nodes,
             hero=True,
+            og_image="/assets/img/og/neighborhoods.jpg",
         ),
         changefreq="weekly",
         priority="0.9",
@@ -369,6 +371,33 @@ def plain(html: str) -> str:
     """Markup and entities out, readable sentence in — for JSON-LD text."""
     text = re.sub(r"<[^>]+>", "", html)
     return re.sub(r"\s+", " ", unescape(text)).strip()
+
+
+ANSWER_Q = re.compile(
+    r'<h[1-6] class="answer__q">(?P<q>.*?)</h[1-6]>\s*'
+    r'<p class="answer__lead">(?P<a>.*?)</p>',
+    re.DOTALL,
+)
+
+
+def faq_from_blocks(blocks_html: str) -> list[dict[str, str]]:
+    """Derive the FAQPage graph from the answer blocks already on the page.
+
+    Hand-maintaining a parallel FAQ list is how the markup and the visible
+    text drift apart, and Google is explicit that FAQ structured data must
+    match content visible on the page. Reading it back out of the rendered
+    blocks makes that impossible by construction: if the passage changes,
+    the schema changes with it.
+
+    This closed a real gap. /sell, /buy, /concierge, both /properties pages
+    and all 19 agent pages carried question-and-answer content with no
+    FAQPage node at all, while the guides had one — roughly 25 pages of
+    extractable answers invisible to anything reading the graph.
+    """
+    return [
+        {"q": plain(m.group("q")), "a": plain(m.group("a"))}
+        for m in ANSWER_Q.finditer(blocks_html)
+    ]
 
 
 def tax_block(h: dict) -> str:
@@ -409,6 +438,7 @@ def tax_block(h: dict) -> str:
         f"retrieved {taxes.RETRIEVED}.</p>"
     )
     return c.answer_block(
+        heading="h2",
         anchor="mello-roos",
         question=f"Does {h['name']} have Mello-Roos, and how much?",
         lead=lead,
@@ -470,6 +500,7 @@ def build_neighborhood(slug: str) -> None:
     blocks = "\n\n".join(filter(None, [
         tax_block(h),
         c.answer_block(
+            heading="h2",
             anchor="schools",
             question=f"What school district serves {h['name']}?",
             lead=(
@@ -482,29 +513,20 @@ def build_neighborhood(slug: str) -> None:
         ),
         # Community-specific depth. Structural facts only — which district,
         # which boundary, which agency. See build/data/guides.py.
-        *[c.answer_block(**b) for b in guides.for_hood(slug)],
+        *[c.answer_block(heading="h2", **b) for b in guides.for_hood(slug)],
         c.answer_block(
+            heading="h2",
             anchor="track-record",
             question=f"Has Team Azizi actually sold in {h['name']}?",
             lead=record,
         ) if record else None,
     ]))
 
-    faq = [
-        {"q": f"Does {h['name']} have Mello-Roos?",
-         "a": (taxes.for_hood(slug) or {}).get("note", "")},
-        {"q": f"What school district serves {h['name']}?",
-         "a": f"{h['name']} is served by {h['district']}. Attendance is "
-              "assigned by address, not by ZIP code."},
-    ]
-    # Every community-specific passage also goes into the FAQ graph. The lead
-    # is written to stand alone on the page, which is the same property the
-    # schema answer needs, so it transfers without rewriting. Entities are
-    # unescaped because JSON-LD carries text, not markup.
-    faq += [
-        {"q": b["question"], "a": plain(b["lead"])}
-        for b in guides.for_hood(slug)
-    ]
+    # Derived from the rendered blocks, not hand-written alongside them.
+    # The previous version paraphrased: the Mello-Roos answer used the note
+    # from taxes.py while the page displayed a different lead sentence, which
+    # is exactly the visible-content mismatch Google's FAQ guidance forbids.
+    faq = faq_from_blocks(blocks)
 
     # Twelve communities have no photograph and are not getting a fabricated
     # one (docs/photography-brief.md). Instead of an empty band they get a
@@ -636,6 +658,7 @@ def build_neighborhood(slug: str) -> None:
             body=body,
             nodes=nodes,
             hero="light" if slug in HOOD_IMAGE_MISSING else True,
+            og_image=f"/assets/img/og/hood-{slug}.jpg",
         ),
         changefreq="monthly",
         priority="0.9",
@@ -683,7 +706,7 @@ def build_home_valuation() -> None:
     """
     path = "/home-valuation"
     updated = TODAY
-    author = agents.team_lead()
+    author = agents.author_for("/home-valuation")
 
     blocks = "\n\n".join([
         c.answer_block(
@@ -918,21 +941,7 @@ def build_home_valuation() -> None:
   </div>
 </section>"""
 
-    faq = [
-        {"q": "Why is my Zestimate wrong?",
-         "a": "An automated valuation has never been inside the house. It "
-              "works from public records and nearby sales, so it cannot see a "
-              "remodel, a view, a lot position, or which side of a school "
-              "boundary an address falls on."},
-        {"q": "Does an online estimate account for Mello-Roos?",
-         "a": "No. In Del Sur and 4S Ranch, Mello-Roos obligations vary by "
-              "community facilities district and build phase, which changes "
-              "the monthly payment a buyer can carry and therefore the price."},
-        {"q": "What do I get instead of an instant number?",
-         "a": "A comparative market analysis from the Team Azizi agent who "
-              "works your neighborhood, built from MLS sales and current "
-              "competing inventory, with the reasoning shown."},
-    ]
+    faq = faq_from_blocks(blocks)
 
     nodes = c.base_nodes() + [
         schema.web_page(
@@ -1025,7 +1034,7 @@ def build_thank_you() -> None:
 
 
 def build_properties() -> None:
-    lead = agents.team_lead()
+    lead = agents.author_for("/properties")
 
     # ---- /properties/sale — where /home-search/* lands -------------------
     path = "/properties/sale"
@@ -1102,6 +1111,7 @@ def build_properties() -> None:
                     author_slug=lead["slug"],
                     updated=TODAY,
                 ),
+                schema.faq_page(faq_from_blocks(sale_blocks)),
                 schema.breadcrumbs([
                     ("Home", f"{site.DOMAIN}/"),
                     ("For sale", f"{site.DOMAIN}{path}"),
@@ -1203,6 +1213,7 @@ def build_properties() -> None:
                     author_slug=lead["slug"],
                     updated=TODAY,
                 ),
+                schema.faq_page(faq_from_blocks(sold_blocks)),
                 schema.breadcrumbs([
                     ("Home", f"{site.DOMAIN}/"),
                     ("Sold", f"{site.DOMAIN}{path}"),
@@ -1267,7 +1278,9 @@ def simple_page(
     description: str,
     crumb: str,
 ) -> None:
-    lead = agents.team_lead()
+    # Keyed on the page's own path so /sell, /buy and /concierge each get
+    # their own byline rather than sharing the helper's.
+    lead = agents.author_for(path)
     body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
   <div class="container container--narrow">
     <nav aria-label="Breadcrumb" class="updated">
@@ -1295,6 +1308,7 @@ def simple_page(
                     url=f"{site.DOMAIN}{path}", name=h1,
                     author_slug=lead["slug"], updated=TODAY,
                 ),
+                schema.faq_page(faq_from_blocks(blocks)),
                 schema.breadcrumbs([
                     ("Home", f"{site.DOMAIN}/"),
                     (crumb, f"{site.DOMAIN}{path}"),
@@ -1635,7 +1649,7 @@ def build_mello_roos() -> None:
     for people; the data is there for everyone.
     """
     path = "/mello-roos"
-    lead = agents.team_lead()
+    lead = agents.author_for("/mello-roos")
 
     panels = []
     options = []
@@ -1772,6 +1786,9 @@ def build_mello_roos() -> None:
       seven where the honest answer is &ldquo;none.&rdquo;
     </p>
 
+    <h2 class="rule-gold" style="margin-top:2.5rem">
+      Look up a community
+    </h2>
     <div class="cfd-tool">
       <div class="field">
         <label for="cfd-select">Choose a community</label>
@@ -1846,22 +1863,7 @@ def build_mello_roos() -> None:
   </div>
 </section>"""
 
-    faq = [
-        {"q": "What is Mello-Roos?",
-         "a": "Mello-Roos is an additional property tax levied inside a "
-              "community facilities district, used to pay for the schools, "
-              "roads and parks a new development required. It is charged on "
-              "top of ordinary property tax and is set per parcel."},
-        {"q": "How much is Mello-Roos in San Diego County?",
-         "a": "No single figure exists. The amount varies by district, by "
-              "improvement area and by the phase a home was built in. The "
-              "authoritative number is the line item on the property tax "
-              "bill, which names the district and gives a contact number."},
-        {"q": "Which San Diego city has the most Mello-Roos districts?",
-         "a": "San Marcos, with 91 active community facilities districts in "
-              "the County Auditor's FY 2025-26 list — more than any other "
-              "city in San Diego County."},
-    ]
+    faq = faq_from_blocks(blocks)
 
     write(
         path,
@@ -1891,10 +1893,125 @@ def build_mello_roos() -> None:
                     ("Mello-Roos", f"{site.DOMAIN}{path}"),
                 ]),
             ],
+            og_image="/assets/img/og/mello-roos.jpg",
         ),
         changefreq="monthly",
         priority="0.9",
     )
+
+
+def build_blog() -> None:
+    """The blog index and one page per post.
+
+    Not generated when there are no posts, for the same reason /testimonials
+    is not: an empty index advertises an abandoned blog, which is a worse
+    signal than having none. The old Luxury Presence site shipped a
+    copyright notice reading 2022 for four years; nothing here should
+    telegraph neglect the same way.
+    """
+    if not posts.POSTS:
+        print("  (no posts yet — /blog not generated)")
+        return
+
+    ordered = sorted(posts.POSTS, key=lambda p: p["date"], reverse=True)
+
+    # ---- index ----------------------------------------------------------
+    cards = "\n".join(
+        f"""      <article class="postcard">
+        <h2><a href="/blog/{p['slug']}">{c.esc(p['title'])}</a></h2>
+        <p class="updated">{p['date']} &middot; {c.esc(agents.by_slug(p['author'])['name'])}</p>
+        <p>{p['dek']}</p>
+      </article>"""
+        for p in ordered
+    )
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Journal
+    </nav>
+    <p class="eyebrow">Journal</p>
+    <h1>Notes on North San Diego County</h1>
+    <p class="lede">
+      Questions that come up often enough to be worth writing down properly,
+      answered from primary sources rather than from what everyone else says.
+    </p>
+    <div class="postcards">
+{cards}
+    </div>
+    <p class="updated" style="margin-top:2.5rem">Last updated {TODAY}</p>
+  </div>
+</section>"""
+    write(
+        "/blog",
+        c.page(
+            title="Journal — Notes on North San Diego County | Team Azizi",
+            description=(
+                "Questions about buying and selling in North San Diego "
+                "County, answered from primary sources. From Team Azizi at "
+                "Compass."
+            ),
+            path="/blog",
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Journal", f"{site.DOMAIN}/blog"),
+                ]),
+            ],
+        ),
+        changefreq="weekly",
+        priority="0.7",
+    )
+
+    # ---- posts ----------------------------------------------------------
+    for post in ordered:
+        author = agents.by_slug(post["author"])
+        path = f"/blog/{post['slug']}"
+        blocks = "\n\n".join(
+            c.answer_block(heading="h2", **b) for b in post["blocks"]
+        )
+        body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; <a href="/blog">Journal</a> &rsaquo;
+      {c.esc(post['title'])}
+    </nav>
+    <p class="eyebrow">Journal</p>
+    <h1>{c.esc(post['title'])}</h1>
+    {c.byline(author, post['date'])}
+    <p class="lede">{post['dek']}</p>
+
+{blocks}
+
+    <p class="answer__source" style="margin-top:2.5rem">
+      District boundaries are set by the districts themselves and are redrawn
+      from time to time. Every assignment above should be confirmed with the
+      district office for the specific address before it is relied on.
+    </p>
+    <p class="updated">Published {post['date']}</p>
+  </div>
+</section>"""
+        write(
+            path,
+            c.page(
+                title=f"{post['title']} | Team Azizi",
+                description=post["description"],
+                path=path,
+                body=body,
+                nodes=c.base_nodes() + [
+                    schema.article(post, author),
+                    schema.faq_page(faq_from_blocks(blocks)),
+                    schema.breadcrumbs([
+                        ("Home", f"{site.DOMAIN}/"),
+                        ("Journal", f"{site.DOMAIN}/blog"),
+                        (post["title"], f"{site.DOMAIN}{path}"),
+                    ]),
+                ],
+                og_image=f"/assets/img/og/post-{post['slug']}.jpg",
+            ),
+            changefreq="yearly",
+            priority="0.8",
+        )
 
 
 def build_testimonials() -> None:
@@ -1914,7 +2031,7 @@ def build_testimonials() -> None:
         print("  (no testimonials yet — /testimonials not generated)")
         return
 
-    lead = agents.team_lead()
+    lead = agents.author_for("/testimonials")
     cards = []
     for t in testimonials.ENTRIES:
         who = agents.by_slug(t["agent"]) if t.get("agent") else None
@@ -1999,7 +2116,7 @@ def build_testimonials() -> None:
 def build_contact() -> None:
     """/contact was in the primary nav on all 43 pages, linking at nothing."""
     path = "/contact"
-    lead = agents.team_lead()
+    lead = agents.author_for("/contact")
     body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 4rem)">
   <div class="container container--narrow">
     <nav aria-label="Breadcrumb" class="updated">
@@ -2172,7 +2289,8 @@ def build_team() -> None:
         else:
             body = (
                 '<p class="updated">Specialist assignment pending client '
-                f"confirmation. {c.esc(agents.team_lead()['name'])} covers "
+                "confirmation. "
+                f"{c.esc(agents.for_neighborhood(slug)[0]['name'])} covers "
                 f"{c.esc(h['name'])} enquiries in the meantime.</p>"
             )
         groups.append(f"""    <div class="area-group">
@@ -2353,6 +2471,43 @@ def agent_language_block(agent: dict) -> str | None:
     )
 
 
+def agent_zillow_block(agent: dict) -> str | None:
+    """"Review me on Zillow" — only when a real profile URL exists.
+
+    Soliciting reviews to Zillow rather than collecting them on-site is the
+    right pattern on two counts. The site cannot carry review schema for
+    third-party reviews anyway (Google prohibits aggregating them, see
+    data/testimonials.py), and a populated Zillow profile is a `sameAs`
+    signal that helps consolidate the entity — which is the problem this
+    rebuild exists to fix.
+
+    Eighteen of nineteen agents have no URL yet. Zillow handles do not follow
+    from names or Compass handles, and Zillow 403s automated lookups, so
+    guessing one means publishing a link to a stranger's profile under our
+    client's name. Those pages simply omit the block.
+    """
+    profile = agents.review_profile(agent)
+    if not profile:
+        return None
+    platform, url = profile
+    name = c.esc(agent["name"])
+    return f"""<section class="answer" id="review">
+  <h2 class="answer__q">Worked with {name}? Leave a review</h2>
+  <p class="answer__lead">
+    Reviews for {name} live on {c.esc(platform)} rather than on this site,
+    where they can be read next to every other agent in San Diego County and
+    where nobody at Team Azizi can edit them. If {name} handled your sale or
+    purchase, that is the place to say so.
+  </p>
+  <p style="margin-top:1.25rem">
+    <a class="btn btn--filled" href="{url}" rel="nofollow noopener"
+       target="_blank">Review {name} on {c.esc(platform)}</a>
+    <a class="btn" href="{url}" rel="nofollow noopener"
+       target="_blank">Read existing reviews</a>
+  </p>
+</section>"""
+
+
 def agent_reach_block(agent: dict, hood_obj: dict | None) -> str:
     name = c.esc(agent["name"])
     dre = (
@@ -2413,6 +2568,7 @@ def build_agents() -> None:
             agent_record_block(agent),
             agent_language_block(agent),
             agent_reach_block(agent, hood_obj),
+            agent_zillow_block(agent),
         ]))
 
         body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
@@ -2444,6 +2600,7 @@ def build_agents() -> None:
 
         nodes = c.base_nodes() + [
             schema.agent(agent, hood=hood_obj),
+            schema.faq_page(faq_from_blocks(blocks)),
             schema.breadcrumbs(
                 [
                     ("Home", f"{site.DOMAIN}/"),
@@ -2554,6 +2711,7 @@ def main() -> int:
     build_sell()
     build_buy()
     build_concierge()
+    build_blog()
     build_testimonials()
     build_contact()
     build_thank_you()

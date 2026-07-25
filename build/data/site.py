@@ -80,7 +80,32 @@ FOOTER_EXPLORE = (
     ("Homes for Sale", "/properties/sale"),
     ("Recently Sold", "/properties/sold"),
     ("Meet the Team", "/team"),
+    ("Journal", "/blog"),
     ("Contact", "/contact"),
+)
+
+# Neighborhood column in the footer, which appears on every page and is
+# therefore the single largest source of internal links on the site.
+#
+# It used to render NAV_ORDER — the original six — so Escondido, the largest
+# market in the team's book at ~96 closed sales, received no footer link at
+# all, while Del Mar at six sales received one on all 48 pages. A link audit
+# showed the North County guides sitting on two inbound links each against
+# the originals' five or more. That is link equity pointed away from the
+# evidence.
+#
+# Ordered by what the team can actually evidence, then by page strength. Not
+# all sixteen: a footer column of sixteen is a list nobody reads, and the
+# hub link at the end carries the rest.
+FOOTER_HOODS = (
+    "escondido",      # ~96 closed sales — the largest market in the book
+    "del-sur",        # 18
+    "4s-ranch",       # 18
+    "carmel-valley",  # 11
+    "scripps-ranch",  # 9
+    "oceanside",      # named in salesRecord.md as a top market; count pending
+    "fallbrook",      # same
+    "san-marcos",     # 91 CFDs — the strongest single page on the site
 )
 
 # Licensees named in the footer of every page, in display order.

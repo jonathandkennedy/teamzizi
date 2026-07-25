@@ -204,11 +204,20 @@ def footer() -> str:
     GBP are one entity or they are three. Licence numbers and the Compass
     equal-housing / MLS marks are a California DRE requirement, not decoration.
     """
+    # Resolved against ALL_AREAS, not NEIGHBORHOODS — the latter is only the
+    # original six, which is exactly how the North County guides ended up
+    # unreachable from the footer. See site.FOOTER_HOODS.
     hoods = "\n".join(
-        f'        <li><a href="/neighborhoods/{slug}">'
-        f"{esc(next(h['name'] for h in site.NEIGHBORHOODS if h['slug'] == slug))}"
-        f"</a></li>"
-        for slug in site.NAV_ORDER
+        [
+            f'        <li><a href="/neighborhoods/{slug}">'
+            f"{esc(next(a['name'] for a in site.ALL_AREAS if a['slug'] == slug))}"
+            f"</a></li>"
+            for slug in site.FOOTER_HOODS
+        ]
+        + [
+            f'        <li><a href="/neighborhoods">All {len(site.ALL_AREAS)}'
+            f" guides</a></li>"
+        ]
     )
     # Only pages that exist. This block previously linked seven — /sell, /buy,
     # /concierge, /testimonials, /blog, /contact, /terms-and-conditions — none
@@ -287,6 +296,7 @@ def page(
     body: str,
     nodes: list[dict[str, Any]],
     hero: bool | str = False,
+    og_image: str = "/assets/img/logos/og-default.png",
 ) -> str:
     """`hero=True` tells the nav to start transparent over a full-bleed hero.
 
@@ -303,7 +313,7 @@ def page(
     return f"""<!doctype html>
 <html lang="en-US">
 <head>
-{head(title=title, description=description, path=path, nodes=nodes)}
+{head(title=title, description=description, path=path, nodes=nodes, og_image=og_image)}
 </head>
 <body{body_class}>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -358,10 +368,13 @@ def expert_block(agent: dict[str, Any], hood: dict[str, Any], *, confirmed: bool
         if agent.get("dre")
         else ""
     )
+    # Not "team lead" any more: the fallback rotates across the three Azizi
+    # licensees, and Sofia and Zohra are not the team lead. Saying so would
+    # be a plain factual error on two thirds of the guides.
     role = (
         f"Your {esc(hood['name'])} specialist"
         if confirmed
-        else f"Team lead &middot; covering {esc(hood['name'])}"
+        else f"Team Azizi &middot; covering {esc(hood['name'])}"
     )
     tel = "tel:+1" + agent["phone"].replace(".", "")
     return f"""<aside class="expert">

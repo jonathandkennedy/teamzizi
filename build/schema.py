@@ -347,3 +347,24 @@ def render(nodes: list[dict[str, Any]]) -> str:
     payload = {"@context": "https://schema.org", "@graph": nodes}
     body = json.dumps(payload, indent=2, ensure_ascii=False)
     return f'<script type="application/ld+json">\n{body}\n</script>'
+
+
+def article(post: dict[str, Any], author: dict[str, Any]) -> dict[str, Any]:
+    """Article for a blog post.
+
+    `author` is a pointer to the Person node the base graph already defines,
+    not a second definition of the same human — one @id describing two
+    different things is the exact failure validate.py exists to catch.
+    """
+    return {
+        "@type": "Article",
+        "@id": f"{site.DOMAIN}/blog/{post['slug']}#article",
+        "headline": post["title"],
+        "description": post["description"],
+        "datePublished": post["date"],
+        "dateModified": post["date"],
+        "author": {"@id": f"{site.DOMAIN}/agent/{author['slug']}#person"},
+        "publisher": {"@id": f"{site.DOMAIN}/#organization"},
+        "mainEntityOfPage": {"@id": f"{site.DOMAIN}/blog/{post['slug']}"},
+        "inLanguage": "en-US",
+    }

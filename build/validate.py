@@ -275,6 +275,38 @@ def check_unverified() -> None:
     for url, reason in site.SAME_AS_PENDING:
         warnings.append(f"sameAs withheld — {url}: {reason}")
 
+    # The "review me on Zillow" CTA only renders where a real profile URL
+    # exists, so a missing one is a silently absent call to action rather
+    # than a broken page. Surfaced on every build so it does not stay
+    # forgotten, and the URL shape is checked so a typo cannot ship a link
+    # pointing at a stranger's profile under an agent's name.
+    from data import agents as _agents  # noqa: PLC0415
+
+    shapes = {
+        "zillow": "https://www.zillow.com/profile/",
+        "realtor_com": "https://www.realtor.com/realestateagents/",
+    }
+    for person in _agents.ROSTER:
+        for field, prefix in shapes.items():
+            url = person.get(field)
+            if url and not url.startswith(prefix):
+                errors.append(
+                    f"{person['name']}'s {field} URL does not start with "
+                    f"{prefix!r}: {url!r}"
+                )
+        if person.get("zillow") and person.get("realtor_com"):
+            warnings.append(
+                f"{person['name']} has both a Zillow and a realtor.com "
+                "profile; the CTA prefers Zillow. Drop one if that is wrong."
+            )
+    if _agents.ZILLOW_PENDING:
+        warnings.append(
+            f"{len(_agents.ZILLOW_PENDING)} licensee(s) have no review "
+            "profile recorded, so their pages carry no 'review me' call to "
+            "action: "
+            + ", ".join(_agents.ZILLOW_PENDING)
+        )
+
 
 def check_internal_links(pages: list[Path]) -> None:
     """Every internal href must resolve to a file that exists.
@@ -315,6 +347,83 @@ def check_internal_links(pages: list[Path]) -> None:
             f"dead internal link {href!r} on {len(on_pages)} page(s) "
             f"(e.g. {sorted(on_pages)[0]}) — nothing resolves there."
         )
+
+
+def check_faq_matches_visible(pages: list[Path]) -> None:
+    """Every FAQPage answer must appear in the page's visible text.
+
+    Google requires FAQ structured data to match content visible on the
+    page, and the honest reason to care is simpler than the policy: markup
+    that says something the page does not say is a claim nobody can check.
+
+    This used to fail. Three FAQ lists were hand-written alongside the
+    passages they described and had drifted into paraphrase — the guides'
+    Mello-Roos answer used the note from taxes.py while the page displayed a
+    different lead sentence. They are derived from the rendered blocks now,
+    which makes a mismatch impossible by construction; this check is what
+    catches anyone reintroducing a hand-written one.
+    """
+    import html as html_mod  # noqa: PLC0415
+
+    for page in pages:
+        raw = page.read_text(encoding="utf-8")
+        stripped = re.sub(r"(?s)<script.*?</script>", "", raw)
+        visible = re.sub(
+            r"\s+", " ", html_mod.unescape(TAGS.sub(" ", stripped))
+        )
+
+        for block in LD_BLOCK.findall(raw):
+            try:
+                data = json.loads(block)
+            except json.JSONDecodeError:
+                continue  # check_jsonld already reported this
+            for node in data.get("@graph", [data]):
+                if not isinstance(node, dict) or node.get("@type") != "FAQPage":
+                    continue
+                for entry in node.get("mainEntity", []):
+                    answer = entry.get("acceptedAnswer", {}).get("text", "")
+                    probe = re.sub(r"\s+", " ", answer)[:70]
+                    if probe and probe not in visible:
+                        errors.append(
+                            f"{rel(page)}: FAQ answer is not in the visible "
+                            f"text — {probe[:60]!r}"
+                        )
+
+
+def check_headings(pages: list[Path]) -> None:
+    """Exactly one h1 per page, and no skipped heading level.
+
+    Screen reader users navigate by heading, and a jump from h1 straight to
+    h3 tells them a level exists that they cannot find. Seventeen pages did
+    exactly that — every neighborhood guide plus /mello-roos — because
+    `answer_block` defaults to h3 and those blocks are the page's top-level
+    sections, so there was no h2 anywhere between the title and them.
+
+    Cheap to check, invisible to catch by eye, and it silently regresses the
+    moment someone adds a section without thinking about level.
+    """
+    heading = re.compile(r"<h([1-6])[ >]")
+    for page in pages:
+        html = re.sub(
+            r"(?s)<(script|style).*?</\1>", "", page.read_text(encoding="utf-8")
+        )
+        levels = [int(m) for m in heading.findall(html)]
+
+        h1s = levels.count(1)
+        if h1s != 1:
+            errors.append(
+                f"{rel(page)}: {h1s} <h1> elements — a page needs exactly one."
+            )
+
+        previous = 0
+        for level in levels:
+            if previous and level > previous + 1:
+                errors.append(
+                    f"{rel(page)}: heading level jumps h{previous} to h{level} "
+                    f"— skipped level breaks heading navigation."
+                )
+                break
+            previous = level
 
 
 def check_testimonials() -> None:
@@ -405,6 +514,8 @@ def main() -> int:
     check_internal_links(pages)
     check_sitemap()
     check_unverified()
+    check_faq_matches_visible(pages)
+    check_headings(pages)
     check_testimonials()
     check_footer_licensees()
 
