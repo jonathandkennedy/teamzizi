@@ -918,6 +918,251 @@ def build_thank_you() -> None:
 
 
 # --------------------------------------------------------------------------
+# /properties/* — the two redirect targets, and a 404
+#
+# These exist because `vercel.json` already 301s two families of dead Luxury
+# Presence URLs at them: /home-search/* and every old individual listing page.
+# A permanent redirect into a 404 is worse for those still-indexed URLs than
+# no redirect at all, so the targets have to exist before the domain moves.
+#
+# Neither page carries live inventory. The MLS question in HANDOFF §6 is
+# unresolved — aggregate statistics are fine, individual listing display needs
+# SDMLS rules confirmed first — so these say what is true today and route the
+# visitor somewhere useful instead of faking a search widget.
+# --------------------------------------------------------------------------
+
+
+def build_properties() -> None:
+    lead = agents.team_lead()
+
+    # ---- /properties/sale — where /home-search/* lands -------------------
+    path = "/properties/sale"
+    sale_blocks = "\n\n".join([
+        c.answer_block(
+            anchor="why-no-search",
+            question="Why is there no property search on this site?",
+            lead=(
+                "Team Azizi does not run a property search widget on this site "
+                "because every portal already has one and none of them tell you "
+                "what decides a purchase in North San Diego County &mdash; which "
+                "Mello-Roos district a parcel sits in, which school boundary the "
+                "street falls on, or whether a view is protected."
+            ),
+            body=(
+                '<p>Those are the questions the '
+                '<a href="/neighborhoods">neighborhood guides</a> answer, from '
+                'the County Auditor&rsquo;s district list and the school '
+                'districts themselves. Search is a commodity; that is not.</p>'
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="how-to-see-listings",
+            question="How do I see what Team Azizi has for sale?",
+            lead=(
+                f"Call {site.PHONE_DISPLAY} and a Team Azizi agent will send "
+                "current North San Diego County listings for the specific area "
+                "and price range you are looking in, including properties that "
+                "have not reached the portals yet."
+            ),
+            heading="h2",
+        ),
+    ])
+
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 4rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Properties &rsaquo; For sale
+    </nav>
+    <p class="eyebrow">For sale</p>
+    <h1>Current listings</h1>
+    <p class="lede">
+      If you followed a link to a property search here, that search tool is
+      gone. What replaced it is better for most people: a named agent who
+      works one area and can send you what is coming before it is public.
+    </p>
+
+{sale_blocks}
+
+    <p style="margin-top:2.5rem">
+      <a class="btn btn--dark" href="{site.PHONE_HREF}">{site.PHONE_DISPLAY}</a>
+      <a class="btn" href="/neighborhoods">Neighborhood guides</a>
+    </p>
+    <p class="updated" style="margin-top:2rem">Last updated {TODAY}</p>
+  </div>
+</section>"""
+
+    write(
+        path,
+        c.page(
+            title="Homes for Sale in North San Diego County | Team Azizi",
+            description=(
+                "Current listings from Team Azizi at Compass across North San "
+                f"Diego County. Call {site.PHONE_DISPLAY} for what is "
+                "available in your area and price range."
+            ),
+            path=path,
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.web_page(
+                    url=f"{site.DOMAIN}{path}",
+                    name="Homes for Sale in North San Diego County",
+                    author_slug=lead["slug"],
+                    updated=TODAY,
+                ),
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("For sale", f"{site.DOMAIN}{path}"),
+                ]),
+            ],
+        ),
+        changefreq="weekly",
+        priority="0.7",
+    )
+
+    # ---- /properties/sold — where old listing URLs land ------------------
+    # Someone hitting this bookmarked one specific house years ago. Say that
+    # plainly rather than dropping them on a generic page with no explanation.
+    path = "/properties/sold"
+    proof_link = (
+        f'<a href="{site.PROOF["source_url"]}" rel="nofollow noopener" '
+        f'target="_blank">{c.esc(site.PROOF["list_name"])}</a>'
+    )
+    sold_blocks = "\n\n".join([
+        c.answer_block(
+            anchor="track-record",
+            question="How many homes has Team Azizi sold?",
+            lead=(
+                f"Team Azizi, based in San Diego, has "
+                f"{site.PROOF['closed_sales']} closed sales and "
+                f"{site.PROOF['closed_rentals']} closed rentals recorded on its "
+                "Compass profile, with 2025 production of "
+                f"{site.PROOF['volume_2025']} across "
+                f"{site.PROOF['sides_2025']} transaction sides."
+            ),
+            body=(
+                "<p>That 2025 figure is third-party verifiable: it ranks the "
+                f"team {site.PROOF['ca_rank']} on the {proof_link} from "
+                "RealTrends Verified, reporting 2025 production. The San Diego "
+                "Business Journal named the team one of the top 10 in the county "
+                "in October 2025.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="where",
+            question="Where does Team Azizi actually sell?",
+            lead=(
+                "Team Azizi&rsquo;s largest markets by transaction count are in "
+                "inland and coastal North County &mdash; Escondido above all, "
+                "then Oceanside, Fallbrook and San Marcos &mdash; alongside the "
+                "I-15 corridor communities of Del Sur, 4S Ranch and Scripps "
+                "Ranch and the coast at Carmel Valley and Del Mar."
+            ),
+            body=(
+                '<p>Each <a href="/neighborhoods">neighborhood guide</a> states '
+                "the team&rsquo;s record in that specific community, including "
+                "where it is thin. Rancho Santa Fe says one sale, because that is "
+                "the number.</p>"
+            ),
+            heading="h2",
+        ),
+    ])
+
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 4rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Properties &rsaquo; Sold
+    </nav>
+    <p class="eyebrow">Sold</p>
+    <h1>That listing has closed</h1>
+    <p class="lede">
+      If a link brought you to a specific property, that listing is no longer
+      active and its page is gone. Rather than show you nothing, here is what
+      the record actually looks like.
+    </p>
+
+{sold_blocks}
+
+    <p style="margin-top:2.5rem">
+      <a class="btn btn--dark" href="{site.PHONE_HREF}">{site.PHONE_DISPLAY}</a>
+      <a class="btn" href="/properties/sale">Current listings</a>
+    </p>
+    <p class="updated" style="margin-top:2rem">Last updated {TODAY}</p>
+  </div>
+</section>"""
+
+    write(
+        path,
+        c.page(
+            title="Recently Sold — Team Azizi's Record | Team Azizi",
+            description=(
+                f"Team Azizi at Compass has {site.PROOF['closed_sales']} "
+                "closed sales across North San Diego County. 2025 production: "
+                f"{site.PROOF['volume_2025']} across "
+                f"{site.PROOF['sides_2025']} sides, verified by RealTrends."
+            ),
+            path=path,
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.web_page(
+                    url=f"{site.DOMAIN}{path}",
+                    name="Recently Sold — Team Azizi's Record",
+                    author_slug=lead["slug"],
+                    updated=TODAY,
+                ),
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Sold", f"{site.DOMAIN}{path}"),
+                ]),
+            ],
+        ),
+        changefreq="monthly",
+        priority="0.7",
+    )
+
+
+def build_404() -> None:
+    """Vercel serves site/404.html automatically for a static project.
+
+    Written to `404.html` directly rather than through write(): a 404 must not
+    appear in the sitemap, and it is noindex because an indexed error page is
+    the one thing worse than no error page.
+    """
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 5rem);min-height:60vh">
+  <div class="container container--narrow">
+    <p class="eyebrow">404</p>
+    <h1>That page has moved or no longer exists</h1>
+    <p class="lede">
+      This site was rebuilt in 2026 and some older links did not survive the
+      move. The parts people were usually looking for are below.
+    </p>
+    <div class="cta-row" style="margin-top:2rem">
+      <a class="btn btn--dark" href="/neighborhoods">Neighborhood guides</a>
+      <a class="btn btn--dark" href="/properties/sale">Current listings</a>
+      <a class="btn btn--dark" href="/team">The team</a>
+    </div>
+    <p style="margin-top:2.5rem">
+      If you were looking for a specific property, call
+      {site.PHONE_DISPLAY} and someone will tell you where it ended up.
+    </p>
+  </div>
+</section>"""
+    html = c.page(
+        title="Page Not Found | Team Azizi",
+        description="That page has moved or no longer exists.",
+        path="/404",
+        body=body,
+        nodes=c.base_nodes(),
+    )
+    html = html.replace(
+        "<title>", '<meta name="robots" content="noindex,follow">\n<title>', 1
+    )
+    (SITE / "404.html").write_text(html, encoding="utf-8")
+    print("  site/404.html  (noindex, not in sitemap)")
+
+
+# --------------------------------------------------------------------------
 # Team, grouped by the area each agent farms
 # --------------------------------------------------------------------------
 
@@ -1190,7 +1435,9 @@ def main() -> int:
     build_neighborhood_hub()
     build_neighborhoods()
     build_home_valuation()
+    build_properties()
     build_thank_you()
+    build_404()
     build_team()
     build_agents()
     build_sitemap()

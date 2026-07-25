@@ -161,7 +161,14 @@ def check_answer_blocks(pages: list[Path]) -> None:
     """
     from components import ANAPHORA  # noqa: PLC0415
 
-    hood_names = {h["name"].lower() for h in site.ALL_AREAS}
+    # A passage must carry its own geography, because a sub-query result never
+    # arrives with the page around it. A community name satisfies that; so does
+    # the region, for site-wide passages like "how many homes have you sold"
+    # that genuinely belong to no single neighborhood. What is NOT acceptable
+    # is a passage with no place in it at all.
+    hood_names = {h["name"].lower() for h in site.ALL_AREAS} | {
+        "san diego", "north county", "southern california",
+    }
     # A subtler failure than an opening pronoun, and one I shipped three times
     # before catching it: the lead answers the heading conversationally and
     # refers back to it. On the page it reads fine. Lifted into a sub-query
