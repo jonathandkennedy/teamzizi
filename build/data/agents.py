@@ -105,6 +105,9 @@ ROSTER: list[dict] = [
         "compass": "candice-medina",
         "photo": "/assets/img/team/headshot-candice-casares.jpg",
         "farms": None,
+        # No third-party review profile — Compass only,
+        # confirmed by the client 2026-07-25.
+        "no_review_profile": True,
     },
     {
         "slug": "sara-forgnone",
@@ -116,6 +119,7 @@ ROSTER: list[dict] = [
         "compass": "sara-forgnone",
         "photo": "/assets/img/team/headshot-sara-forgnone.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Sara%20Forgnone",
     },
     {
         "slug": "charisma-gallegos",
@@ -140,6 +144,7 @@ ROSTER: list[dict] = [
         "compass": "melissa-gutierrez",
         "photo": "/assets/img/team/headshot-melissa-lopez.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/melissalopezhomessd",
     },
     {
         "slug": "candace-kirk",
@@ -151,6 +156,7 @@ ROSTER: list[dict] = [
         "compass": "candace-kirk",
         "photo": "/assets/img/team/headshot-candace-kirk.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/CandaceKirkRE",
     },
     {
         "slug": "sarah-rivas",
@@ -162,6 +168,7 @@ ROSTER: list[dict] = [
         "compass": "sarah-rivas",
         "photo": "/assets/img/team/headshot-sarah-rivas.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/SarahNRivas",
     },
     {
         "slug": "nicholas-miele",
@@ -199,6 +206,7 @@ ROSTER: list[dict] = [
         "compass": "gabriela-santiago",
         "photo": "/assets/img/team/headshot-gabriela-santiago.jpg",
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/Gabriela%20Santiago",
     },
     {
         "slug": "tiffney-cipriani",
@@ -211,6 +219,7 @@ ROSTER: list[dict] = [
         "compass": "tiffney-cipriani",
         "photo": None,
         "farms": None,
+        "realtor_com": "https://www.realtor.com/realestateagents/64ecea47bf666c98f0715e60",
     },
     {
         "slug": "javier-hernandez",
@@ -222,6 +231,7 @@ ROSTER: list[dict] = [
         "compass": "javier-hernandez",
         "photo": None,
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/JaviSellsSD",
     },
     {
         "slug": "malcolm-schick",
@@ -234,6 +244,7 @@ ROSTER: list[dict] = [
         "compass": "malcolm-schick",
         "photo": None,
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/SanDiegoMalcolm",
     },
     {
         "slug": "michael-angotta",
@@ -260,6 +271,7 @@ ROSTER: list[dict] = [
         "compass": "mahan-taleshpour",
         "photo": None,
         "farms": None,
+        "zillow": "https://www.zillow.com/profile/MahanTRealEstate",
     },
 ]
 
@@ -399,7 +411,30 @@ def unassigned() -> list[str]:
 # review schema for third-party reviews anyway (see data/testimonials.py),
 # and a populated Zillow profile is a sameAs signal that helps consolidate
 # the entity — which is the whole problem this rebuild exists to fix.
-ZILLOW_PENDING = [a["slug"] for a in ROSTER if not a.get("zillow")]
+def review_profile(agent: dict) -> tuple[str, str] | None:
+    """(platform, url) for the "review me" CTA, or None.
+
+    Not Zillow-only. Tiffney Cipriani has no Zillow profile and her reviews
+    live on realtor.com; Candice Casares has no third-party review profile at
+    all and is flagged explicitly so nobody spends another round looking for
+    one. Both are client-confirmed rather than assumed from a failed lookup.
+    """
+    if agent.get("zillow"):
+        return "Zillow", agent["zillow"]
+    if agent.get("realtor_com"):
+        return "realtor.com", agent["realtor_com"]
+    return None
+
+
+# Licensees with no review profile recorded yet. Operations staff and anyone
+# explicitly confirmed as having none are excluded — they are answered, not
+# outstanding.
+ZILLOW_PENDING = [
+    a["slug"] for a in ROSTER
+    if not review_profile(a)
+    and not a.get("operations")
+    and not a.get("no_review_profile")
+]
 
 
 # --------------------------------------------------------------------------

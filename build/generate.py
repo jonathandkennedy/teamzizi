@@ -2486,21 +2486,22 @@ def agent_zillow_block(agent: dict) -> str | None:
     guessing one means publishing a link to a stranger's profile under our
     client's name. Those pages simply omit the block.
     """
-    url = agent.get("zillow")
-    if not url:
+    profile = agents.review_profile(agent)
+    if not profile:
         return None
+    platform, url = profile
     name = c.esc(agent["name"])
     return f"""<section class="answer" id="review">
   <h2 class="answer__q">Worked with {name}? Leave a review</h2>
   <p class="answer__lead">
-    Reviews for {name} live on Zillow rather than on this site, where they
-    can be read next to every other agent in San Diego County and where
-    nobody at Team Azizi can edit them. If {name} handled your sale or
+    Reviews for {name} live on {c.esc(platform)} rather than on this site,
+    where they can be read next to every other agent in San Diego County and
+    where nobody at Team Azizi can edit them. If {name} handled your sale or
     purchase, that is the place to say so.
   </p>
   <p style="margin-top:1.25rem">
     <a class="btn btn--filled" href="{url}" rel="nofollow noopener"
-       target="_blank">Review {name} on Zillow</a>
+       target="_blank">Review {name} on {c.esc(platform)}</a>
     <a class="btn" href="{url}" rel="nofollow noopener"
        target="_blank">Read existing reviews</a>
   </p>

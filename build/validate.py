@@ -282,19 +282,29 @@ def check_unverified() -> None:
     # pointing at a stranger's profile under an agent's name.
     from data import agents as _agents  # noqa: PLC0415
 
+    shapes = {
+        "zillow": "https://www.zillow.com/profile/",
+        "realtor_com": "https://www.realtor.com/realestateagents/",
+    }
     for person in _agents.ROSTER:
-        url = person.get("zillow")
-        if url and not url.startswith("https://www.zillow.com/profile/"):
-            errors.append(
-                f"{person['name']}'s zillow URL is not a Zillow profile URL: "
-                f"{url!r}"
+        for field, prefix in shapes.items():
+            url = person.get(field)
+            if url and not url.startswith(prefix):
+                errors.append(
+                    f"{person['name']}'s {field} URL does not start with "
+                    f"{prefix!r}: {url!r}"
+                )
+        if person.get("zillow") and person.get("realtor_com"):
+            warnings.append(
+                f"{person['name']} has both a Zillow and a realtor.com "
+                "profile; the CTA prefers Zillow. Drop one if that is wrong."
             )
     if _agents.ZILLOW_PENDING:
         warnings.append(
-            f"{len(_agents.ZILLOW_PENDING)} of {len(_agents.ROSTER)} agents "
-            "have no Zillow profile URL, so their pages carry no 'review me' "
-            "call to action. Each agent can copy their own profile URL from "
-            "the address bar — they cannot be guessed or looked up."
+            f"{len(_agents.ZILLOW_PENDING)} licensee(s) have no review "
+            "profile recorded, so their pages carry no 'review me' call to "
+            "action: "
+            + ", ".join(_agents.ZILLOW_PENDING)
         )
 
 
