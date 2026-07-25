@@ -4,7 +4,7 @@
 **Domain:** teamazizi.com (Jon controls registrar; site currently DOWN) · **Planned host:** Vercel
 **Project dir:** `/Users/jonkennedy/team-azizi-website/` · **Repo:** [github.com/jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) (public — client-facing docs are visible; note the repo name is missing the "a") · **Brief:** `retainer-reach/briefs/team-azizi/san-diego/location.brief.md`
 **Strategy doc:** [GAMEPLAN.md](GAMEPLAN.md) — this file is *state + decisions + why*; GAMEPLAN is *the plan*.
-**Last updated:** 2026-07-24
+**Last updated:** 2026-07-25
 
 ---
 
@@ -22,12 +22,12 @@ Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2
 | **Strategy** | ✅ Complete — `GAMEPLAN.md` |
 | **Client brief** | ✅ Filed — `retainer-reach/briefs/team-azizi/` |
 | **AI baseline** | ✅ Captured (absent from 14/14 queries) — `research/aiBaseline.md` |
-| **Code / site** | ❌ Not started — Phase 1 is next |
-| **Repo** | ✅ [jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — public, `main` |
-| **Brand assets** | ✅ Recovered from Wayback — all 34 identified assets, `assets/recovered/` (compressed copies; request originals) |
+| **Code / site** | 🔨 Phase 1 in progress — design system, chrome, schema pipeline, homepage + `/neighborhoods` hub shipped |
+| **Repo** | ✅ [jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — **being made private** (2026-07-25) |
+| **Brand assets** | ⚠️ Recovered, but the manifest was wrong in several places — see the corrections table in `assets/recovered/README.md` |
 | **GBP** | ❌ Does not exist — Phase 2 |
 
-**Next action:** Phase 1 build — design-system port → homepage → 6 neighborhood pages. Nothing blocks it.
+**Next action:** the six neighborhood pages. Blocked only on sourcing the market data (see §9).
 
 ---
 
@@ -48,6 +48,19 @@ Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2
 | **Honest content, evidence tiers in reporting** | The brand's citation strategy. Competitor listicles name competitors fairly; ranking claims carry their confidence tier (entity→AI = Tier D consensus, not measured; open-at-search-time = Tier B; review responses = Tier A). Don't oversell schema — "schema alone rarely moves rankings." |
 | **Recommend canonical name "Team Azizi"** (long form "Team Azizi Real Estate \| Compass San Diego") | Matches Compass + RealTrends. Long form disambiguates from **Azizi Developments (Dubai)**, which pollutes generic "Azizi real estate" AI/search results. *Pending client confirm — but everything ships with one string.* |
 | **Sonia legacy handled with the family, never silently** | Founder Sonia Azizi died July 6, 2023. Most review equity is stranded on her profiles. Plan: honor her on `/about`; every decision about her Yelp/Zillow/LinkedIn/podcast profiles routes through the client and family. Do not delete or quietly rewrite anything of hers. |
+
+### Added 2026-07-25 (Phase 1 build)
+
+| Decision | Why |
+|---|---|
+| **URLs carry no trailing slash** — `/neighborhoods/carmel-valley`, served from `neighborhoods/carmel-valley.html` via Vercel `cleanUrls` | That is exactly how the old site served them, and ~10 of those URLs are still indexed. GAMEPLAN §4.4 writes them with a trailing slash; that was a drafting slip. Preserving the path exactly is the whole point — a trailing-slash convention would 301 away the equity we are rebuilding to keep. |
+| **No JSON-LD is ever hand-written.** Every block is a Python dict serialised with `json.dumps`; `build/validate.py` re-parses all of it pre-push | Makes the missing-brace failure that broke CitedRealty's homepage graph structurally impossible rather than merely unlikely. |
+| **The full entity graph repeats on every page**, rather than being defined once and referenced | An AI fetcher may only ever see one page. Each page has to stand alone as a complete statement of the entity. (The validator flags one `@id` describing *different* things, which is the real error the schema skill warns about.) |
+| **`sameAs` only lists profiles that are accurate today.** LinkedIn, Yelp and the YouTube channel are withheld in `SAME_AS_PENDING` with reasons | A `sameAs` pointing at a profile carrying "Upstart Real Estate" or the old (619) number tells the knowledge graph that the wrong data is authoritative. They move up as Phase 2 fixes them. |
+| **Fonts self-hosted** (Reem Kufi Fun 400, Lato 400/700 — both SIL OFL, 84 KB total) | Removes a render-blocking third-party request and a dependency the client cannot control, which is the premise of the whole rebuild. |
+| **Reem Kufi Fun's colour layer remapped to the brand gold `#8D7120`** | The typeface is a COLRv1 colour font — the tittles on i/j are small **red hearts**, which is the "Fun" in the name and which the old site shipped unremarked. Red appears nowhere else in the brand and fights the gold accent. Remapping the palette keeps the letterforms and the detail while resolving the clash. One CSS block to delete if the client wants the stock red back. |
+| **Neighborhood market data comes from public sources**, cited and dated: County Auditor CFD reports for Mello-Roos, district boundary maps for schools, published portal medians with named attribution | No client dependency, fully defensible under "no fabrication," and the Mello-Roos and school-boundary data *is* the moat — no competitor publishes it. Revisit if the client grants MLS access. |
+| **No generated imagery on neighborhood pages** | A synthetic photo of a real named community cuts against the no-fabrication doctrine the whole strategy rests on. Generated art is fine for abstract section bands. Wrong-place recovered photos render an honest "photography pending" placeholder instead. |
 
 ---
 
@@ -77,6 +90,18 @@ $105.59M volume / 92 sides (RealTrends Verified 2025) · #1 Del Mar by sides, #2
 team-azizi-website/
 ├── GAMEPLAN.md                    ← the plan (strategy, specs, build order)
 ├── HANDOFF.md                     ← this file
+├── vercel.json                    ← cleanUrls, 301 map, cache + security headers
+├── build/                         ← generators. Nothing here is deployed.
+│   ├── data/site.py    THE canonical strings — NAP, proof points, services,
+│   │                   sameAs, neighborhoods. Never retype these elsewhere.
+│   ├── schema.py       JSON-LD builders (dicts → json.dumps, never strings)
+│   ├── components.py   <head>, nav, footer, page shell
+│   ├── generate.py     writes site/
+│   ├── validate.py     PRE-PUSH GATE — run before every commit
+│   └── fetch_fonts.py  one-shot: self-hosts the webfonts
+├── site/                          ← the deployable site (output is committed)
+│   ├── assets/{css,js,fonts,img}
+│   └── *.html, sitemap.xml, robots.txt
 └── research/
     ├── site.md          Old-site URL inventory, content, SEO observations, preservation notes
     ├── design.md        Exact design tokens + section-by-section layouts + Wayback asset URLs
@@ -145,8 +170,14 @@ Full detail in GAMEPLAN §4. The parts most easily got wrong:
 - [ ] Scope confirm: this is Local Hero tier ($3,999/mo — site build + neighborhoods)
 
 **Ours:**
-- [ ] `git init` + Vercel project at Phase 1 start
-- [x] Recover all Wayback assets — done 2026-07-24, all 34 identified assets in `assets/recovered/`
+- [x] `git init` — done; repo is live
+- [ ] Vercel project — set **Root Directory = `site`**; `vercel.json` at repo root already carries `cleanUrls`, the 301 map and cache/security headers
+- [ ] Make the repo private (no API for this — GitHub Settings → General → Danger Zone)
+- [ ] Optimise images before launch — `site/assets/img/` is 8.3 MB unoptimised; the hero poster alone is 396 KB and is the LCP element
+- [ ] Get the real **Compass brokerage logo** from Compass's brand kit (the recovered file is the TA monogram, mislabelled)
+- [ ] Replace the Carmel Valley and 4S Ranch neighborhood photos — the archived ones show the wrong places
+- [ ] Verify the office **geo coordinates** against the GBP pin once GBP exists (currently approximate; `validate.py` warns)
+- [x] Recover all Wayback assets — done 2026-07-24; **manifest corrected 2026-07-25**, see `assets/recovered/README.md`
 - [ ] Point DNS to Vercel at launch (Jon controls registrar)
 - [ ] Submit to GSC + Bing Webmaster immediately at launch; request re-indexing of preserved URLs
 - [ ] Lead form endpoint decision (Formspree — watch the ~50/mo free cap — vs. client CRM webhook)

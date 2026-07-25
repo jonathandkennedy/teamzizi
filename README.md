@@ -14,17 +14,34 @@ Built and maintained by [CitedRealty](https://citedrealty.com).
 
 ## Status
 
-Research and strategy complete. Site build not yet started — Phase 1 is the design-system port, homepage, and six neighborhood pages.
+Research and strategy complete. **Phase 1 in progress** — the design system, global chrome, schema pipeline, homepage and `/neighborhoods` hub are built. Next: the six neighborhood pages.
+
+## Build
+
+```bash
+python3 build/generate.py    # write site/
+python3 build/validate.py    # PRE-PUSH GATE — must exit 0
+```
+
+`validate.py` parses every JSON-LD block, rejects one `@id` describing two different things, checks `sitemap.xml` as XML against real files, and fails the build if any stale NAP string (old address, old phone, "Upstart", the "45 Ranch" typo) reaches the output.
+
+Deploy is Vercel with **Root Directory = `site`**. There is no build step on the host — generated HTML is committed, so the client can open any file in this repo and read their own website.
 
 ## Layout
 
 ```
 GAMEPLAN.md              Strategy + specs
 HANDOFF.md               Decisions, canonical data, compliance
+vercel.json              cleanUrls, 301 map, cache + security headers
+build/                   Generators (not deployed)
+  data/site.py           THE canonical strings — never retype them elsewhere
+  schema.py              JSON-LD builders — dicts, never hand-written strings
+  validate.py            Pre-push gate
+site/                    The deployable site (output committed)
 research/                Research pack (9-agent pass, 2026-07-24)
   archive-snapshots/     Saved HTML/CSS of the dead Luxury Presence site
 assets/recovered/        Brand assets pulled back from the Wayback Machine
-  _recovery-log.txt      What was recovered vs. still missing
+  README.md              Manifest + 2026-07-25 corrections (several were wrong)
 ```
 
 ## Notes
@@ -33,4 +50,5 @@ assets/recovered/        Brand assets pulled back from the Wayback Machine
 - **Schema must be server-rendered** into the HTML — AI fetchers and `curl` don't run JavaScript.
 - **Validate every JSON-LD block** (`json.loads`) and `sitemap.xml` before each push.
 - **Recovered assets are placeholders.** Wayback copies are compressed and incomplete; request originals from the client. The three `.mp4` files are Luxury Presence *stock* footage — replace with real neighborhood footage.
+- **Two recovered neighborhood photos show the wrong places** — the Carmel Valley image is Carmel Valley, *Monterey County* (wine country), and the 4S Ranch image is a mid-century suburb. Neither is in `site/`; those cards render a "photography pending" placeholder until real images exist.
 - Fair Housing, MLS data-use, DRE display, and TCPA constraints are documented in [HANDOFF.md §6](HANDOFF.md) — read before writing neighborhood content.

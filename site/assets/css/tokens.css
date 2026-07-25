@@ -1,0 +1,89 @@
+/* ============================================================
+   Team Azizi — Design tokens
+   Ported from the Luxury Presence build documented in
+   research/design.md. Values are the brand; the execution
+   (fluid type, grid, custom properties) is the modernisation.
+   Light-first by design — the original site had no dark mode
+   and the black/white system is the brand identity.
+   ============================================================ */
+
+:root {
+  /* ---- Colour ------------------------------------------------ */
+  --c-bg: #ffffff;
+  --c-ink: #000000;              /* body + heading text on light  */
+  --c-ink-soft: #1a1a1a;         /* footer icons, IG hover fill   */
+  --c-on-dark: #ffffff;
+  --c-neutral: #848484;          /* secondary/meta text           */
+  --c-muted: #7a7a7a;            /* inactive drawer links         */
+  --c-rule-strong: #c6c6c6;      /* nav hover underline           */
+  --c-silver: #c0c0c0;           /* light outline buttons         */
+  --c-rule: #e7e7e7;             /* hairline dividers             */
+  --c-panel: #f3f3f3;
+  --c-panel-ink: #c4c4c4;
+
+  /* Gold micro-accents — used sparingly: section underlines,
+     status tags, checklist bullets. Never as a fill. */
+  --c-gold: #8d7120;
+  --c-gold-tan: #ccb091;
+
+  /* Overlays — imagery carries the design, type must stay legible */
+  --o-hero: rgba(0, 0, 0, 0.3);
+  --o-media: rgba(0, 0, 0, 0.4);
+  --o-media-heavy: rgba(0, 0, 0, 0.5);
+  --o-backdrop: rgba(2, 5, 7, 0.7);
+
+  /* ---- Type -------------------------------------------------- */
+  /* Reem Kufi Fun is the single most recognisable brand asset —
+     a geometric Kufi-flavoured sans, always weight 400 for display.
+     LP's class was named ".serif"; the font is not a serif. */
+  --f-display: "Reem Kufi Fun", "Trebuchet MS", sans-serif;
+  --f-body: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Fluid scale derived from the original 70/43/30/21/17/16 desktop
+     steps and the 40/32 mobile steps. */
+  --t-h1: clamp(2.5rem, 1.62rem + 3.9vw, 4.375rem);   /* 40 → 70 */
+  --t-h2: clamp(2rem, 1.66rem + 1.5vw, 2.6875rem);    /* 32 → 43 */
+  --t-h3: clamp(1.5rem, 1.32rem + 0.78vw, 1.875rem);  /* 24 → 30 */
+  --t-h4: clamp(1.1875rem, 1.14rem + 0.2vw, 1.3125rem);
+  --t-h5: 1.0625rem;
+  --t-h6: 1rem;
+  --t-body: 1rem;
+  --t-small: 0.875rem;
+  --t-ui: 0.8125rem;             /* nav links                     */
+
+  --lh-display: 1.15;
+  --lh-body: 1.7;
+  --ls-display: 0.047em;         /* .75px at 16px                 */
+  --ls-ui: 0.115em;              /* 1.5px at 13px — tracked UI    */
+
+  /* ---- Space ------------------------------------------------- */
+  --container: 1400px;
+  --container-wide: 1440px;
+  --gutter: clamp(1.25rem, 0.6rem + 2.9vw, 3.125rem);  /* 20 → 50 */
+  --section-y: clamp(3.5rem, 2.3rem + 5.3vw, 6rem);    /* 56 → 96 */
+  --section-y-tight: clamp(2.75rem, 2rem + 3.3vw, 4rem);
+  --nav-h: 100px;
+  --nav-h-mobile: 72px;
+
+  /* ---- Line + form ------------------------------------------- */
+  --border-w: 2px;               /* ghost buttons are 2px, always  */
+  --radius: 0;                   /* square everywhere by design    */
+  --radius-pill: 999px;          /* mobile contact pill only       */
+  --radius-modal: 16px;          /* valuation modal only           */
+
+  /* ---- Motion ------------------------------------------------ */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur: 0.2s;
+  --dur-slow: 0.5s;
+
+  --z-nav: 101;
+  --z-drawer: 120;
+  --z-modal: 200;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 0.01ms;
+    --dur-slow: 0.01ms;
+  }
+}

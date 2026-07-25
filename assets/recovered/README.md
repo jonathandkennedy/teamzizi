@@ -4,6 +4,36 @@ Pulled from the Wayback Machine after teamazizi.com went offline. **These are co
 
 The three videos are Luxury Presence **stock** footage, not Team Azizi footage. Replace with real neighborhood video (see GAMEPLAN §4.3).
 
+## Corrections — 2026-07-25
+
+Every file below was opened and inspected during the Phase 1 build. The table
+further down was written from media IDs, not from the images themselves, and it
+is wrong in several places. Corrections, most consequential first:
+
+| File | Manifest says | Actually is |
+|---|---|---|
+| `neighborhoods/carmel-valley.jpg` | Carmel Valley hero | **A vineyard in Carmel Valley, Monterey County** — wine country, not 92130. The old site shipped the exact geographic conflation the SEO strategy exists to fight. **Do not use.** |
+| `neighborhoods/4s-ranch.jpg` | 4S Ranch hero | **A mature mid-century suburb** — 1960s ranch homes, old fan palms, grid streets. 4S Ranch is a 2000s master-planned community. **Do not use.** |
+| `logos/compass-brokerage.png` | Compass brokerage mark | The **TA monogram**, cropped. We do not have the Compass logo — request it from Compass's brand kit. |
+| `backgrounds/newsletter.png` | Newsletter band image | **A blank white image.** Not recovered. |
+| `misc/44e07ded-….png` | Unidentified | **REALTOR® + Equal Housing Opportunity marks** — required in the footer (HANDOFF §6). |
+| `misc/c572aa1a-….png` | Unidentified | **San Diego MLS logo** — required for the MLS disclaimer. |
+| `misc/9c77c8c8-….png` | Unidentified | **The Luxury Presence logo.** Must never ship. |
+| `misc/jx9bf4w0yscrocpejgwv.png` | Unidentified | TA │ COMPASS lockup on black — now the default OG share image. |
+| `misc/8f4fcc54-….jpg`, `misc/zbz1puja….jpg` | Unidentified | **Mediterranean stock** (olive, cypress, stone walls) — Greece or Spain, not San Diego. |
+| 9 × 500×500 `misc/*.png` | 9 unidentified assets | **One image, nine byte-identical copies** — the TA monogram, now `site/assets/img/logos/monogram.png`. |
+
+So "all 34 identified assets recovered" overstates it: one asset is blank, one
+is the wrong image entirely, two neighborhood photos show the wrong places, and
+nine of the "assets" are the same file. Usable unique assets are closer to 22.
+
+Also worth knowing: the primary logo is not a "Team Azizi" wordmark — it is a
+**TA │ COMPASS lockup**, so the brand mark already carries the affiliation.
+
+Assets in active use now live in `site/assets/img/`. The two wrong-place
+neighborhood photos were deliberately *not* copied there, so they cannot ship
+by accident; those cards render an honest "photography pending" placeholder.
+
 | File | Dimensions | Size | Purpose |
 |---|---|---|---|
 | `backgrounds/hero-poster.jpg` | 1920×2880 | 396 KB | Hero video poster frame (LCP image — optimize first) |
