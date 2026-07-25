@@ -25,6 +25,7 @@ from __future__ import annotations
 ROSTER: list[dict] = [
     {
         "slug": "nilab-azizi",
+        "instagram": "https://www.instagram.com/nilab.azizi_realtor/",
         "name": "Nilab Azizi",
         "title": "Team Lead | REALTOR®",
         "dre": "02047962",
@@ -36,6 +37,8 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "sofia-azizi",
+        "sales": 24,
+        "instagram": "https://www.instagram.com/sofiaa_azizi/",
         "name": "Sofia Azizi",
         "title": "REALTOR® | DRE 02108624",
         "dre": "02108624",
@@ -46,6 +49,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "zohra-azizi",
+        "sales": 47,
         "name": "Zohra Azizi",
         "title": "Realtor® | DRE# 01992847",
         "dre": "01992847",
@@ -56,6 +60,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "masooma-azizi",
+        "sales": 0,
         "name": "Masooma Azizi",
         "title": "Chief Financial Officer",
         "dre": None,
@@ -67,6 +72,8 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "dari-ahranjani",
+        "sales": 17,
+        "instagram": "https://www.instagram.com/dari.ahranjani/",
         "name": "Dari Ahranjani",
         "title": "REALTOR® | DRE# 02130344",
         "dre": "02130344",
@@ -77,6 +84,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "candice-casares",
+        "sales": 31,
         "name": "Candice Casares",
         "title": "REALTOR® | DRE# 02160651",
         "dre": "02160651",
@@ -87,6 +95,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "sara-forgnone",
+        "sales": 8,
         "name": "Sara Forgnone",
         "title": "Realtor® | DRE# 02045480",
         "dre": "02045480",
@@ -97,6 +106,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "charisma-gallegos",
+        "sales": 0,
         "name": "Charisma Gallegos",
         "title": "Assistant to The Azizi Team",
         "dre": None,
@@ -108,6 +118,8 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "melissa-lopez",
+        "sales": 94,
+        "languages": ['English', 'Spanish'],
         "name": "Melissa Lopez",
         "title": "REALTOR® | DRE# 01329108",
         "dre": "01329108",
@@ -118,6 +130,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "candace-kirk",
+        "sales": 35,
         "name": "Candace Kirk",
         "title": "Realtor® | DRE# 02059754",
         "dre": "02059754",
@@ -128,6 +141,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "sarah-rivas",
+        "sales": 11,
         "name": "Sarah Rivas",
         "title": "REALTOR® | DRE# 02112696",
         "dre": "02112696",
@@ -138,6 +152,8 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "nicholas-miele",
+        "sales": 75,
+        "instagram": "https://www.instagram.com/nickmeh/",
         "name": "Nicholas Miele",
         "title": "REALTOR® | DRE# 02089615",
         "dre": "02089615",
@@ -148,6 +164,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "jared-stransky",
+        "sales": 51,
         "name": "Jared Stransky",
         "title": "Realtor® | DRE# 02081146",
         "dre": "02081146",
@@ -158,6 +175,8 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "gabriela-santiago",
+        "sales": 53,
+        "languages": ['English', 'Spanish'],
         "name": "Gabriela Santiago",
         "title": "Agent | DRE# 01955750",
         "dre": "01955750",
@@ -168,6 +187,8 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "tiffney-cipriani",
+        "sales": 3,
+        "instagram": "https://www.instagram.com/tiffneycipriani_realtor/",
         "name": "Tiffney Cipriani",
         "title": "REALTOR® | DRE# 02186323",
         "dre": "02186323",
@@ -178,6 +199,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "javier-hernandez",
+        "sales": 95,
         "name": "Javier Hernandez",
         "title": "Realtor® | DRE# 02004707",
         "dre": "02004707",
@@ -188,6 +210,8 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "malcolm-schick",
+        "sales": 33,
+        "instagram": "https://www.instagram.com/sandiegomalcolm/",
         "name": "Malcolm Schick",
         "title": "REALTOR® | DRE# 02010355",
         "dre": "02010355",
@@ -198,6 +222,7 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "michael-angotta",
+        "sales": 177,
         "name": "Michael Angotta",
         "title": "REALTOR® | DRE 02177007",
         "dre": "02177007",
@@ -208,6 +233,8 @@ ROSTER: list[dict] = [
     },
     {
         "slug": "mahan-taleshpour",
+        "sales": 25,
+        "languages": ['English', 'Farsi'],
         "name": "Mahan Taleshpour",
         "title": "REALTOR® | DRE# 02050744",
         "dre": "02050744",
@@ -224,21 +251,73 @@ ROSTER: list[dict] = [
 # way. Not rendered.
 FORMER = ["deanna-colby", "coby-herzog"]
 
-# The question to put to the client, one line per community. Six answers turn
-# this whole system on.
+# --------------------------------------------------------------------------
+# Evidence-based proposals, 2026-07-25.
+#
+# These are now derived rather than guessed: a full sweep of all 1,009 Compass
+# past sales plus the 18 individual agent pages. See research/salesRecord.md.
+#
+# They remain *proposals*. `farms` above stays None until the client confirms,
+# because a transaction record shows where someone has closed, not where they
+# have chosen to farm — and 1,009 sales attribute only 45 to these six
+# communities in total.
+# --------------------------------------------------------------------------
+
+PROPOSED = {
+    # 18 team sales in 92127. Del Sur and 4S Ranch are NOT separable by ZIP —
+    # 92127 also covers Rancho Bernardo and Santaluz — so a per-community
+    # split needs street-level data.
+    "del-sur": ("zohra-azizi", "moderate", "6 sales in 92127; Sofia Azizi next at 3"),
+    "4s-ranch": ("zohra-azizi", "moderate", "same 92127 pool; not separable from Del Sur by ZIP"),
+    # Sofia holds both top Scripps sales ($3.5M, $3.2M); Zohra leads by count.
+    "scripps-ranch": ("sofia-azizi", "moderate", "9 team sales; holds both top sales in 92131"),
+    # See the Angotta caution below before publishing this one.
+    "del-mar": ("michael-angotta", "moderate", "3 of 6 team sales, plus hosted the Mira Montana launch"),
+    "carmel-valley": (None, "low", "contested: Hernandez 3, Angotta 3, Miele 2 — Miele holds the $4.75M top sale"),
+    # One sale in the entire 1,009-record history.
+    "rancho-santa-fe": (None, "none", "ONE lifetime team sale (5918 Fairway Place, $2.9M). No basis for an expert page."),
+}
+
+# Michael Angotta is the best-supported Del Mar candidate on transaction
+# evidence and simultaneously the riskiest to build a page around:
+#   - 136 of his 177 sales are in CONNECTICUT (Norwalk, Fairfield, Bridgeport)
+#   - a second IG account, @realestatebuyangotta, links to YB Realty not
+#     Compass — possible brokerage change in progress
+#   - his Compass bio claims "$100,000,000 in transactions" individually,
+#     the same figure SDBJ credits to the whole team for 2025
+# Resolve with the client before he is published as a neighborhood specialist.
+ANGOTTA_CAUTION = True
+
 PROPOSED_ASSIGNMENTS = """\
-Which agent farms each of these? One name each; they become the page author,
-the byline, the direct contact, and the schema author for that neighborhood.
+Confirm the agent who FARMS each community. We now have a proposal for four of
+the six, derived from all 1,009 Compass sales — but a closing record shows
+where someone has sold, not where they have chosen to farm, so these need a
+yes or a correction:
 
-  Del Sur (92127)          → ?
-  4S Ranch (92127)         → ?
-  Scripps Ranch (92131)    → ?
-  Carmel Valley (92130)    → ?
-  Del Mar (92014)          → ?
-  Rancho Santa Fe (92067)  → ?
+  Del Sur (92127)          → Zohra Azizi?      (6 sales in 92127)
+  4S Ranch (92127)         → Zohra Azizi?      (same ZIP pool — can you split
+                                                Del Sur from 4S Ranch?)
+  Scripps Ranch (92131)    → Sofia Azizi?      (holds both top sales there)
+  Del Mar (92014)          → Michael Angotta?  (3 of 6 — but see below)
+  Carmel Valley (92130)    → ?                 (genuinely contested three ways)
+  Rancho Santa Fe (92067)  → ?                 (ONE sale, ever)
 
-An agent may hold more than one. Any left unanswered keep the team lead as
-author, which is accurate but weaker than a named local specialist.
+Three things that need answering alongside:
+
+1. Rancho Santa Fe. One lifetime sale. An expert page there would be the
+   thinnest page on the site, in the hardest SERP in the county. Recommend
+   dropping it until there is a record — or telling us who is actively
+   farming it now, if someone is.
+
+2. Michael Angotta. 136 of his 177 sales are in Connecticut, and one of his
+   Instagram accounts links to YB Realty rather than Compass. Is he staying,
+   and is San Diego his focus?
+
+3. The bigger question. Across 1,009 sales, only 45 (4.5%) are in these six
+   communities; the median sale is $650,000 and 77.5% are under $1M. The
+   actual book is Escondido (~96), South Bay, Oceanside, Fallbrook, Spring
+   Valley. Are the six the farm you are building toward, or the farm you
+   have? Both are legitimate answers, but they produce different sites.
 """
 
 

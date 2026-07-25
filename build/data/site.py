@@ -70,7 +70,15 @@ STALE_STRINGS = (
 PROOF = {
     "volume_2025": "$105.59M",
     "sides_2025": "92",
-    "del_mar_rank": "#1 in Del Mar by sides, #2 by volume",
+    # ⚠️ DO NOT PUBLISH until RealTrends' methodology is confirmed. RealTrends
+    # assigns each team a business city and ranks within it; Team Azizi's
+    # assigned city is Del Mar. Their Compass record shows SIX Del Mar sales
+    # ever, against 92 sides in 2025 alone. The rank is very likely an artifact
+    # of where the team is registered, not Del Mar market share — but a reader
+    # will infer market share. See research/salesRecord.md §2.
+    "del_mar_rank_UNVERIFIED": "#1 in Del Mar by sides, #2 by volume",
+    "sdbj_top10": "One of the top 10 real estate teams in the county "
+                  "(San Diego Business Journal, October 2025)",
     "ca_rank": "#58 in California by volume",
     "national_rank": "#265 nationally by volume",
     "closed_sales": "1,016",

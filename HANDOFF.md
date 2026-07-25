@@ -27,7 +27,7 @@ Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2
 | **Brand assets** | ⚠️ Recovered, but the manifest was wrong in several places — see the corrections table in `assets/recovered/README.md` |
 | **GBP** | ❌ Does not exist — Phase 2 |
 
-**Next action:** the six neighborhood pages. Blocked only on sourcing the market data (see §9).
+**Next action:** ⚠️ **read [research/salesRecord.md](research/salesRecord.md) before writing another line of neighborhood content.** A full sweep of all 1,009 Compass sales (2026-07-25) shows only **45 (4.5%)** are in the six target communities, the median sale is **$650,000**, 77.5% are under $1M, and **Rancho Santa Fe has one sale, ever**. The farm the plan is built on is not the farm the record shows. That is a client conversation, not a build decision — but it is the next one.
 
 ---
 
@@ -164,7 +164,13 @@ Full detail in GAMEPLAN §4. The parts most easily got wrong:
 ## 7. Open items
 
 **Client-dependent (asked; don't block Phase 1 build):**
-- [ ] **Which agent farms each of the six neighborhoods?** Six names. Turns on the byline, the direct contact, the `/team` grouping and the schema author on every neighborhood page. Question text ready in `build/data/agents.py:PROPOSED_ASSIGNMENTS`.
+- [ ] **⚠️ Are the six communities the farm you have, or the farm you want?** 45 of 1,009 sales (4.5%). Median $650K, 77.5% under $1M. The actual book is Escondido (~96), South Bay, Oceanside, Fallbrook, Spring Valley. Both answers are legitimate; they produce different sites. [research/salesRecord.md](research/salesRecord.md) §1.
+- [ ] **⚠️ Verify "#1 in Del Mar by sides" before it goes back on the site.** Pulled from the homepage 2026-07-25. RealTrends ranks within an assigned business city; theirs is Del Mar; they have six Del Mar sales in the entire Compass record. Very likely an artifact of registration, not market share — and a reader will infer market share. §2.
+- [ ] **Rancho Santa Fe: keep or drop?** One lifetime sale, in the hardest SERP in the county. An expert page there fails the plan's own webspam-team test.
+- [ ] **Michael Angotta — staying, and San Diego-focused?** 136 of his 177 sales are Connecticut, and one of his Instagram accounts links to YB Realty rather than Compass.
+- [ ] **Confirm the four proposed farming assignments** (now evidence-based, not guesses): Del Sur + 4S Ranch → Zohra Azizi · Scripps Ranch → Sofia Azizi · Del Mar → Michael Angotta · Carmel Valley → contested three ways. Also: can they split Del Sur from 4S Ranch? ZIP 92127 covers both plus Rancho Bernardo and Santaluz. Full text in `agents.PROPOSED_ASSIGNMENTS`.
+- [ ] **Nicholas Miele's YouTube channel.** @lifeinsandiego — 12.4K subscribers, 205 videos, ~weekly, and the only real on-location neighborhood video in the estate (Carmel Valley ×2, RSF ×2, 4S/Del Sur, Del Mar, Santaluz). It is in the team's link-in-bio but owned personally. Licensing arrangement? It is the highest-reach asset they have and it is not theirs.
+- [ ] **@soniasellssd — 9,412 followers**, still live, bio "Founder of Team Azizi". Four and a half times the team account and the largest audience in the entity graph. Family decision, not an SEO one.
 - [ ] **The other three link-in-bio URLs on Instagram.** The visible one is `teamazizi.com/home-valuation` — dead, and taking live traffic from 2,055 followers. The other three are almost certainly dead teamazizi.com paths too. This makes `/home-valuation` launch-critical, not a Phase 3 rebuild.
 - [ ] **Replace "Top 1% in SD County" in the Instagram bio with the RealTrends line.** Resolved 2026-07-25: the client supplied the RealTrends listing, confirming **#58 of all California Large Teams by volume** ($105.59M / 92 sides / Del Mar). That does not substantiate "Top 1% in SD County" — different denominator, no published source — it makes it *unnecessary*. "#58 Large Team in California, RealTrends Verified" is the stronger claim because a reader can click it, and unlike "Top 1%" it is not the identical string their most direct competitor already uses. Site now leads with it; the bio should match so profile and site assert the same checkable thing.
 - [ ] Note the citation year: RealTrends publishes this under its **2026 program** reporting **2025 production**. Cite both or a reader who clicks through thinks the number is stale.

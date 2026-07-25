@@ -97,7 +97,11 @@ def build_home() -> None:
         [
             stat(site.PROOF["volume_2025"], "2025 sales volume"),
             stat(site.PROOF["sides_2025"], "2025 transaction sides"),
-            stat("#1", "In Del Mar by sides"),
+            # "#1 in Del Mar by sides" pulled 2026-07-25 — likely an
+            # artifact of RealTrends' business-city assignment, not market
+            # share (six Del Mar sales in the whole Compass record).
+            # research/salesRecord.md §2. SDBJ top-10 is specific and safe.
+            stat("Top 10", "Team in San Diego County"),
             stat(site.PROOF["list_rank"], "Large team in California"),
         ]
     )
@@ -133,8 +137,9 @@ def build_home() -> None:
       {site.PROOF['list_rank']} of all California large teams by volume on
       <a href="{site.PROOF['source_url']}" rel="nofollow noopener"
       target="_blank">{c.esc(site.PROOF['list_name'])}</a>, RealTrends
-      Verified &mdash; reporting 2025 production. Also named among San Diego's
-      best teams by the San&nbsp;Diego Business Journal.
+      Verified &mdash; reporting 2025 production. Named one of the top 10
+      real estate teams in the county by the San&nbsp;Diego Business
+      Journal, October 2025.
       Every figure on this site is third-party verifiable; none of them
       require taking our word for it.
     </p>
@@ -144,7 +149,7 @@ def build_home() -> None:
 <section class="section section--panel">
   <div class="container">
     <p class="eyebrow">Neighborhood guides</p>
-    <h2 class="rule-gold">The six communities we actually work in</h2>
+    <h2 class="rule-gold">Six communities, in depth</h2>
     <p>
       Each guide carries current market conditions, the Mello-Roos and
       property-tax math for that community, which streets feed which schools,
@@ -167,10 +172,10 @@ def build_home() -> None:
       <h2>A family team, {site.PROOF['closed_sales']} closed sales</h2>
       <p>
         Team Azizi was founded by Sonia Azizi and is led today by
-        {c.esc(site.LEAD_AGENT)}. The team spans the coastal luxury market at
-        the Del Mar end and the inland family communities along the
-        I&#8209;15 corridor &mdash; a footprint no other team in the county
-        covers as one practice.
+        {c.esc(site.LEAD_AGENT)}. The team works the full price spectrum
+        across San Diego County &mdash; first homes through estates &mdash;
+        which is why the guides here talk about tax districts and school
+        boundaries rather than lifestyle adjectives.
       </p>
       <div class="cta-row">
         <a class="btn btn--dark" href="/team">Meet the team</a>
