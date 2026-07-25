@@ -78,19 +78,38 @@ PROOF = {
     "active_range": "$369,000 – $5,875,000",
     "top_sold": "$6,100,000",
     "sdbj": "Named among San Diego's Best Teams, San Diego Business Journal 2025",
-    "source": "RealTrends Verified 2025 · San Diego Business Journal · Compass",
+    # The list is published under RealTrends' 2026 program and reports 2025
+    # production. Naming both matters: cite it as "2025" alone and a reader who
+    # clicks through lands on a page headed "2026 Best Real Estate Large Teams
+    # in California" and thinks the number is stale.
+    "list_name": "2026 Best Real Estate Large Teams in California",
+    "list_rank": "#58",
+    "source": (
+        "RealTrends Verified 2026 program (2025 production) · "
+        "San Diego Business Journal · Compass"
+    ),
     "source_url": (
+        "https://www.realtrends.com/ranking/best-real-estate-agents-california/"
+        "large-teams-volume/"
+    ),
+    "profile_url": (
         "https://www.realtrends.com/team-profile/team-azizi-california-compass/"
     ),
 }
 
-# Live entity conflict, found 2026-07-25 on @teamazizi_realestate.
-# Their Instagram bio claims "Top 1% in SD County" — an unverified figure this
-# build refuses to print (it is in STALE_STRINGS). The site and the profile
-# cannot say different things about the same business, so this resolves one of
-# two ways: the client substantiates the claim, or the bio changes at launch
-# alongside the site. Tracked in HANDOFF §7.
-BIO_CLAIM_CONFLICT = "Top 1% in SD County"
+# Resolved 2026-07-25 — the client supplied the RealTrends listing directly,
+# confirming #58 of all California Large Teams by volume.
+#
+# This does NOT substantiate the "Top 1% in SD County" line in their Instagram
+# bio: different denominator (California large teams vs every agent in San
+# Diego County) and no published source behind it. It makes that line
+# unnecessary instead. "#58 Large Team in California, RealTrends Verified" is
+# a stronger claim precisely because a reader can click it and check — and it
+# is not the identical string their most direct competitor already uses.
+#
+# Recommendation to the client: adopt this language in the bio too, so the
+# site and the profile assert the same checkable thing.
+BIO_CLAIM_TO_REPLACE = "Top 1% in SD County"
 
 # --------------------------------------------------------------------------
 # Services — mirrored exactly into schema hasOfferCatalog and, later, the

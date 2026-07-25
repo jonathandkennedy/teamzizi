@@ -98,7 +98,7 @@ def build_home() -> None:
             stat(site.PROOF["volume_2025"], "2025 sales volume"),
             stat(site.PROOF["sides_2025"], "2025 transaction sides"),
             stat("#1", "In Del Mar by sides"),
-            stat(site.PROOF["closed_sales"], "Closed sales on Compass"),
+            stat(site.PROOF["list_rank"], "Large team in California"),
         ]
     )
 
@@ -130,9 +130,13 @@ def build_home() -> None:
 {stats}
     </div>
     <p class="stats__source">
-      Source: <a href="{site.PROOF['source_url']}" rel="nofollow noopener"
-      target="_blank">RealTrends Verified 2025</a> and the team's Compass
-      profile. Every figure on this site is third-party verifiable.
+      {site.PROOF['list_rank']} of all California large teams by volume on
+      <a href="{site.PROOF['source_url']}" rel="nofollow noopener"
+      target="_blank">{c.esc(site.PROOF['list_name'])}</a>, RealTrends
+      Verified &mdash; reporting 2025 production. Also named among San Diego's
+      best teams by the San&nbsp;Diego Business Journal.
+      Every figure on this site is third-party verifiable; none of them
+      require taking our word for it.
     </p>
   </div>
 </section>
