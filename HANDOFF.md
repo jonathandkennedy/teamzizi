@@ -10,11 +10,11 @@
 
 ## 0. One-paragraph summary
 
-Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2025, **#1 in Del Mar by sides**, 1,016 closed sales on Compass) whose Luxury Presence website is dead — DNS down, Google's index of it decaying, no Google Business Profile, and AI assistants already repeating corrupted third-party data about them. A 9-agent research pass confirmed they are **absent from all 14 tested AI/search queries**, including their own office neighborhood. The engagement is: rebuild teamazizi.com as an owned static site at the same URLs with the same brand but real editorial depth, repair the entity across the web, stand up GBP + review velocity, and run the market-report/Q&A content engine that research proved earns AI citations *in this exact market*. It doubles as CitedRealty's first documented case study — the zero-visibility "before" is already captured.
+Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2025, **#58 of California large teams by volume**, top 10 in the county per SDBJ, 1,016 closed sales on Compass — but see [salesRecord.md](research/salesRecord.md): the median sale is $650K and only 4.5% of that record falls in the six target communities) whose Luxury Presence website is dead — DNS down, Google's index of it decaying, no Google Business Profile, and AI assistants already repeating corrupted third-party data about them. A 9-agent research pass confirmed they are **absent from all 14 tested AI/search queries**, including their own office neighborhood. The engagement is: rebuild teamazizi.com as an owned static site at the same URLs with the same brand but real editorial depth, repair the entity across the web, stand up GBP + review velocity, and run the market-report/Q&A content engine that research proved earns AI citations *in this exact market*. It doubles as CitedRealty's first documented case study — the zero-visibility "before" is already captured.
 
 ---
 
-## 1. Status as of 2026-07-24
+## 1. Status as of 2026-07-25
 
 | | |
 |---|---|
