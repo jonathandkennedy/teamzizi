@@ -317,6 +317,42 @@ def check_internal_links(pages: list[Path]) -> None:
         )
 
 
+def check_headings(pages: list[Path]) -> None:
+    """Exactly one h1 per page, and no skipped heading level.
+
+    Screen reader users navigate by heading, and a jump from h1 straight to
+    h3 tells them a level exists that they cannot find. Seventeen pages did
+    exactly that — every neighborhood guide plus /mello-roos — because
+    `answer_block` defaults to h3 and those blocks are the page's top-level
+    sections, so there was no h2 anywhere between the title and them.
+
+    Cheap to check, invisible to catch by eye, and it silently regresses the
+    moment someone adds a section without thinking about level.
+    """
+    heading = re.compile(r"<h([1-6])[ >]")
+    for page in pages:
+        html = re.sub(
+            r"(?s)<(script|style).*?</\1>", "", page.read_text(encoding="utf-8")
+        )
+        levels = [int(m) for m in heading.findall(html)]
+
+        h1s = levels.count(1)
+        if h1s != 1:
+            errors.append(
+                f"{rel(page)}: {h1s} <h1> elements — a page needs exactly one."
+            )
+
+        previous = 0
+        for level in levels:
+            if previous and level > previous + 1:
+                errors.append(
+                    f"{rel(page)}: heading level jumps h{previous} to h{level} "
+                    f"— skipped level breaks heading navigation."
+                )
+                break
+            previous = level
+
+
 def check_testimonials() -> None:
     """Testimonials must be attributable, and must never be marked up.
 
@@ -405,6 +441,7 @@ def main() -> int:
     check_internal_links(pages)
     check_sitemap()
     check_unverified()
+    check_headings(pages)
     check_testimonials()
     check_footer_licensees()
 

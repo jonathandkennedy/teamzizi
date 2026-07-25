@@ -409,6 +409,7 @@ def tax_block(h: dict) -> str:
         f"retrieved {taxes.RETRIEVED}.</p>"
     )
     return c.answer_block(
+        heading="h2",
         anchor="mello-roos",
         question=f"Does {h['name']} have Mello-Roos, and how much?",
         lead=lead,
@@ -470,6 +471,7 @@ def build_neighborhood(slug: str) -> None:
     blocks = "\n\n".join(filter(None, [
         tax_block(h),
         c.answer_block(
+            heading="h2",
             anchor="schools",
             question=f"What school district serves {h['name']}?",
             lead=(
@@ -482,8 +484,9 @@ def build_neighborhood(slug: str) -> None:
         ),
         # Community-specific depth. Structural facts only — which district,
         # which boundary, which agency. See build/data/guides.py.
-        *[c.answer_block(**b) for b in guides.for_hood(slug)],
+        *[c.answer_block(heading="h2", **b) for b in guides.for_hood(slug)],
         c.answer_block(
+            heading="h2",
             anchor="track-record",
             question=f"Has Team Azizi actually sold in {h['name']}?",
             lead=record,
@@ -1772,6 +1775,9 @@ def build_mello_roos() -> None:
       seven where the honest answer is &ldquo;none.&rdquo;
     </p>
 
+    <h2 class="rule-gold" style="margin-top:2.5rem">
+      Look up a community
+    </h2>
     <div class="cfd-tool">
       <div class="field">
         <label for="cfd-select">Choose a community</label>
