@@ -6,7 +6,33 @@
 
 **URL:** https://www.instagram.com/teamazizi_realestate/ | **Display name:** "Team Azizi Real Estate"
 
-**Follower/post counts:** Not retrievable — Instagram serves a login wall to fetchers and no cached snippet exposed the counts. Needs a logged-in manual check. For scale reference, team lead Nilab Azizi's personal account **@nilab.azizi_realtor** shows **1,466 followers / 1,434 following / 272 posts**, and its bio references @teamazizi_realestate.
+**Follower/post counts — CAPTURED 2026-07-25** via a logged-in browser (unavailable to fetchers; both curl and headless Chromium get the app shell with no profile data):
+
+**563 posts · 2,055 followers · 1,209 following**
+
+For scale: team lead Nilab Azizi's personal account **@nilab.azizi_realtor** shows **1,466 followers / 1,434 following / 272 posts** — i.e. the team account is only ~40% larger than one agent's personal account. The team brand is not where the audience lives.
+
+**Bio, verbatim:**
+```
+Team Azizi Real Estate
+• @Compass
+• Top 1% in SD County
+• San Diego Experts
+↓ Let us help you find your next dream home!
+teamazizi.com/home-valuation and 3 more
+```
+
+**Three findings that change the build:**
+
+1. **The link-in-bio points at `teamazizi.com/home-valuation`** — a dead URL, actively receiving social traffic from 2,055 followers, plus "and 3 more" links we have not enumerated. This promotes `/home-valuation` from "rebuild eventually" (GAMEPLAN §4.2 lists it as content-lost) to **launch-critical**. Get the other three URLs from the client; they are almost certainly dead teamazizi.com paths too.
+
+2. **The bio claims "Top 1% in SD County"** — the exact unverified claim HANDOFF §3 tells us to purge in favour of the RealTrends figures, and it is live on their own profile today. This is an entity-consistency conflict, not just a copy preference: the site cannot say one thing while the profile says another. Either the client substantiates it or the bio changes with the site.
+
+3. **San Diego Business Journal recognition is confirmed** — a pinned post reads "Recognized Among San Diego's Best Teams · Featured in the San Diego Business Journal for achieving $100M+ in sales in 2025." compass.md noted the SDBJ list PDF surfaced but could not extract the row. This is now a usable, citable third-party proof point alongside RealTrends.
+
+**Story highlights (the publicly-fronted agents):** Sonia Azizi · Nilab Azizi · Sara Forgnone · Gaby Santiago · Sofia Azizi · Zohra Azizi · OPEN HOUSE. Useful signal for the neighborhood-first rebuild — these six are the agents the team already puts a face to.
+
+**Sonia legacy:** a pinned "IN LOVING MEMORY" post and a dedicated story highlight. The family is honouring her publicly, which makes an "Our Founder" section on `/about` clearly appropriate; specifics still route through the family (HANDOFF §2).
 
 **Status:** Actively maintained — indexed posts as recent as **July 22, 2026**.
 

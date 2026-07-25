@@ -4,17 +4,17 @@
 **Domain:** teamazizi.com (Jon controls registrar; site currently DOWN) · **Planned host:** Vercel
 **Project dir:** `/Users/jonkennedy/team-azizi-website/` · **Repo:** [github.com/jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) (public — client-facing docs are visible; note the repo name is missing the "a") · **Brief:** `retainer-reach/briefs/team-azizi/san-diego/location.brief.md`
 **Strategy doc:** [GAMEPLAN.md](GAMEPLAN.md) — this file is *state + decisions + why*; GAMEPLAN is *the plan*.
-**Last updated:** 2026-07-24
+**Last updated:** 2026-07-25
 
 ---
 
 ## 0. One-paragraph summary
 
-Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2025, **#1 in Del Mar by sides**, 1,016 closed sales on Compass) whose Luxury Presence website is dead — DNS down, Google's index of it decaying, no Google Business Profile, and AI assistants already repeating corrupted third-party data about them. A 9-agent research pass confirmed they are **absent from all 14 tested AI/search queries**, including their own office neighborhood. The engagement is: rebuild teamazizi.com as an owned static site at the same URLs with the same brand but real editorial depth, repair the entity across the web, stand up GBP + review velocity, and run the market-report/Q&A content engine that research proved earns AI citations *in this exact market*. It doubles as CitedRealty's first documented case study — the zero-visibility "before" is already captured.
+Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2025, **#58 of California large teams by volume**, top 10 in the county per SDBJ, 1,016 closed sales on Compass — but see [salesRecord.md](research/salesRecord.md): the median sale is $650K and only 4.5% of that record falls in the six target communities) whose Luxury Presence website is dead — DNS down, Google's index of it decaying, no Google Business Profile, and AI assistants already repeating corrupted third-party data about them. A 9-agent research pass confirmed they are **absent from all 14 tested AI/search queries**, including their own office neighborhood. The engagement is: rebuild teamazizi.com as an owned static site at the same URLs with the same brand but real editorial depth, repair the entity across the web, stand up GBP + review velocity, and run the market-report/Q&A content engine that research proved earns AI citations *in this exact market*. It doubles as CitedRealty's first documented case study — the zero-visibility "before" is already captured.
 
 ---
 
-## 1. Status as of 2026-07-24
+## 1. Status as of 2026-07-25
 
 | | |
 |---|---|
@@ -22,12 +22,12 @@ Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2
 | **Strategy** | ✅ Complete — `GAMEPLAN.md` |
 | **Client brief** | ✅ Filed — `retainer-reach/briefs/team-azizi/` |
 | **AI baseline** | ✅ Captured (absent from 14/14 queries) — `research/aiBaseline.md` |
-| **Code / site** | ❌ Not started — Phase 1 is next |
-| **Repo** | ✅ [jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — public, `main` |
-| **Brand assets** | ✅ Recovered from Wayback — all 34 identified assets, `assets/recovered/` (compressed copies; request originals) |
+| **Code / site** | 🔨 Phase 1 — 30 pages built (home, hub, **6 neighborhood guides**, `/home-valuation`, `/team`, 19 agent pages). Neighborhood guides are ~380 words against an 800–1,500 target: the tax and schools blocks are real and sourced, the rest awaits data. |
+| **Repo** | ✅ [jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — **being made private** (2026-07-25) |
+| **Brand assets** | ⚠️ Recovered, but the manifest was wrong in several places — see the corrections table in `assets/recovered/README.md` |
 | **GBP** | ❌ Does not exist — Phase 2 |
 
-**Next action:** Phase 1 build — design-system port → homepage → 6 neighborhood pages. Nothing blocks it.
+**Next action:** ⚠️ **read [research/salesRecord.md](research/salesRecord.md) before writing another line of neighborhood content.** A full sweep of all 1,009 Compass sales (2026-07-25) shows only **45 (4.5%)** are in the six target communities, the median sale is **$650,000**, 77.5% are under $1M, and **Rancho Santa Fe has one sale, ever**. The farm the plan is built on is not the farm the record shows. That is a client conversation, not a build decision — but it is the next one.
 
 ---
 
@@ -48,6 +48,25 @@ Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2
 | **Honest content, evidence tiers in reporting** | The brand's citation strategy. Competitor listicles name competitors fairly; ranking claims carry their confidence tier (entity→AI = Tier D consensus, not measured; open-at-search-time = Tier B; review responses = Tier A). Don't oversell schema — "schema alone rarely moves rankings." |
 | **Recommend canonical name "Team Azizi"** (long form "Team Azizi Real Estate \| Compass San Diego") | Matches Compass + RealTrends. Long form disambiguates from **Azizi Developments (Dubai)**, which pollutes generic "Azizi real estate" AI/search results. *Pending client confirm — but everything ships with one string.* |
 | **Sonia legacy handled with the family, never silently** | Founder Sonia Azizi died July 6, 2023. Most review equity is stranded on her profiles. Plan: honor her on `/about`; every decision about her Yelp/Zillow/LinkedIn/podcast profiles routes through the client and family. Do not delete or quietly rewrite anything of hers. |
+
+### Added 2026-07-25 (Phase 1 build)
+
+| Decision | Why |
+|---|---|
+| **URLs carry no trailing slash** — `/neighborhoods/carmel-valley`, served from `neighborhoods/carmel-valley.html` via Vercel `cleanUrls` | That is exactly how the old site served them, and ~10 of those URLs are still indexed. GAMEPLAN §4.4 writes them with a trailing slash; that was a drafting slip. Preserving the path exactly is the whole point — a trailing-slash convention would 301 away the equity we are rebuilding to keep. |
+| **No JSON-LD is ever hand-written.** Every block is a Python dict serialised with `json.dumps`; `build/validate.py` re-parses all of it pre-push | Makes the missing-brace failure that broke CitedRealty's homepage graph structurally impossible rather than merely unlikely. |
+| **The full entity graph repeats on every page**, rather than being defined once and referenced | An AI fetcher may only ever see one page. Each page has to stand alone as a complete statement of the entity. (The validator flags one `@id` describing *different* things, which is the real error the schema skill warns about.) |
+| **`sameAs` only lists profiles that are accurate today.** LinkedIn, Yelp and the YouTube channel are withheld in `SAME_AS_PENDING` with reasons | A `sameAs` pointing at a profile carrying "Upstart Real Estate" or the old (619) number tells the knowledge graph that the wrong data is authoritative. They move up as Phase 2 fixes them. |
+| **Fonts self-hosted** (Reem Kufi Fun 400, Lato 400/700 — both SIL OFL, 84 KB total) | Removes a render-blocking third-party request and a dependency the client cannot control, which is the premise of the whole rebuild. |
+| **Reem Kufi Fun's colour layer remapped to the brand gold `#8D7120`** | The typeface is a COLRv1 colour font — the tittles on i/j are small **red hearts**, which is the "Fun" in the name and which the old site shipped unremarked. Red appears nowhere else in the brand and fights the gold accent. Remapping the palette keeps the letterforms and the detail while resolving the clash. One CSS block to delete if the client wants the stock red back. |
+| **Neighborhood market data comes from public sources**, cited and dated: County Auditor CFD reports for Mello-Roos, district boundary maps for schools, published portal medians with named attribution | No client dependency, fully defensible under "no fabrication," and the Mello-Roos and school-boundary data *is* the moat — no competitor publishes it. Revisit if the client grants MLS access. |
+| **No generated imagery on neighborhood pages** | A synthetic photo of a real named community cuts against the no-fabrication doctrine the whole strategy rests on. Generated art is fine for abstract section bands. Wrong-place recovered photos render an honest "photography pending" placeholder instead. |
+| **Neighborhood pages are built as fan-out answer blocks, not narrative** | AI Mode decomposes a query into sub-queries and retrieves *passages*. A flowing page competes for one head term; the same content in self-contained blocks competes for ~19 retrievals. Map in `build/data/fanout.py`; `validate.py` rejects any lead answer that opens with a pronoun or omits the place name, because both make a passage useless once lifted. See GAMEPLAN §4.5. |
+| **Localized imagery, sourced from their own listing photography first** | Original local imagery is a first-hand signal the May 2026 update rewards, and **no competitor publishes any** — a documented open gap. 1,016 closed sales means they already own true street-level photography of every one of the six communities; that beats a shoot for a first pass. Shot list and technical spec: [docs/photography-brief.md](docs/photography-brief.md). |
+| **IndexNow at launch** (key `ce855552…`, `build/indexnow.py`) | ChatGPT retrieval leans on Bing's index, and IndexNow is how you tell Bing a URL changed without waiting to be crawled. Bing/Yandex/Seznam/Naver only — **Google does not participate**. Honest framing for the client: it accelerates discovery, it does not cause ranking or citation. |
+| **Neighborhood-first IA: one named licensee owns each of the six areas** | A page authored by "Team Azizi" is a company talking; a page authored by a named licensee with a DRE number, a direct line and a sold record *in that neighborhood* is a person who can be checked — which is what E-E-A-T rewards and what an assistant needs before it will name someone. `/team` groups by area rather than showing one flat grid of nineteen faces, because "who do I call about Del Sur" is the question visitors arrive with. Person schema carries `areaServed` + `knowsAbout`; the neighborhood page's `WebPage.author` points at that agent. |
+| **Farming assignments are client data — the system ships with confirmable slots** | Nothing published anywhere says which agent works which community. All six start unassigned in `build/data/agents.py`, and pages fall back to the team lead, who is a real, accountable, verifiable licensee — not a placeholder and not a company byline. Six one-line answers turn the whole system on. Question is pre-written in `agents.PROPOSED_ASSIGNMENTS`. |
+| **robots.txt names the AI crawlers explicitly and allows them** | Retrieval bots (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, Google-Extended) are what fetch a page in order to cite it — blocking any would forfeit the engagement. Training bots (GPTBot, ClaudeBot, Applebot-Extended) are also allowed: for a business whose problem is that models don't know it exists, being in the training data is upside. That one is a reversible client call. |
 
 ---
 
@@ -77,6 +96,18 @@ $105.59M volume / 92 sides (RealTrends Verified 2025) · #1 Del Mar by sides, #2
 team-azizi-website/
 ├── GAMEPLAN.md                    ← the plan (strategy, specs, build order)
 ├── HANDOFF.md                     ← this file
+├── vercel.json                    ← cleanUrls, 301 map, cache + security headers
+├── build/                         ← generators. Nothing here is deployed.
+│   ├── data/site.py    THE canonical strings — NAP, proof points, services,
+│   │                   sameAs, neighborhoods. Never retype these elsewhere.
+│   ├── schema.py       JSON-LD builders (dicts → json.dumps, never strings)
+│   ├── components.py   <head>, nav, footer, page shell
+│   ├── generate.py     writes site/
+│   ├── validate.py     PRE-PUSH GATE — run before every commit
+│   └── fetch_fonts.py  one-shot: self-hosts the webfonts
+├── site/                          ← the deployable site (output is committed)
+│   ├── assets/{css,js,fonts,img}
+│   └── *.html, sitemap.xml, robots.txt
 └── research/
     ├── site.md          Old-site URL inventory, content, SEO observations, preservation notes
     ├── design.md        Exact design tokens + section-by-section layouts + Wayback asset URLs
@@ -133,6 +164,18 @@ Full detail in GAMEPLAN §4. The parts most easily got wrong:
 ## 7. Open items
 
 **Client-dependent (asked; don't block Phase 1 build):**
+- [ ] **⚠️ Are the six communities the farm you have, or the farm you want?** 45 of 1,009 sales (4.5%). Median $650K, 77.5% under $1M. The actual book is Escondido (~96), South Bay, Oceanside, Fallbrook, Spring Valley. Both answers are legitimate; they produce different sites. [research/salesRecord.md](research/salesRecord.md) §1.
+- [ ] **⚠️ Verify "#1 in Del Mar by sides" before it goes back on the site.** Pulled from the homepage 2026-07-25. RealTrends ranks within an assigned business city; theirs is Del Mar; they have six Del Mar sales in the entire Compass record. Very likely an artifact of registration, not market share — and a reader will infer market share. §2.
+- [ ] **Rancho Santa Fe: keep or drop?** One lifetime sale, in the hardest SERP in the county. An expert page there fails the plan's own webspam-team test.
+- [ ] **Michael Angotta — staying, and San Diego-focused?** 136 of his 177 sales are Connecticut, and one of his Instagram accounts links to YB Realty rather than Compass.
+- [ ] **Confirm the four proposed farming assignments** (now evidence-based, not guesses): Del Sur + 4S Ranch → Zohra Azizi · Scripps Ranch → Sofia Azizi · Del Mar → Michael Angotta · Carmel Valley → contested three ways. Also: can they split Del Sur from 4S Ranch? ZIP 92127 covers both plus Rancho Bernardo and Santaluz. Full text in `agents.PROPOSED_ASSIGNMENTS`.
+- [ ] **Nicholas Miele's YouTube channel.** @lifeinsandiego — 12.4K subscribers, 205 videos, ~weekly, and the only real on-location neighborhood video in the estate (Carmel Valley ×2, RSF ×2, 4S/Del Sur, Del Mar, Santaluz). It is in the team's link-in-bio but owned personally. Licensing arrangement? It is the highest-reach asset they have and it is not theirs.
+- [ ] **@soniasellssd — 9,412 followers**, still live, bio "Founder of Team Azizi". Four and a half times the team account and the largest audience in the entity graph. Family decision, not an SEO one.
+- [ ] **The other three link-in-bio URLs on Instagram.** The visible one is `teamazizi.com/home-valuation` — dead, and taking live traffic from 2,055 followers. The other three are almost certainly dead teamazizi.com paths too. This makes `/home-valuation` launch-critical, not a Phase 3 rebuild.
+- [ ] **Replace "Top 1% in SD County" in the Instagram bio with the RealTrends line.** Resolved 2026-07-25: the client supplied the RealTrends listing, confirming **#58 of all California Large Teams by volume** ($105.59M / 92 sides / Del Mar). That does not substantiate "Top 1% in SD County" — different denominator, no published source — it makes it *unnecessary*. "#58 Large Team in California, RealTrends Verified" is the stronger claim because a reader can click it, and unlike "Top 1%" it is not the identical string their most direct competitor already uses. Site now leads with it; the bio should match so profile and site assert the same checkable thing.
+- [ ] Note the citation year: RealTrends publishes this under its **2026 program** reporting **2025 production**. Cite both or a reader who clicks through thinks the number is stale.
+- [ ] Headshots for the six agents without one — Masooma, Charisma, Tiffney, Javier, Malcolm, Mahan
+- [ ] Deanna Colby and Coby Herzog: departed? Their `/agent/` URLs are indexed and need a deliberate 301 either way
 - [ ] Confirm canonical name string
 - [ ] Current roster — old site showed 15, Compass shows 18 public (new: Masooma CFO, Tiffney, Javier, Malcolm, Mahan, Charisma; verify Deanna Colby / Coby Herzog status)
 - [ ] Sonia legacy decisions (memorialize vs. update her profiles) — with the family
@@ -145,10 +188,18 @@ Full detail in GAMEPLAN §4. The parts most easily got wrong:
 - [ ] Scope confirm: this is Local Hero tier ($3,999/mo — site build + neighborhoods)
 
 **Ours:**
-- [ ] `git init` + Vercel project at Phase 1 start
-- [x] Recover all Wayback assets — done 2026-07-24, all 34 identified assets in `assets/recovered/`
+- [x] `git init` — done; repo is live
+- [ ] Vercel project — set **Root Directory = `site`**; `vercel.json` at repo root already carries `cleanUrls`, the 301 map and cache/security headers
+- [ ] Make the repo private (no API for this — GitHub Settings → General → Danger Zone)
+- [ ] Optimise images before launch — `site/assets/img/` is 8.3 MB unoptimised; the hero poster alone is 396 KB and is the LCP element
+- [ ] Get the real **Compass brokerage logo** from Compass's brand kit (the recovered file is the TA monogram, mislabelled)
+- [ ] Replace the Carmel Valley and 4S Ranch neighborhood photos — the archived ones show the wrong places
+- [ ] Verify the office **geo coordinates** against the GBP pin once GBP exists (currently approximate; `validate.py` warns)
+- [x] Recover all Wayback assets — done 2026-07-24; **manifest corrected 2026-07-25**, see `assets/recovered/README.md`
 - [ ] Point DNS to Vercel at launch (Jon controls registrar)
 - [ ] Submit to GSC + Bing Webmaster immediately at launch; request re-indexing of preserved URLs
+- [ ] Run `python3 build/indexnow.py` at launch (full sitemap) and after every content deploy — will 422 until DNS points at Vercel and the key file is reachable
+- [ ] Ask the client for rights to their own listing photography — it is the fastest source of true localized neighborhood imagery and they already own 1,016 sales' worth
 - [ ] Lead form endpoint decision (Formspree — watch the ~50/mo free cap — vs. client CRM webhook)
 - [ ] Find owner of `greatersandiegohouses.com` staging site (broken `*.testintegration.com` SSL, indexed) → fix or noindex
 - [ ] Case-study log: screenshot the corrupted AI answers *now*, before they're fixed

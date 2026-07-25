@@ -1,0 +1,703 @@
+/* ============================================================
+   Team Azizi — Components.
+   Nav, drawer, footer, hero, cards, stat band, media sections.
+   ============================================================ */
+
+/* ---- Nav ---------------------------------------------------- */
+/* Transparent over a hero, solid white once scrolled past it.
+   Both logo variants are in the markup; CSS swaps them so there is
+   no flash and no JS dependency for first paint. */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: var(--z-nav);
+  height: var(--nav-h-mobile);
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--c-rule);
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+.nav__logo {
+  display: block;
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.nav__logo img {
+  width: auto;
+  height: clamp(1.75rem, 1.4rem + 1.5vw, 2.375rem);
+}
+
+.nav__logo-light { display: none; }
+
+.nav__links { display: none; }
+
+.nav__links ul {
+  display: flex;
+  gap: clamp(1rem, 0.2rem + 1.4vw, 1.875rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__links a {
+  position: relative;
+  font-size: var(--t-ui);
+  font-weight: 700;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.4em;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+
+.nav__links a:hover::after,
+.nav__links a:focus-visible::after,
+.nav__links a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav__phone {
+  display: none;
+  font-size: var(--t-ui);
+  font-weight: 700;
+  letter-spacing: var(--ls-ui);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav__toggle {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.nav__bars,
+.nav__bars::before,
+.nav__bars::after {
+  display: block;
+  width: 1.5rem;
+  height: 2px;
+  background: currentColor;
+}
+
+.nav__bars {
+  position: relative;
+}
+
+.nav__bars::before,
+.nav__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.nav__bars::before { top: -7px; }
+.nav__bars::after { top: 7px; }
+
+/* Over a full-bleed hero: transparent chrome, white marks. */
+.has-hero .nav:not(.is-scrolled) {
+  background: transparent;
+  border-color: transparent;
+  color: var(--c-on-dark);
+}
+
+.has-hero .nav:not(.is-scrolled) .nav__logo-light { display: block; }
+.has-hero .nav:not(.is-scrolled) .nav__logo-dark { display: none; }
+
+@media (min-width: 62rem) {
+  .nav { height: var(--nav-h); }
+  .nav__links { display: block; }
+  .nav__phone { display: block; }
+  .nav__toggle { display: none; }
+}
+
+/* ---- Drawer ------------------------------------------------- */
+
+.drawer[hidden] { display: none; }
+
+.drawer {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-drawer);
+  background: var(--o-backdrop);
+}
+
+.drawer__panel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(400px, 88vw);
+  padding: 2rem var(--gutter);
+  overflow-y: auto;
+  background: var(--c-bg);
+}
+
+.drawer__close {
+  margin-left: auto;
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  background: transparent;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.drawer__panel ul {
+  margin: 2rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.drawer__panel li + li {
+  border-top: 1px solid var(--c-rule);
+}
+
+.drawer__panel a {
+  font-palette: --ta-gold;
+  display: block;
+  padding: 0.875rem 0;
+  font-family: var(--f-display);
+  font-size: 1.3125rem;
+  letter-spacing: 0.03em;
+  color: var(--c-muted);
+  text-decoration: none;
+}
+
+.drawer__panel a:hover,
+.drawer__panel a[aria-current="page"] {
+  color: var(--c-ink);
+}
+
+.drawer__phone {
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: var(--ls-ui);
+  text-decoration: none;
+}
+
+/* ---- Hero --------------------------------------------------- */
+
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: min(100svh, 46rem);
+  padding: calc(var(--nav-h) + 3rem) var(--gutter) 4rem;
+  overflow: hidden;
+  color: var(--c-on-dark);
+  text-align: center;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--o-hero);
+  z-index: 1;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+}
+
+.hero h1 {
+  margin-bottom: 0.25em;
+}
+
+.hero__sub {
+  font-palette: --ta-gold;
+  margin: 0 auto 2.25rem;
+  font-family: var(--f-display);
+  font-size: var(--t-h4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---- Brokerage strip ---------------------------------------- */
+
+.brokerage {
+  display: grid;
+  place-items: center;
+  padding-block: 2.5rem;
+}
+
+.brokerage img {
+  width: 150px;
+  height: auto;
+}
+
+/* ---- Stat band ---------------------------------------------- */
+
+.stats {
+  display: grid;
+  gap: clamp(2rem, 1rem + 3vw, 3.5rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.stat__value {
+  font-palette: --ta-gold;
+  margin: 0 0 0.25rem;
+  font-family: var(--f-display);
+  font-size: var(--t-h2);
+  line-height: 1;
+}
+
+.stat__label {
+  margin: 0;
+  max-width: none;
+  font-size: var(--t-small);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-neutral);
+}
+
+.section--dark .stat__label { color: var(--c-rule-strong); }
+
+/* Every proof point is third-party verifiable; the source line says so
+   rather than asking the reader to take the number on trust. */
+.stats__source {
+  margin: 2.5rem auto 0;
+  font-size: var(--t-small);
+  text-align: center;
+  color: var(--c-neutral);
+}
+
+/* ---- Cards -------------------------------------------------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.card__media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 8 / 5;
+  background: var(--c-panel);
+}
+
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.card:hover .card__media img {
+  transform: scale(1.04);
+}
+
+.card__overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--o-media);
+  opacity: 0;
+  transition: opacity var(--dur) var(--ease);
+}
+
+.card:hover .card__overlay,
+.card:focus-visible .card__overlay {
+  opacity: 1;
+}
+
+.card__title {
+  margin: 1rem 0 0.25rem;
+  font-size: var(--t-small);
+  font-weight: 700;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+  font-family: var(--f-body);
+}
+
+.card__meta {
+  margin: 0;
+  font-size: var(--t-small);
+  color: var(--c-neutral);
+}
+
+/* Missing-asset placeholder. Deliberately obvious: a wrong-place stock
+   photo is worse than an honest blank, and this makes the gap visible in
+   review rather than shipping quietly. */
+.card__media--pending {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 8 / 5;
+  border: 1px dashed var(--c-silver);
+  background: var(--c-bg);
+  color: var(--c-neutral);
+}
+
+.card__media--pending::after {
+  content: "Photography pending";
+  font-size: var(--t-ui);
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+}
+
+/* ---- Split feature ------------------------------------------ */
+
+.split {
+  display: grid;
+  gap: clamp(2rem, 1rem + 4vw, 4rem);
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+}
+
+.split__body h2 { margin-top: 0; }
+
+/* ---- Footer ------------------------------------------------- */
+
+.footer {
+  padding-block: var(--section-y) 2.5rem;
+  border-top: 1px solid var(--c-rule);
+  color: var(--c-ink-soft);
+  font-size: var(--t-small);
+}
+
+.footer__grid {
+  display: grid;
+  gap: clamp(2rem, 1rem + 3vw, 3rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
+
+.footer__brand img {
+  width: auto;
+  height: 2.5rem;
+}
+
+.footer__tagline {
+  font-palette: --ta-gold;
+  margin: 1rem 0 0;
+  font-family: var(--f-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-neutral);
+}
+
+.footer__heading {
+  margin: 0 0 1rem;
+  font-family: var(--f-body);
+  font-size: var(--t-ui);
+  font-weight: 700;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+}
+
+.footer address {
+  font-style: normal;
+  line-height: 2;
+}
+
+.footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  line-height: 2;
+}
+
+.footer a {
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer__legal {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--c-rule);
+  color: var(--c-neutral);
+  font-size: 0.75rem;
+}
+
+.footer__legal p {
+  max-width: none;
+}
+
+.footer__licence {
+  font-weight: 700;
+  color: var(--c-ink-soft);
+}
+
+.footer__marks {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.footer__marks img {
+  height: 2rem;
+  width: auto;
+}
+
+.footer__marks img:last-child {
+  height: 1rem;
+}
+
+/* ---- Utilities ---------------------------------------------- */
+
+.lede {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  color: var(--c-ink);
+}
+
+.updated {
+  font-size: var(--t-small);
+  color: var(--c-neutral);
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.band .cta-row {
+  justify-content: center;
+}
+
+/* ---- Answer blocks ------------------------------------------ */
+/* Each block fully answers one AI Mode fan-out sub-query and carries a
+   stable fragment id, so it can be retrieved and cited as a passage rather
+   than as "somewhere on this page". The lead sentence is styled larger
+   because it is doing double duty: it is the extractable answer and it is
+   what a skimming human reads. See build/data/fanout.py. */
+
+.answer {
+  padding-block: 1.75rem;
+  border-top: 1px solid var(--c-rule);
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+.answer:first-of-type {
+  border-top: 0;
+}
+
+.answer__q {
+  margin-bottom: 0.5rem;
+  font-size: var(--t-h4);
+}
+
+.answer__lead {
+  font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  font-weight: 400;
+}
+
+.answer__lead strong {
+  font-weight: 700;
+}
+
+/* Source line — every number on this site traces to something. */
+.answer__source {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--c-neutral);
+}
+
+.answer__source a {
+  color: inherit;
+}
+
+/* ---- Expert block ------------------------------------------- */
+/* The named licensee who owns a neighborhood. Strongest E-E-A-T element on
+   the page: a real person, a licence anyone can look up, a direct line. */
+
+.expert {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  border: 1px solid var(--c-rule);
+  background: var(--c-bg);
+}
+
+.expert__photo {
+  width: 6.25rem;
+  height: 6.25rem;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.expert__photo--pending {
+  border: 1px dashed var(--c-silver);
+  background: var(--c-panel);
+}
+
+.expert__body { flex: 1 1 14rem; }
+
+.expert__role {
+  margin: 0 0 0.25rem;
+  font-size: var(--t-ui);
+  font-weight: 700;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+  color: var(--c-neutral);
+}
+
+.expert__name {
+  margin: 0 0 0.25rem;
+  font-family: var(--f-display);
+  font-palette: --ta-gold;
+  font-size: var(--t-h3);
+  line-height: 1.1;
+}
+
+.expert__meta {
+  margin: 0 0 1rem;
+  font-size: var(--t-small);
+  color: var(--c-neutral);
+}
+
+.expert__dre { font-variant-numeric: tabular-nums; }
+
+.expert .cta-row { margin-top: 0; }
+
+/* ---- Roster ------------------------------------------------- */
+
+.roster {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+}
+
+.roster__card { text-decoration: none; }
+
+.roster__photo {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--c-panel);
+}
+
+.roster__photo--pending {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--c-silver);
+}
+
+.roster__photo--pending::after {
+  content: "Photo pending";
+  font-size: 0.75rem;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+  color: var(--c-neutral);
+}
+
+.roster__name {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: var(--t-small);
+  font-weight: 700;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+}
+
+.roster__title {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--c-neutral);
+}
+
+.area-group + .area-group { margin-top: 3.5rem; }
+
+.area-group__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--c-gold);
+}
+
+.area-group__head h2 { margin: 0; }
+
+/* ---- Valuation form ----------------------------------------- */
+
+.valuation {
+  max-width: 40rem;
+  margin-top: 2.5rem;
+  padding: 2rem;
+  border: 1px solid var(--c-rule);
+}
+
+.valuation .grid { gap: 0 1.25rem; }
+
+/* ---- Video embed -------------------------------------------- */
+/* No competitor embeds neighborhood video on a neighborhood page. */
+
+.video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin-block: 1.5rem 0.75rem;
+  background: var(--c-ink);
+}
+
+.video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

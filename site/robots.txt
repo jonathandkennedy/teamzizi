@@ -1,0 +1,41 @@
+# Everything else.
+User-agent: *
+Allow: /
+
+# Bing — also the index ChatGPT retrieval leans on.
+User-agent: bingbot
+Allow: /
+
+# ChatGPT search retrieval. Required for citation.
+User-agent: OAI-SearchBot
+Allow: /
+
+# User-initiated fetch from a ChatGPT session.
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity retrieval. Required for citation.
+User-agent: PerplexityBot
+Allow: /
+
+# Claude search retrieval.
+User-agent: Claude-SearchBot
+Allow: /
+
+# Gemini / AI Overviews grounding.
+User-agent: Google-Extended
+Allow: /
+
+# OpenAI training. Allowed deliberately — see build/generate.py.
+User-agent: GPTBot
+Allow: /
+
+# Anthropic training. Same reasoning.
+User-agent: ClaudeBot
+Allow: /
+
+# Apple Intelligence training. Same reasoning.
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://teamazizi.com/sitemap.xml
