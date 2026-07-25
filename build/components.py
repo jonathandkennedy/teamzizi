@@ -208,15 +208,26 @@ def page(
     path: str,
     body: str,
     nodes: list[dict[str, Any]],
-    hero: bool = False,
+    hero: bool | str = False,
 ) -> str:
-    """`hero=True` tells the nav to start transparent over a full-bleed hero."""
+    """`hero=True` tells the nav to start transparent over a full-bleed hero.
+
+    `hero="light"` is the same full-bleed treatment over a *light* hero — the
+    fact plates on communities with no photograph. Without it the nav renders
+    white-on-cream and is effectively invisible, which is an accessibility
+    failure rather than a cosmetic one.
+    """
+    body_class = ""
+    if hero == "light":
+        body_class = ' class="has-hero has-hero--light"'
+    elif hero:
+        body_class = ' class="has-hero"'
     return f"""<!doctype html>
 <html lang="en-US">
 <head>
 {head(title=title, description=description, path=path, nodes=nodes)}
 </head>
-<body{' class="has-hero"' if hero else ""}>
+<body{body_class}>
 <a class="skip-link" href="#main">Skip to content</a>
 {nav(current=path)}
 <main id="main">

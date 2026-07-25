@@ -139,6 +139,17 @@
 .has-hero .nav:not(.is-scrolled) .nav__logo-light { display: block; }
 .has-hero .nav:not(.is-scrolled) .nav__logo-dark { display: none; }
 
+/* Over a LIGHT full-bleed hero (the fact plates) the chrome still floats, but
+   white marks on cream are invisible — so the ink treatment stays. */
+.has-hero--light .nav:not(.is-scrolled) { color: var(--c-ink); }
+.has-hero--light .nav:not(.is-scrolled) .nav__logo-light { display: none; }
+.has-hero--light .nav:not(.is-scrolled) .nav__logo-dark { display: block; }
+.has-hero--light .nav:not(.is-scrolled) .nav__bars,
+.has-hero--light .nav:not(.is-scrolled) .nav__bars::before,
+.has-hero--light .nav:not(.is-scrolled) .nav__bars::after {
+  background: var(--c-ink);
+}
+
 @media (min-width: 62rem) {
   .nav { height: var(--nav-h); }
   .nav__links { display: block; }
@@ -717,6 +728,40 @@
 .valuation__shot figcaption { margin-top: 0.75rem; }
 
 .valuation__pitch > * + * { margin-top: 1rem; }
+
+/* ---- Fact plate (hero for communities with no photograph) ---- */
+
+/* Three facts, each already sourced further down the page, so the hero
+   promises exactly what the page delivers. This carries more information
+   than a stock photograph would — which is the argument for it, not a
+   consolation for the missing image. */
+.plate {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 3rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--c-rule-strong);
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.plate__cell { display: grid; gap: 0.35rem; }
+
+.plate__value {
+  font-family: var(--f-display, inherit);
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  line-height: 1;
+  color: var(--c-gold);
+}
+
+.plate__label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-neutral);
+}
 
 /* ---- Video embed -------------------------------------------- */
 /* No competitor embeds neighborhood video on a neighborhood page. */

@@ -22,6 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 import components as c  # noqa: E402
 import schema  # noqa: E402
+import textures  # noqa: E402
 from data import agents, guides, site, taxes  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
@@ -504,17 +505,61 @@ def build_neighborhood(slug: str) -> None:
         for b in guides.for_hood(slug)
     ]
 
-    hero = (
-        f"""<img class="band__media" src="/assets/img/neighborhoods/{slug}.jpg"
-       alt="" width="1280" height="800" fetchpriority="high">"""
-        if slug not in HOOD_IMAGE_MISSING else ""
-    )
+    # Twelve communities have no photograph and are not getting a fabricated
+    # one (docs/photography-brief.md). Instead of an empty band they get a
+    # designed hero: the community's own facts set as type, over an abstract
+    # texture that depicts nothing. It carries more information than a stock
+    # photograph would, and it stops being needed the day a real photograph
+    # of that street exists — remove the slug from HOOD_IMAGE_MISSING.
+    if slug not in HOOD_IMAGE_MISSING:
+        hero_media = (
+            f'<img class="band__media" src="/assets/img/neighborhoods/{slug}.jpg"\n'
+            '       alt="" width="1280" height="800" fetchpriority="high">'
+        )
+        hero_facts = ""
+        hero_class = "band band--hero"
+    else:
+        texture = textures.ASSIGNMENT.get(slug, "grain")
+        hero_media = (
+            f'<img class="band__media" src="/assets/img/textures/{texture}.jpg"\n'
+            '       alt="" width="1600" height="1067" fetchpriority="high">'
+        )
+        hero_class = "band band--hero band--plate"
 
-    body = f"""<section class="band band--hero" style="padding-top:calc(var(--nav-h) + 4rem)">
-  {hero}
+        # Facts, not adjectives — and each is already sourced elsewhere on the
+        # page, so the hero promises exactly what the page delivers.
+        cfd = taxes.for_hood(slug) or {}
+        districts = len(cfd.get("districts", []))
+        if slug == "san-marcos":
+            tax_fact = ("91", "active CFDs &mdash; most in the county")
+        elif slug == "poway":
+            tax_fact = ("19", "Poway Unified CFDs")
+        elif cfd.get("has_cfd"):
+            tax_fact = (str(districts), "Mello-Roos district" + ("s" if districts != 1 else ""))
+        else:
+            tax_fact = ("None", "named in the county CFD list")
+
+        zips = h["zip"].split(",")
+        plate = [
+            (str(len(zips)), "ZIP code" + ("s" if len(zips) != 1 else "")),
+            tax_fact,
+        ]
+        if (sold := SOLD_RECORD.get(slug)):
+            plate.append((str(sold), "closed sales here"))
+
+        cells = "\n".join(
+            f'      <div class="plate__cell">'
+            f'<span class="plate__value">{v}</span>'
+            f'<span class="plate__label">{lab}</span></div>'
+            for v, lab in plate
+        )
+        hero_facts = f'\n    <div class="plate">\n{cells}\n    </div>'
+
+    body = f"""<section class="{hero_class}" style="padding-top:calc(var(--nav-h) + 4rem)">
+  {hero_media}
   <div class="container">
     <h1>{name} Real Estate Guide</h1>
-    <p style="margin-inline:auto">{h['zip']} &middot; {c.esc(h['district'])}</p>
+    <p style="margin-inline:auto">{h['zip']} &middot; {c.esc(h['district'])}</p>{hero_facts}
   </div>
 </section>
 
@@ -590,7 +635,7 @@ def build_neighborhood(slug: str) -> None:
             path=path,
             body=body,
             nodes=nodes,
-            hero=True,
+            hero="light" if slug in HOOD_IMAGE_MISSING else True,
         ),
         changefreq="monthly",
         priority="0.9",
