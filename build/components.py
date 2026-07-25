@@ -236,6 +236,59 @@ ANAPHORA = (
 )
 
 
+def expert_block(agent: dict[str, Any], hood: dict[str, Any], *, confirmed: bool) -> str:
+    """The named licensee who owns a neighborhood.
+
+    This is the single strongest E-E-A-T element on a neighborhood page: a real
+    person, a licence number anyone can look up on the DRE site, a direct line,
+    and a stated area. A company byline cannot do that work.
+
+    When the assignment is unconfirmed the page falls back to the team lead and
+    says so plainly rather than implying a specialism nobody has claimed.
+    """
+    photo = (
+        f'<img class="expert__photo" src="{agent["photo"]}" '
+        f'alt="{esc(agent["name"])}" width="200" height="200" loading="lazy">'
+        if agent.get("photo")
+        else '<div class="expert__photo expert__photo--pending"></div>'
+    )
+    dre = (
+        f'<span class="expert__dre">CA DRE# {agent["dre"]}</span>'
+        if agent.get("dre")
+        else ""
+    )
+    role = (
+        f"Your {esc(hood['name'])} specialist"
+        if confirmed
+        else f"Team lead &middot; covering {esc(hood['name'])}"
+    )
+    tel = "tel:+1" + agent["phone"].replace(".", "")
+    return f"""<aside class="expert">
+  {photo}
+  <div class="expert__body">
+    <p class="expert__role">{role}</p>
+    <p class="expert__name">{esc(agent['name'])}</p>
+    <p class="expert__meta">{esc(agent['title'])}<br>{dre}</p>
+    <div class="cta-row">
+      <a class="btn btn--dark btn--sm" href="{tel}">{esc(agent['phone'])}</a>
+      <a class="btn btn--dark btn--sm" href="/agent/{agent['slug']}">Profile</a>
+    </div>
+  </div>
+</aside>"""
+
+
+def byline(agent: dict[str, Any], updated: str) -> str:
+    """Visible author + updated date. The date must match `dateModified` in
+    the schema — a schema date contradicting the visible one is worse than
+    shipping no date."""
+    licence = f", CA DRE# {agent['dre']}" if agent.get("dre") else ""
+    return (
+        '<p class="updated">Written by '
+        f'<a href="/agent/{agent["slug"]}">{esc(agent["name"])}</a>'
+        f"{licence} &middot; Updated {updated}</p>"
+    )
+
+
 def answer_block(
     *,
     anchor: str,

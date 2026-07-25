@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 import components as c  # noqa: E402
 import schema  # noqa: E402
-from data import site  # noqa: E402
+from data import agents, site  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 TODAY = date.today().isoformat()
@@ -54,7 +54,10 @@ HOOD_IMAGE_MISSING = {"carmel-valley", "4s-ranch"}
 
 
 def hood_card(slug: str) -> str:
+    """A neighborhood card leads with the place and names the human who owns
+    it. "Del Sur — Nilab Azizi" is a different proposition from "Del Sur"."""
     h = hood(slug)
+    agent, confirmed = agents.for_neighborhood(slug)
     if slug in HOOD_IMAGE_MISSING:
         media = '<div class="card__media card__media--pending"></div>'
     else:
@@ -66,10 +69,15 @@ def hood_card(slug: str) -> str:
             "Explore</span></span>"
             "</div>"
         )
+    who = (
+        f"{c.esc(agent['name'])} &middot; {h['zip']}"
+        if confirmed
+        else f"{h['zip']} &middot; {c.esc(h['district'])}"
+    )
     return f"""      <a class="card" href="/neighborhoods/{slug}">
         {media}
         <span class="card__title">{c.esc(h['name'])}</span>
-        <span class="card__meta">{h['zip']} &middot; {c.esc(h['district'])}</span>
+        <span class="card__meta">{who}</span>
       </a>"""
 
 
@@ -285,6 +293,191 @@ def build_neighborhood_hub() -> None:
 
 
 # --------------------------------------------------------------------------
+# Team, grouped by the area each agent farms
+# --------------------------------------------------------------------------
+
+
+def roster_card(agent: dict) -> str:
+    photo = (
+        f'<img class="roster__photo" src="{agent["photo"]}" '
+        f'alt="{c.esc(agent["name"])}" width="400" height="400" loading="lazy">'
+        if agent.get("photo")
+        else '<div class="roster__photo roster__photo--pending"></div>'
+    )
+    return f"""      <a class="roster__card" href="/agent/{agent['slug']}">
+        {photo}
+        <span class="roster__name">{c.esc(agent['name'])}</span>
+        <span class="roster__title">{c.esc(agent['title'])}</span>
+      </a>"""
+
+
+def build_team() -> None:
+    """Roster organised by neighborhood, not as one undifferentiated grid.
+
+    A flat grid of nineteen faces answers "how big is this team". Grouping by
+    area answers "who do I call about Del Sur", which is the question a visitor
+    actually arrived with.
+    """
+    path = "/team"
+    groups = []
+
+    for slug in site.NAV_ORDER:
+        h = hood(slug)
+        members = [a for a in agents.ROSTER if a.get("farms") == slug]
+        if members:
+            cards = "\n".join(roster_card(a) for a in members)
+            body = f'<div class="roster">\n{cards}\n    </div>'
+        else:
+            body = (
+                '<p class="updated">Specialist assignment pending client '
+                f"confirmation. {c.esc(agents.team_lead()['name'])} covers "
+                f"{c.esc(h['name'])} enquiries in the meantime.</p>"
+            )
+        groups.append(f"""    <div class="area-group">
+      <div class="area-group__head">
+        <h2>{c.esc(h['name'])}</h2>
+        <a href="/neighborhoods/{slug}">{h['zip']} guide &rsaquo;</a>
+      </div>
+      {body}
+    </div>""")
+
+    unassigned = [a for a in agents.agents_only() if not a.get("farms")]
+    ops = [a for a in agents.ROSTER if a.get("operations")]
+    groups.append(f"""    <div class="area-group">
+      <div class="area-group__head"><h2>The full team</h2></div>
+      <div class="roster">
+{chr(10).join(roster_card(a) for a in unassigned)}
+      </div>
+    </div>""")
+    groups.append(f"""    <div class="area-group">
+      <div class="area-group__head"><h2>Operations</h2></div>
+      <div class="roster">
+{chr(10).join(roster_card(a) for a in ops)}
+      </div>
+    </div>""")
+
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Team
+    </nav>
+    <p class="eyebrow">Meet the team</p>
+    <h1>Who covers your neighborhood</h1>
+    <p class="lede">
+      Team Azizi is {len(agents.agents_only())} licensed agents and
+      {len(ops)} operations staff working the North San Diego corridor from the
+      Compass office in Carmel&nbsp;Valley. Every neighborhood guide on this
+      site is written and kept current by the agent who works there.
+    </p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+{chr(10).join(groups)}
+  </div>
+</section>"""
+
+    nodes = c.base_nodes() + [
+        schema.breadcrumbs(
+            [("Home", f"{site.DOMAIN}/"), ("Team", f"{site.DOMAIN}/team")]
+        )
+    ]
+    nodes += [schema.agent(a) for a in agents.ROSTER]
+
+    write(
+        path,
+        c.page(
+            title="Meet the Team — North San Diego Real Estate Agents | Team Azizi",
+            description=(
+                f"{len(agents.agents_only())} licensed Compass agents covering "
+                "Carmel Valley, Del Mar, Rancho Santa Fe, Del Sur, 4S Ranch and "
+                f"Scripps Ranch. Find the agent who works your neighborhood. "
+                f"Call {site.PHONE_DISPLAY}."
+            ),
+            path=path,
+            body=body,
+            nodes=nodes,
+        ),
+        priority="0.8",
+    )
+
+
+def build_agents() -> None:
+    """One page per agent, at the old /agent/{slug} paths, which are indexed."""
+    for agent in agents.ROSTER:
+        path = f"/agent/{agent['slug']}"
+        farmed = [h for h in site.NEIGHBORHOODS if h["slug"] == agent.get("farms")]
+        hood_obj = farmed[0] if farmed else None
+
+        photo = (
+            f'<img class="expert__photo" src="{agent["photo"]}" '
+            f'alt="{c.esc(agent["name"])}" width="320" height="320" '
+            'fetchpriority="high">'
+            if agent.get("photo")
+            else '<div class="expert__photo expert__photo--pending"></div>'
+        )
+        dre = f"CA DRE# {agent['dre']}" if agent.get("dre") else "Operations"
+        tel = "tel:+1" + agent["phone"].replace(".", "")
+        area = (
+            f"""<p class="lede">{c.esc(agent['name'])} works
+      <a href="/neighborhoods/{hood_obj['slug']}">{c.esc(hood_obj['name'])}</a>
+      ({hood_obj['zip']}) and writes the neighborhood guide for it.</p>"""
+            if hood_obj
+            else '<p class="updated">Neighborhood specialism pending client '
+            "confirmation.</p>"
+        )
+
+        body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; <a href="/team">Team</a> &rsaquo;
+      {c.esc(agent['name'])}
+    </nav>
+    <div class="split">
+      <div>{photo}</div>
+      <div>
+        <h1>{c.esc(agent['name'])}</h1>
+        <p class="eyebrow">{c.esc(agent['title'])} &middot; {dre}</p>
+        {area}
+        <div class="cta-row">
+          <a class="btn btn--dark" href="{tel}">{c.esc(agent['phone'])}</a>
+          <a class="btn btn--dark" href="/contact">Get in touch</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>"""
+
+        nodes = c.base_nodes() + [
+            schema.agent(agent, hood=hood_obj),
+            schema.breadcrumbs(
+                [
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Team", f"{site.DOMAIN}/team"),
+                    (agent["name"], f"{site.DOMAIN}{path}"),
+                ]
+            ),
+        ]
+
+        where = f" — {hood_obj['name']} Specialist" if hood_obj else ""
+        write(
+            path,
+            c.page(
+                title=f"{agent['name']}{where} | Team Azizi at Compass",
+                description=(
+                    f"{agent['name']}, {agent['title']}, Team Azizi at Compass "
+                    f"in San Diego. {dre}. Call {agent['phone']}."
+                ),
+                path=path,
+                body=body,
+                nodes=nodes,
+            ),
+            priority="0.5",
+        )
+
+
+# --------------------------------------------------------------------------
 # Sitemap + robots
 # --------------------------------------------------------------------------
 
@@ -361,6 +554,8 @@ def main() -> int:
     print("Generating site/\n")
     build_home()
     build_neighborhood_hub()
+    build_team()
+    build_agents()
     build_sitemap()
     build_robots()
     build_indexnow_key()

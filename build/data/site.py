@@ -77,11 +77,20 @@ PROOF = {
     "closed_rentals": "43",
     "active_range": "$369,000 – $5,875,000",
     "top_sold": "$6,100,000",
-    "source": "RealTrends Verified 2025 · Compass",
+    "sdbj": "Named among San Diego's Best Teams, San Diego Business Journal 2025",
+    "source": "RealTrends Verified 2025 · San Diego Business Journal · Compass",
     "source_url": (
         "https://www.realtrends.com/team-profile/team-azizi-california-compass/"
     ),
 }
+
+# Live entity conflict, found 2026-07-25 on @teamazizi_realestate.
+# Their Instagram bio claims "Top 1% in SD County" — an unverified figure this
+# build refuses to print (it is in STALE_STRINGS). The site and the profile
+# cannot say different things about the same business, so this resolves one of
+# two ways: the client substantiates the claim, or the bio changes at launch
+# alongside the site. Tracked in HANDOFF §7.
+BIO_CLAIM_CONFLICT = "Top 1% in SD County"
 
 # --------------------------------------------------------------------------
 # Services — mirrored exactly into schema hasOfferCatalog and, later, the

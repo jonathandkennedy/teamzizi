@@ -553,3 +553,122 @@
 .answer__source a {
   color: inherit;
 }
+
+/* ---- Expert block ------------------------------------------- */
+/* The named licensee who owns a neighborhood. Strongest E-E-A-T element on
+   the page: a real person, a licence anyone can look up, a direct line. */
+
+.expert {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  border: 1px solid var(--c-rule);
+  background: var(--c-bg);
+}
+
+.expert__photo {
+  width: 6.25rem;
+  height: 6.25rem;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.expert__photo--pending {
+  border: 1px dashed var(--c-silver);
+  background: var(--c-panel);
+}
+
+.expert__body { flex: 1 1 14rem; }
+
+.expert__role {
+  margin: 0 0 0.25rem;
+  font-size: var(--t-ui);
+  font-weight: 700;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+  color: var(--c-neutral);
+}
+
+.expert__name {
+  margin: 0 0 0.25rem;
+  font-family: var(--f-display);
+  font-palette: --ta-gold;
+  font-size: var(--t-h3);
+  line-height: 1.1;
+}
+
+.expert__meta {
+  margin: 0 0 1rem;
+  font-size: var(--t-small);
+  color: var(--c-neutral);
+}
+
+.expert__dre { font-variant-numeric: tabular-nums; }
+
+.expert .cta-row { margin-top: 0; }
+
+/* ---- Roster ------------------------------------------------- */
+
+.roster {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+}
+
+.roster__card { text-decoration: none; }
+
+.roster__photo {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--c-panel);
+}
+
+.roster__photo--pending {
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--c-silver);
+}
+
+.roster__photo--pending::after {
+  content: "Photo pending";
+  font-size: 0.75rem;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+  color: var(--c-neutral);
+}
+
+.roster__name {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: var(--t-small);
+  font-weight: 700;
+  letter-spacing: var(--ls-ui);
+  text-transform: uppercase;
+}
+
+.roster__title {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--c-neutral);
+}
+
+.area-group + .area-group { margin-top: 3.5rem; }
+
+.area-group__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--c-gold);
+}
+
+.area-group__head h2 { margin: 0; }

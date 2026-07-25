@@ -184,8 +184,17 @@ def neighborhood_service(hood: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def agent(person: dict[str, Any]) -> dict[str, Any]:
-    """Per-agent `Person` markup.
+def agent_id(slug: str) -> str:
+    return f"{site.DOMAIN}/agent/{slug}#person"
+
+
+def agent(person: dict[str, Any], *, hood: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Per-agent `Person` markup, tied to the neighborhood they farm.
+
+    `areaServed` on the Person is what turns a roster entry into a local
+    specialist as far as the graph is concerned: the licence number makes them
+    checkable, and the area makes them checkable *about somewhere*. That pair
+    is the authorship signal an assistant needs before it will name a person.
 
     Note for the client report: the local-schema skill does not prescribe
     Person markup for individual agents — this is a deliberate extension, and
@@ -193,7 +202,7 @@ def agent(person: dict[str, Any]) -> dict[str, Any]:
     """
     node: dict[str, Any] = {
         "@type": "Person",
-        "@id": f"{site.DOMAIN}/agent/{person['slug']}#person",
+        "@id": agent_id(person["slug"]),
         "name": person["name"],
         "url": f"{site.DOMAIN}/agent/{person['slug']}",
         "jobTitle": person["title"],
@@ -208,8 +217,49 @@ def agent(person: dict[str, Any]) -> dict[str, Any]:
         }
     if person.get("photo"):
         node["image"] = f"{site.DOMAIN}{person['photo']}"
-    if person.get("telephone"):
-        node["telephone"] = person["telephone"]
+    if person.get("phone"):
+        node["telephone"] = person["phone"]
+    if person.get("compass"):
+        node["sameAs"] = [f"https://www.compass.com/agents/{person['compass']}/"]
+    if hood:
+        area: dict[str, Any] = {
+            "@type": "Place",
+            "name": f"{hood['name']}, {site.CITY}, {site.REGION}",
+        }
+        if hood.get("wikipedia"):
+            area["sameAs"] = hood["wikipedia"]
+        node["areaServed"] = area
+        node["knowsAbout"] = f"{hood['name']} real estate"
+    return node
+
+
+def web_page(
+    *,
+    url: str,
+    name: str,
+    author_slug: str,
+    updated: str,
+    about: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """`WebPage` carrying explicit authorship and a visible-matching date.
+
+    Author bylines and dated content are named citation-credibility signals
+    (research/contentPlaybook.md §8). `dateModified` must match the updated
+    date rendered on the page — a schema date that disagrees with the visible
+    one is worse than no date at all.
+    """
+    node: dict[str, Any] = {
+        "@type": "WebPage",
+        "@id": f"{url}#webpage",
+        "url": url,
+        "name": name,
+        "isPartOf": {"@id": WEBSITE_ID},
+        "author": {"@id": agent_id(author_slug)},
+        "publisher": {"@id": ORG_ID},
+        "dateModified": updated,
+    }
+    if about:
+        node["about"] = about
     return node
 
 
