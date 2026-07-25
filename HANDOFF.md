@@ -22,7 +22,7 @@ Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2
 | **Strategy** | ✅ Complete — `GAMEPLAN.md` |
 | **Client brief** | ✅ Filed — `retainer-reach/briefs/team-azizi/` |
 | **AI baseline** | ✅ Captured (absent from 14/14 queries) — `research/aiBaseline.md` |
-| **Code / site** | 🔨 Phase 1 in progress — design system, chrome, schema pipeline, homepage + `/neighborhoods` hub shipped |
+| **Code / site** | 🔨 Phase 1 — 30 pages built (home, hub, **6 neighborhood guides**, `/home-valuation`, `/team`, 19 agent pages). Neighborhood guides are ~380 words against an 800–1,500 target: the tax and schools blocks are real and sourced, the rest awaits data. |
 | **Repo** | ✅ [jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — **being made private** (2026-07-25) |
 | **Brand assets** | ⚠️ Recovered, but the manifest was wrong in several places — see the corrections table in `assets/recovered/README.md` |
 | **GBP** | ❌ Does not exist — Phase 2 |

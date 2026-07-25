@@ -683,3 +683,21 @@
 }
 
 .valuation .grid { gap: 0 1.25rem; }
+
+/* ---- Video embed -------------------------------------------- */
+/* No competitor embeds neighborhood video on a neighborhood page. */
+
+.video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin-block: 1.5rem 0.75rem;
+  background: var(--c-ink);
+}
+
+.video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

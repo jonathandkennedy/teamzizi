@@ -20,7 +20,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 import components as c  # noqa: E402
 import schema  # noqa: E402
-from data import agents, site  # noqa: E402
+from data import agents, site, taxes  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 TODAY = date.today().isoformat()
@@ -299,6 +299,238 @@ def build_neighborhood_hub() -> None:
         changefreq="weekly",
         priority="0.9",
     )
+
+
+# --------------------------------------------------------------------------
+# The six neighborhood pages — the product
+# --------------------------------------------------------------------------
+
+# Team sales per community across the whole 1,009-record Compass history
+# (research/salesRecord.md §1). Published honestly: a page claiming expertise
+# it cannot evidence is the exact doorway pattern the plan exists to avoid.
+SOLD_RECORD = {
+    "del-sur": 18, "4s-ranch": 18,   # 92127 — not separable by ZIP
+    "carmel-valley": 11, "scripps-ranch": 9, "del-mar": 6, "rancho-santa-fe": 1,
+}
+
+
+def tax_block(h: dict) -> str:
+    """The Mello-Roos answer — the single most-asked question in 92127 and,
+    per the competitor teardown, not addressed on one competitor page."""
+    t = taxes.for_hood(h["slug"])
+    if not t:
+        return ""
+    name = c.esc(h["name"])
+
+    if t["has_cfd"]:
+        rows = "".join(
+            f"<li><strong>{c.esc(d[0])}</strong> &mdash; district {d[1]}, "
+            f"administered by {c.esc(d[2])}, {d[3]}</li>"
+            for d in t["districts"]
+        )
+        lead = (
+            f"{name} does carry Mello-Roos. The County Auditor's active "
+            f"FY&nbsp;2025-26 list shows {len(t['districts'])} community "
+            f"facilities district{'s' if len(t['districts']) > 1 else ''} "
+            f"covering {name}, and a home there can sit inside more than one."
+        )
+        body = f"<ul>{rows}</ul><p>{c.esc(t['note'])}</p>"
+    else:
+        lead = (
+            f"No community facilities district in the County Auditor's active "
+            f"FY&nbsp;2025-26 list is named for {name}. That is the documented "
+            f"basis for saying {name} homes generally do not carry Mello-Roos "
+            f"&mdash; though it describes district names, not a guarantee for "
+            f"any particular parcel."
+        )
+        body = f"<p>{c.esc(t['note'])}</p>"
+
+    body += (
+        f'<p class="answer__source">{c.esc(taxes.VERIFY_NOTE)}</p>'
+        f'<p class="answer__source">Source: <a href="{taxes.SOURCE_URL}" '
+        f'rel="nofollow noopener" target="_blank">{c.esc(taxes.SOURCE_NAME)}</a>, '
+        f"retrieved {taxes.RETRIEVED}.</p>"
+    )
+    return c.answer_block(
+        anchor="mello-roos",
+        question=f"Does {h['name']} have Mello-Roos, and how much?",
+        lead=lead,
+        body=body,
+    )
+
+
+def build_neighborhood(slug: str) -> None:
+    h = hood(slug)
+    agent, confirmed = agents.for_neighborhood(slug)
+    name = c.esc(h["name"])
+    path = f"/neighborhoods/{slug}"
+    sold = SOLD_RECORD.get(slug, 0)
+
+    video_html = ""
+    if h.get("video"):
+        v = h["video"]
+        video_html = f"""<section class="section section--tight">
+  <div class="container container--narrow">
+    <h2 class="rule-gold">A tour of {name}</h2>
+    <div class="video">
+      <iframe src="https://www.youtube.com/embed/{v['id']}"
+              title="{c.esc(v['title'])}" loading="lazy"
+              allow="accelerometer; encrypted-media; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+    <p class="answer__source">
+      &ldquo;{c.esc(v['title'])}&rdquo; &mdash; produced for Team Azizi,
+      published on <a href="{site.VIDEO_CHANNEL}" rel="nofollow noopener"
+      target="_blank">{c.esc(site.VIDEO_CHANNEL_NAME)}</a>.
+    </p>
+  </div>
+</section>"""
+
+    # Track record, stated plainly. One sale is one sale.
+    if sold >= 9:
+        record = (
+            f"Team Azizi has closed {sold} sales in {name} across the team's "
+            f"Compass history."
+        )
+    elif sold > 1:
+        record = (
+            f"Team Azizi has closed {sold} sales in {name}. That is a modest "
+            f"number and stating it plainly is the point &mdash; the guide "
+            f"below is built on public records and first-hand local knowledge, "
+            f"not on volume we do not have."
+        )
+    else:
+        record = (
+            f"Team Azizi has closed one sale in {name}. This guide is built on "
+            f"public records and on-the-ground familiarity rather than a deep "
+            f"transaction record here, and saying so is more useful to you "
+            f"than implying otherwise."
+        )
+
+    blocks = "\n\n".join(filter(None, [
+        tax_block(h),
+        c.answer_block(
+            anchor="schools",
+            question=f"What school district serves {h['name']}?",
+            lead=(
+                f"{h['name']} is served by {c.esc(h['district'])}. "
+                "Attendance is assigned by address rather than by ZIP code, so "
+                "two homes a few streets apart can feed different schools "
+                "&mdash; confirm the specific address with the district before "
+                "relying on it."
+            ),
+        ),
+        c.answer_block(
+            anchor="track-record",
+            question=f"Has Team Azizi actually sold in {h['name']}?",
+            lead=record,
+        ),
+    ]))
+
+    faq = [
+        {"q": f"Does {h['name']} have Mello-Roos?",
+         "a": (taxes.for_hood(slug) or {}).get("note", "")},
+        {"q": f"What school district serves {h['name']}?",
+         "a": f"{h['name']} is served by {h['district']}. Attendance is "
+              "assigned by address, not by ZIP code."},
+    ]
+
+    hero = (
+        f"""<img class="band__media" src="/assets/img/neighborhoods/{slug}.jpg"
+       alt="" width="1280" height="800" fetchpriority="high">"""
+        if slug not in HOOD_IMAGE_MISSING else ""
+    )
+
+    body = f"""<section class="band band--hero" style="padding-top:calc(var(--nav-h) + 4rem)">
+  {hero}
+  <div class="container">
+    <h1>{name} Real Estate Guide</h1>
+    <p style="margin-inline:auto">{h['zip']} &middot; {c.esc(h['district'])}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; <a href="/neighborhoods">Neighborhoods</a>
+      &rsaquo; {name}
+    </nav>
+    {c.byline(agent, TODAY)}
+    <p class="lede">
+      What follows is the part of a {name} search that is hard to look up:
+      which tax districts apply, which district assigns the schools, and what
+      we have actually done here. Every figure names its source.
+    </p>
+
+{blocks}
+  </div>
+</section>
+
+{video_html}
+
+<section class="section">
+  <div class="container container--narrow">
+    {c.expert_block(agent, h, confirmed=confirmed)}
+  </div>
+</section>
+
+<section class="band band--heavy">
+  <img class="band__media" src="/assets/img/backgrounds/work-with-us.jpg" alt=""
+       width="1920" height="1200" loading="lazy">
+  <div class="container">
+    <h2 class="rule-center">Thinking about {name}?</h2>
+    <div class="cta-row">
+      <a class="btn btn--light" href="/home-valuation">What's my home worth?</a>
+      <a class="btn btn--light" href="{site.PHONE_HREF}">{site.PHONE_DISPLAY}</a>
+    </div>
+  </div>
+</section>"""
+
+    nodes = c.base_nodes() + [
+        schema.neighborhood_service(h),
+        schema.web_page(
+            url=f"{site.DOMAIN}{path}",
+            name=f"{h['name']} Real Estate Guide",
+            author_slug=agent["slug"],
+            updated=TODAY,
+        ),
+        schema.agent(agent, hood=h if confirmed else None),
+        schema.faq_page(faq),
+        schema.breadcrumbs([
+            ("Home", f"{site.DOMAIN}/"),
+            ("Neighborhoods", f"{site.DOMAIN}/neighborhoods"),
+            (h["name"], f"{site.DOMAIN}{path}"),
+        ]),
+    ]
+    if (v := schema.video(h)):
+        nodes.append(v)
+
+    write(
+        path,
+        c.page(
+            title=(
+                f"{h['name']} Real Estate Guide — Mello-Roos, Schools & "
+                f"Market | Team Azizi"
+            ),
+            description=(
+                f"A sourced guide to {h['name']} ({h['zip']}): which "
+                "Mello-Roos districts apply, which district assigns the "
+                f"schools, and Team Azizi's record there. Call "
+                f"{site.PHONE_DISPLAY}."
+            ),
+            path=path,
+            body=body,
+            nodes=nodes,
+            hero=True,
+        ),
+        changefreq="monthly",
+        priority="0.9",
+    )
+
+
+def build_neighborhoods() -> None:
+    for slug in site.NAV_ORDER:
+        build_neighborhood(slug)
 
 
 # --------------------------------------------------------------------------
@@ -876,6 +1108,7 @@ def main() -> int:
     print("Generating site/\n")
     build_home()
     build_neighborhood_hub()
+    build_neighborhoods()
     build_home_valuation()
     build_thank_you()
     build_team()
