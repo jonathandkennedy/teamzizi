@@ -317,6 +317,53 @@ def check_internal_links(pages: list[Path]) -> None:
         )
 
 
+def check_testimonials() -> None:
+    """Testimonials must be attributable, and must never be marked up.
+
+    Two failure modes this guards against. First, an entry with no source
+    URL is unverifiable, which on a site whose entire pitch is "check us"
+    is worse than no testimonial. Second, someone later adding Review or
+    aggregateRating schema to them — Google prohibits aggregating reviews
+    from other sites, and a business marking up reviews of itself is
+    ineligible for the star feature regardless, so the markup would be a
+    policy violation bought for nothing.
+    """
+    from data import agents, testimonials  # noqa: PLC0415
+
+    roster = {a["slug"] for a in agents.ROSTER}
+    areas = {a["slug"] for a in site.ALL_AREAS}
+
+    for i, entry in enumerate(testimonials.ENTRIES):
+        label = entry.get("name") or f"entry {i}"
+        for field in ("quote", "name", "source_url"):
+            if not entry.get(field):
+                errors.append(
+                    f"testimonial {label!r} has no {field} — an unattributable "
+                    "testimonial cannot ship on this site."
+                )
+        if entry.get("agent") and entry["agent"] not in roster:
+            errors.append(
+                f"testimonial {label!r} names agent {entry['agent']!r}, who is "
+                "not on the roster."
+            )
+        if entry.get("hood") and entry["hood"] not in areas:
+            errors.append(
+                f"testimonial {label!r} names area {entry['hood']!r}, which is "
+                "not a community we cover."
+            )
+
+    page = SITE / "testimonials.html"
+    if page.exists():
+        html = page.read_text(encoding="utf-8")
+        if '"Review"' in html or "aggregateRating" in html:
+            errors.append(
+                "testimonials.html carries Review or aggregateRating schema. "
+                "Google prohibits aggregating reviews from other sites and "
+                "makes self-controlled reviews ineligible for the star "
+                "feature — remove it."
+            )
+
+
 def check_footer_licensees() -> None:
     """The DRE line in the footer is a legal display, not decoration.
 
@@ -358,6 +405,7 @@ def main() -> int:
     check_internal_links(pages)
     check_sitemap()
     check_unverified()
+    check_testimonials()
     check_footer_licensees()
 
     for warning in warnings:

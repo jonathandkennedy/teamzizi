@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import components as c  # noqa: E402
 import schema  # noqa: E402
 import textures  # noqa: E402
-from data import agents, guides, site, taxes  # noqa: E402
+from data import agents, guides, site, taxes, testimonials  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 TODAY = date.today().isoformat()
@@ -1897,6 +1897,105 @@ def build_mello_roos() -> None:
     )
 
 
+def build_testimonials() -> None:
+    """Only generated when there are real testimonials to show.
+
+    An empty testimonials page is worse than no testimonials page — it
+    advertises that nobody said anything. So if `testimonials.ENTRIES` is
+    empty this writes nothing, and the nav and footer entries stay absent
+    because validate.py's link audit would fail the build otherwise.
+
+    Note what is deliberately NOT here: no `Review` nodes, no
+    `aggregateRating`. Google prohibits aggregating reviews from other sites
+    and makes self-controlled reviews ineligible for the star feature
+    regardless. See build/data/testimonials.py for the citation.
+    """
+    if not testimonials.ENTRIES:
+        print("  (no testimonials yet — /testimonials not generated)")
+        return
+
+    lead = agents.team_lead()
+    cards = []
+    for t in testimonials.ENTRIES:
+        who = agents.by_slug(t["agent"]) if t.get("agent") else None
+        attrib = [c.esc(t["name"])]
+        if t.get("hood"):
+            attrib.append(c.esc(hood(t["hood"])["name"]))
+        if t.get("date"):
+            attrib.append(c.esc(t["date"]))
+        src = (
+            f' &middot; <a href="{t["source_url"]}" rel="nofollow noopener" '
+            f'target="_blank">{c.esc(t.get("source", "source"))}</a>'
+            if t.get("source_url") else ""
+        )
+        agent_line = (
+            f'<p class="updated">Worked with '
+            f'<a href="/agent/{who["slug"]}">{c.esc(who["name"])}</a></p>'
+            if who else ""
+        )
+        cards.append(f"""      <figure class="quote">
+        <blockquote><p>{c.esc(t["quote"])}</p></blockquote>
+        <figcaption>{" &middot; ".join(attrib)}{src}</figcaption>
+        {agent_line}
+      </figure>""")
+
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Testimonials
+    </nav>
+    <p class="eyebrow">Testimonials</p>
+    <h1>What clients have said</h1>
+    <p class="lede">
+      Every one of these was written by a client on a third-party profile,
+      and every one links back to it. Nothing here was written by us, and
+      nothing has been edited for tone.
+    </p>
+
+    <div class="quotes">
+{chr(10).join(cards)}
+    </div>
+
+    <p class="answer__source" style="margin-top:2.5rem">
+      These are reproduced from the agents&rsquo; own third-party profiles
+      with a link to each source. They deliberately carry no review
+      structured data: Google prohibits aggregating reviews from other sites,
+      and makes a business marking up reviews of itself ineligible for the
+      star feature regardless. Verify them at the source rather than taking
+      our word for it.
+    </p>
+    <p class="updated">Last updated {TODAY}</p>
+  </div>
+</section>"""
+
+    write(
+        "/testimonials",
+        c.page(
+            title="Client Testimonials | Team Azizi",
+            description=(
+                "What Team Azizi clients have said, reproduced from "
+                "third-party agent profiles with a link to each source."
+            ),
+            path="/testimonials",
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.web_page(
+                    url=f"{site.DOMAIN}/testimonials",
+                    name="Client Testimonials",
+                    author_slug=lead["slug"],
+                    updated=TODAY,
+                ),
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Testimonials", f"{site.DOMAIN}/testimonials"),
+                ]),
+            ],
+        ),
+        changefreq="monthly",
+        priority="0.7",
+    )
+
+
 def build_contact() -> None:
     """/contact was in the primary nav on all 43 pages, linking at nothing."""
     path = "/contact"
@@ -2312,6 +2411,7 @@ def main() -> int:
     build_sell()
     build_buy()
     build_concierge()
+    build_testimonials()
     build_contact()
     build_thank_you()
     build_404()
