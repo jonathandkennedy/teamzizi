@@ -178,6 +178,26 @@ def picture(
     )
 
 
+def action_bar() -> str:
+    """Persistent call / valuation bar, mobile only.
+
+    The nav phone number is `display: none` below 62rem — so on a phone,
+    which is where most of this traffic arrives, there was no persistent way
+    to reach anyone. The tel: links existed but were buried mid-page and in
+    the footer.
+
+    Two actions, no more. Calling is the high-intent one and goes first;
+    the valuation flow is the low-commitment one for someone not ready to
+    talk. Everything else is a link in the page.
+    """
+    return f"""<div class="actionbar" role="group" aria-label="Contact Team Azizi">
+  <a class="actionbar__btn actionbar__btn--call" href="{site.PHONE_HREF}">
+    <span aria-hidden="true">&#9742;</span> Call {site.PHONE_DISPLAY}
+  </a>
+  <a class="actionbar__btn" href="/home-valuation">Home value</a>
+</div>"""
+
+
 def footer() -> str:
     """Footer NAP must match the (future) GBP exactly — schema, footer and
     GBP are one entity or they are three. Licence numbers and the Compass
@@ -291,6 +311,7 @@ def page(
 {body}
 </main>
 {footer()}
+{action_bar()}
 <script src="/assets/js/site.js" defer></script>
 </body>
 </html>

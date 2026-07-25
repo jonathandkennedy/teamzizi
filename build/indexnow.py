@@ -1,7 +1,8 @@
 """IndexNow submission.
 
-    python3 build/indexnow.py            # submit every URL in sitemap.xml
-    python3 build/indexnow.py /sell /buy # submit specific paths
+    python3 build/indexnow.py --check     # is the domain ready? submits nothing
+    python3 build/indexnow.py             # submit every URL in sitemap.xml
+    python3 build/indexnow.py /sell /buy  # submit specific paths
 
 Why this is worth doing here specifically: ChatGPT's retrieval leans on Bing's
 index, and IndexNow is how you tell Bing a URL changed without waiting to be
@@ -53,10 +54,70 @@ def sitemap_urls() -> list[str]:
     ]
 
 
-def submit(urls: list[str]) -> int:
+def preflight() -> list[str]:
+    """Check the domain is actually serving before submitting anything.
+
+    Returns a list of problems; empty means good to go.
+
+    This exists because as of 2026-07-25 `teamazizi.com` had no A record at
+    all — the Luxury Presence site was dead and DNS still pointed nowhere.
+    Firing IndexNow at a domain that does not resolve earns a 422 every time,
+    and repeated failures against the same host are exactly how you get
+    rate-limited by the endpoint you most need on launch day.
+
+    So: verify the site answers, verify the key file is served with the exact
+    key as its body, verify the sitemap is fetchable. Then submit.
+    """
+    problems: list[str] = []
+
+    def get(url: str) -> tuple[int, str]:
+        try:
+            with urllib.request.urlopen(url, timeout=20) as response:
+                return response.status, response.read(200).decode("utf-8", "replace")
+        except urllib.error.HTTPError as exc:
+            return exc.code, ""
+        except Exception as exc:  # DNS failure, TLS failure, timeout
+            return 0, str(exc)
+
+    status, body = get(f"{site.DOMAIN}/")
+    if status != 200:
+        problems.append(
+            f"{site.DOMAIN}/ returned {status or 'no response'} — the domain "
+            "is not serving. Point DNS at Vercel and add the domain to the "
+            "project first; nothing below can work until it does."
+        )
+        return problems  # everything else will fail for the same reason
+
+    status, body = get(f"{site.DOMAIN}/{KEY}.txt")
+    if status != 200:
+        problems.append(f"key file {site.DOMAIN}/{KEY}.txt returned {status}")
+    elif body.strip() != KEY:
+        problems.append(
+            f"key file body is {body.strip()!r}, expected {KEY!r} — IndexNow "
+            "verifies domain control by matching these exactly."
+        )
+
+    status, _ = get(f"{site.DOMAIN}/sitemap.xml")
+    if status != 200:
+        problems.append(f"{site.DOMAIN}/sitemap.xml returned {status}")
+
+    return problems
+
+
+def submit(urls: list[str], *, force: bool = False) -> int:
     if not urls:
         print("nothing to submit")
         return 0
+
+    print(f"Preflight against {site.DOMAIN} …")
+    problems = preflight()
+    for problem in problems:
+        print(f"  BLOCK  {problem}")
+    if problems and not force:
+        print("\nNot submitting. Fix the above, or pass --force to try anyway.")
+        return 1
+    if not problems:
+        print("  ok — domain serving, key file matches, sitemap reachable\n")
 
     payload = json.dumps(
         {
@@ -90,11 +151,26 @@ def submit(urls: list[str]) -> int:
 
 
 def main(argv: list[str]) -> int:
-    if argv:
-        urls = [f"{site.DOMAIN}{path if path.startswith('/') else '/' + path}" for path in argv]
+    force = "--force" in argv
+    check_only = "--check" in argv
+    paths = [a for a in argv if not a.startswith("--")]
+
+    if check_only:
+        print(f"Preflight against {site.DOMAIN} …")
+        problems = preflight()
+        for problem in problems:
+            print(f"  BLOCK  {problem}")
+        if not problems:
+            print("  ok — ready to submit")
+        return 1 if problems else 0
+
+    if paths:
+        urls = [
+            f"{site.DOMAIN}{p if p.startswith('/') else '/' + p}" for p in paths
+        ]
     else:
         urls = sitemap_urls()
-    return submit(urls)
+    return submit(urls, force=force)
 
 
 if __name__ == "__main__":
