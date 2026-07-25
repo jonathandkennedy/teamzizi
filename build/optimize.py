@@ -72,12 +72,34 @@ def role(path: Path) -> str:
     return path.relative_to(IMG).parts[0]
 
 
+def already_done(path: Path, cap: int) -> bool:
+    """True when this file has already been through the optimiser.
+
+    Without this the script re-encoded every JPEG on every run: a lossy
+    generation each time, and — the practical harm — forty binary files
+    showing as modified in git on every build, for no change anyone asked
+    for. A file counts as done when it is a JPEG already within the cap with
+    a matching .webp beside it.
+    """
+    if path.suffix.lower() != ".jpg":
+        return False  # PNG sources still need converting
+    if not path.with_suffix(".webp").exists():
+        return False
+    try:
+        with Image.open(path) as img:
+            return max(img.size) <= cap
+    except Exception:
+        return False
+
+
 def optimize(path: Path, *, dry_run: bool) -> tuple[int, int, int]:
     """Returns (bytes_before, bytes_after_jpeg, bytes_webp)."""
     before = path.stat().st_size
     cap = CAPS.get(role(path))
     if cap is None:
         return before, before, 0
+    if already_done(path, cap) and not FORCE:
+        return before, before, path.with_suffix(".webp").stat().st_size
 
     img = Image.open(path)
     # Flatten any alpha onto white — a photograph does not need it, and
@@ -122,6 +144,9 @@ def optimize(path: Path, *, dry_run: bool) -> tuple[int, int, int]:
         path.unlink()
 
     return before, jpeg_path.stat().st_size, webp_path.stat().st_size
+
+
+FORCE = "--force" in sys.argv
 
 
 def main() -> int:
