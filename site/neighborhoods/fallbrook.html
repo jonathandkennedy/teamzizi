@@ -229,7 +229,7 @@
         "propertyID": "CA DRE License",
         "value": "02047962"
       },
-      "image": "https://teamazizi.com/assets/img/team/headshot-nilab-azizi.png",
+      "image": "https://teamazizi.com/assets/img/team/headshot-nilab-azizi.jpg",
       "telephone": "858.847.8067",
       "sameAs": [
         "https://www.compass.com/agents/nilab-azizi/"
@@ -315,7 +315,7 @@
 }
 </script>
 </head>
-<body class="has-hero">
+<body class="has-hero has-hero--light">
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="nav" id="nav" data-nav>
   <div class="nav__inner container container--wide">
@@ -330,9 +330,7 @@
       <ul>
       <li><a href="/neighborhoods">Neighborhoods</a></li>
       <li><a href="/properties/sale">Properties</a></li>
-      <li><a href="/sell">Sell</a></li>
-      <li><a href="/buy">Buy</a></li>
-      <li><a href="/concierge">Concierge</a></li>
+      <li><a href="/home-valuation">What&#x27;s My Home Worth?</a></li>
       <li><a href="/team">Team</a></li>
       <li><a href="/contact">Contact</a></li>
       </ul>
@@ -359,9 +357,7 @@
       <ul>
       <li><a href="/neighborhoods">Neighborhoods</a></li>
       <li><a href="/properties/sale">Properties</a></li>
-      <li><a href="/sell">Sell</a></li>
-      <li><a href="/buy">Buy</a></li>
-      <li><a href="/concierge">Concierge</a></li>
+      <li><a href="/home-valuation">What&#x27;s My Home Worth?</a></li>
       <li><a href="/team">Team</a></li>
       <li><a href="/contact">Contact</a></li>
       </ul>
@@ -370,11 +366,15 @@
   </div>
 </div>
 <main id="main">
-<section class="band band--hero" style="padding-top:calc(var(--nav-h) + 4rem)">
-  
+<section class="band band--hero band--plate" style="padding-top:calc(var(--nav-h) + 4rem)">
+  <picture><source srcset="/assets/img/textures/contour.webp" type="image/webp"><img class="band__media" src="/assets/img/textures/contour.jpg" alt="" width="1600" height="1067" fetchpriority="high" decoding="async"></picture>
   <div class="container">
     <h1>Fallbrook Real Estate Guide</h1>
     <p style="margin-inline:auto">92028 &middot; Fallbrook Union Elementary and Fallbrook Union High School District</p>
+    <div class="plate">
+      <div class="plate__cell"><span class="plate__value">1</span><span class="plate__label">ZIP code</span></div>
+      <div class="plate__cell"><span class="plate__value">None</span><span class="plate__label">named in the county CFD list</span></div>
+    </div>
   </div>
 </section>
 
@@ -433,7 +433,7 @@
 <section class="section">
   <div class="container container--narrow">
     <aside class="expert">
-  <img class="expert__photo" src="/assets/img/team/headshot-nilab-azizi.png" alt="Nilab Azizi" width="200" height="200" loading="lazy">
+  <picture><source srcset="/assets/img/team/headshot-nilab-azizi.webp" type="image/webp"><img class="expert__photo" src="/assets/img/team/headshot-nilab-azizi.jpg" alt="Nilab Azizi" width="200" height="200" loading="lazy" decoding="async"></picture>
   <div class="expert__body">
     <p class="expert__role">Team lead &middot; covering Fallbrook</p>
     <p class="expert__name">Nilab Azizi</p>
@@ -448,8 +448,7 @@
 </section>
 
 <section class="band band--heavy">
-  <img class="band__media" src="/assets/img/backgrounds/work-with-us.jpg" alt=""
-       width="1920" height="1200" loading="lazy">
+  <picture><source srcset="/assets/img/backgrounds/work-with-us.webp" type="image/webp"><img class="band__media" src="/assets/img/backgrounds/work-with-us.jpg" alt="" width="1920" height="1200" loading="lazy" decoding="async"></picture>
   <div class="container">
     <h2 class="rule-center">Thinking about Fallbrook?</h2>
     <div class="cta-row">
@@ -492,12 +491,11 @@
     <div class="footer__nav">
       <h2 class="footer__heading">Explore</h2>
       <ul>
-        <li><a href="/sell">Sell Your Home</a></li>
-        <li><a href="/buy">Buy a Home</a></li>
-        <li><a href="/concierge">Compass Concierge</a></li>
+        <li><a href="/neighborhoods">Neighborhood Guides</a></li>
+        <li><a href="/home-valuation">What&#x27;s My Home Worth?</a></li>
+        <li><a href="/properties/sale">Homes for Sale</a></li>
+        <li><a href="/properties/sold">Recently Sold</a></li>
         <li><a href="/team">Meet the Team</a></li>
-        <li><a href="/testimonials">Testimonials</a></li>
-        <li><a href="/blog">Blog</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
@@ -505,7 +503,9 @@
 
   <div class="container footer__legal">
     <p class="footer__licence">
-      Nilab Azizi &middot; CA DRE# 02047962<br>
+      <a href="/agent/nilab-azizi">Nilab Azizi</a> &middot; CA DRE# 02047962<br>
+      <a href="/agent/sofia-azizi">Sofia Azizi</a> &middot; CA DRE# 02108624<br>
+      <a href="/agent/zohra-azizi">Zohra Azizi</a> &middot; CA DRE# 01992847<br>
       Compass California III, Inc. &middot; CA DRE# 01527365
     </p>
     <p class="footer__disclaimer">Team Azizi is a team of real estate licensees affiliated with Compass, a licensed real estate broker. Compass California III, Inc. dba Compass, CA DRE# 01527365. All information is deemed reliable but is not guaranteed and should be independently verified. Equal Housing Opportunity.</p>
@@ -518,10 +518,15 @@
     </div>
     <p class="footer__copyright">
       &copy; <span data-year>2026</span> Team Azizi.
-      <a href="/terms-and-conditions">Privacy Policy</a>
     </p>
   </div>
 </footer>
+<div class="actionbar" role="group" aria-label="Contact Team Azizi">
+  <a class="actionbar__btn actionbar__btn--call" href="tel:+18588478067">
+    <span aria-hidden="true">&#9742;</span> Call (858) 847-8067
+  </a>
+  <a class="actionbar__btn" href="/home-valuation">Home value</a>
+</div>
 <script src="/assets/js/site.js" defer></script>
 </body>
 </html>

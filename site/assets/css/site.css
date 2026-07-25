@@ -139,6 +139,17 @@
 .has-hero .nav:not(.is-scrolled) .nav__logo-light { display: block; }
 .has-hero .nav:not(.is-scrolled) .nav__logo-dark { display: none; }
 
+/* Over a LIGHT full-bleed hero (the fact plates) the chrome still floats, but
+   white marks on cream are invisible — so the ink treatment stays. */
+.has-hero--light .nav:not(.is-scrolled) { color: var(--c-ink); }
+.has-hero--light .nav:not(.is-scrolled) .nav__logo-light { display: none; }
+.has-hero--light .nav:not(.is-scrolled) .nav__logo-dark { display: block; }
+.has-hero--light .nav:not(.is-scrolled) .nav__bars,
+.has-hero--light .nav:not(.is-scrolled) .nav__bars::before,
+.has-hero--light .nav:not(.is-scrolled) .nav__bars::after {
+  background: var(--c-ink);
+}
+
 @media (min-width: 62rem) {
   .nav { height: var(--nav-h); }
   .nav__links { display: block; }
@@ -684,6 +695,74 @@
 
 .valuation .grid { gap: 0 1.25rem; }
 
+/* Step 1 is one field and a button. It gets the visual weight because it is
+   the step that has to convert; the full form below is the follow-through. */
+.valuation--step1 {
+  background: var(--c-panel, #f7f6f4);
+  border-color: var(--c-ink, #14110e);
+}
+
+.valuation__result {
+  max-width: 52rem;
+  margin-top: 2.5rem;
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 48rem) {
+  .valuation__result { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+.valuation__shot { margin: 0; }
+
+.valuation__shot img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+/* The caption carries the address back, so the person can see we read it
+   correctly before they act on anything. */
+.valuation__shot figcaption { margin-top: 0.75rem; }
+
+.valuation__pitch > * + * { margin-top: 1rem; }
+
+/* ---- Fact plate (hero for communities with no photograph) ---- */
+
+/* Three facts, each already sourced further down the page, so the hero
+   promises exactly what the page delivers. This carries more information
+   than a stock photograph would — which is the argument for it, not a
+   consolation for the missing image. */
+.plate {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem 3rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--c-rule-strong);
+  max-width: 44rem;
+  margin-inline: auto;
+}
+
+.plate__cell { display: grid; gap: 0.35rem; }
+
+.plate__value {
+  font-family: var(--f-display, inherit);
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+  line-height: 1;
+  color: var(--c-gold);
+}
+
+.plate__label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-neutral);
+}
+
 /* ---- Video embed -------------------------------------------- */
 /* No competitor embeds neighborhood video on a neighborhood page. */
 
@@ -700,4 +779,50 @@
   width: 100%;
   height: 100%;
   border: 0;
+}
+
+/* ---- Mobile action bar -------------------------------------- */
+
+/* The nav phone number is hidden below 62rem, so on a phone — where most of
+   this traffic arrives — there was no persistent way to reach anyone. Two
+   actions only: calling is the high-intent one and leads. */
+.actionbar { display: none; }
+
+@media (max-width: 61.99rem) {
+  .actionbar {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: var(--z-nav, 50);
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1px;
+    background: var(--c-rule);
+    border-top: 1px solid var(--c-rule);
+    /* Clear the iOS home indicator. */
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .actionbar__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3.25rem;
+    padding: 0.75rem 0.5rem;
+    background: var(--c-bg);
+    color: var(--c-ink);
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .actionbar__btn--call {
+    background: var(--c-ink);
+    color: var(--c-on-dark);
+  }
+
+  /* Stop the bar covering the last line of the footer. */
+  .footer { padding-bottom: 5rem; }
 }

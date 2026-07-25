@@ -276,6 +276,75 @@ def check_unverified() -> None:
         warnings.append(f"sameAs withheld — {url}: {reason}")
 
 
+def check_internal_links(pages: list[Path]) -> None:
+    """Every internal href must resolve to a file that exists.
+
+    Added after the footer shipped seven dead links on all 43 pages — /sell,
+    /buy, /concierge, /testimonials, /blog, /contact, /terms-and-conditions —
+    for as long as the footer has existed. Nobody noticed because a footer is
+    the part of a page you stop reading.
+
+    Resolution mirrors Vercel's `cleanUrls`: /foo matches foo.html.
+    """
+    existing = {
+        p.relative_to(SITE).as_posix() for p in SITE.rglob("*") if p.is_file()
+    }
+
+    def resolves(href: str) -> bool:
+        target = href.split("#")[0].split("?")[0]
+        if not target or target.startswith(("http://", "https://", "mailto:", "tel:")):
+            return True
+        target = target.lstrip("/")
+        if not target:
+            return "index.html" in existing
+        return (
+            target in existing
+            or f"{target}.html" in existing
+            or f"{target}/index.html" in existing
+        )
+
+    broken: dict[str, set[str]] = defaultdict(set)
+    for page in pages:
+        html = re.sub(r"(?s)<script.*?</script>", "", page.read_text(encoding="utf-8"))
+        for match in re.finditer(r'href="([^"]+)"', html):
+            if not resolves(match.group(1)):
+                broken[match.group(1)].add(rel(page))
+
+    for href, on_pages in sorted(broken.items(), key=lambda kv: -len(kv[1])):
+        errors.append(
+            f"dead internal link {href!r} on {len(on_pages)} page(s) "
+            f"(e.g. {sorted(on_pages)[0]}) — nothing resolves there."
+        )
+
+
+def check_footer_licensees() -> None:
+    """The DRE line in the footer is a legal display, not decoration.
+
+    It renders on all 43 pages, so a wrong or missing number is wrong 43
+    times. These are hard errors rather than warnings: publishing a licence
+    number that does not belong to the named person is worse than publishing
+    no footer at all.
+    """
+    from data import agents  # noqa: PLC0415
+
+    roster = {a["slug"] for a in agents.ROSTER}
+    for slug in site.FOOTER_LICENSEES:
+        if slug not in roster:
+            errors.append(
+                f"site.FOOTER_LICENSEES names {slug!r}, who is not on the "
+                "roster — the footer would render a broken /agent link and a "
+                "licence number for nobody."
+            )
+            continue
+        person = agents.by_slug(slug)
+        if not person.get("dre"):
+            errors.append(
+                f"Footer licensee {person['name']} has no DRE number on the "
+                "roster. California requires it wherever the licensee is "
+                "named in advertising."
+            )
+
+
 def main() -> int:
     if not SITE.exists():
         print("site/ does not exist yet")
@@ -286,8 +355,10 @@ def main() -> int:
     check_answer_blocks(pages)
     check_lead_forms(pages)
     check_stale_strings(pages)
+    check_internal_links(pages)
     check_sitemap()
     check_unverified()
+    check_footer_licensees()
 
     for warning in warnings:
         print(f"  warn   {warning}")

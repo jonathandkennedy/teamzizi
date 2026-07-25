@@ -215,7 +215,7 @@
         "propertyID": "CA DRE License",
         "value": "02047962"
       },
-      "image": "https://teamazizi.com/assets/img/team/headshot-nilab-azizi.png",
+      "image": "https://teamazizi.com/assets/img/team/headshot-nilab-azizi.jpg",
       "telephone": "858.847.8067",
       "sameAs": [
         "https://www.compass.com/agents/nilab-azizi/"
@@ -286,9 +286,7 @@
       <ul>
       <li><a href="/neighborhoods">Neighborhoods</a></li>
       <li><a href="/properties/sale">Properties</a></li>
-      <li><a href="/sell">Sell</a></li>
-      <li><a href="/buy">Buy</a></li>
-      <li><a href="/concierge">Concierge</a></li>
+      <li><a href="/home-valuation" aria-current="page">What&#x27;s My Home Worth?</a></li>
       <li><a href="/team">Team</a></li>
       <li><a href="/contact">Contact</a></li>
       </ul>
@@ -315,9 +313,7 @@
       <ul>
       <li><a href="/neighborhoods">Neighborhoods</a></li>
       <li><a href="/properties/sale">Properties</a></li>
-      <li><a href="/sell">Sell</a></li>
-      <li><a href="/buy">Buy</a></li>
-      <li><a href="/concierge">Concierge</a></li>
+      <li><a href="/home-valuation" aria-current="page">What&#x27;s My Home Worth?</a></li>
       <li><a href="/team">Team</a></li>
       <li><a href="/contact">Contact</a></li>
       </ul>
@@ -332,16 +328,63 @@
       <a href="/">Home</a> &rsaquo; Home Valuation
     </nav>
     <p class="eyebrow">Home valuation</p>
-    <h1>Zillow has never seen your house</h1>
+    <h1>What's your home worth?</h1>
     <p class="lede">
-      It has not walked your street, it does not know which school your address
-      feeds, and it cannot tell a Mello-Roos district from an HOA. If you think
-      your home is worth more than the number online, you may well be right
-      &mdash; and the way to find out is to have someone who sells here
-      actually look.
+      Put in your address and we'll pull up your house and open your Zestimate
+      in a new tab, so you can see what the algorithm thinks. Then, if you want
+      a number that accounts for what you've actually done to the place, an
+      agent who sells on your street will come out and work it properly.
     </p>
 
-    <form class="valuation" method="POST" action="https://formspree.io/f/PLACEHOLDER"
+    <!-- Step 1. Address only. Deliberately one field: this is the step that
+         has to convert, and every extra box costs completions. The address is
+         sent as a lead the moment it is submitted (see site.js) — before the
+         Zillow tab opens — because that is the point of highest intent and
+         highest abandonment. -->
+    <form class="valuation valuation--step1" data-address-step
+          data-zillow="https://www.zillow.com/homes/{address}_rb/"
+          data-endpoint="https://formspree.io/f/PLACEHOLDER"
+          data-streetview-key="">
+      <div class="field">
+        <label for="address-lookup">Your property address</label>
+        <input id="address-lookup" name="address" type="text" required
+               autocomplete="street-address"
+               placeholder="1234 Example St, Escondido CA 92025">
+      </div>
+      <button class="btn btn--filled" type="submit">See my home &amp; Zestimate</button>
+      <p class="updated" style="margin-top:1rem">
+        Opens Zillow in a new tab. Nothing is posted publicly and your address
+        is not sold on &mdash; it goes to a Team Azizi agent and nobody else.
+      </p>
+    </form>
+
+    <!-- Revealed after step 1, populated by site.js. -->
+    <div class="valuation__result" data-address-result hidden>
+      <figure class="valuation__shot">
+        <img data-streetview alt="" width="800" height="500" loading="lazy" hidden>
+        <figcaption data-address-echo class="updated"></figcaption>
+      </figure>
+      <div class="valuation__pitch">
+        <h2 class="rule-gold">Zillow has never been inside</h2>
+        <p>
+          Your Zestimate is open in the other tab. It was built from public
+          records and nearby sales &mdash; which means it has not seen your
+          kitchen, your addition, your lot, or which side of a school boundary
+          you sit on. Those are the things that move the number most in North
+          San Diego County.
+        </p>
+        <p>
+          For an accurate figure, a Team Azizi agent comes out, walks the
+          property, pulls real comparables from the MLS, and prices in the
+          upgrades and additions you have actually made &mdash; with the
+          reasoning shown rather than a single number asserted.
+        </p>
+        <p><a class="btn btn--filled" href="#full-valuation">Book that walkthrough</a></p>
+      </div>
+    </div>
+
+    <form class="valuation" id="full-valuation" method="POST"
+          action="https://formspree.io/f/PLACEHOLDER"
           data-lead-form data-lead-kind="valuation">
       <!-- Formspree control fields. _subject is rewritten on submit to carry
            the address, so the notification email is scannable in an inbox
@@ -418,7 +461,7 @@
            font-weight:400;letter-spacing:0;text-transform:none">
            By submitting this form, I consent to be contacted by Team Azizi and Compass by phone, text message and email at the number and address provided, including by automated means and prerecorded or artificial voices, about real estate services. Consent is not a condition of any purchase. Message and data rates may apply. Reply STOP to opt out.</label></p>
       </div>
-      <button class="btn btn--filled" type="submit">Request my valuation</button>
+      <button class="btn btn--filled" type="submit">Book my walkthrough</button>
       <p class="updated" style="margin-top:1rem">
         A real person reads every one of these. No automated estimate, no drip
         sequence, no selling your details on.
@@ -460,8 +503,7 @@
 </section>
 
 <section class="band band--heavy">
-  <img class="band__media" src="/assets/img/backgrounds/home-valuation.jpg" alt=""
-       width="2560" height="1708" loading="lazy">
+  <picture><source srcset="/assets/img/backgrounds/home-valuation.webp" type="image/webp"><img class="band__media" src="/assets/img/backgrounds/home-valuation.jpg" alt="" width="1920" height="1281" loading="lazy" decoding="async"></picture>
   <div class="container">
     <h2 class="rule-center">Rather just talk it through?</h2>
     <div class="cta-row">
@@ -504,12 +546,11 @@
     <div class="footer__nav">
       <h2 class="footer__heading">Explore</h2>
       <ul>
-        <li><a href="/sell">Sell Your Home</a></li>
-        <li><a href="/buy">Buy a Home</a></li>
-        <li><a href="/concierge">Compass Concierge</a></li>
+        <li><a href="/neighborhoods">Neighborhood Guides</a></li>
+        <li><a href="/home-valuation">What&#x27;s My Home Worth?</a></li>
+        <li><a href="/properties/sale">Homes for Sale</a></li>
+        <li><a href="/properties/sold">Recently Sold</a></li>
         <li><a href="/team">Meet the Team</a></li>
-        <li><a href="/testimonials">Testimonials</a></li>
-        <li><a href="/blog">Blog</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
@@ -517,7 +558,9 @@
 
   <div class="container footer__legal">
     <p class="footer__licence">
-      Nilab Azizi &middot; CA DRE# 02047962<br>
+      <a href="/agent/nilab-azizi">Nilab Azizi</a> &middot; CA DRE# 02047962<br>
+      <a href="/agent/sofia-azizi">Sofia Azizi</a> &middot; CA DRE# 02108624<br>
+      <a href="/agent/zohra-azizi">Zohra Azizi</a> &middot; CA DRE# 01992847<br>
       Compass California III, Inc. &middot; CA DRE# 01527365
     </p>
     <p class="footer__disclaimer">Team Azizi is a team of real estate licensees affiliated with Compass, a licensed real estate broker. Compass California III, Inc. dba Compass, CA DRE# 01527365. All information is deemed reliable but is not guaranteed and should be independently verified. Equal Housing Opportunity.</p>
@@ -530,10 +573,15 @@
     </div>
     <p class="footer__copyright">
       &copy; <span data-year>2026</span> Team Azizi.
-      <a href="/terms-and-conditions">Privacy Policy</a>
     </p>
   </div>
 </footer>
+<div class="actionbar" role="group" aria-label="Contact Team Azizi">
+  <a class="actionbar__btn actionbar__btn--call" href="tel:+18588478067">
+    <span aria-hidden="true">&#9742;</span> Call (858) 847-8067
+  </a>
+  <a class="actionbar__btn" href="/home-valuation">Home value</a>
+</div>
 <script src="/assets/js/site.js" defer></script>
 </body>
 </html>

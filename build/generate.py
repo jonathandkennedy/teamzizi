@@ -22,6 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 import components as c  # noqa: E402
 import schema  # noqa: E402
+import textures  # noqa: E402
 from data import agents, guides, site, taxes  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
@@ -67,9 +68,11 @@ def hood_card(slug: str) -> str:
     else:
         media = (
             '<div class="card__media">'
-            f'<img src="/assets/img/neighborhoods/{slug}.jpg" alt="" '
-            'width="1280" height="800" loading="lazy">'
-            '<span class="card__overlay"><span class="btn btn--light btn--sm">'
+            + c.picture(
+                f"/assets/img/neighborhoods/{slug}.jpg", width=1280, height=800,
+                sizes="(min-width: 62rem) 30vw, (min-width: 40rem) 45vw, 92vw",
+            )
+            + '<span class="card__overlay"><span class="btn btn--light btn--sm">'
             "Explore</span></span>"
             "</div>"
         )
@@ -118,14 +121,14 @@ def build_home() -> None:
     )
 
     body = f"""<section class="hero">
-  <img class="hero__media" src="/assets/img/backgrounds/hero-poster.jpg" alt=""
-       width="1920" height="2880" fetchpriority="high" decoding="async">
+  {c.picture("/assets/img/backgrounds/hero-poster.jpg", width=1920, height=2880,
+             cls="hero__media", eager=True)}
   <div class="hero__inner">
     <h1>{c.esc(site.NAME)}</h1>
     <p class="hero__sub">Who Represents You Matters</p>
     <div class="cta-row" style="justify-content:center">
       <a class="btn btn--light" href="/neighborhoods">Neighborhood guides</a>
-      <a class="btn btn--light" href="/sell">What's my home worth?</a>
+      <a class="btn btn--light" href="/home-valuation">What's my home worth?</a>
     </div>
   </div>
 </section>
@@ -182,8 +185,8 @@ def build_home() -> None:
 <section class="section">
   <div class="container split">
     <div class="split__media">
-      <img src="/assets/img/team/team-group.jpg" alt="The Team Azizi team"
-           width="1920" height="1528" loading="lazy">
+      {c.picture("/assets/img/team/team-group.jpg", alt="The Team Azizi team",
+               width=1920, height=1528)}
     </div>
     <div class="split__body">
       <p class="eyebrow">Meet the team</p>
@@ -203,8 +206,7 @@ def build_home() -> None:
 </section>
 
 <section class="band band--heavy">
-  <img class="band__media" src="/assets/img/backgrounds/work-with-us.jpg" alt=""
-       width="1920" height="1200" loading="lazy">
+  {c.picture("/assets/img/backgrounds/work-with-us.jpg", width=1920, height=1200, cls="band__media")}
   <div class="container">
     <h2 class="rule-center">Work With Us</h2>
     <p style="margin-inline:auto">
@@ -260,8 +262,8 @@ def build_neighborhood_hub() -> None:
     total = len(site.ALL_AREAS)
 
     body = f"""<section class="band band--hero" style="padding-top:calc(var(--nav-h) + 4rem)">
-  <img class="band__media" src="/assets/img/neighborhoods/_hub-hero.jpg" alt=""
-       width="1920" height="1440" fetchpriority="high" decoding="async">
+  {c.picture("/assets/img/neighborhoods/_hub-hero.jpg", width=1920, height=1440,
+             cls="band__media", eager=True)}
   <div class="container">
     <h1>North San Diego Neighborhood Guides</h1>
     <p style="margin-inline:auto">
@@ -504,17 +506,61 @@ def build_neighborhood(slug: str) -> None:
         for b in guides.for_hood(slug)
     ]
 
-    hero = (
-        f"""<img class="band__media" src="/assets/img/neighborhoods/{slug}.jpg"
-       alt="" width="1280" height="800" fetchpriority="high">"""
-        if slug not in HOOD_IMAGE_MISSING else ""
-    )
+    # Twelve communities have no photograph and are not getting a fabricated
+    # one (docs/photography-brief.md). Instead of an empty band they get a
+    # designed hero: the community's own facts set as type, over an abstract
+    # texture that depicts nothing. It carries more information than a stock
+    # photograph would, and it stops being needed the day a real photograph
+    # of that street exists — remove the slug from HOOD_IMAGE_MISSING.
+    if slug not in HOOD_IMAGE_MISSING:
+        hero_media = c.picture(
+            f"/assets/img/neighborhoods/{slug}.jpg", width=1280, height=800,
+            cls="band__media", eager=True,
+        )
+        hero_facts = ""
+        hero_class = "band band--hero"
+    else:
+        texture = textures.ASSIGNMENT.get(slug, "grain")
+        hero_media = c.picture(
+            f"/assets/img/textures/{texture}.jpg", width=1600, height=1067,
+            cls="band__media", eager=True,
+        )
+        hero_class = "band band--hero band--plate"
 
-    body = f"""<section class="band band--hero" style="padding-top:calc(var(--nav-h) + 4rem)">
-  {hero}
+        # Facts, not adjectives — and each is already sourced elsewhere on the
+        # page, so the hero promises exactly what the page delivers.
+        cfd = taxes.for_hood(slug) or {}
+        districts = len(cfd.get("districts", []))
+        if slug == "san-marcos":
+            tax_fact = ("91", "active CFDs &mdash; most in the county")
+        elif slug == "poway":
+            tax_fact = ("19", "Poway Unified CFDs")
+        elif cfd.get("has_cfd"):
+            tax_fact = (str(districts), "Mello-Roos district" + ("s" if districts != 1 else ""))
+        else:
+            tax_fact = ("None", "named in the county CFD list")
+
+        zips = h["zip"].split(",")
+        plate = [
+            (str(len(zips)), "ZIP code" + ("s" if len(zips) != 1 else "")),
+            tax_fact,
+        ]
+        if (sold := SOLD_RECORD.get(slug)):
+            plate.append((str(sold), "closed sales here"))
+
+        cells = "\n".join(
+            f'      <div class="plate__cell">'
+            f'<span class="plate__value">{v}</span>'
+            f'<span class="plate__label">{lab}</span></div>'
+            for v, lab in plate
+        )
+        hero_facts = f'\n    <div class="plate">\n{cells}\n    </div>'
+
+    body = f"""<section class="{hero_class}" style="padding-top:calc(var(--nav-h) + 4rem)">
+  {hero_media}
   <div class="container">
     <h1>{name} Real Estate Guide</h1>
-    <p style="margin-inline:auto">{h['zip']} &middot; {c.esc(h['district'])}</p>
+    <p style="margin-inline:auto">{h['zip']} &middot; {c.esc(h['district'])}</p>{hero_facts}
   </div>
 </section>
 
@@ -544,8 +590,7 @@ def build_neighborhood(slug: str) -> None:
 </section>
 
 <section class="band band--heavy">
-  <img class="band__media" src="/assets/img/backgrounds/work-with-us.jpg" alt=""
-       width="1920" height="1200" loading="lazy">
+  {c.picture("/assets/img/backgrounds/work-with-us.jpg", width=1920, height=1200, cls="band__media")}
   <div class="container">
     <h2 class="rule-center">Thinking about {name}?</h2>
     <div class="cta-row">
@@ -590,7 +635,7 @@ def build_neighborhood(slug: str) -> None:
             path=path,
             body=body,
             nodes=nodes,
-            hero=True,
+            hero="light" if slug in HOOD_IMAGE_MISSING else True,
         ),
         changefreq="monthly",
         priority="0.9",
@@ -730,16 +775,63 @@ def build_home_valuation() -> None:
       <a href="/">Home</a> &rsaquo; Home Valuation
     </nav>
     <p class="eyebrow">Home valuation</p>
-    <h1>Zillow has never seen your house</h1>
+    <h1>What's your home worth?</h1>
     <p class="lede">
-      It has not walked your street, it does not know which school your address
-      feeds, and it cannot tell a Mello-Roos district from an HOA. If you think
-      your home is worth more than the number online, you may well be right
-      &mdash; and the way to find out is to have someone who sells here
-      actually look.
+      Put in your address and we'll pull up your house and open your Zestimate
+      in a new tab, so you can see what the algorithm thinks. Then, if you want
+      a number that accounts for what you've actually done to the place, an
+      agent who sells on your street will come out and work it properly.
     </p>
 
-    <form class="valuation" method="POST" action="{site.LEAD_ENDPOINT}"
+    <!-- Step 1. Address only. Deliberately one field: this is the step that
+         has to convert, and every extra box costs completions. The address is
+         sent as a lead the moment it is submitted (see site.js) — before the
+         Zillow tab opens — because that is the point of highest intent and
+         highest abandonment. -->
+    <form class="valuation valuation--step1" data-address-step
+          data-zillow="{site.ZILLOW_SEARCH}"
+          data-endpoint="{site.LEAD_ENDPOINT}"
+          data-streetview-key="{site.GOOGLE_MAPS_KEY}">
+      <div class="field">
+        <label for="address-lookup">Your property address</label>
+        <input id="address-lookup" name="address" type="text" required
+               autocomplete="street-address"
+               placeholder="1234 Example St, Escondido CA 92025">
+      </div>
+      <button class="btn btn--filled" type="submit">See my home &amp; Zestimate</button>
+      <p class="updated" style="margin-top:1rem">
+        Opens Zillow in a new tab. Nothing is posted publicly and your address
+        is not sold on &mdash; it goes to a Team Azizi agent and nobody else.
+      </p>
+    </form>
+
+    <!-- Revealed after step 1, populated by site.js. -->
+    <div class="valuation__result" data-address-result hidden>
+      <figure class="valuation__shot">
+        <img data-streetview alt="" width="800" height="500" loading="lazy" hidden>
+        <figcaption data-address-echo class="updated"></figcaption>
+      </figure>
+      <div class="valuation__pitch">
+        <h2 class="rule-gold">Zillow has never been inside</h2>
+        <p>
+          Your Zestimate is open in the other tab. It was built from public
+          records and nearby sales &mdash; which means it has not seen your
+          kitchen, your addition, your lot, or which side of a school boundary
+          you sit on. Those are the things that move the number most in North
+          San Diego County.
+        </p>
+        <p>
+          For an accurate figure, a Team Azizi agent comes out, walks the
+          property, pulls real comparables from the MLS, and prices in the
+          upgrades and additions you have actually made &mdash; with the
+          reasoning shown rather than a single number asserted.
+        </p>
+        <p><a class="btn btn--filled" href="#full-valuation">Book that walkthrough</a></p>
+      </div>
+    </div>
+
+    <form class="valuation" id="full-valuation" method="POST"
+          action="{site.LEAD_ENDPOINT}"
           data-lead-form data-lead-kind="valuation">
       <!-- Formspree control fields. _subject is rewritten on submit to carry
            the address, so the notification email is scannable in an inbox
@@ -797,7 +889,7 @@ def build_home_valuation() -> None:
            font-weight:400;letter-spacing:0;text-transform:none">
            {c.esc(site.TCPA_CONSENT)}</label></p>
       </div>
-      <button class="btn btn--filled" type="submit">Request my valuation</button>
+      <button class="btn btn--filled" type="submit">Book my walkthrough</button>
       <p class="updated" style="margin-top:1rem">
         A real person reads every one of these. No automated estimate, no drip
         sequence, no selling your details on.
@@ -815,8 +907,8 @@ def build_home_valuation() -> None:
 </section>
 
 <section class="band band--heavy">
-  <img class="band__media" src="/assets/img/backgrounds/home-valuation.jpg" alt=""
-       width="2560" height="1708" loading="lazy">
+  {c.picture("/assets/img/backgrounds/home-valuation.jpg", width=1920, height=1281,
+             cls="band__media")}
   <div class="container">
     <h2 class="rule-center">Rather just talk it through?</h2>
     <div class="cta-row">
@@ -1122,6 +1214,103 @@ def build_properties() -> None:
     )
 
 
+def build_contact() -> None:
+    """/contact was in the primary nav on all 43 pages, linking at nothing."""
+    path = "/contact"
+    lead = agents.team_lead()
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 4rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Contact
+    </nav>
+    <p class="eyebrow">Contact</p>
+    <h1>Talk to a person</h1>
+    <p class="lede">
+      Team Azizi works out of the Compass office at {c.esc(site.STREET)} in
+      Carmel Valley, across North San Diego County from Oceanside to Ramona.
+      Call and you will get a licensee, not a call centre.
+    </p>
+
+    <div class="grid grid--2" style="margin-top:2.5rem">
+      <div>
+        <h2 class="rule-gold">Direct</h2>
+        <address style="font-style:normal">
+          <a href="{site.PHONE_HREF}">{site.PHONE_DISPLAY}</a><br>
+          <a href="mailto:{site.EMAIL}">{site.EMAIL}</a><br><br>
+          {c.esc(site.STREET)}<br>
+          {c.esc(site.CITY)}, {site.REGION} {site.POSTAL}
+        </address>
+        <p style="margin-top:1.5rem">
+          Looking for a specific area? Each
+          <a href="/neighborhoods">neighborhood guide</a> names the agent who
+          works it, with their own direct line and DRE number.
+        </p>
+      </div>
+
+      <form class="valuation" method="POST" action="{site.LEAD_ENDPOINT}"
+            data-lead-form data-lead-kind="contact">
+        <input type="hidden" name="_subject" value="Website enquiry"
+               data-subject-prefix="Enquiry">
+        <input type="hidden" name="_next" value="{site.DOMAIN}/thank-you">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"
+               aria-hidden="true"
+               style="position:absolute;left:-9999px;width:1px;height:1px">
+        <div class="field">
+          <label for="c-name">Name</label>
+          <input id="c-name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="c-phone">Phone</label>
+          <input id="c-phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="c-message">How can we help?</label>
+          <textarea id="c-message" name="message" rows="4"></textarea>
+        </div>
+        <div class="consent">
+          <input id="c-consent" name="consent" type="checkbox" required>
+          <p><label for="c-consent" style="display:inline;font-size:inherit;
+             font-weight:400;letter-spacing:0;text-transform:none">
+             {c.esc(site.TCPA_CONSENT)}</label></p>
+        </div>
+        <button class="btn btn--filled" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</section>"""
+    write(
+        path,
+        c.page(
+            title="Contact Team Azizi — North San Diego County | Team Azizi",
+            description=(
+                f"Reach Team Azizi at Compass: {site.PHONE_DISPLAY}, "
+                f"{site.STREET}, {site.CITY}. Serving North San Diego County "
+                "from Oceanside to Ramona."
+            ),
+            path=path,
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.web_page(
+                    url=f"{site.DOMAIN}{path}",
+                    name="Contact Team Azizi",
+                    author_slug=lead["slug"],
+                    updated=TODAY,
+                ),
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Contact", f"{site.DOMAIN}{path}"),
+                ]),
+            ],
+        ),
+        changefreq="yearly",
+        priority="0.8",
+    )
+
+
 def build_404() -> None:
     """Vercel serves site/404.html automatically for a static project.
 
@@ -1169,8 +1358,9 @@ def build_404() -> None:
 
 def roster_card(agent: dict) -> str:
     photo = (
-        f'<img class="roster__photo" src="{agent["photo"]}" '
-        f'alt="{c.esc(agent["name"])}" width="400" height="400" loading="lazy">'
+        c.picture(agent["photo"], alt=agent["name"], width=400, height=400,
+                  cls="roster__photo",
+                  sizes="(min-width: 62rem) 22vw, (min-width: 40rem) 30vw, 45vw")
         if agent.get("photo")
         else '<div class="roster__photo roster__photo--pending"></div>'
     )
@@ -1290,9 +1480,8 @@ def build_agents() -> None:
         hood_obj = farmed[0] if farmed else None
 
         photo = (
-            f'<img class="expert__photo" src="{agent["photo"]}" '
-            f'alt="{c.esc(agent["name"])}" width="320" height="320" '
-            'fetchpriority="high">'
+            c.picture(agent["photo"], alt=agent["name"], width=320, height=320,
+                      cls="expert__photo", eager=True)
             if agent.get("photo")
             else '<div class="expert__photo expert__photo--pending"></div>'
         )
@@ -1436,6 +1625,7 @@ def main() -> int:
     build_neighborhoods()
     build_home_valuation()
     build_properties()
+    build_contact()
     build_thank_you()
     build_404()
     build_team()

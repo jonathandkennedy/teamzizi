@@ -372,6 +372,17 @@ textarea {
 .band--hero::after { background: var(--o-hero); }
 .band--heavy::after { background: var(--o-media-heavy); }
 
+/* Plate: the hero for a community with no photograph. The background is an
+   abstract texture that depicts nothing, so unlike the photo bands it is
+   light — which means the type has to flip to ink and the dark scrim has to
+   go. See build/textures.py for why these are not pictures of places. */
+.band--plate {
+  color: var(--c-ink);
+  border-block: 1px solid var(--c-rule);
+}
+
+.band--plate::after { background: none; }
+
 .band > .container {
   position: relative;
   z-index: 2;

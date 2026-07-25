@@ -11,17 +11,22 @@ trailing slashes — that would 301 away the equity we are rebuilding to keep.
 from __future__ import annotations
 
 import html
+from pathlib import Path
 from typing import Any
 
 import schema
-from data import site
+from data import agents, site
 
+SITE_ROOT = Path(__file__).resolve().parent.parent / "site"
+
+# Built pages only. Sell / Buy / Concierge were here linking at nothing, so
+# the primary navigation on all 43 pages offered three 404s. They come back
+# the moment those pages exist — validate.py now fails the build on a dead
+# internal link, which is what should have caught this the first time.
 NAV_LINKS = [
     ("Neighborhoods", "/neighborhoods"),
     ("Properties", "/properties/sale"),
-    ("Sell", "/sell"),
-    ("Buy", "/buy"),
-    ("Concierge", "/concierge"),
+    ("What's My Home Worth?", "/home-valuation"),
     ("Team", "/team"),
     ("Contact", "/contact"),
 ]
@@ -119,6 +124,80 @@ def nav(current: str = "") -> str:
 </div>"""
 
 
+def picture(
+    src: str,
+    *,
+    alt: str = "",
+    width: int,
+    height: int,
+    cls: str = "",
+    eager: bool = False,
+    sizes: str = "",
+) -> str:
+    """<picture> with WebP first and the JPEG as fallback.
+
+    build/optimize.py writes a .webp alongside every photograph. WebP is
+    roughly 40-60% smaller than the equivalent JPEG here, and a browser that
+    cannot read it silently takes the <img>. Nothing is lost and nobody needs
+    a script.
+
+    `eager` marks the LCP candidate: fetchpriority high, no lazy attribute.
+    Everything else is lazy and async-decoded, because on a neighborhood page
+    the hero is the only image above the fold.
+    """
+    stem = src.rsplit(".", 1)[0]
+    klass = f' class="{cls}"' if cls else ""
+    loading = (
+        ' fetchpriority="high" decoding="async"'
+        if eager
+        else ' loading="lazy" decoding="async"'
+    )
+
+    # `sizes` is what stops the browser downloading a 1280px file for a 400px
+    # card. It is only correct when a narrow rendition exists, which
+    # build/optimize.py writes for the directories that need one.
+    narrow = Path(SITE_ROOT / f"{stem.lstrip('/')}-800.webp")
+    if sizes and narrow.exists():
+        webp_set = f"{stem}-800.webp 800w, {stem}.webp {width}w"
+        jpeg_set = f"{stem}-800.jpg 800w, {stem}.jpg {width}w"
+        return (
+            "<picture>"
+            f'<source srcset="{webp_set}" sizes="{sizes}" type="image/webp">'
+            f'<source srcset="{jpeg_set}" sizes="{sizes}" type="image/jpeg">'
+            f'<img{klass} src="{src}" alt="{esc(alt)}" '
+            f'width="{width}" height="{height}"{loading}>'
+            "</picture>"
+        )
+
+    return (
+        "<picture>"
+        f'<source srcset="{stem}.webp" type="image/webp">'
+        f'<img{klass} src="{src}" alt="{esc(alt)}" '
+        f'width="{width}" height="{height}"{loading}>'
+        "</picture>"
+    )
+
+
+def action_bar() -> str:
+    """Persistent call / valuation bar, mobile only.
+
+    The nav phone number is `display: none` below 62rem — so on a phone,
+    which is where most of this traffic arrives, there was no persistent way
+    to reach anyone. The tel: links existed but were buried mid-page and in
+    the footer.
+
+    Two actions, no more. Calling is the high-intent one and goes first;
+    the valuation flow is the low-commitment one for someone not ready to
+    talk. Everything else is a link in the page.
+    """
+    return f"""<div class="actionbar" role="group" aria-label="Contact Team Azizi">
+  <a class="actionbar__btn actionbar__btn--call" href="{site.PHONE_HREF}">
+    <span aria-hidden="true">&#9742;</span> Call {site.PHONE_DISPLAY}
+  </a>
+  <a class="actionbar__btn" href="/home-valuation">Home value</a>
+</div>"""
+
+
 def footer() -> str:
     """Footer NAP must match the (future) GBP exactly — schema, footer and
     GBP are one entity or they are three. Licence numbers and the Compass
@@ -129,6 +208,22 @@ def footer() -> str:
         f"{esc(next(h['name'] for h in site.NEIGHBORHOODS if h['slug'] == slug))}"
         f"</a></li>"
         for slug in site.NAV_ORDER
+    )
+    # Only pages that exist. This block previously linked seven — /sell, /buy,
+    # /concierge, /testimonials, /blog, /contact, /terms-and-conditions — none
+    # of which had been built, so every page on the site shipped seven 404s in
+    # its footer. site.FOOTER_EXPLORE is the built set; the rest come back as
+    # each page lands.
+    explore = "\n".join(
+        f'        <li><a href="{href}">{esc(label)}</a></li>'
+        for label, href in site.FOOTER_EXPLORE
+    )
+    # Each named licensee links to their own page, so the DRE number and the
+    # person it belongs to are one click apart rather than an orphan string.
+    licensees = "<br>\n      ".join(
+        f'<a href="/agent/{a["slug"]}">{esc(a["name"])}</a> '
+        f"&middot; CA DRE# {a['dre']}"
+        for a in (agents.by_slug(s) for s in site.FOOTER_LICENSEES)
     )
     return f"""<footer class="footer">
   <div class="container footer__grid">
@@ -158,20 +253,14 @@ def footer() -> str:
     <div class="footer__nav">
       <h2 class="footer__heading">Explore</h2>
       <ul>
-        <li><a href="/sell">Sell Your Home</a></li>
-        <li><a href="/buy">Buy a Home</a></li>
-        <li><a href="/concierge">Compass Concierge</a></li>
-        <li><a href="/team">Meet the Team</a></li>
-        <li><a href="/testimonials">Testimonials</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/contact">Contact</a></li>
+{explore}
       </ul>
     </div>
   </div>
 
   <div class="container footer__legal">
     <p class="footer__licence">
-      {esc(site.LEAD_AGENT)} &middot; CA DRE# {site.LEAD_DRE}<br>
+      {licensees}<br>
       {esc(site.BROKERAGE)} &middot; CA DRE# {site.BROKERAGE_DRE}
     </p>
     <p class="footer__disclaimer">{esc(site.DISCLAIMER)}</p>
@@ -184,7 +273,6 @@ def footer() -> str:
     </div>
     <p class="footer__copyright">
       &copy; <span data-year>2026</span> {esc(site.NAME)}.
-      <a href="/terms-and-conditions">Privacy Policy</a>
     </p>
   </div>
 </footer>"""
@@ -197,21 +285,33 @@ def page(
     path: str,
     body: str,
     nodes: list[dict[str, Any]],
-    hero: bool = False,
+    hero: bool | str = False,
 ) -> str:
-    """`hero=True` tells the nav to start transparent over a full-bleed hero."""
+    """`hero=True` tells the nav to start transparent over a full-bleed hero.
+
+    `hero="light"` is the same full-bleed treatment over a *light* hero — the
+    fact plates on communities with no photograph. Without it the nav renders
+    white-on-cream and is effectively invisible, which is an accessibility
+    failure rather than a cosmetic one.
+    """
+    body_class = ""
+    if hero == "light":
+        body_class = ' class="has-hero has-hero--light"'
+    elif hero:
+        body_class = ' class="has-hero"'
     return f"""<!doctype html>
 <html lang="en-US">
 <head>
 {head(title=title, description=description, path=path, nodes=nodes)}
 </head>
-<body{' class="has-hero"' if hero else ""}>
+<body{body_class}>
 <a class="skip-link" href="#main">Skip to content</a>
 {nav(current=path)}
 <main id="main">
 {body}
 </main>
 {footer()}
+{action_bar()}
 <script src="/assets/js/site.js" defer></script>
 </body>
 </html>
@@ -247,8 +347,8 @@ def expert_block(agent: dict[str, Any], hood: dict[str, Any], *, confirmed: bool
     says so plainly rather than implying a specialism nobody has claimed.
     """
     photo = (
-        f'<img class="expert__photo" src="{agent["photo"]}" '
-        f'alt="{esc(agent["name"])}" width="200" height="200" loading="lazy">'
+        picture(agent["photo"], alt=agent["name"], width=200, height=200,
+                cls="expert__photo")
         if agent.get("photo")
         else '<div class="expert__photo expert__photo--pending"></div>'
     )

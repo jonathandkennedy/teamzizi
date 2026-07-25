@@ -44,6 +44,55 @@ LEAD_DRE = "02047962"
 BROKERAGE = "Compass California III, Inc."
 BROKERAGE_DRE = "01527365"
 
+# Google Street View Static API key, for the photograph of the property on
+# /home-valuation. Empty means the page still works and simply shows no
+# photograph — the flow degrades rather than breaking.
+#
+# This key is necessarily public: it goes into an <img> src the browser
+# fetches. That is normal for the Static APIs and safe ONLY with an HTTP
+# referrer restriction locking it to teamazizi.com in the Google Cloud
+# console. An unrestricted key on a public page is somebody else's free
+# quota and the client's bill.
+GOOGLE_MAPS_KEY = ""
+
+# Zillow's public search URL. We link people to their own Zestimate in a new
+# tab rather than reproducing it: Zillow retired the public Zestimate API in
+# 2021 and everything else on the market is a scraper, but a hyperlink is
+# just a hyperlink. This also puts the number on Zillow's page where it
+# belongs, rather than making Zillow the authority on our own site.
+ZILLOW_SEARCH = "https://www.zillow.com/homes/{address}_rb/"
+
+# Footer "Explore" column — ONLY pages that have actually been built.
+#
+# This list existed implicitly in components.py and named seven pages, none of
+# which had been generated: /sell, /buy, /concierge, /testimonials, /blog,
+# /contact and /terms-and-conditions. Every one of the 43 pages therefore
+# shipped seven dead links in its footer. A link audit is now part of
+# validate.py so this cannot come back silently — add the entry here at the
+# same time as the page, not before.
+FOOTER_EXPLORE = (
+    ("Neighborhood Guides", "/neighborhoods"),
+    ("What's My Home Worth?", "/home-valuation"),
+    ("Homes for Sale", "/properties/sale"),
+    ("Recently Sold", "/properties/sold"),
+    ("Meet the Team", "/team"),
+    ("Contact", "/contact"),
+)
+
+# Licensees named in the footer of every page, in display order.
+#
+# California requires the responsible licensee's name and DRE number on
+# advertising. Naming more than one is a choice rather than an obligation, and
+# the reason to make it is that this is a family team: Nilab leads it, Sofia
+# and Zohra are the other two Azizi licensees, and a visitor who arrived from
+# an Instagram post by one of them should find that person's licence on the
+# page rather than only the team lead's.
+#
+# Slugs, not names and numbers. The DRE numbers live in agents.py and are
+# resolved from there, so there is exactly one place to correct one — and
+# validate.py fails the build if a slug here is not on the roster.
+FOOTER_LICENSEES = ("nilab-azizi", "sofia-azizi", "zohra-azizi")
+
 # Strings to purge on sight — every one of these is live somewhere on the
 # web today and is actively corrupting the entity (research/social.md §NAP).
 STALE_STRINGS = (
