@@ -586,11 +586,17 @@ def build_neighborhood(slug: str) -> None:
             f'target="_blank">{c.esc(credit["licence"])}</a>'
             if credit.get("licence_url") else c.esc(credit["licence"])
         )
+        # CC BY and CC BY-SA both require indicating that changes were made,
+        # not merely naming the author. Cropping to a 16:10 hero is already a
+        # change, so this applies to every one of these; where the frame was
+        # also graded, the credit says so specifically.
+        changed = credit.get("modified") or "Cropped to fit."
         credit_html = (
             '\n<p class="photo-credit">Photograph: '
             f'<a href="{credit["source"]}" rel="nofollow noopener" '
             f'target="_blank">{c.esc(credit["title"])}</a> by '
-            f'{c.esc(credit["author"])}, {lic}. {c.esc(credit["depicts"])}</p>'
+            f'{c.esc(credit["author"])}, {lic}. {c.esc(credit["depicts"])} '
+            f'{c.esc(changed)}</p>'
         )
 
     body = f"""<section class="{hero_class}" style="padding-top:calc(var(--nav-h) + 4rem)">

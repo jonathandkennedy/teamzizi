@@ -163,6 +163,11 @@ CREDITS: dict[str, dict[str, str]] = {
         "source": "https://commons.wikimedia.org/wiki/File:Valley_Center.jpg",
         "depicts": "A dirt road past a coast live oak in the grassland and "
                    "low hills of Valley Center.",
+        # Shot on a 2008 compact camera and flat straight out of it. Levels,
+        # contrast, saturation and sharpening only — the response curve
+        # applied to pixels that were already in the frame, which is what a
+        # darkroom print does. Nothing added, nothing removed.
+        "modified": "Cropped to fit; colour and contrast adjusted.",
     },
     "4s-ranch": {
         "title": "4S Ranch from Black Mountain",
