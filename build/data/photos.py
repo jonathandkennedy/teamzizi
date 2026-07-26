@@ -141,6 +141,29 @@ CREDITS: dict[str, dict[str, str]] = {
         "depicts": "A lane climbing past a hillside house near Ross Lake in "
                    "Fallbrook.",
     },
+    "valley-center": {
+        # This one was rejected on the first pass and that was wrong. The
+        # file carries "Laguna Mountains (California)" alongside "Valley
+        # Center, California" — two places fifty kilometres apart — and a
+        # self-contradicting file is normally a stop. What settled it was
+        # asking a different question: not "what does the file claim?" but
+        # "who relies on it?" It is the lead image on the Valley Center,
+        # California article across twenty-seven Wikipedias and is bound to
+        # Wikidata Q2861838, and an editor deliberately recategorised it TO
+        # "Valley Center, California" in 2020, removing the broader county
+        # and CDP categories by hand. The Laguna Mountains tag is a stale
+        # leftover; they are visible looking east from Valley Center.
+        #
+        # Usage is a stronger signal than metadata, because metadata is one
+        # uploader and usage is many editors with something to lose.
+        "title": "Valley Center, California",
+        "author": "Vcdrummer",
+        "licence": "CC BY 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Valley_Center.jpg",
+        "depicts": "A dirt road past a coast live oak in the grassland and "
+                   "low hills of Valley Center.",
+    },
     "4s-ranch": {
         "title": "4S Ranch from Black Mountain",
         "author": "Peard33",
@@ -153,19 +176,16 @@ CREDITS: dict[str, dict[str, str]] = {
 }
 
 
-REJECTED = {
-    # Kept so nobody re-runs the same search and reaches the same wrong
-    # conclusion.
-    "valley-center": (
-        "Nothing publishable. Geosearch's best hit is Daley Ranch, described "
-        "as 'Escondido' with 'location is approximate'; Openverse returns "
-        "Santa Cruz Island and downtown Sacramento. The one real candidate, "
-        "File:Valley Center.jpg, carries BOTH 'Valley Center, California' and "
-        "'Laguna Mountains (California)' as categories — two places fifty "
-        "kilometres apart, and no coordinates to break the tie. A file whose "
-        "own metadata contradicts itself is not verification."
-    ),
-}
+# Empty, and worth leaving in place. All sixteen areas are covered.
+#
+# It is here for the next area added to the book. When a search comes back
+# with nothing verifiable, record the reason here rather than leaving the
+# slot silently blank — otherwise the next person repeats the same search,
+# and the risk is not that they find nothing again, it is that they are less
+# careful and install the wrong place. That has already happened once on
+# this site: Carmel Valley shipped a Monterey County vineyard, four hundred
+# miles from the neighborhood it was selling.
+REJECTED: dict[str, str] = {}
 
 
 def for_hood(slug: str) -> dict | None:
