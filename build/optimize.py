@@ -29,6 +29,8 @@ breaks for a client that cannot read it.
 
 from __future__ import annotations
 
+import hashlib
+import json
 import sys
 from pathlib import Path
 
@@ -76,20 +78,80 @@ def already_done(path: Path, cap: int) -> bool:
     """True when this file has already been through the optimiser.
 
     Without this the script re-encoded every JPEG on every run: a lossy
-    generation each time, and — the practical harm — forty binary files
-    showing as modified in git on every build, for no change anyone asked
-    for. A file counts as done when it is a JPEG already within the cap with
-    a matching .webp beside it.
+    generation each time, and the practical harm, forty binary files showing
+    as modified in git on every build, for no change anyone asked for.
+
+    Staleness is decided by the CONTENT HASH recorded in the manifest, not by
+    mtime. mtime looks like the obvious signal and is wrong here: git writes
+    files at checkout time in arbitrary order, so on a fresh clone half the
+    derivatives appear older than their sources and the whole tree
+    re-encodes, which is the churn this function exists to stop.
+
+    The hash matters because replacing a source JPEG in place -- regrading a
+    hero, recropping it -- used to leave the old .webp beside the new .jpg.
+    `components.picture()` puts the WebP first, so every browser that can
+    read WebP got the stale frame while the JPEG fallback nobody looks at
+    was correct. Silent, and invisible in the markup.
     """
     if path.suffix.lower() != ".jpg":
         return False  # PNG sources still need converting
-    if not path.with_suffix(".webp").exists():
+
+    if MANIFEST.get(path.relative_to(IMG).as_posix()) != source_hash(path):
+        return False
+    if not all(d.exists() for d in derived_for(path)):
         return False
     try:
         with Image.open(path) as img:
             return max(img.size) <= cap
     except Exception:
         return False
+
+
+def derived_for(path: Path) -> list[Path]:
+    """Every file `optimize()` writes alongside `path`.
+
+    The narrow rendition is conditional on the source being WIDER than
+    NARROW, matching the `img.width > NARROW` guard in optimize(). Getting
+    that condition wrong in only one of the two places is not a cosmetic
+    mismatch: the team headshots are capped at exactly 800, which is not
+    greater than 800, so no -800 file is written for them — and a staleness
+    check that demanded one would find it missing on every single run and
+    re-encode all twenty of them forever.
+    """
+    out = [path.with_suffix(".webp")]
+    if role(path) not in NARROW_DIRS:
+        return out
+    try:
+        with Image.open(path) as img:
+            wide = img.width > NARROW
+    except Exception:  # noqa: BLE001
+        return out
+    if wide:
+        stem = path.with_suffix("")
+        out += [Path(f"{stem}-{NARROW}.jpg"), Path(f"{stem}-{NARROW}.webp")]
+    return out
+
+
+def source_hash(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()[:16]
+
+
+# Committed alongside the images so a fresh clone starts in the "everything
+# is current" state instead of re-encoding the whole tree on its first build.
+MANIFEST_PATH = IMG / ".optimized.json"
+
+
+def load_manifest() -> dict[str, str]:
+    try:
+        return json.loads(MANIFEST_PATH.read_text())
+    except (OSError, ValueError):
+        return {}
+
+
+def save_manifest(manifest: dict[str, str]) -> None:
+    MANIFEST_PATH.write_text(
+        json.dumps(dict(sorted(manifest.items())), indent=1) + "\n"
+    )
 
 
 def optimize(path: Path, *, dry_run: bool) -> tuple[int, int, int]:
@@ -143,10 +205,45 @@ def optimize(path: Path, *, dry_run: bool) -> tuple[int, int, int]:
     if path.suffix.lower() == ".png" and jpeg_path.exists():
         path.unlink()
 
+    # Record the hash of what we just WROTE, not of the input: the next run
+    # sees the encoded JPEG, and that is the file whose hash has to match.
+    MANIFEST[jpeg_path.relative_to(IMG).as_posix()] = source_hash(jpeg_path)
+
     return before, jpeg_path.stat().st_size, webp_path.stat().st_size
 
 
 FORCE = "--force" in sys.argv
+MANIFEST: dict[str, str] = {}
+
+
+def seed_manifest(files: list[Path]) -> int:
+    """Adopt files that are already correct, without re-encoding them.
+
+    Run once, when the manifest is introduced or a new image is added by
+    hand. Anything already within its cap with all its derivatives present
+    is recorded as-is. Without this the first run after this change would
+    re-encode the entire tree — a lossy generation on every image and a
+    seventy-file binary diff, to reach a state that was already correct.
+    """
+    seeded = 0
+    for path in files:
+        key = path.relative_to(IMG).as_posix()
+        if key in MANIFEST or path.suffix.lower() != ".jpg":
+            continue
+        cap = CAPS.get(role(path))
+        if cap is None:
+            continue
+        if not all(d.exists() for d in derived_for(path)):
+            continue
+        try:
+            with Image.open(path) as img:
+                if max(img.size) > cap:
+                    continue
+        except Exception:  # noqa: BLE001
+            continue
+        MANIFEST[key] = source_hash(path)
+        seeded += 1
+    return seeded
 
 
 def main() -> int:
@@ -163,6 +260,12 @@ def main() -> int:
         and p.suffix.lower() in PHOTO_SUFFIXES
         and not p.stem.endswith(f"-{NARROW}")
     )
+
+    MANIFEST.update(load_manifest())
+    if not FORCE:
+        seeded = seed_manifest(files)
+        if seeded:
+            print(f"adopted {seeded} already-optimised file(s) into the manifest")
 
     total_before = total_jpeg = total_webp = 0
     changed = []
@@ -187,6 +290,8 @@ def main() -> int:
     )
     if dry_run:
         print("--dry-run: nothing written")
+    else:
+        save_manifest(MANIFEST)
     return 0
 
 
