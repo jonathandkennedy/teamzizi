@@ -21,9 +21,26 @@ The first of those is the exact error that put a Monterey County vineyard on
 the Carmel Valley page of the old site. Three of twelve areas returned a
 wrong place as their TOP result. Nothing here may be auto-selected.
 
-Better method for the rest: Commons geosearch (list=geosearch with the
-community's coordinates and a radius) returns files by location rather than
-by name, which cannot match a same-named place 400 miles away.
+What actually worked, in the order it was tried
+-----------------------------------------------
+1. Commons text search on "<Name>, California" — got six areas, and would
+   have got three wrong ones too if the captions had not been read.
+2. Commons GEOsearch on the community centroid (build/commons.py near()) —
+   three more. Immune to the same-name trap by construction, but only as
+   good as the geotags, and Fallbrook's are wrong: every hit is San Luis Rey
+   Mission Church, which is in Oceanside.
+3. Openverse (build/openverse.py) — indexes Flickr, where people who live in
+   a place post pictures of it, plus US government accounts whose work is
+   public domain. This is what found Encinitas.
+4. Commons text search on the DISAMBIGUATED name — "Carmel Valley San Diego",
+   not "Carmel Valley, California"; "4S Ranch", not "4S Ranch, California".
+   This is the step that should have been first. Commons keeps a category
+   per community ("Carmel Valley, San Diego", "4S Ranch, California"), and
+   a file carrying that category has been placed by a human who knew which
+   Carmel Valley they meant. It found the last four.
+
+The category is the strongest signal available and the cheapest to check.
+Prefer it over description text, which is often just the file name again.
 """
 
 from __future__ import annotations
@@ -81,24 +98,73 @@ CREDITS: dict[str, dict[str, str]] = {
         "depicts": "Alta Vista Gardens, the botanical garden on Brengle "
                    "Terrace in Vista.",
     },
+    "carmel-valley": {
+        # Categorised "Carmel Valley, San Diego" on Commons — the category
+        # that distinguishes it from Carmel Valley, Monterey County, which
+        # is the wrong-place photograph the old site actually published.
+        "title": "Carmel Valley San Diego",
+        "author": "Navirav",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Carmel_Valley_San_Diego_2.JPG",
+        "depicts": "Carmel Valley in San Diego, looking north from the south "
+                   "rim across the canyon to the ridgeline development.",
+    },
+    "encinitas": {
+        "title": "Boathouses, Encinitas",
+        "author": "Invertzoo",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Boathouses,_Encinitas.JPG",
+        "depicts": "The SS Encinitas and SS Moonlight — two houses built in "
+                   "the shape of boats in the late 1920s, on Third Street.",
+    },
+    "ramona": {
+        "title": "Montecito Ranch, Ramona",
+        "author": "Jerrye & Roy Klotz, M.D.",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:MONTECITO_RANCH,_RAMONA,_SAN_DIEGO_COUNTY.jpg",
+        "depicts": "The 1880s ranch house at Montecito Ranch in Ramona, "
+                   "later owned by the actor James Cagney.",
+    },
+    "fallbrook": {
+        # Geotagged 33.4426, -117.2842 and categorised "Geography of
+        # Fallbrook, California". Chosen over a USDA avocado-grove frame
+        # from the same search because that one is a portrait of a named
+        # farmer, not a picture of the place.
+        "title": "Lynda Lane, Fallbrook",
+        "author": "cultivar413",
+        "licence": "CC BY 2.0",
+        "licence_url": "https://creativecommons.org/licenses/by/2.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:180214_17_Fallbrook,_CA_-_Walk_around_Ross_Lake,_Lynda_Lane.jpg",
+        "depicts": "A lane climbing past a hillside house near Ross Lake in "
+                   "Fallbrook.",
+    },
+    "4s-ranch": {
+        "title": "4S Ranch from Black Mountain",
+        "author": "Peard33",
+        "licence": "Public domain",
+        "licence_url": "",
+        "source": "https://commons.wikimedia.org/wiki/File:4sranch.JPG",
+        "depicts": "4S Ranch seen from Black Mountain, looking across the "
+                   "community to the hills beyond.",
+    },
 }
 
 
 REJECTED = {
     # Kept so nobody re-runs the same search and reaches the same wrong
-    # conclusion. Every one of these was a TOP geosearch result.
-    "fallbrook": "All top hits are San Luis Rey Mission Church, which is in "
-                 "OCEANSIDE — the Commons geotags are wrong.",
-    "valley-center": "Best hit is Daley Ranch, described as 'Escondido' with "
-                     "'location is approximate'. The rest are an insect and a "
-                     "child on a hay bale.",
-    "carmel-valley": "Geosearch returns aquarium fish; name search returns "
-                     "Monterey County. Nothing usable at either.",
-    "4s-ranch": "Bongo drums, a group photo, an agave leaf close-up.",
-    "encinitas": "Best hit is captioned only 'San Diego in September 2016' — "
-                 "not verifiable as Encinitas.",
-    "ramona": "Only archival black-and-white HABS survey photographs of a "
-              "bridge. Correct place, wrong register for a hero.",
+    # conclusion.
+    "valley-center": (
+        "Nothing publishable. Geosearch's best hit is Daley Ranch, described "
+        "as 'Escondido' with 'location is approximate'; Openverse returns "
+        "Santa Cruz Island and downtown Sacramento. The one real candidate, "
+        "File:Valley Center.jpg, carries BOTH 'Valley Center, California' and "
+        "'Laguna Mountains (California)' as categories — two places fifty "
+        "kilometres apart, and no coordinates to break the tie. A file whose "
+        "own metadata contradicts itself is not verification."
+    ),
 }
 
 
