@@ -166,6 +166,8 @@ Every area gets touched at least quarterly by a post that serves it, a guide ref
 
 **Riverside note:** the three corridor guides cite city-published district records (the SD Auditor's list doesn't reach Riverside County), publish no volume claims (no Compass record there), and ship on designed plate heroes until a photography pass — same §5-of-HANDOFF verification method when it runs. Add `Temecula Murrieta Menifee` phrasings to the monthly listening sweeps and the AI query panel.
 
+**Southern expansion (2026-07-30, twelve areas):** La Jolla, Pacific Beach, Ocean Beach, Hillcrest, North Park, Downtown, College Area + Chula Vista, Santee, El Cajon, Spring Valley, Lemon Grove — all guides live, all served today by the market pulse plus their own live-fact blocks. Post bank seeded by the guides themselves: **STRO license explainer** (PB/OB/Mission Beach tiers — high-intent, no local competitor answers it with the actual caps), **La Jolla cityhood tracker** (update-in-place per LAFCO milestone, same pattern as Del Mar bluff/rail), **Hillcrest plan amendment owner explainer**, **Chula Vista east/west total-monthly comparison**, **Fanita Ranch tracker**. Add all twelve to listening sweeps and the AI panel; photography pass covers all fifteen new areas together.
+
 ### 6.4 30 / 60 / 90 (re-baselined 2026-07-30 after the foundation sprint)
 
 - **By day 30:** posts #9, #10, #11, #12 shipped — the calendar's foundation set complete (#8 enrollment-windows holds for its January news window unless the client wants it early); guide-refresh pass #1 underway; first local `/last30days` Reddit pass appended to communityVoice.md; client actions requested in writing: `LEAD_ENDPOINT`, privacy policy, GBP postcard, RSF call.

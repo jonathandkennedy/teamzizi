@@ -48,15 +48,22 @@ def _area_served() -> list[dict[str, Any]]:
     actually documents.
     """
     areas: list[dict[str, Any]] = []
-    for hood in site.NEIGHBORHOODS:
+    for hood in site.NEIGHBORHOODS + site.SD_CITY:
+        # "Downtown San Diego, San Diego, CA" would stutter — its name
+        # already carries the city.
+        name = (
+            f"{hood['name']}, {site.REGION}"
+            if site.CITY in hood["name"]
+            else f"{hood['name']}, {site.CITY}, {site.REGION}"
+        )
         entry: dict[str, Any] = {
             "@type": "Place",
-            "name": f"{hood['name']}, {site.CITY}, {site.REGION}",
+            "name": name,
         }
         if hood["wikipedia"]:
             entry["sameAs"] = hood["wikipedia"]
         areas.append(entry)
-    for hood in site.NORTH_COUNTY + site.SW_RIVERSIDE:
+    for hood in site.NORTH_COUNTY + site.EAST_SOUTH + site.SW_RIVERSIDE:
         entry = {
             "@type": "Place",
             "name": f"{hood['name']}, California",

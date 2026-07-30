@@ -221,6 +221,129 @@ DISTRICTS.update({
 })
 
 # --------------------------------------------------------------------------
+# City neighborhoods, East County and South Bay, added 2026-07-30 — same
+# county, same source: the County Auditor's active FY 2025-26 list, re-read
+# in full for this pass. Chula Vista is the headline: the city's east-side
+# master plans account for 33 district lines under the city alone, with the
+# elementary and high school districts levying separately — three layers
+# possible on one bill. Santee and Lemon Grove each appear once, and the
+# Lemon Grove district is a commercial corridor, which the custom lead says
+# plainly rather than letting "has Mello-Roos" mislead.
+# --------------------------------------------------------------------------
+
+DISTRICTS.update({
+    "chula-vista": {
+        "has_cfd": True,
+        "districts": [
+            ("City districts — Otay Ranch villages, Eastlake, Millenia, Sunbow; 33 lines in the county list", "6014-xx / 6015-xx", "Spicer Consulting Group", "(866) 504-2067"),
+            ("Chula Vista Elementary CFDs #1–#21", "3798-xx", "Chula Vista Elementary School District", "(619) 425-9600"),
+            ("Sweetwater Union High CFDs #1–#6", "6159-xx", "Sweetwater Union High School District", "(619) 691-5575"),
+        ],
+        "lead": (
+            "Chula Vista carries the densest Mello-Roos concentration in "
+            "the county list — 33 city district lines across the east-side "
+            "master plans (Otay Ranch, Eastlake, Millenia, Sunbow), plus "
+            "separate districts levied by the elementary and high school "
+            "districts — so a single east-side parcel can carry city, "
+            "elementary and high-school special-tax lines at once."
+        ),
+        "note": (
+            "The split is geographic: western Chula Vista's older stock "
+            "largely predates the Mello-Roos era, while nearly all of the "
+            "load sits east of Interstate 805. Which districts apply, and "
+            "at what amount, is parcel-specific — the tax bill names every "
+            "line."
+        ),
+    },
+    "santee": {
+        "has_cfd": True,
+        "districts": [
+            ("Santee CFD 2015-1 Zone 1", "6091-46", "City of Santee", "(619) 258-4100"),
+        ],
+        "lead": (
+            "Santee appears once in the County Auditor's active "
+            "FY 2025-26 list — CFD 2015-1 Zone 1 — so Mello-Roos in Santee "
+            "is the exception rather than the rule, concentrated in newer "
+            "development, and the tax bill for a specific parcel settles "
+            "it."
+        ),
+        "note": (
+            "Most of Santee's housing stock predates community facilities "
+            "financing entirely. The city publishes its own CFD "
+            "information; the county list and the bill are the checkable "
+            "record."
+        ),
+    },
+    "lemon-grove": {
+        "has_cfd": True,
+        "districts": [
+            ("Main St Promenade CFD 2013-1", "6060-14", "City of Lemon Grove", "(619) 825-3800"),
+        ],
+        "lead": (
+            "Lemon Grove appears once in the County Auditor's active "
+            "FY 2025-26 list — the Main St Promenade district (2013-1), a "
+            "commercial-corridor CFD — so a typical Lemon Grove home does "
+            "not carry Mello-Roos, and the tax bill for a specific parcel "
+            "settles it."
+        ),
+        "note": (
+            "A district named in the list is not the same thing as a tax "
+            "on the housing stock — the Promenade district exists to fund "
+            "a commercial corridor. Residential Lemon Grove's property-tax "
+            "story is ordinary base rates on mid-century stock."
+        ),
+    },
+    # Verified absences — same method, list re-read 2026-07-30.
+    "el-cajon": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the County Auditor's active "
+        "FY 2025-26 list is named for El Cajon. On older East County stock "
+        "that is the quiet half of the affordability math: the same loan "
+        "payment buys more house when no special-tax line sits on top of "
+        "it.")},
+    "spring-valley": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "Spring Valley. As unincorporated county territory its cost "
+        "questions run to county service levels and parcel condition "
+        "rather than special taxes.")},
+    "la-jolla": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "La Jolla. Property-tax questions there are usually Proposition 13 "
+        "basis after long ownership, and reassessment at sale — a different "
+        "conversation entirely.")},
+    "pacific-beach": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "Pacific Beach. The carrying costs that actually surprise buyers "
+        "here are coastal: insurance, and the licensing economics of "
+        "short-term rental plans.")},
+    "ocean-beach": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "Ocean Beach. The cost conversations that matter are condition and "
+        "coastal exposure on older cottages, not special taxes.")},
+    "hillcrest": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "Hillcrest. Maintenance assessment districts — a different, smaller "
+        "instrument — do operate in San Diego's urban neighborhoods, and "
+        "the tax bill itemizes any that apply.")},
+    "north-park": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "North Park. Where a home is a designated historic resource, the "
+        "relevant tax program runs the other way — a Mills Act contract "
+        "can reduce property taxes in exchange for preservation "
+        "obligations.")},
+    "downtown-san-diego": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "Downtown San Diego. The monthly obligation that behaves like a "
+        "second tax downtown is the HOA assessment, and it is read in the "
+        "association's budget and CC&Rs rather than on the county "
+        "bill.")},
+    "college-area": {"has_cfd": False, "districts": [], "note": (
+        "No community facilities district in the active list is named for "
+        "the College Area. The community's cost questions are rental-market "
+        "questions — what a property can lawfully be, not what it is "
+        "taxed.")},
+})
+
+# --------------------------------------------------------------------------
 # Southwest Riverside County, added 2026-07-30. A DIFFERENT COUNTY: the San
 # Diego Auditor's list above says nothing about these cities, so each entry
 # below carries its own source (the city's published CFD/debt records) and

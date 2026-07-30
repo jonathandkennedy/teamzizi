@@ -549,12 +549,150 @@ SW_RIVERSIDE = [
     },
 ]
 
+# City of San Diego neighborhoods south of the original farm, added
+# 2026-07-30 at client request. These are San Diego communities (La Jolla
+# included — its cityhood question is answered honestly on its page), so
+# they take the "{name}, San Diego, CA" areaServed form and San Diego
+# Unified as the district.
+SD_CITY = [
+    {
+        "slug": "la-jolla",
+        "name": "La Jolla",
+        "zip": "92037",
+        "district": "San Diego Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/La_Jolla",
+        "video": None,
+        "priority": 1,
+        "angle": "The 6710 La Jolla Blvd development representation justifies the page (GAMEPLAN §9). Cityhood question is live news.",
+    },
+    {
+        "slug": "pacific-beach",
+        "name": "Pacific Beach",
+        "zip": "92109",
+        "district": "San Diego Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Pacific_Beach,_San_Diego",
+        "video": None,
+        "priority": 2,
+        "angle": "STRO license math is the question every buyer asks and few pages answer with the actual tiers.",
+    },
+    {
+        "slug": "ocean-beach",
+        "name": "Ocean Beach",
+        "zip": "92107",
+        "district": "San Diego Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Ocean_Beach,_San_Diego",
+        "video": None,
+        "priority": 3,
+        "angle": "Height limit + community plan explain the whole market; overflight is checkable block by block.",
+    },
+    {
+        "slug": "hillcrest",
+        "name": "Hillcrest",
+        "zip": "92103",
+        "district": "San Diego Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Hillcrest,_San_Diego",
+        "video": None,
+        "priority": 4,
+        "angle": "The 2024 plan amendment (~17,000 homes) is a generational rezoning almost nobody explains to owners.",
+    },
+    {
+        "slug": "north-park",
+        "name": "North Park",
+        "zip": "92104",
+        "district": "San Diego Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/North_Park,_San_Diego",
+        "video": None,
+        "priority": 5,
+        "angle": "Historic districts + Mills Act + ADU rules — three regulatory layers on Craftsman stock.",
+    },
+    {
+        "slug": "downtown-san-diego",
+        "name": "Downtown San Diego",
+        "zip": "92101",
+        "district": "San Diego Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Downtown_San_Diego",
+        "video": None,
+        "priority": 6,
+        "angle": "Condo-regime market: HOA docs, FAA height caps, district-by-district differences.",
+    },
+    {
+        "slug": "college-area",
+        "name": "College Area",
+        "zip": "92115",
+        "district": "San Diego Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/College_Area,_San_Diego",
+        "video": None,
+        "priority": 7,
+        "angle": "SDSU drives the economics; owner-occupants and investors underwrite the same house differently.",
+    },
+]
+
+# East County and South Bay, added 2026-07-30 at client request — and this
+# is where salesRecord.md says the book actually lives: Spring Valley, South
+# Bay (incl. Chula Vista), Santee and El Cajon are named top markets. Counts
+# stay unpublished until the full export lands (SOLD_RECORD = None).
+EAST_SOUTH = [
+    {
+        "slug": "chula-vista",
+        "name": "Chula Vista",
+        "zip": "91910, 91911, 91913, 91914, 91915",
+        "district": "Chula Vista Elementary School District (K-6) and Sweetwater Union High School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Chula_Vista,_California",
+        "video": None,
+        "priority": 1,
+        "angle": "Named top market. The I-805 east/west split and the three-layer CFD bill are the whole story.",
+    },
+    {
+        "slug": "santee",
+        "name": "Santee",
+        "zip": "92071",
+        "district": "Santee School District (K-8) and Grossmont Union High School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Santee,_California",
+        "video": None,
+        "priority": 2,
+        "angle": "Named top market. One CFD in the list; river floodplain and Fanita Ranch are the land-use facts.",
+    },
+    {
+        "slug": "el-cajon",
+        "name": "El Cajon",
+        "zip": "92019, 92020, 92021",
+        "district": "Cajon Valley Union School District (K-8) and Grossmont Union High School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/El_Cajon,_California",
+        "video": None,
+        "priority": 3,
+        "angle": "Named top market. No Mello-Roos in the list — the monthly-cost story against newer communities.",
+    },
+    {
+        "slug": "spring-valley",
+        "name": "Spring Valley",
+        "zip": "91977, 91978",
+        "district": "La Mesa-Spring Valley Schools (K-8) and Grossmont Union High School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Spring_Valley,_San_Diego_County,_California",
+        "video": None,
+        "priority": 4,
+        "angle": "Named top market, and unincorporated — the county-jurisdiction facts the rural pages pioneered, in a suburban setting.",
+    },
+    {
+        "slug": "lemon-grove",
+        "name": "Lemon Grove",
+        "zip": "91945",
+        "district": "Lemon Grove School District (K-8) and Grossmont Union High School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Lemon_Grove,_California",
+        "video": None,
+        "priority": 5,
+        "angle": "One of the county's smallest cities; its single CFD is commercial-corridor only — worth saying plainly.",
+    },
+]
+
 # Everything the site covers. The original six stay first in navigation
 # because the client claims them; North County follows in record order;
-# the Riverside corridor closes the list.
-ALL_AREAS = NEIGHBORHOODS + NORTH_COUNTY + SW_RIVERSIDE
+# the city neighborhoods, East County/South Bay and the Riverside corridor
+# close the list.
+ALL_AREAS = NEIGHBORHOODS + NORTH_COUNTY + SD_CITY + EAST_SOUTH + SW_RIVERSIDE
 
 NORTH_COUNTY_ORDER = [a["slug"] for a in sorted(NORTH_COUNTY, key=lambda x: x["priority"])]
+SD_CITY_ORDER = [a["slug"] for a in sorted(SD_CITY, key=lambda x: x["priority"])]
+EAST_SOUTH_ORDER = [a["slug"] for a in sorted(EAST_SOUTH, key=lambda x: x["priority"])]
 SW_RIVERSIDE_ORDER = [a["slug"] for a in sorted(SW_RIVERSIDE, key=lambda x: x["priority"])]
 
 NAV_ORDER = [

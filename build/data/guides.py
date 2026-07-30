@@ -1468,6 +1468,766 @@ GUIDES.update({
 })
 
 # --------------------------------------------------------------------------
+# City neighborhoods, East County and South Bay, added 2026-07-30 at client
+# request — southward to where salesRecord.md says the book actually lives.
+# Same rules: structural facts only, places and processes never people.
+# Live regulatory facts verified 2026-07-30: STRO tiers per the city's
+# ordinance, the Hillcrest Focused Plan Amendment (adopted 2024-07-30), the
+# La Jolla incorporation timeline per SD LAFCO, the county CFD list re-read
+# in full (see taxes.py).
+# --------------------------------------------------------------------------
+
+GUIDES.update({
+    "la-jolla": [
+        {
+            "anchor": "own-city",
+            "question": "Is La Jolla its own city?",
+            "lead": (
+                "La Jolla is not its own city today &mdash; it is a "
+                "community of the City of San Diego with its own postal "
+                "identity (92037) &mdash; and an active incorporation "
+                "effort is testing that: LAFCO advanced a cityhood "
+                "application in 2025, the state-required fiscal analysis "
+                "began in 2026, and organizers aim for a 2028 ballot."
+            ),
+            "body": (
+                "<p>Two facts keep the question honest. Incorporation "
+                "would need approval from La Jolla voters <em>and</em> "
+                "voters in the rest of San Diego, and until any of that "
+                "happens the City of San Diego&rsquo;s rules govern every "
+                "permit, tax and service in La Jolla. The San Diego LAFCO "
+                "project page is the record; a transaction today is a "
+                "City of San Diego transaction.</p>"
+            ),
+        },
+        {
+            "anchor": "height-limit",
+            "question": "Why are most La Jolla buildings low-rise?",
+            "lead": (
+                "A 30-foot coastal height limit, adopted by San Diego "
+                "voters in 1972&rsquo;s Proposition D, governs new "
+                "construction across the city&rsquo;s coastal zone "
+                "including La Jolla &mdash; the reason the skyline stops "
+                "where it does, and a hard constraint on any remodel that "
+                "adds a story."
+            ),
+            "body": (
+                "<p>The limit predates almost every current owner and "
+                "survives legal challenge better than buyers assume. What "
+                "it means in practice: redevelopment value on a La Jolla "
+                "lot is set by what thirty feet can hold, and any plan "
+                "premised on building higher needs the specific "
+                "parcel&rsquo;s zoning read before money moves.</p>"
+            ),
+        },
+        {
+            "anchor": "micro-areas",
+            "question": "What are the different parts of La Jolla?",
+            "lead": (
+                "La Jolla divides into named micro-areas &mdash; the "
+                "Village, La Jolla Shores, the Muirlands, Bird Rock and "
+                "others &mdash; that differ structurally in lot size, "
+                "slope, walkability and stock age, which is why "
+                "community-wide generalizations mislead more in La Jolla "
+                "than almost anywhere in San Diego."
+            ),
+            "body": (
+                "<p>The Village and Bird Rock are walkable commercial "
+                "spines with smaller lots; the Shores flattens to the "
+                "beach; the Muirlands and the hillsides above carry the "
+                "large view parcels. Pricing, insurance and renovation "
+                "questions all answer differently by micro-area, which is "
+                "why the useful comparison set is the micro-area, not "
+                "&ldquo;La Jolla.&rdquo;</p>"
+            ),
+        },
+    ],
+    "pacific-beach": [
+        {
+            "anchor": "str-license",
+            "question": "Can you run a short-term rental in Pacific Beach?",
+            "lead": (
+                "Short-term rentals in Pacific Beach run under the City "
+                "of San Diego&rsquo;s STRO ordinance: whole-home licenses "
+                "outside Mission Beach (Tier 3) are capped citywide at "
+                "about one percent of the city&rsquo;s housing stock, "
+                "home-sharing tiers are separate, and only Mission Beach "
+                "carries its own higher cap."
+            ),
+            "body": (
+                "<p>The practical consequence for a Pacific Beach "
+                "purchase premised on rental income: the license path "
+                "has to be confirmed before close, not assumed &mdash; "
+                "licenses are issued to hosts rather than attaching to "
+                "the property, and the citywide cap means availability "
+                "changes over time. The city&rsquo;s STRO pages carry "
+                "the current tier rules and counts.</p>"
+            ),
+        },
+        {
+            "anchor": "flood-zones",
+            "question": "Do parts of Pacific Beach sit in a flood zone?",
+            "lead": (
+                "Low-lying blocks of Pacific Beach around Mission Bay "
+                "&mdash; Crown Point among them &mdash; sit in mapped "
+                "FEMA flood zones, and the designation is a parcel-level "
+                "fact that decides whether a lender requires flood "
+                "insurance."
+            ),
+            "body": (
+                "<p>FEMA&rsquo;s flood maps are public and searchable by "
+                "address, and the answer belongs in the affordability "
+                "math alongside the mortgage quote &mdash; flood "
+                "premiums on the bay-adjacent blocks are real money. Two "
+                "streets of elevation routinely separate a mapped zone "
+                "from an unmapped one.</p>"
+            ),
+        },
+        {
+            "anchor": "micro-areas",
+            "question": "How do North PB, Crown Point and the beach blocks differ?",
+            "lead": (
+                "Pacific Beach splits structurally into the ocean-front "
+                "and boardwalk blocks, the flat central grid, Crown "
+                "Point on the bay, and North Pacific Beach rising toward "
+                "Bird Rock &mdash; with stock age, noise exposure and "
+                "rental concentration all changing block by block."
+            ),
+            "body": (
+                "<p>North Pacific Beach carries more owner-occupied "
+                "single-family stock; the blocks nearest the boardwalk "
+                "carry the densest rental and nightlife exposure &mdash; "
+                "a difference any buyer can verify with two evening "
+                "visits. The useful question is never &ldquo;what is PB "
+                "like&rdquo; but &ldquo;what is this block like at 11 "
+                "pm.&rdquo;</p>"
+            ),
+        },
+    ],
+    "ocean-beach": [
+        {
+            "anchor": "low-rise",
+            "question": "Why has Ocean Beach stayed low-rise while other beach towns built up?",
+            "lead": (
+                "Ocean Beach sits inside the coastal zone governed by "
+                "San Diego&rsquo;s 30-foot height limit (Proposition D, "
+                "1972), and its community plan has held a low-scale line "
+                "for decades &mdash; together they are why the cottage "
+                "fabric survives and why redevelopment assumptions that "
+                "pencil elsewhere do not pencil in Ocean Beach."
+            ),
+            "body": (
+                "<p>For a buyer the constraint cuts both ways: it limits "
+                "what can be built on a lot, and it protects the scale "
+                "that makes the neighborhood worth buying into. Plans "
+                "premised on maximizing a parcel need the community "
+                "plan and coastal rules read first &mdash; Ocean Beach "
+                "is where those documents bind hardest.</p>"
+            ),
+        },
+        {
+            "anchor": "overflight",
+            "question": "How loud is airport overflight in Ocean Beach?",
+            "lead": (
+                "Aircraft departing San Diego International climb west "
+                "over the Point Loma peninsula, and parts of Ocean Beach "
+                "hear it &mdash; how much varies block by block, and the "
+                "airport authority publishes noise contour maps that put "
+                "a checkable line under what an afternoon visit "
+                "suggests."
+            ),
+            "body": (
+                "<p>Overflight is a mapped, disclosed condition rather "
+                "than a rumor: the contours exist, the disclosure "
+                "obligations exist, and an hour on the specific block at "
+                "departure-heavy times answers the question no listing "
+                "will. Sensitivity to it is personal; the facts about it "
+                "are not.</p>"
+            ),
+        },
+        {
+            "anchor": "cottage-stock",
+            "question": "What should an inspection focus on in an Ocean Beach cottage?",
+            "lead": (
+                "Ocean Beach&rsquo;s housing stock skews old and coastal "
+                "&mdash; beach cottages from the early and mid twentieth "
+                "century &mdash; so inspections there earn their fee on "
+                "foundations, framing moisture, original electrical, "
+                "sewer laterals and salt-air corrosion rather than on "
+                "cosmetics."
+            ),
+            "body": (
+                "<p>None of that is a reason to avoid the stock; it is "
+                "the reason inspection contingencies exist. A cottage "
+                "that has had its systems renewed is a different "
+                "purchase from one wearing new paint over 1940s wiring, "
+                "and the permit history &mdash; public record &mdash; "
+                "usually says which one is on offer.</p>"
+            ),
+        },
+    ],
+    "hillcrest": [
+        {
+            "anchor": "plan-amendment",
+            "question": "What did the 2024 Hillcrest plan amendment change?",
+            "lead": (
+                "San Diego&rsquo;s City Council adopted the Hillcrest "
+                "Focused Plan Amendment on July 30, 2024, creating "
+                "capacity for roughly 17,000 additional homes with "
+                "densities that allow high-rise construction &mdash; a "
+                "generational rezoning of the neighborhood&rsquo;s "
+                "core."
+            ),
+            "body": (
+                "<p>A plan sets capacity; construction follows financing "
+                "and takes years &mdash; so the amendment&rsquo;s "
+                "near-term effect is on land value and development "
+                "interest, not on next year&rsquo;s skyline. For owners "
+                "the practical questions are parcel-specific: what "
+                "density now applies to this lot, and what is proposed "
+                "nearby. The city&rsquo;s plan page and development "
+                "tracker answer both.</p>"
+            ),
+        },
+        {
+            "anchor": "medical-campus",
+            "question": "What is happening to the UCSD hospital campus in Hillcrest?",
+            "lead": (
+                "UC San Diego is redeveloping its Hillcrest medical "
+                "campus under a long-range development plan &mdash; a "
+                "multi-year rebuild that keeps the institution in the "
+                "neighborhood while replacing most of the aging "
+                "site &mdash; and construction phasing there is a "
+                "years-long fact of life for the surrounding blocks."
+            ),
+            "body": (
+                "<p>Institutional campuses run on published plans: the "
+                "LRDP and its environmental documents state what gets "
+                "built, roughly when, and how traffic and staging are "
+                "handled. A buyer near the campus reads those documents "
+                "rather than guessing &mdash; the difference between a "
+                "construction season and a construction decade is in "
+                "them.</p>"
+            ),
+        },
+        {
+            "anchor": "stock-eras",
+            "question": "What kind of housing stock does Hillcrest actually have?",
+            "lead": (
+                "Hillcrest layers a century of stock &mdash; early "
+                "1900s streetcar-suburb houses, mid-century apartment "
+                "courts, 1970s&ndash;80s condo conversions, and newer "
+                "mixed-use buildings &mdash; and each era carries its "
+                "own inspection and ownership questions."
+            ),
+            "body": (
+                "<p>Conversion-era condos deserve particular attention "
+                "to HOA reserves and building systems &mdash; a 1970s "
+                "building&rsquo;s pipes do not care about its renovated "
+                "kitchens. On the older houses, the usual pre-war items "
+                "&mdash; foundations, laterals, original wiring &mdash; "
+                "apply as they do across the urban core.</p>"
+            ),
+        },
+    ],
+    "north-park": [
+        {
+            "anchor": "historic-districts",
+            "question": "Do North Park homes fall under historic-district rules?",
+            "lead": (
+                "Parts of North Park sit inside designated historic "
+                "districts &mdash; the Dryden District among them &mdash; "
+                "where City of San Diego historical-resource rules attach "
+                "to contributing homes: exterior changes route through "
+                "historic review, and Mills Act contracts can reduce "
+                "property taxes in exchange for preservation "
+                "obligations."
+            ),
+            "body": (
+                "<p>Historic status is parcel-specific and checkable "
+                "before an offer: the city&rsquo;s historical resources "
+                "records state whether a home is designated or "
+                "contributing, and escrow will surface an existing Mills "
+                "Act contract &mdash; an obligation and a tax benefit "
+                "that transfer with the house. Neither is a surprise "
+                "anyone needs to have.</p>"
+            ),
+        },
+        {
+            "anchor": "adu-activity",
+            "question": "Why do North Park lots carry so many ADUs?",
+            "lead": (
+                "North Park&rsquo;s transit-adjacent zoning made it one "
+                "of the City of San Diego&rsquo;s most active areas for "
+                "accessory dwelling units under the city&rsquo;s bonus "
+                "rules &mdash; and those rules have been revised more "
+                "than once, so what a lot could build last year, this "
+                "year and next are three different questions."
+            ),
+            "body": (
+                "<p>The current municipal code, not the neighbors&rsquo; "
+                "lot, is the authority on what an ADU plan can be "
+                "&mdash; and for a buyer, existing unpermitted units are "
+                "the thing to smoke out in inspection and permit "
+                "history. The <a href=\"/blog/adu-rules-san-diego-"
+                "county-2026\">ADU rules explainer</a> covers the state "
+                "layer and how to check a specific parcel.</p>"
+            ),
+        },
+        {
+            "anchor": "craftsman-stock",
+            "question": "What does buying a North Park Craftsman actually involve?",
+            "lead": (
+                "North Park&rsquo;s signature stock is pre-war &mdash; "
+                "Craftsman and California bungalows from the 1910s and "
+                "1920s &mdash; which makes foundations, original "
+                "electrical, sewer laterals and a century of "
+                "renovation-over-renovation the substance of an "
+                "inspection there."
+            ),
+            "body": (
+                "<p>Permit history is the shortcut: a bungalow with "
+                "documented system renewals is a different risk from an "
+                "undocumented flip, at the same list price. And where a "
+                "home might qualify as a historic resource, that status "
+                "changes the renovation path &mdash; check it before "
+                "planning, not after.</p>"
+            ),
+        },
+    ],
+    "downtown-san-diego": [
+        {
+            "anchor": "hoa-regime",
+            "question": "What does an HOA actually cover in a Downtown San Diego high-rise?",
+            "lead": (
+                "A Downtown San Diego condominium is a share of a "
+                "building run by its association: the HOA assessment "
+                "carries the master insurance, building systems, staff "
+                "and amenities, and the documents that price the "
+                "purchase are the association&rsquo;s budget, reserve "
+                "study and CC&amp;Rs &mdash; not the unit&rsquo;s "
+                "finishes."
+            ),
+            "body": (
+                "<p>Reserve funding is the number that separates "
+                "similar-looking buildings: an under-reserved tower "
+                "meets its roof and elevator bills through special "
+                "assessments, and those arrive as five-figure surprises. "
+                "Escrow delivers the documents; reading them is the "
+                "inspection.</p>"
+            ),
+        },
+        {
+            "anchor": "districts",
+            "question": "What are the different districts of Downtown San Diego?",
+            "lead": (
+                "Downtown San Diego is seven districts behaving "
+                "differently &mdash; the Gaslamp Quarter, East Village, "
+                "Marina, Columbia, Cortez Hill, Little Italy and the "
+                "Core &mdash; with noise, construction pipeline and "
+                "building age varying enough that the district matters "
+                "more than the word downtown."
+            ),
+            "body": (
+                "<p>Little Italy and Marina skew established and "
+                "quieter; East Village carries the largest construction "
+                "pipeline and the widest variance block to block; the "
+                "Gaslamp is a nightlife district first. The same "
+                "two-evening test that serves beach buyers serves "
+                "downtown buyers: visit the block at night before "
+                "pricing the view.</p>"
+            ),
+        },
+        {
+            "anchor": "height-caps",
+            "question": "Why do Downtown San Diego towers stop at similar heights?",
+            "lead": (
+                "Aircraft on approach to San Diego International "
+                "descend directly over Downtown San Diego, and federal "
+                "airspace surfaces cap building heights below what "
+                "zoning alone would allow &mdash; the reason the "
+                "skyline plateaus rather than spikes."
+            ),
+            "body": (
+                "<p>For an owner the practical edge of that fact is "
+                "view durability: a protected view exists only where "
+                "the parcel between you and the water cannot build "
+                "higher, and the height caps make that calculable "
+                "rather than hopeful. Overflight noise is the same "
+                "checkable, block-varying fact it is everywhere on the "
+                "approach path.</p>"
+            ),
+        },
+    ],
+    "college-area": [
+        {
+            "anchor": "sdsu-economics",
+            "question": "How does SDSU shape the College Area housing market?",
+            "lead": (
+                "San Diego State University sits inside the College "
+                "Area, and the community&rsquo;s housing economics run "
+                "on it: a substantial share of the stock operates as "
+                "student rentals, the city regulates high-occupancy "
+                "conversions, and the university&rsquo;s own housing "
+                "construction shifts the rental balance year to year."
+            ),
+            "body": (
+                "<p>The consequence is two different underwritings of "
+                "the same house: an owner-occupant prices quiet and "
+                "condition; an investor prices bedrooms and the "
+                "city&rsquo;s rental rules. Knowing which buyer a "
+                "listing is priced for &mdash; and which one you are "
+                "&mdash; is most of the negotiation in the College "
+                "Area.</p>"
+            ),
+        },
+        {
+            "anchor": "trolley",
+            "question": "Is the College Area on the trolley?",
+            "lead": (
+                "The trolley&rsquo;s Green Line serves the College Area "
+                "through the SDSU Transit Center &mdash; an underground "
+                "station beneath the campus &mdash; connecting toward "
+                "Mission Valley and downtown, which puts genuine "
+                "rail transit inside a neighborhood that otherwise "
+                "reads as postwar suburbia."
+            ),
+            "body": (
+                "<p>Transit adjacency also carries zoning consequences "
+                "in San Diego &mdash; density and parking rules relax "
+                "near stations &mdash; so proximity to the station is "
+                "both a commute fact and a development-potential fact, "
+                "each checkable against the current code.</p>"
+            ),
+        },
+        {
+            "anchor": "stock",
+            "question": "What is the housing stock like in the College Area?",
+            "lead": (
+                "The College Area&rsquo;s stock is predominantly "
+                "postwar &mdash; 1940s through 1960s ranches and "
+                "minimal-traditional homes on modest lots, with canyon "
+                "and view pockets on the ridges &mdash; and its "
+                "inspection profile follows that era: original panels, "
+                "galvanized supply lines, aging laterals."
+            ),
+            "body": (
+                "<p>Condition variance is wide because use has been "
+                "wide: long-held family homes and decades-hard rentals "
+                "sit on the same street at the same list price. The "
+                "permit record and a thorough inspection separate them "
+                "&mdash; which is the entire game in this "
+                "neighborhood.</p>"
+            ),
+        },
+    ],
+    "chula-vista": [
+        {
+            "anchor": "east-west",
+            "question": "Why do eastern and western Chula Vista feel like different markets?",
+            "lead": (
+                "Chula Vista splits at Interstate 805: western Chula "
+                "Vista is the older city &mdash; mid-century stock, "
+                "largely free of Mello-Roos &mdash; while the east side "
+                "is master-planned (Eastlake, Otay Ranch, Millenia) and "
+                "carries the densest community-facilities-district "
+                "concentration in the county list."
+            ),
+            "body": (
+                "<p>The same list price therefore buys two different "
+                "monthly payments, and the Mello-Roos block above is "
+                "where the difference lives &mdash; a single east-side "
+                "parcel can carry city, elementary-district and "
+                "high-school-district special-tax lines at once. "
+                "Comparing east to west without the tax lines is "
+                "comparing nothing.</p>"
+            ),
+        },
+        {
+            "anchor": "two-districts",
+            "question": "Why does Chula Vista have two school districts instead of one?",
+            "lead": (
+                "Chula Vista has no unified school district: Chula "
+                "Vista Elementary School District &mdash; among the "
+                "largest elementary-only districts in California "
+                "&mdash; runs kindergarten through sixth grade, and "
+                "Sweetwater Union High School District runs seventh "
+                "through twelfth."
+            ),
+            "body": (
+                "<p>Both districts also levy their own Mello-Roos on "
+                "the east side, which is the unusual part &mdash; the "
+                "school-assignment question and the school-tax question "
+                "are separate checks on the same address. Assignment "
+                "itself follows each district&rsquo;s boundary maps, "
+                "confirmed with the district for the exact address.</p>"
+            ),
+        },
+        {
+            "anchor": "bayfront",
+            "question": "What is happening on the Chula Vista bayfront?",
+            "lead": (
+                "The Chula Vista Bayfront is mid-transformation: the "
+                "Gaylord Pacific resort and convention center opened in "
+                "2025 as the anchor of a decades-planned redevelopment "
+                "of the industrial waterfront, with further phases "
+                "entitled around it."
+            ),
+            "body": (
+                "<p>Waterfront redevelopment moves on public documents "
+                "&mdash; the port district&rsquo;s master plan and its "
+                "phase approvals &mdash; and its effects on the west "
+                "side are the trackable kind: employment, traffic "
+                "patterns, and what happens to the blocks between the "
+                "bay and Broadway. Watching the filings beats watching "
+                "the renderings.</p>"
+            ),
+        },
+    ],
+    "santee": [
+        {
+            "anchor": "floodplain",
+            "question": "Does the San Diego River flood in Santee?",
+            "lead": (
+                "The San Diego River runs the length of Santee, and "
+                "parts of the valley floor sit in mapped FEMA "
+                "floodplain &mdash; a parcel-level designation that "
+                "decides whether a lender requires flood insurance and "
+                "what site drainage a project must handle."
+            ),
+            "body": (
+                "<p>The maps are public and address-searchable, and "
+                "elevation moves fast on the valley edges &mdash; "
+                "streets a quarter mile apart map differently. The "
+                "check costs nothing before an offer and a premium "
+                "surprise after one.</p>"
+            ),
+        },
+        {
+            "anchor": "fanita-ranch",
+            "question": "What is Fanita Ranch and why does it keep coming up?",
+            "lead": (
+                "Fanita Ranch is a long-contested plan for roughly "
+                "3,000 homes on Santee&rsquo;s northern hillsides, "
+                "approved by the city more than once and repeatedly "
+                "challenged in court &mdash; the single land-use "
+                "decision most likely to change Santee&rsquo;s housing "
+                "supply, traffic and evacuation planning."
+            ),
+            "body": (
+                "<p>Whichever way it resolves, it is the variable: "
+                "supply on that scale moves a small city&rsquo;s "
+                "market. The city&rsquo;s records and the court docket "
+                "are the sources that matter; anything else is "
+                "advocacy from one side or the other, worth reading "
+                "as such.</p>"
+            ),
+        },
+        {
+            "anchor": "sr52",
+            "question": "What does the SR-52 commute mean for Santee?",
+            "lead": (
+                "State Route 52 begins in Santee and is its direct "
+                "line west toward Kearny Mesa, UTC and the coastal "
+                "job centers &mdash; and its peak-hour behavior is the "
+                "honest cost of Santee&rsquo;s price advantage over "
+                "communities nearer the coast."
+            ),
+            "body": (
+                "<p>The corridor test-drives in an hour: westbound in "
+                "the morning window, eastbound in the evening one. "
+                "Trolley access &mdash; the Green Line terminates in "
+                "Santee &mdash; is the alternative worth pricing for "
+                "downtown-bound commuters.</p>"
+            ),
+        },
+    ],
+    "el-cajon": [
+        {
+            "anchor": "rancho-san-diego",
+            "question": "Is Rancho San Diego part of El Cajon?",
+            "lead": (
+                "Rancho San Diego is not inside the city of El Cajon "
+                "&mdash; it is unincorporated county territory southeast "
+                "of the city line, carrying El Cajon mailing addresses "
+                "&mdash; while Fletcher Hills and Granite Hills sit "
+                "inside the city; the jurisdiction, not the address, "
+                "decides whose rules and services apply."
+            ),
+            "body": (
+                "<p>The pattern repeats across the county and this "
+                "site keeps saying so because it keeps costing buyers "
+                "money: mailing city is postal, jurisdiction is legal. "
+                "For any El Cajon-addressed parcel, the county&rsquo;s "
+                "and city&rsquo;s own maps say which government you are "
+                "dealing with.</p>"
+            ),
+        },
+        {
+            "anchor": "monthly-cost",
+            "question": "Why is the monthly cost lower in El Cajon than in newer communities at the same price?",
+            "lead": (
+                "El Cajon carries no community facilities district in "
+                "the County Auditor&rsquo;s active list, and most of "
+                "its stock predates HOA-financed development &mdash; so "
+                "at the same purchase price, the monthly payment runs "
+                "lower than in Mello-Roos communities, and the "
+                "difference is structural rather than promotional."
+            ),
+            "body": (
+                "<p>The honest comparison is total monthly cost: base "
+                "taxes on older East County stock against base plus "
+                "special taxes plus HOA in the newer master plans. The "
+                "<a href=\"/mello-roos\">Mello-Roos lookup</a> makes "
+                "the comparison concrete, community by community.</p>"
+            ),
+        },
+        {
+            "anchor": "gillespie",
+            "question": "What is Gillespie Field and does it affect El Cajon homes?",
+            "lead": (
+                "Gillespie Field is the county-operated airport on El "
+                "Cajon&rsquo;s northern edge &mdash; general aviation, "
+                "not commercial service &mdash; and its traffic "
+                "pattern, published land-use compatibility plan and "
+                "disclosure rules are mapped facts a buyer near it can "
+                "check rather than guess."
+            ),
+            "body": (
+                "<p>Airport influence areas run on documents here as "
+                "they do everywhere in the county: the compatibility "
+                "plan defines the zones, and time on the specific "
+                "street answers the subjective half of the question. "
+                "The pattern matches Ramona&rsquo;s airfield and "
+                "French Valley&rsquo;s &mdash; small airports are "
+                "checkable neighbors.</p>"
+            ),
+        },
+    ],
+    "spring-valley": [
+        {
+            "anchor": "unincorporated",
+            "question": "Is Spring Valley a city?",
+            "lead": (
+                "Spring Valley is unincorporated San Diego County "
+                "&mdash; no city hall, with the Sheriff, county fire "
+                "and county planning providing services &mdash; which "
+                "puts a suburban community under the same governance "
+                "the rural east county pages describe."
+            ),
+            "body": (
+                "<p>Unincorporated status is practical, not "
+                "ceremonial: permits route to county Planning &amp; "
+                "Development Services, code questions to county "
+                "ordinances, and service levels differ from the "
+                "incorporated cities next door. La Mesa and Lemon "
+                "Grove sit across a line that matters legally and "
+                "invisibly.</p>"
+            ),
+        },
+        {
+            "anchor": "micro-areas",
+            "question": "What are the different parts of Spring Valley?",
+            "lead": (
+                "Spring Valley&rsquo;s two ZIP codes cover distinct "
+                "terrain &mdash; the valley-floor grid, Dictionary "
+                "Hill&rsquo;s view slopes, and the Casa de Oro and "
+                "Mount Helix edges shared with unincorporated La Mesa "
+                "&mdash; with lot size, slope and stock age changing "
+                "accordingly."
+            ),
+            "body": (
+                "<p>Hillside parcels bring hillside questions &mdash; "
+                "retaining walls, drainage, access grade &mdash; and "
+                "the Mount Helix edge carries estate lots that price "
+                "like a different community because structurally they "
+                "are one. Per-street reading beats per-community "
+                "reading here.</p>"
+            ),
+        },
+        {
+            "anchor": "value-structure",
+            "question": "Why has Spring Valley been a volume market for value buyers?",
+            "lead": (
+                "Spring Valley combines mid-century stock, no "
+                "community facilities district in the county&rsquo;s "
+                "active list, and freeway position between SR-125, "
+                "SR-94 and the South Bay job corridors &mdash; the "
+                "structural ingredients of an entry-price market that "
+                "moves on volume."
+            ),
+            "body": (
+                "<p>The same structure sets the inspection agenda: "
+                "older systems, additions of varying permit status, "
+                "and hillside conditions. A permit-history read and a "
+                "thorough inspection are where value purchases in "
+                "Spring Valley are actually won.</p>"
+            ),
+        },
+    ],
+    "lemon-grove": [
+        {
+            "anchor": "own-city",
+            "question": "Is Lemon Grove its own city?",
+            "lead": (
+                "Lemon Grove incorporated in 1977 and is one of San "
+                "Diego County&rsquo;s smallest cities by area &mdash; "
+                "a full-service municipality of roughly four square "
+                "miles with the Orange Line trolley running through "
+                "its center."
+            ),
+            "body": (
+                "<p>Small-city status is a governance fact with "
+                "practical texture: one planning counter, one council, "
+                "and city-level decisions that move faster than big-"
+                "city ones. The trolley stop &mdash; rail transit in a "
+                "town this size &mdash; is the infrastructure fact "
+                "most listings undersell.</p>"
+            ),
+        },
+        {
+            "anchor": "position",
+            "question": "How central is Lemon Grove, actually?",
+            "lead": (
+                "Lemon Grove sits at the junction of SR-94 and SR-125 "
+                "&mdash; the position that puts downtown San Diego, "
+                "the South Bay and East County each one freeway away "
+                "&mdash; and centrality, not size, is the "
+                "community&rsquo;s structural argument."
+            ),
+            "body": (
+                "<p>Commute claims deserve the same skepticism "
+                "everywhere: the freeways are adjacent, and their "
+                "peak-hour behavior is the real number. The trolley "
+                "&mdash; Orange Line toward downtown &mdash; prices "
+                "the alternative for anyone working along it.</p>"
+            ),
+        },
+        {
+            "anchor": "stock",
+            "question": "What does the older Lemon Grove housing stock mean for an inspection?",
+            "lead": (
+                "Lemon Grove&rsquo;s houses are predominantly "
+                "mid-century &mdash; 1940s through 1960s bungalows and "
+                "ranches on usable lots &mdash; so inspections there "
+                "concentrate on the era&rsquo;s systems: original "
+                "panels, galvanized plumbing, sewer laterals and the "
+                "permit status of decades of additions."
+            ),
+            "body": (
+                "<p>Usable lots also make Lemon Grove a practical ADU "
+                "candidate under state law &mdash; the same rules "
+                "covered in <a href=\"/blog/adu-rules-san-diego-county-"
+                "2026\">the ADU explainer</a> apply, with the "
+                "city&rsquo;s own standards layered on. Check the "
+                "specific parcel; the lot sizes here often clear the "
+                "practical bar.</p>"
+            ),
+        },
+    ],
+})
+
+# --------------------------------------------------------------------------
 # Southwest Riverside County, added 2026-07-30 at client request. Same rules
 # as everything above: structural facts only, no prices, no ratings, places
 # and processes never people. Sources: city CFD/debt pages (see taxes.py
@@ -1662,7 +2422,7 @@ GUIDES.update({
         },
         {
             "anchor": "three-districts",
-            "question": "Which school districts serve Menifee?",
+            "question": "Why does Menifee span three school systems?",
             "lead": (
                 "Menifee splits across school systems the way Escondido "
                 "does: Menifee Union School District runs kindergarten "

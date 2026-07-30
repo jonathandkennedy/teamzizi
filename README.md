@@ -14,7 +14,7 @@ Built and maintained by [CitedRealty](https://citedrealty.com).
 
 ## Status
 
-Research and strategy complete. **The site is built** — 59 pages, including 19 neighborhood guides (16 San Diego + the Temecula/Murrieta/Menifee corridor), 19 agent pages, the `/mello-roos` and `/home-valuation` lead magnets, a seven-post journal running on [docs/content-runbook.md](docs/content-runbook.md), and a photograph on 16 of the 19 area pages (the Riverside three await a photography pass).
+Research and strategy complete. **The site is built** — 71 pages, including 31 neighborhood guides (the countywide set from La Jolla and Chula Vista to Ramona, plus the Temecula/Murrieta/Menifee corridor), 19 agent pages, the `/mello-roos` and `/home-valuation` lead magnets, a seven-post journal running on [docs/content-runbook.md](docs/content-runbook.md), and a photograph on 16 of the 31 area pages (the fifteen newest await a photography pass).
 
 **One thing blocks launch:** `site.LEAD_ENDPOINT` is a placeholder, so every lead form posts into nothing. `validate.py` fails the build on it deliberately. Full state and the open-items list: [HANDOFF.md](HANDOFF.md).
 

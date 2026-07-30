@@ -51,6 +51,10 @@ def hood(slug: str) -> dict:
 HOOD_IMAGE_MISSING = ({"carmel-valley", "4s-ranch"} | {
     a["slug"] for a in site.NORTH_COUNTY
 } | {
+    a["slug"] for a in site.SD_CITY
+} | {
+    a["slug"] for a in site.EAST_SOUTH
+} | {
     a["slug"] for a in site.SW_RIVERSIDE
 }) - set(photos.CREDITS)
 
@@ -137,13 +141,13 @@ def build_home() -> None:
 
 <section class="section">
   <div class="container" style="text-align:center">
-    <p class="eyebrow">North San Diego County</p>
+    <p class="eyebrow">San Diego County &amp; the Temecula Valley</p>
     <h2>From the coast to the corridor</h2>
     <p class="lede" style="margin-inline:auto">
       Team Azizi represents buyers and sellers across {len(site.ALL_AREAS)}
-      North San Diego communities &mdash; from Oceanside, Carlsbad and
-      Encinitas on the coast, inland through Vista, San&nbsp;Marcos,
-      Escondido and Poway, out to Fallbrook, Valley&nbsp;Center and Ramona
+      communities &mdash; the coast from La&nbsp;Jolla to Oceanside, the
+      urban core, East County and the South Bay, inland through Escondido
+      and the backcountry, and up the I&#8209;15 into the Temecula Valley
       &mdash; from the Compass office at {c.esc(site.STREET)} in
       Carmel&nbsp;Valley.
     </p>
@@ -262,6 +266,8 @@ def build_neighborhood_hub() -> None:
     path = "/neighborhoods"
     corridor = "\n".join(hood_card(slug) for slug in site.NAV_ORDER)
     north = "\n".join(hood_card(slug) for slug in site.NORTH_COUNTY_ORDER)
+    sd_city = "\n".join(hood_card(slug) for slug in site.SD_CITY_ORDER)
+    east_south = "\n".join(hood_card(slug) for slug in site.EAST_SOUTH_ORDER)
     riverside = "\n".join(hood_card(slug) for slug in site.SW_RIVERSIDE_ORDER)
     total = len(site.ALL_AREAS)
 
@@ -269,10 +275,10 @@ def build_neighborhood_hub() -> None:
   {c.picture("/assets/img/neighborhoods/_hub-hero.jpg", width=1920, height=1440,
              cls="band__media", eager=True)}
   <div class="container">
-    <h1>North San Diego &amp; Temecula Valley Neighborhood Guides</h1>
+    <h1>San Diego County &amp; Temecula Valley Neighborhood Guides</h1>
     <p style="margin-inline:auto">
-      {total} communities, from the Del Mar coast to the Ramona backcountry
-      and up the I-15 to Temecula.
+      {total} communities &mdash; from La Jolla and the Chula Vista bayfront
+      to the Ramona backcountry, and up the I-15 to Temecula.
     </p>
   </div>
 </section>
@@ -314,6 +320,33 @@ def build_neighborhood_hub() -> None:
 {corridor}
     </div>
 
+    <h3 id="san-diego-city" class="rule-gold" style="margin-top:3.5rem">
+      San Diego &mdash; the city neighborhoods
+    </h3>
+    <p>
+      From La Jolla down the coast to Ocean Beach and through the urban core
+      &mdash; communities of the City of San Diego, where the governing facts
+      are city rules: the coastal height limit, the STRO rental tiers,
+      historic districts, and plan amendments that redraw what a lot can
+      hold.
+    </p>
+    <div class="grid grid--3" style="margin-top:2rem">
+{sd_city}
+    </div>
+
+    <h3 id="east-county-south-bay" class="rule-gold" style="margin-top:3.5rem">
+      East County &amp; South Bay
+    </h3>
+    <p>
+      Santee, El Cajon, Spring Valley, Lemon Grove and Chula Vista &mdash;
+      where the team&rsquo;s transaction record actually concentrates, and
+      where the honest math (older stock, few or no special taxes, freeway
+      position) is the story competitors skip.
+    </p>
+    <div class="grid grid--3" style="margin-top:2rem">
+{east_south}
+    </div>
+
     <h3 id="temecula-valley" class="rule-gold" style="margin-top:3.5rem">
       Over the county line &mdash; the Temecula Valley
     </h3>
@@ -344,14 +377,14 @@ def build_neighborhood_hub() -> None:
         path,
         c.page(
             title=(
-                "North San Diego Neighborhood Guides — Escondido, Carlsbad, "
-                "Oceanside, Poway & More | Team Azizi"
+                "San Diego County Neighborhood Guides — La Jolla to Escondido, "
+                "Chula Vista to Temecula | Team Azizi"
             ),
             description=(
-                f"Maintained guides to {total} North San Diego communities: "
-                "which Mello-Roos districts apply, which district assigns the "
-                "schools, and Team Azizi's record in each. From Team Azizi at "
-                "Compass."
+                f"Maintained guides to {total} San Diego County and Temecula "
+                "Valley communities: which Mello-Roos districts apply, which "
+                "district assigns the schools, and Team Azizi's record in "
+                "each. From Team Azizi at Compass."
             ),
             path=path,
             body=body,
@@ -384,6 +417,14 @@ SOLD_RECORD = {
     # Southwest Riverside — absent from the Compass sales sweep entirely.
     # None means the page says nothing about volume rather than guessing.
     "temecula": None, "murrieta": None, "menifee": None,
+    # City neighborhoods + East County/South Bay. salesRecord.md names
+    # Spring Valley, South Bay (incl. Chula Vista), Santee and El Cajon as
+    # actual top markets, but per-area counts need the full export — None
+    # until then, same rule as North County.
+    "la-jolla": None, "pacific-beach": None, "ocean-beach": None,
+    "hillcrest": None, "north-park": None, "downtown-san-diego": None,
+    "college-area": None, "chula-vista": None, "santee": None,
+    "el-cajon": None, "spring-valley": None, "lemon-grove": None,
 }
 
 
@@ -589,6 +630,10 @@ def build_neighborhood(slug: str) -> None:
             tax_fact = ("10", "city CFDs formed to date")
         elif slug == "menifee":
             tax_fact = ("34", "zones in the citywide CFD")
+        elif slug == "chula-vista":
+            tax_fact = ("3", "CFD layers possible on one east-side bill")
+        elif slug == "lemon-grove":
+            tax_fact = ("1", "CFD &mdash; commercial corridor only")
         elif cfd.get("has_cfd"):
             tax_fact = (str(districts), "Mello-Roos district" + ("s" if districts != 1 else ""))
         else:
@@ -719,7 +764,10 @@ def build_neighborhood(slug: str) -> None:
 
 
 def build_neighborhoods() -> None:
-    for slug in site.NAV_ORDER + site.NORTH_COUNTY_ORDER + site.SW_RIVERSIDE_ORDER:
+    for slug in (
+        site.NAV_ORDER + site.NORTH_COUNTY_ORDER + site.SD_CITY_ORDER
+        + site.EAST_SOUTH_ORDER + site.SW_RIVERSIDE_ORDER
+    ):
         build_neighborhood(slug)
 
 
@@ -830,7 +878,7 @@ def build_home_valuation() -> None:
         ),
     ])
 
-    # Grouped rather than a flat list of nineteen: a homeowner scanning for
+    # Grouped rather than a flat list of thirty-one: a homeowner scanning for
     # their own city finds it faster, and the group label tells the agent
     # reading the lead email roughly where the property is before they open it.
     def _optgroup(label: str, slugs: list[str]) -> str:
@@ -1499,8 +1547,8 @@ def build_buy() -> None:
                 "<p>Mello-Roos is the one buyers most often miss, because it "
                 "is invisible in a listing price and varies parcel by parcel. "
                 "The <a href=\"/mello-roos\">Mello-Roos lookup</a> gives the "
-                "active districts for all nineteen communities we cover, "
-                "including the seven where the answer is none.</p>"
+                "active districts for all thirty-one communities we cover, "
+                "including the sixteen where the answer is none.</p>"
             ),
             heading="h2",
         ),
@@ -1560,7 +1608,7 @@ def build_buy() -> None:
                 "decision."
             ),
             body=(
-                "<p>All nineteen guides state the tax position, the school "
+                "<p>All thirty-one guides state the tax position, the school "
                 "districts and our actual record in that community, including "
                 "where it is thin. <a href=\"/neighborhoods\">Start "
                 "there</a>.</p>"
@@ -1695,7 +1743,7 @@ def build_mello_roos() -> None:
     92127. Everyone writes around it because getting it right means reading a
     county PDF. `build/data/taxes.py` is that PDF, parsed.
 
-    Every one of the nineteen panels is server-rendered and present in the
+    Every one of the thirty-one panels is server-rendered and present in the
     HTML, hidden with CSS rather than built on demand. An AI fetcher does not
     run JavaScript, and a lookup tool whose answers only exist after a click
     is a lookup tool no model can ever cite. The <select> is a convenience
