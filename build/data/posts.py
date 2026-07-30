@@ -2457,6 +2457,468 @@ POSTS: list[dict] = [
             },
         ],
     },
+    {
+        # Southern-expansion batch, post 2 of 5. News lane, revised as the
+        # three tracks move. Density figures are from the CEQA Notice of
+        # Determination (primary); anything sourced only to press coverage is
+        # attributed inline. The "20-story towers" framing that circulates is
+        # deliberately absent — adopted heights-in-feet never got verified to
+        # a primary document, and the du/ac numbers did.
+        "slug": "whats-changing-in-hillcrest",
+        "title": (
+            "What's changing in Hillcrest: the promenade, the "
+            "rezone's first filings, and the hospital rebuild"
+        ),
+        "dek": (
+            "Three projects are remaking Hillcrest on three different "
+            "clocks &mdash; a pedestrian promenade opening first, a "
+            "generational rezone whose first applications are just "
+            "arriving, and a hospital replacement that runs to 2033. "
+            "The dated record of each, and what an owner actually "
+            "watches. Revised as milestones land."
+        ),
+        "date": "2026-07-30",
+        "author": "zohra-azizi",
+        "description": (
+            "Hillcrest's three concurrent changes tracked with dates: "
+            "the Normal Street Promenade's opening timeline, the first "
+            "development filings under the 2024 plan amendment, the "
+            "post office relocation, and UCSD's hospital replacement "
+            "schedule through 2033."
+        ),
+        "footnote": (
+            "      Dates and figures above are from the City of San Diego&rsquo;s plan\n"
+            "      and project pages, the CEQA Notice of Determination, USPS notices, UC\n"
+            "      San Diego&rsquo;s capital-program pages and UC Regents items as of July\n"
+            "      2026, with press-reported details attributed inline. Construction\n"
+            "      schedules move; this page is revised as milestones land."
+        ),
+        "blocks": [
+            {
+                "anchor": "rezone",
+                "question": (
+                    "What did the Hillcrest rezone actually change on "
+                    "the ground?"
+                ),
+                "lead": (
+                    "The Hillcrest Focused Plan Amendment &mdash; "
+                    "adopted July 30, 2024, with its implementing "
+                    "ordinances effective December 1, 2024 &mdash; "
+                    "rezoned about 380 acres of Hillcrest and the "
+                    "Medical Complex area, raising maximum "
+                    "residential density from 109 dwelling units per "
+                    "acre to 218, and up to 290 in community "
+                    "commercial areas concentrated in the Hillcrest "
+                    "core and between Richmond Street and Park "
+                    "Boulevard."
+                ),
+                "body": (
+                    "<p>Two mechanics matter more than the "
+                    "headline numbers. The amendment mapped a "
+                    "streamlined-review zone &mdash; a CPIOZ Type A "
+                    "area along the Washington Street and University "
+                    "Avenue corridors and south along Fourth, Fifth "
+                    "and Sixth &mdash; where conforming projects "
+                    "review ministerially rather than through "
+                    "hearings. And the capacity is a 30-year "
+                    "envelope, not a construction schedule: the "
+                    "city&rsquo;s release put the added capacity at "
+                    "17,200 homes, and what converts capacity into "
+                    "buildings is the filings block below. The "
+                    "<a href=\"/neighborhoods/hillcrest\">Hillcrest "
+                    "guide</a> carries the ownership-level picture.</p>"
+                ),
+            },
+            {
+                "anchor": "first-filings",
+                "question": (
+                    "Has anything actually been proposed under the "
+                    "new Hillcrest zoning?"
+                ),
+                "lead": (
+                    "The first substantial applications in the "
+                    "Hillcrest plan area are now on file: permit "
+                    "applications submitted since July 2025 for the "
+                    "post office block at 3911 Cleveland Avenue "
+                    "&mdash; up to 270 homes in eight stories, as "
+                    "reported by Times of San Diego &mdash; and "
+                    "Hillcrest Hall at 1601 University Avenue, 97 "
+                    "income-restricted apartments that the San Diego "
+                    "Housing Commission board advanced on April 16, "
+                    "2026."
+                ),
+                "body": (
+                    "<p>A watch item rather than a filing: the "
+                    "AT&amp;T building at Sixth and University lost "
+                    "its landmark microwave tower in late 2025, and "
+                    "neighboring owners have hired planning counsel "
+                    "to explore redevelopment &mdash; but no "
+                    "application exists. The honest read for owners: "
+                    "two filings and one exploration, eighteen "
+                    "months into a 30-year plan, is what the early "
+                    "innings of a rezone look like. Parcel-level "
+                    "questions &mdash; what density now applies to a "
+                    "specific lot, what is proposed within a block "
+                    "&mdash; are answered by the city&rsquo;s plan "
+                    "page and development-tracker map, not by "
+                    "renderings in the press.</p>"
+                ),
+            },
+            {
+                "anchor": "promenade",
+                "question": (
+                    "When does the Normal Street Promenade in "
+                    "Hillcrest actually open?"
+                ),
+                "lead": (
+                    "The Normal Street Promenade &mdash; Hillcrest&rsquo;s "
+                    "conversion of Normal Street&rsquo;s west lanes "
+                    "into a pedestrian promenade with an expanded "
+                    "Pride Plaza and the 1.1-mile Eastern Hillcrest "
+                    "Bikeway &mdash; began construction in February "
+                    "2025 and is now expected to open by the end of "
+                    "2026, with full project completion in 2027, per "
+                    "the city&rsquo;s statements in July 2026 press "
+                    "coverage."
+                ),
+                "body": (
+                    "<p>The delay from the original schedule has a "
+                    "concrete cause the city has described: "
+                    "century-old infrastructure under the street "
+                    "&mdash; abandoned streetcar lines and "
+                    "disconnected storm drains &mdash; that had to "
+                    "be rebuilt first. That work is done; what "
+                    "remains is surface finish &mdash; the rainbow "
+                    "bikeway painting, roughly a hundred new trees "
+                    "(98 planted as of late July 2026, per local "
+                    "coverage), shade structures and a restored "
+                    "vintage trolley car. Adjacent reality worth "
+                    "knowing: the University Avenue pipe replacement "
+                    "next door runs to the end of 2027, so the "
+                    "promenade opening does not end construction in "
+                    "the immediate blocks.</p>"
+                ),
+            },
+            {
+                "anchor": "post-office",
+                "question": (
+                    "Is the Hillcrest post office moving?"
+                ),
+                "lead": (
+                    "The Hillcrest post office is proposed to move "
+                    "&mdash; but onto the promenade, not out of the "
+                    "neighborhood: USPS announced on December 30, "
+                    "2025, that it lost the lease at 3911 Cleveland "
+                    "Avenue and proposes relocating to the former "
+                    "Newbreak Church building fronting Normal "
+                    "Street, next to the DMV. As of late July 2026, "
+                    "no move date has been announced."
+                ),
+                "body": (
+                    "<p>The two ends of the move tell one story. "
+                    "The receiving end puts a post office, the DMV "
+                    "and the promenade on one civic block. The "
+                    "departing end is the redevelopment application "
+                    "above &mdash; the Cleveland Avenue site is the "
+                    "one carrying the 270-unit filing &mdash; which "
+                    "makes this relocation the first visible "
+                    "domino of the rezone rather than a footnote. "
+                    "USPS relocations run through a public notice "
+                    "and comment process, so the announcement "
+                    "trail, not neighborhood rumor, is where the "
+                    "actual dates will appear.</p>"
+                ),
+            },
+            {
+                "anchor": "ucsd",
+                "question": (
+                    "How far along is the UCSD Hillcrest hospital "
+                    "rebuild?"
+                ),
+                "lead": (
+                    "UC San Diego&rsquo;s Hillcrest campus rebuild "
+                    "has finished its first phase &mdash; the "
+                    "McGrath Outpatient Pavilion opened July 28, "
+                    "2025, following the parking structure completed "
+                    "in 2023 &mdash; and the main event is next: a "
+                    "roughly 300-bed replacement hospital, with site "
+                    "preparation and demolition expected to begin in "
+                    "late summer 2026, major construction in summer "
+                    "2027, and an operational date of 2033 per "
+                    "UCSD&rsquo;s current capital-program page."
+                ),
+                "body": (
+                    "<p>The driver is state hospital seismic law "
+                    "&mdash; the existing 1963 tower does not meet "
+                    "the requirements and was judged infeasible to "
+                    "retrofit, so it operates through construction "
+                    "and comes down after the replacement opens. UC "
+                    "Regents approved $150 million in "
+                    "preliminary-plans funding on March 19, 2025, "
+                    "with the full budget to follow environmental "
+                    "review. For the surrounding blocks that means "
+                    "the construction phasing runs on published "
+                    "documents with dates &mdash; and a buyer near "
+                    "the campus edge is buying next to a "
+                    "seven-year, phase-mapped project, not an "
+                    "open-ended one. The 2019 campus plan also "
+                    "carries up to 1,000 on-campus homes in its "
+                    "later phases &mdash; housing supply on "
+                    "Hillcrest&rsquo;s doorstep that predates the "
+                    "2024 rezone.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        # Southern-expansion batch, post 3 of 5. Update-in-place tracker on
+        # the Del Mar bluff/rail pattern. Research note that matters for
+        # future revisions: LAFCO's project page files the CFA-contract item
+        # under a "May 4, 2026" heading, but every meeting-level document
+        # (agenda, deck, staff report, executed contract) says the Commission
+        # authorized it at the June 15, 2026 special meeting — cite June 15.
+        # The applicant's ~$8M/yr revenue-neutrality figure is an ACLJ
+        # estimate reported by lajolla.ca, labeled as such below.
+        "slug": "la-jolla-cityhood-what-owners-should-know",
+        "title": (
+            "La Jolla cityhood: what is actually decided, and what an "
+            "owner should watch"
+        ),
+        "dek": (
+            "La Jolla&rsquo;s bid to leave the City of San Diego has "
+            "cleared its petition, survived a court challenge, and "
+            "entered the two-year fiscal analysis that decides whether "
+            "it reaches a ballot. What the process actually requires, "
+            "what would and would not change for property owners, and "
+            "the dates that matter next. Revised as milestones land."
+        ),
+        "date": "2026-07-30",
+        "author": "sofia-azizi",
+        "description": (
+            "The La Jolla incorporation effort tracked from primary "
+            "records: the certified petition, the fiscal analysis "
+            "underway, the dual-vote requirement and the dispute over "
+            "it, what happens to property taxes and schools, and the "
+            "timeline to a possible November 2028 election."
+        ),
+        "footnote": (
+            "      Facts above are from San Diego LAFCO&rsquo;s published records &mdash;\n"
+            "      staff reports, the June 15, 2026 meeting materials, the executed\n"
+            "      consultant agreement &mdash; and the cited statutes as of July 2026,\n"
+            "      with applicant materials and press reports labeled as such. The\n"
+            "      analysis phase runs into 2028 and every conclusion in it is\n"
+            "      provisional until the Commission acts. This page is revised as\n"
+            "      milestones land."
+        ),
+        "blocks": [
+            {
+                "anchor": "where-it-stands",
+                "question": (
+                    "Where does the La Jolla cityhood effort stand "
+                    "right now?"
+                ),
+                "lead": (
+                    "The La Jolla incorporation proposal &mdash; "
+                    "formally a special reorganization that would "
+                    "detach about 14 square miles from the City of "
+                    "San Diego &mdash; is past its petition stage "
+                    "and into its analysis stage: LAFCO certified "
+                    "6,772 valid signatures against a requirement of "
+                    "6,750 in 2025, and the state-required "
+                    "comprehensive fiscal analysis began fieldwork "
+                    "in August 2026 under a contract authorized "
+                    "June 15, 2026."
+                ),
+                "body": (
+                    "<p>The petition&rsquo;s 22-signature margin "
+                    "drew a formal objection from the mayor and a "
+                    "lawsuit from the city; the trial court struck "
+                    "the city&rsquo;s challenge in its entirety in "
+                    "October 2025, per LAFCO&rsquo;s official "
+                    "statement, and the analysis is proceeding. The "
+                    "proposed boundary covers roughly the 92037 "
+                    "footprint &mdash; the Village, La Jolla Shores "
+                    "and Bird Rock, about 38,000 residents &mdash; "
+                    "and excludes the UC San Diego campus. Until "
+                    "any of the steps below happen, every permit, "
+                    "tax and service in "
+                    "<a href=\"/neighborhoods/la-jolla\">La Jolla</a> "
+                    "remains City of San Diego business.</p>"
+                ),
+            },
+            {
+                "anchor": "the-vote",
+                "question": (
+                    "Who gets to vote on La Jolla leaving San "
+                    "Diego?"
+                ),
+                "lead": (
+                    "State law as written requires two elections for "
+                    "a special reorganization like La Jolla&rsquo;s: "
+                    "one in the territory detaching, and one across "
+                    "the entire city it detaches from &mdash; and a "
+                    "majority in both. Government Code section "
+                    "57119 orders both elections; section 57176.1 "
+                    "makes approval conditional on majorities in "
+                    "each."
+                ),
+                "body": (
+                    "<p>Whether that citywide vote is truly "
+                    "required is now the proposal&rsquo;s central "
+                    "legal question: the applicant "
+                    "association&rsquo;s negotiator has argued "
+                    "publicly that it may not be, LAFCO&rsquo;s "
+                    "position is that it is, and coverage in June "
+                    "2026 described the question as untested "
+                    "territory no court has resolved. An owner "
+                    "tracking this needs no opinion on the merits "
+                    "&mdash; just the awareness that the answer "
+                    "changes the odds entirely, since a proposal "
+                    "that must win a citywide majority faces a "
+                    "different electorate than one decided in La "
+                    "Jolla alone.</p>"
+                ),
+            },
+            {
+                "anchor": "fiscal-analysis",
+                "question": (
+                    "What does the La Jolla fiscal analysis "
+                    "actually decide?"
+                ),
+                "lead": (
+                    "The comprehensive fiscal analysis now underway "
+                    "for La Jolla &mdash; prepared by London Moeder "
+                    "Advisors under a $150,000 contract funded by "
+                    "the applicant association, not by taxpayers "
+                    "&mdash; is the statutory test of whether a "
+                    "City of La Jolla works on paper: projected "
+                    "revenues and costs over ten years, how "
+                    "services would be provided, and what the "
+                    "detachment does to the City of San "
+                    "Diego&rsquo;s finances."
+                ),
+                "body": (
+                    "<p>Two of its tasks carry the outcome. The "
+                    "property-tax exchange determines how the "
+                    "existing tax revenue splits between the new "
+                    "city and the agencies that serve it today. And "
+                    "the revenue-neutrality analysis applies the "
+                    "law&rsquo;s hard condition: LAFCO cannot "
+                    "approve an incorporation that leaves the "
+                    "remaining city substantially worse off unless "
+                    "the effect is mitigated &mdash; by tax-sharing "
+                    "or payments over time. The applicant&rsquo;s "
+                    "own preliminary analysis, as reported by "
+                    "lajolla.ca, contemplated payments to San Diego "
+                    "on the order of $8 million a year for a "
+                    "negotiated period &mdash; a number the CFA "
+                    "will now test rather than assume.</p>"
+                ),
+            },
+            {
+                "anchor": "taxes",
+                "question": (
+                    "Would La Jolla cityhood change property "
+                    "taxes?"
+                ),
+                "lead": (
+                    "Incorporation would not change the 1 percent "
+                    "base property-tax rate in La Jolla &mdash; "
+                    "that cap is set by the state constitution and "
+                    "applies regardless of which city a parcel sits "
+                    "in &mdash; and it is not a reassessment "
+                    "event: the law reallocates existing revenue "
+                    "between agencies rather than levying anything "
+                    "new."
+                ),
+                "body": (
+                    "<p>The moving part is allocation. Per the "
+                    "applicant&rsquo;s preliminary fiscal analysis "
+                    "on file with LAFCO, about 17 percent of the "
+                    "basic 1 percent collected in La Jolla &mdash; "
+                    "roughly $44 million &mdash; currently accrues "
+                    "to the City of San Diego, and that share is "
+                    "what a new city would negotiate over; the "
+                    "schools&rsquo; 53 percent share sits outside "
+                    "the fight, and existing special taxes and "
+                    "assessments above the 1 percent continue "
+                    "unchanged. What a new city could add later "
+                    "&mdash; its own taxes, its own fees &mdash; is "
+                    "a policy question for a city that does not "
+                    "yet exist, which is exactly why the CFA&rsquo;s "
+                    "ten-year budget is the document to read when "
+                    "it publishes.</p>"
+                ),
+            },
+            {
+                "anchor": "schools-services",
+                "question": (
+                    "What happens to schools and city services if "
+                    "La Jolla incorporates?"
+                ),
+                "lead": (
+                    "School assignments in La Jolla would not "
+                    "change with cityhood: school districts are "
+                    "outside this process entirely &mdash; the "
+                    "state&rsquo;s reorganization law expressly "
+                    "excludes them from LAFCO&rsquo;s jurisdiction, "
+                    "and the proposal on file touches no school "
+                    "boundary. City services are the open "
+                    "question the analysis exists to answer."
+                ),
+                "body": (
+                    "<p>Today the City of San Diego provides "
+                    "police, fire-rescue, lifeguards, parks, "
+                    "libraries, permitting, sewer and trash in La "
+                    "Jolla. A new city would provide each of those "
+                    "directly, contract for them &mdash; including "
+                    "potentially back to San Diego &mdash; or join "
+                    "a regional provider; the applicant&rsquo;s "
+                    "preliminary analysis catalogs options from a "
+                    "standalone police department to annexation "
+                    "into County Fire. Which model each service "
+                    "gets, and what it costs, is the substance of "
+                    "the analysis running through mid-2027 &mdash; "
+                    "and the first document that will state it "
+                    "concretely is the draft CFA.</p>"
+                ),
+            },
+            {
+                "anchor": "timeline",
+                "question": (
+                    "When could La Jolla actually vote on "
+                    "cityhood?"
+                ),
+                "lead": (
+                    "LAFCO&rsquo;s own published timeline for La "
+                    "Jolla runs: analysis fieldwork August 2026 "
+                    "through June 2027, a draft report with a "
+                    "90-day public review and community workshops "
+                    "July through October 2027, a final report by "
+                    "early 2028, Commission consideration around "
+                    "May 2028, and &mdash; only if the Commission "
+                    "approves &mdash; an election in November 2028, "
+                    "with a potential effective date of July 2029."
+                ),
+                "body": (
+                    "<p>Every arrow in that chain is conditional "
+                    "on the one before it, and the Commission can "
+                    "attach terms that reshape the proposal at the "
+                    "approval step. The trackable record lives in "
+                    "San Diego LAFCO&rsquo;s agendas &mdash; the "
+                    "next regular meetings fall August 3 and "
+                    "October 5, 2026 &mdash; and this page gets "
+                    "revised as those milestones land, the same "
+                    "update-in-place treatment as the "
+                    "<a href=\"/blog/del-mar-bluff-rail-what-owners-should-know\">"
+                    "Del Mar bluff rail tracker</a>. History gives "
+                    "the honest odds: press coverage notes no "
+                    "California community has voted itself out of "
+                    "an existing city in more than a century.</p>"
+                ),
+            },
+        ],
+    },
 ]
 
 
