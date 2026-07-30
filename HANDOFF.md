@@ -26,7 +26,7 @@ Two things will waste your time if you don't know them.
 | **Research** | ✅ Complete (9-agent workflow, ~684k tokens) — `research/` |
 | **Strategy** | ✅ Complete — `GAMEPLAN.md` |
 | **AI baseline** | ✅ Captured — absent from 14/14 tested queries — `research/aiBaseline.md` |
-| **Site** | ✅ **50 pages** built and deployed to the Vercel preview |
+| **Site** | ✅ **53 pages** built and deployed to the Vercel preview |
 | **Neighborhood guides** | ✅ **16 areas**, 16,107 words total, 867–1,204 words each, 10–13 answer blocks each |
 | **Agent pages** | ✅ 19, all with headshots; 18 of 19 carry a review CTA |
 | **Photography** | ✅ **16 of 16** areas have a real photograph; 12 are third-party with rendered credits |
@@ -35,7 +35,7 @@ Two things will waste your time if you don't know them.
 | **GBP** | ❌ Does not exist. Phase 2, and it needs the client to receive the postcard |
 | **Repo visibility** | ⚠️ Still public. No API for this — GitHub Settings → General → Danger Zone |
 
-### The 50 pages
+### The 53 pages
 
 ```
 /                                  home
@@ -45,7 +45,7 @@ Two things will waste your time if you don't know them.
 /agent/{19}                        one per licensee
 /home-valuation                    two-step lead magnet
 /mello-roos                        2,671 words — the deepest single asset on the site
-/blog  +  /blog/{1}                journal; one post, 1,212 words
+/blog  +  /blog/{4}                journal — calendar in docs/content-runbook.md §4
 /sell  /buy  /concierge            service pages
 /contact  /thank-you  /404
 /properties/sale  /properties/sold 301 targets for ~10 indexed legacy listing URLs

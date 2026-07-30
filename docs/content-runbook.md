@@ -67,16 +67,16 @@ Topic bank → brief (template: `research/contentPlaybook.md` §5) → post. A t
 
 ## 4. Editorial calendar — the first twelve
 
-Ordered for impact, not date. ✅ = sources gathered in listening pass #1; write next. Volumes from communityVoice.md §4 (directional). Bylines follow `agents.author_for()` / farming assignments — names below are the *area owners* to consult, not hardcoded bylines.
+Ordered for impact, not date. ✔ = shipped (slug is live under `/blog/`) · ✖ = retired with the reason recorded. Volumes from communityVoice.md §4 (directional). Bylines follow the `agents.py` pool (`author_for("/blog/{slug}")` — the three shipped posts landed Nilab/Sofia/Zohra) and get reassigned to area owners when farming assignments are confirmed.
 
 | # | Slug (under `/blog/`) | Lane | Target queries & why | Primary sources | Serves |
 |---|---|---|---|---|---|
-| 1 ✅ | `california-fair-plan-san-diego` | News+evergreen | **california fair plan (33.1K/mo, KD 12)**; "fair plan rate increase october 2026"; insurability questions. The Oct 15 increase is the hook; update in place as CDI acts. | CDI filing/approval docs, cfpnet.com published facts, Stanford Woods study | Fallbrook, Valley Center, Ramona, Escondido, Scripps Ranch, Poway |
-| 2 ✅ | `san-diego-adu-rules-2026` | News+evergreen | **adu san diego (480/mo, KD 33, $34 CPC)**; AB 976 owner-occupancy removal; AB 1033 separate-sale in unincorporated county. Verify every numeric limit against the specific municipal code — they differ by city. | County ADU-ZO amendment page, city municipal codes, bill texts | Rural trio (separate-sale), Scripps (legacy ADU slug), all 16 |
-| 3 ✅ | `del-sur-vs-4s-ranch` | Journal | The proven-demand comparison whose ranking answers are 2007–2020 City-Data threads (URLs in communityVoice §3). Micro-volume head term, huge fan-out surface: CFD math, both-PUSD nuance, HOA structure, commute, housing stock eras. | County Auditor CFD reports (already in `taxes.py`), PUSD boundary maps | Del Sur, 4S Ranch (and the whole 92127 story) |
+| 1 ✔ **shipped 2026-07-30** | `california-fair-plan-san-diego` | News+evergreen | **california fair plan (33.1K/mo, KD 12)**; "fair plan rate increase october 2026"; insurability questions. The Oct 15 increase is the hook; update in place as CDI acts. | CDI-approved rate action (29.1%, eff. Oct 15) as reported at approval; cfpnet.com program description; Stanford Woods study | Fallbrook, Valley Center, Ramona, Escondido, Scripps Ranch, 4S Ranch |
+| 2 ✔ **shipped 2026-07-30** | `adu-rules-san-diego-county-2026` | News+evergreen | **adu san diego (480/mo, KD 33, $34 CPC)**. The real 2026 story was better than the contractor-blog version: the County adopted AB 1033 separate-sale on **March 4, 2026 (effective April 4)** — verified at the County page; AB 976/1033 verified at leginfo. The "permitted after Jan 1 2026" owner-occupancy claim circulating on contractor blogs was wrong (AB 976 is from Oct 2023) — which is why the verify-first rule exists. | County ADU-ZO amendment page, leginfo bill texts | Rural trio (separate-sale), city-vs-county block touches all 16 |
+| 3 ✖ **retired 2026-07-30** | ~~`del-sur-vs-4s-ranch`~~ | — | **Cannibalization check failed**: both guides already carry the head-to-head as answer blocks (`del-sur#vs-4s-ranch`, `4s-ranch#vs-del-sur`, plus `4s-ranch#cfd-worth-it`). A standalone post would split that query across three URLs — the exact failure the posts.py bar exists to prevent. The comparison surface stays in the guides; deepen there if needed. Slot replaced by #4. | — | — |
 | 4 | `mello-roos-payoff-early` | Journal | "Can you pay off Mello-Roos early — and should you?" — the next question after `/mello-roos` (what-is: 1.6K/mo, KD 0, already held). Payoff mechanics, prepayment quotes, when it pencils. | County Auditor, CFD administrators' payoff procedures | 92127 cluster, Poway, San Marcos |
 | 5 | `north-county-market-pulse` | News (recurring) | san diego housing market (1.6K/mo, KD 38) long-tail; July 2026 numbers in hand: $1.02M median, 3.2 mo supply highest since 2020 yet seller-leaning, detached listings −11.6% YTD. Monthly or quarterly, dated, one URL per period or update-in-place — decide at post 2. | SDAR monthly indicators (cite the report), Redfin market data | All 16; the market-report vehicle until `/market-report/` ships |
-| 6 | `selling-a-house-with-solar-panels-san-diego` | Journal | **210/mo, KD 0, transactional** — lease/PPA transfer in escrow, buyout math, NEM status effects. Ubiquitous in 92127/Escondido inventory. | CPUC NEM docs, lease-transfer procedures from the major lessors' published terms | Escondido, 4S/Del Sur, Oceanside, San Marcos |
+| 6 ✔ **shipped 2026-07-30** | `selling-a-house-with-solar-panels-san-diego` | Journal | **210/mo, KD 0, transactional** — owned-vs-leased, lease assumption in escrow, UCC-1 release, legacy NEM transfer mechanics (term stated as confirm-with-SDG&E rather than an unverified number), disclosure package. | Process facts framed as process; tariff/term specifics deferred to SDG&E/CPUC by name | Escondido, San Marcos, 92127, all newer-tract areas |
 | 7 | `del-mar-bluff-rail-what-owners-should-know` | News | SANDAG LOSSAN tunnel milestones → property-owner framing nobody serves (coverage is transit-politics framed). Update in place per board action. | SANDAG board docs, City of Del Mar project repository | Del Mar, Solana Beach edge of Encinitas |
 | 8 | `poway-unified-enrollment-windows` | News (annual) | District enrollment/transfer dates + address-lookup method, published when windows open (~Feb). Extends the school-district post; same pattern later for SDUHSD/Escondido/Carlsbad clusters. | District announcements + boundary tools | 4S Ranch, Del Sur, Poway, (RB) |
 | 9 | `is-escondido-a-good-place-to-live` | Journal | 170/mo, KD 0 — answered the Fair-Housing-safe way: two-district structure, CFD-free older pockets vs newer CFD tracts, commute reality, land-use edges. The reframe-table showcase. | District maps, taxes.py, Census commute data (cited, not embedded as demographics) | Escondido — their single largest market |
@@ -98,7 +98,66 @@ Measure monthly, into the case-study log: GSC impressions/queries per post URL (
 
 ---
 
-## 6. Shipping a post — mechanics
+## 6. The acceleration plan (added 2026-07-30)
+
+The client asked for faster needle movement. Honesty first, then the plan.
+
+### 6.1 What actually moves the needle, ranked
+
+Content velocity is the fourth-biggest lever, not the first. Saying otherwise would sell effort instead of outcomes.
+
+1. **Launch.** DNS is not pointed and `LEAD_ENDPOINT` is a placeholder. Until teamazizi.com resolves and gets indexed, every post ships into a site Google and the AI crawlers cannot fetch, and the old index keeps decaying. *Client actions: point DNS, supply the form endpoint. Everything below compounds only after this.*
+2. **GBP.** Gemini's primary local source and the map-pack gate. Does not exist yet; needs the client to receive the postcard. Every shipped post is designed to recycle into GBP posts — an empty channel until this lands.
+3. **Review velocity.** 5–10/month across Google/Zillow/Yelp beats any amount of prose. Built into the agent pages already; needs the team actually asking.
+4. **Content velocity** — this runbook. The one lever fully in our hands, so we run it at full speed *while flagging weekly that 1–3 are the multipliers*.
+5. **Entity cleanup** (Phase 2 NAP sweep) — removes the corrupted-answer drag.
+
+### 6.2 The weekly rhythm (replaces "2–4/month" pacing)
+
+**One post per week, every week**, plus fast-lane news. Sustainable because the system batches:
+
+- **Monday (30–60 min):** listening scan — the §3b web sweeps, agent-forwarded threads, the data-release calendar. Pick or confirm the week's post from the calendar.
+- **Midweek:** verify sources (primary only), write in `posts.py` block format, byline per the pool.
+- **Friday:** build → validate → date-churn guard → push → PR. After merge: IndexNow ping.
+- **Within 48h of deploy:** repurpose to Instagram now; queue as a GBP post for the day GBP exists.
+- **Monthly (first week):** full listening pass — local `/last30days` Reddit sweep + append to communityVoice.md; re-run the AI query panel; refill the calendar to ≥8 briefed posts.
+
+**Fast-lane SLA:** a CDI action, SANDAG board decision, district boundary/enrollment change, or council approval affecting a farm area gets its post — or an update-in-place to the existing one — within **72 hours**. Being the first fact-dense page on a local change is how a small site beats portals to a citation.
+
+**Batch production is the multiplier.** One verification pass feeds several posts: today's single research pass shipped three (insurance, solar, ADU). Future themed batches: the schools batch (one enrollment post per district cluster, each January), the development batch (one pipeline post per city, quarterly), the tax batch (payoff + assessment appeals + Prop 19, off one Auditor/Assessor reading).
+
+### 6.3 Per-area coverage matrix
+
+Every area gets touched at least quarterly by a post that serves it, a guide refresh, or a fast-lane news item. State as of 2026-07-30 — update this table when posts ship:
+
+| Area | Guide | Served by posts today | Next planned touch |
+|---|---|---|---|
+| Fallbrook | ✅ | FAIR Plan · ADU separate-sale · school-district | #11 insurance-before-offer |
+| Valley Center | ✅ | FAIR Plan · ADU separate-sale | #11; water-district explainer (bank) |
+| Ramona | ✅ | FAIR Plan · ADU separate-sale | #11 |
+| Escondido | ✅ | FAIR Plan · solar · school-district (two-district block) | #9 is-escondido · #10 pipeline (quarterly) |
+| San Marcos | ✅ | solar | #10 variant: San Marcos leads RHNA; 91-CFD angle via #4 |
+| Oceanside | ✅ | ADU (jurisdiction block) | #12 Mission Ave mixed-use |
+| Vista | ✅ | ADU (jurisdiction block) | market-pulse #5 carries it; "no Vista CFD" fact via #4 |
+| Carlsbad | ✅ | school-district (boundary block) · ADU (jurisdiction) | enrollment-windows batch (Jan) |
+| Encinitas | ✅ | school-district (Cardiff block) | bluff/rail #7 mentions; enrollment batch |
+| Poway | ✅ | school-district (PUSD reach block) | #4 Mello-Roos payoff (PUSD CFD contrast) |
+| 4S Ranch | ✅ | FAIR Plan · school-district | #4 payoff |
+| Del Sur | ✅ | school-district (PUSD block) | #4 payoff |
+| Scripps Ranch | ✅ | FAIR Plan · school-district | ADU-on-canyon-lots angle (bank) |
+| Carmel Valley | ✅ | school-district (DMUSD/SDUHSD block) | market-pulse; SDUHSD enrollment batch |
+| Del Mar | ✅ | — **gap** | #7 bluff/rail — next Del Mar post |
+| Rancho Santa Fe | ✅ | — **gap** | Covenant/ARB/septic explainer (long game per GAMEPLAN §4.5); pending the client's keep-or-drop call (HANDOFF §9) |
+
+### 6.4 30 / 60 / 90
+
+- **By day 30:** posts #4 (payoff), #5 (market pulse, July/Aug data), #7 (Del Mar bluff/rail) shipped — closes the Del Mar gap; launch blockers re-flagged to client in writing; first local `/last30days` Reddit pass appended to communityVoice.md.
+- **By day 60:** #9, #10, #12 shipped (Escondido ×2, Oceanside); GBP live if postcard received → backfill all posts as GBP posts; AI panel re-run against the 14-query baseline, deltas logged to the case study.
+- **By day 90:** every area except (possibly) RSF has ≥1 serving post; quarterly guide-refresh cycle #1 done; listening pass #4; measurement review — which posts earned citations, double down there.
+
+---
+
+## 7. Shipping a post — mechanics
 
 1. Add the post dict to `build/data/posts.py` (blocks format; study the school-district post). Confirm byline against `agents.py` and the three-places-agree rule (HANDOFF §2).
 2. `python3 build/generate.py` then `python3 build/optimize.py` if images were added, then `python3 build/validate.py` — the answer-block checks apply to posts too.

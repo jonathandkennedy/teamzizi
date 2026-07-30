@@ -116,9 +116,9 @@ Read on the nulls: volume tools see Google Ads groupings; conversational and que
 
 Twelve briefed posts, cadence, compliance reframes, and the monthly re-run procedure live in **[docs/content-runbook.md](../docs/content-runbook.md)**. The three highest-conviction first moves from this pass:
 
-1. **FAIR Plan / insurance explainer** — 33K/mo, KD 12, Oct 15 rate-increase deadline gives it a news hook and an update cadence.
-2. **ADU rules 2026** — law changed in January, county adopted separate-sale, $34 CPC, legacy ADU slug precedent.
-3. **Del Sur vs 4S Ranch** — the 20-year-old-thread vacuum, provable with the §3 URLs, answerable with taxes.py CFD data the site already holds.
+1. **FAIR Plan / insurance explainer** — 33K/mo, KD 12, Oct 15 rate-increase deadline gives it a news hook and an update cadence. *(Shipped 2026-07-30: `/blog/california-fair-plan-san-diego`.)*
+2. **ADU rules 2026** — the County adopted AB 1033 separate-sale March 4, 2026; $34 CPC; legacy ADU slug precedent. *(Shipped 2026-07-30: `/blog/adu-rules-san-diego-county-2026` — and the solar-sale post shipped alongside it.)*
+3. **Del Sur vs 4S Ranch** — the 20-year-old-thread vacuum, provable with the §3 URLs. *(Retired as a standalone post 2026-07-30: both guides already carry the head-to-head as answer blocks, so a post would cannibalize — runbook §4 records the reasoning. The vacuum is served by deepening the guide blocks, not by a new URL.)*
 
 **Verification discipline:** several §2 figures come from insurance-broker and contractor blogs. Before any of them appears on teamazizi.com, trace to the primary source — CDI filing, FAIR Plan published facts, municipal code, County ordinance, district announcements. No secondary-source number ships. (HANDOFF §8: no fabrication; every claim traces to a named source.)
 

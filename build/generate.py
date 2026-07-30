@@ -1991,6 +1991,15 @@ def build_blog() -> None:
         blocks = "\n\n".join(
             c.answer_block(heading="h2", **b) for b in post["blocks"]
         )
+        # Per-post caution line. Each topic needs its own ("confirm with the
+        # district" is wrong under an insurance post), so the text lives in
+        # the post dict, pre-wrapped to the page's indentation.
+        footnote_html = (
+            '\n    <p class="answer__source" style="margin-top:2.5rem">\n'
+            f"{post['footnote']}\n    </p>"
+            if post.get("footnote")
+            else ""
+        )
         body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
   <div class="container container--narrow">
     <nav aria-label="Breadcrumb" class="updated">
@@ -2003,12 +2012,7 @@ def build_blog() -> None:
     <p class="lede">{post['dek']}</p>
 
 {blocks}
-
-    <p class="answer__source" style="margin-top:2.5rem">
-      District boundaries are set by the districts themselves and are redrawn
-      from time to time. Every assignment above should be confirmed with the
-      district office for the specific address before it is relied on.
-    </p>
+{footnote_html}
     <p class="updated">Published {post['date']}</p>
   </div>
 </section>"""
