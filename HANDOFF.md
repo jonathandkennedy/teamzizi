@@ -5,7 +5,7 @@
 **Repo:** [github.com/jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — note the missing "a" in the repo name; the domain is team**a**zizi.com
 **Live preview:** https://teamazizi.vercel.app
 **Strategy doc:** [GAMEPLAN.md](GAMEPLAN.md) — that file is *the plan*; this file is *state, decisions, and why*.
-**Last updated:** 2026-07-26
+**Last updated:** 2026-07-30
 
 ---
 
@@ -353,6 +353,8 @@ Caps by role, doubled for retina: backgrounds 1920, neighborhoods 1280, textures
 **Add a neighborhood photograph.** Search Commons on the **disambiguated** name and check the **category** before anything else. Read the description. Look at the image. Add a `photos.CREDITS` entry with the licence URL and a `modified` note, drop the cropped file into `site/assets/img/neighborhoods/`, then run optimize and generate. If nothing verifiable turns up, add a `photos.REJECTED` entry saying why.
 
 **Replace an existing image.** Just overwrite the JPEG. The hash manifest will notice and regenerate every derivative. This did not use to work — see §6.
+
+**Write a journal post or news update.** [docs/content-runbook.md](docs/content-runbook.md) is the whole procedure — three lanes, the Fair-Housing reframe table, the briefed calendar, and the shipping mechanics (including the date-churn guard from §9). Topic sourcing runs on the monthly listening pass: the `/last30days` skill (installed at `.claude/skills/last30days/`; **run it locally — Reddit blocks datacenter egress**, verified 2026-07-30) plus the web sweeps and agent-sourced Nextdoor signal documented in [research/communityVoice.md](research/communityVoice.md).
 
 **Refresh market snapshots.** Update the stats per community, bump the visible updated date, and recycle each refresh into a GBP post and an Instagram post. Quarterly refresh discipline is a feature, not overhead: competitors ship $0 medians, lorem ipsum and empty school tables. Nothing here may rot unattended.
 

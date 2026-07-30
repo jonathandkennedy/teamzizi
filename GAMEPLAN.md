@@ -197,6 +197,8 @@ Priority from the opportunity map (most-winnable first — [research/aiBaseline.
 
 Anatomy per post: question-first title, **TL;DR block**, H2s, FAQ + schema, byline + dated, year-stamped where it fits, internal links to neighborhood/service pages. Cadence: 2–4/month. Every piece repurposes into GBP posts + Instagram (their IG is active — listings, market education, milestones) + email newsletter.
 
+**Operationalized 2026-07-30:** topic sourcing (community listening via the `/last30days` skill + web sweeps), compliance reframes, the first twelve briefed posts, and shipping mechanics live in [docs/content-runbook.md](docs/content-runbook.md); the listening evidence is [research/communityVoice.md](research/communityVoice.md).
+
 ---
 
 ## 8. Measurement & the Case Study
