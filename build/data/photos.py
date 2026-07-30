@@ -178,6 +178,155 @@ CREDITS: dict[str, dict[str, str]] = {
         "depicts": "4S Ranch seen from Black Mountain, looking across the "
                    "community to the hills beyond.",
     },
+    # ----------------------------------------------------------------------
+    # Southern + corridor expansion, installed 2026-07-30. Every entry below
+    # was verified the same way: image viewed, Commons description and
+    # category read, licence checked commercial+derivatives. The Ocean Beach
+    # search is the cautionary tale again — the bare term returns Ocean
+    # Beach, San Francisco (Cliff House included) as every top hit.
+    "la-jolla": {
+        "title": "La Jolla Cove from the south",
+        "author": "Invertzoo",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:La_Jolla_Cove_from_the_south.JPG",
+        "depicts": "La Jolla Cove from the south end — swimmers in the "
+                   "clear water, seabirds on the sandstone bluffs, the "
+                   "village rising behind.",
+    },
+    "pacific-beach": {
+        "title": "Pacific Beach Crystal Pier",
+        "author": "Adbar",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Pacific_Beach_Crystal_Pier.JPG",
+        "depicts": "The beach at Pacific Beach looking north — kelp on the "
+                   "sand, Crystal Pier and its cottages in the "
+                   "mid-distance, the community rising on the hill.",
+    },
+    "ocean-beach": {
+        "title": "Pier on Ocean Beach",
+        "author": "Alen Ištoković",
+        "licence": "CC BY 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Pier_on_Ocean_Beach_-_panoramio.jpg",
+        "depicts": "On the Ocean Beach Pier looking toward the T — "
+                   "walkers, anglers and the pier caf&eacute; over the "
+                   "surf.",
+    },
+    "hillcrest": {
+        "title": "Hillcrest (San Diego, California)",
+        "author": "Visitor7",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Hillcrest_(San_Diego,_California).jpg",
+        "depicts": "The Hillcrest neon sign over University Avenue at "
+                   "Fifth, the commercial core in afternoon light.",
+    },
+    "north-park": {
+        "title": "NorthParkUni30th",
+        "author": "Jlantzy",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:NorthParkUni30th.JPG",
+        "depicts": "The North Park sign on University Avenue near 30th "
+                   "Street at dusk, an MTS bus at the curb.",
+    },
+    "downtown-san-diego": {
+        "title": "San Diego Skyline Day JD111107",
+        "author": "JDrewes",
+        "licence": "CC BY-SA 3.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:San_Diego_Skyline_Day_JD111107.jpg",
+        "depicts": "The downtown San Diego skyline from Coronado across "
+                   "the bay, a sailboat mid-channel.",
+    },
+    "college-area": {
+        "title": "Hepner Hall at San Diego State University 2013",
+        "author": "Stuart Seeger",
+        "licence": "CC BY 2.0",
+        "licence_url": "https://creativecommons.org/licenses/by/2.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Hepner_Hall_at_San_Diego_State_University_2013.jpg",
+        "depicts": "Hepner Hall's mission-revival tower at San Diego "
+                   "State University, the College Area's anchor "
+                   "institution.",
+    },
+    "chula-vista": {
+        "title": "Third Avenue Pride",
+        "author": "Allan Ferguson",
+        "licence": "CC BY 2.0",
+        "licence_url": "https://creativecommons.org/licenses/by/2.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Third_Avenue_Pride.jpg",
+        "depicts": "The Third Avenue gateway arch over downtown Chula "
+                   "Vista's historic commercial street.",
+    },
+    "santee": {
+        "title": "Scenic view of Santee looking east over Santee Lakes",
+        "author": "Devindad",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Scenic_view_of_Santee_looking_east_over_Santee_Lakes.jpg",
+        "depicts": "Santee looking east over Santee Lakes, sunbeams "
+                   "breaking through cloud onto the valley.",
+    },
+    "el-cajon": {
+        "title": "Aerial view of El Cajon, CA",
+        "author": "Jmabel",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_El_Cajon,_CA.jpg",
+        "depicts": "The El Cajon valley from the air — Gillespie "
+                   "Field's runways at upper left, the freeway curving "
+                   "through the grid.",
+    },
+    "spring-valley": {
+        "title": "Casa de Oro Spring Valley California (Campo Road)",
+        "author": "Jason Kardos",
+        "licence": "CC BY-SA 4.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Casa_de_Oro_Spring_Valley_California_Jason_Kardos_Mt_Helix_Lifestyles_Real_Estate_.jpg",
+        "depicts": "Campo Road through Casa de Oro in greater Spring "
+                   "Valley, looking east — the Santa Sophia church tower "
+                   "on the left, hillside homes behind.",
+    },
+    "lemon-grove": {
+        "title": "Lemon Grove, CA",
+        "author": "Allan Ferguson",
+        "licence": "CC BY 2.0",
+        "licence_url": "https://creativecommons.org/licenses/by/2.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Lemon_Grove,_CA.jpg",
+        "depicts": "The Lemon Grove lemon on its Best Climate on Earth "
+                   "plinth beside the trolley tracks on Broadway.",
+    },
+    "temecula": {
+        "title": "Temecula California vineyard",
+        "author": "michael c",
+        "licence": "CC BY-SA 2.0",
+        "licence_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Temecula_California_vineyard.jpg",
+        "depicts": "Vine rows in Temecula Valley Wine Country, a hilltop "
+                   "winery at the end of the lane.",
+    },
+    "murrieta": {
+        "title": "Murrieta, California Panorama from Santa Ana Mountains",
+        "author": "Z3lvs",
+        "licence": "CC0",
+        "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Murrieta,_California_Panorama_from_Santa_Ana_Mountains.jpg",
+        "depicts": "Murrieta from the Santa Ana Mountains foothills at "
+                   "golden hour — spring wildflowers in front, the "
+                   "city's grid filling the valley below.",
+    },
+    "menifee": {
+        "title": "Menifee Library",
+        "author": "Ageofultron",
+        "licence": "CC0",
+        "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "source": "https://commons.wikimedia.org/wiki/File:Menifee_Library.jpg",
+        "depicts": "The Menifee Library on a clear day — new civic "
+                   "architecture in one of Riverside County's newest "
+                   "cities.",
+    },
 }
 
 
