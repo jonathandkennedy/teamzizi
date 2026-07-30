@@ -1,76 +1,119 @@
 # Team Azizi — Handoff & Decision Log
 
 **Client:** Team Azizi (Compass) · San Diego · **CitedRealty customer #1**
-**Domain:** teamazizi.com (Jon controls registrar; site currently DOWN) · **Planned host:** Vercel
-**Project dir:** `/Users/jonkennedy/team-azizi-website/` · **Repo:** [github.com/jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) (public — client-facing docs are visible; note the repo name is missing the "a") · **Brief:** `retainer-reach/briefs/team-azizi/san-diego/location.brief.md`
-**Strategy doc:** [GAMEPLAN.md](GAMEPLAN.md) — this file is *state + decisions + why*; GAMEPLAN is *the plan*.
-**Last updated:** 2026-07-25
+**Domain:** teamazizi.com — registrar controlled by Jon; **DNS not yet pointed** · **Host:** Vercel
+**Repo:** [github.com/jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — note the missing "a" in the repo name; the domain is team**a**zizi.com
+**Live preview:** https://teamazizi.vercel.app
+**Strategy doc:** [GAMEPLAN.md](GAMEPLAN.md) — that file is *the plan*; this file is *state, decisions, and why*.
+**Last updated:** 2026-07-26
 
 ---
 
-## 0. One-paragraph summary
+## 0. Read this first
 
-Team Azizi is a RealTrends-verified top San Diego team ($105.59M / 92 sides in 2025, **#58 of California large teams by volume**, top 10 in the county per SDBJ, 1,016 closed sales on Compass — but see [salesRecord.md](research/salesRecord.md): the median sale is $650K and only 4.5% of that record falls in the six target communities) whose Luxury Presence website is dead — DNS down, Google's index of it decaying, no Google Business Profile, and AI assistants already repeating corrupted third-party data about them. A 9-agent research pass confirmed they are **absent from all 14 tested AI/search queries**, including their own office neighborhood. The engagement is: rebuild teamazizi.com as an owned static site at the same URLs with the same brand but real editorial depth, repair the entity across the web, stand up GBP + review velocity, and run the market-report/Q&A content engine that research proved earns AI citations *in this exact market*. It doubles as CitedRealty's first documented case study — the zero-visibility "before" is already captured.
+Two things will waste your time if you don't know them.
+
+**One: the farm in the plan is not the farm in the record.** GAMEPLAN is built on six affluent north-coastal communities. A full sweep of all 1,009 Compass sales found only 45 of them (4.5%) in those six, a median sale price of $650,000, and exactly one lifetime sale in Rancho Santa Fe. The real book is Escondido (~96 sales, the single largest market), South Bay, Spring Valley, Fallbrook, Oceanside, Santee, El Cajon. See [research/salesRecord.md](research/salesRecord.md). The site now covers **sixteen** areas rather than six, which is the resolution: the original six are kept because the client asked for them, and ten North County communities were added because that is where the transactions are. The unanswered client question is which set gets the marketing spend.
+
+**Two: there is exactly one launch blocker.** `site.LEAD_ENDPOINT` is still `https://formspree.io/f/PLACEHOLDER`. Every lead form on the site posts into nothing. `build/validate.py` fails the build on it deliberately, and that single failure is the "1 error" you will see on every validate run. Nothing else is blocking DNS.
 
 ---
 
-## 1. Status as of 2026-07-25
+## 1. Status as of 2026-07-26
 
 | | |
 |---|---|
 | **Research** | ✅ Complete (9-agent workflow, ~684k tokens) — `research/` |
 | **Strategy** | ✅ Complete — `GAMEPLAN.md` |
-| **Client brief** | ✅ Filed — `retainer-reach/briefs/team-azizi/` |
-| **AI baseline** | ✅ Captured (absent from 14/14 queries) — `research/aiBaseline.md` |
-| **Code / site** | 🔨 Phase 1 — 30 pages built (home, hub, **6 neighborhood guides**, `/home-valuation`, `/team`, 19 agent pages). Neighborhood guides are ~380 words against an 800–1,500 target: the tax and schools blocks are real and sourced, the rest awaits data. |
-| **Repo** | ✅ [jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — **being made private** (2026-07-25) |
-| **Brand assets** | ⚠️ Recovered, but the manifest was wrong in several places — see the corrections table in `assets/recovered/README.md` |
-| **GBP** | ❌ Does not exist — Phase 2 |
+| **AI baseline** | ✅ Captured — absent from 14/14 tested queries — `research/aiBaseline.md` |
+| **Site** | ✅ **50 pages** built and deployed to the Vercel preview |
+| **Neighborhood guides** | ✅ **16 areas**, 16,107 words total, 867–1,204 words each, 10–13 answer blocks each |
+| **Agent pages** | ✅ 19, all with headshots; 18 of 19 carry a review CTA |
+| **Photography** | ✅ **16 of 16** areas have a real photograph; 12 are third-party with rendered credits |
+| **Validation** | ✅ 0 errors other than the deliberate `LEAD_ENDPOINT` blocker |
+| **DNS** | ❌ Not pointed. This is the last step, not the first — see [docs/launch-runbook.md](docs/launch-runbook.md) |
+| **GBP** | ❌ Does not exist. Phase 2, and it needs the client to receive the postcard |
+| **Repo visibility** | ⚠️ Still public. No API for this — GitHub Settings → General → Danger Zone |
 
-**Next action:** ⚠️ **read [research/salesRecord.md](research/salesRecord.md) before writing another line of neighborhood content.** A full sweep of all 1,009 Compass sales (2026-07-25) shows only **45 (4.5%)** are in the six target communities, the median sale is **$650,000**, 77.5% are under $1M, and **Rancho Santa Fe has one sale, ever**. The farm the plan is built on is not the farm the record shows. That is a client conversation, not a build decision — but it is the next one.
+### The 50 pages
+
+```
+/                                  home
+/neighborhoods                     hub
+/neighborhoods/{16}                the product — see §4
+/team                              grouped by area, not a flat grid of 19 faces
+/agent/{19}                        one per licensee
+/home-valuation                    two-step lead magnet
+/mello-roos                        2,671 words — the deepest single asset on the site
+/blog  +  /blog/{1}                journal; one post, 1,212 words
+/sell  /buy  /concierge            service pages
+/contact  /thank-you  /404
+/properties/sale  /properties/sold 301 targets for ~10 indexed legacy listing URLs
+```
 
 ---
 
 ## 2. Decision log — settled, do not re-litigate
 
-| Decision | Why |
-|---|---|
-| **Static HTML/CSS/JS, no framework, no build step** (Python generators for repeating page types) | CitedRealty house style. Fastest Core Web Vitals; **schema server-rendered in the HTML** because AI fetchers and `curl` don't run JS; trivially portable so the client genuinely owns it; anyone can edit it. |
-| **Client owns everything** | Their last site vanished when the Luxury Presence relationship ended. That *is* the pitch — they lived the rented-SaaS failure mode. Never build them onto something they can lose. |
-| **Rebuild at the same URLs; 301 the rest** | ~10 old URLs are still indexed despite dead DNS. URL preservation is the cheapest SEO win available and the window is closing. Full map in GAMEPLAN §4.2. |
-| **Keep the brand, modernize the bones** | Black/white system, Reem Kufi Fun + Lato, square 2px ghost buttons, gold `#8D7120`/`#CCB091` accents, video hero — this IS the brand and returning clients should recognize it. Modernize *execution* (fluid type, CSS grid, lighter motion), not identity. |
-| **NO IDX at launch** | Fails CitedRealty's own published need-test: a listing-focused team's sellers don't hire them for a search widget, and buyers use Zillow regardless. IDX would cost $50–100+/mo plus MLS fees, add another vendor whose URLs die on exit, and risk the broken-widget trust failures seen on competitor sites (Whissel's $0 medians, Kolker's "No results found"). Their **own** listings need no IDX license — generator + weekly refresh. `/home-search/*` → 301. Revisit only if the team commits to a real buyer saved-search nurture pipeline; then noindexed, on their own domain. |
-| **Neighborhood pages are the product** | Verified gap: not one competitor page publishes Mello-Roos math, school-boundary specifics, or maintained market stats. That's the moat. Template = CitedRealty's published 7-block post + the skills' 8-section spec (GAMEPLAN §4.5). |
-| **Hand-craft 6 pages, don't scale to 30 yet** | May 2026 core update explicitly demotes name-swapped geo templates. 5–20 pages = hand-crafted tier per the skills. Five deep pages beat thirty thin ones — and CitedRealty's own blog says so publicly. |
-| **Primary tracking keyword: "carmel valley san diego real estate agent"** | Sits at their physical office (92130) so it's geogrid-trackable and proximity-favored; decisive agent-selection intent; genuinely winnable — unlike portal-locked "homes for sale" or RSF head terms owned by Barry Estates/Brizolis Janzen. |
-| **Content priority: Del Sur → 4S Ranch → Scripps → CV → Del Mar → RSF** | Ordered by *winnability*, not by prestige. Del Sur has no market content anywhere (AI admits it has no data); 4S Ranch's incumbents are 2000s forum threads; RSF is the hardest SERP in the county. |
-| **Earned mentions only — never bought** | Google's May 2026 AI-search guide makes buying citations/mentions to influence AI results a stated spam risk (Tier A). This is also CitedRealty's compliance line and must survive contact with the Scripps Ranch competitor who *is* using paid press releases. Legit PR announcing real RealTrends results is fine; paid "AI mention" packages are not. |
-| **Honest content, evidence tiers in reporting** | The brand's citation strategy. Competitor listicles name competitors fairly; ranking claims carry their confidence tier (entity→AI = Tier D consensus, not measured; open-at-search-time = Tier B; review responses = Tier A). Don't oversell schema — "schema alone rarely moves rankings." |
-| **Recommend canonical name "Team Azizi"** (long form "Team Azizi Real Estate \| Compass San Diego") | Matches Compass + RealTrends. Long form disambiguates from **Azizi Developments (Dubai)**, which pollutes generic "Azizi real estate" AI/search results. *Pending client confirm — but everything ships with one string.* |
-| **Sonia legacy handled with the family, never silently** | Founder Sonia Azizi died July 6, 2023. Most review equity is stranded on her profiles. Plan: honor her on `/about`; every decision about her Yelp/Zillow/LinkedIn/podcast profiles routes through the client and family. Do not delete or quietly rewrite anything of hers. |
-
-### Added 2026-07-25 (Phase 1 build)
+### Foundational
 
 | Decision | Why |
 |---|---|
-| **URLs carry no trailing slash** — `/neighborhoods/carmel-valley`, served from `neighborhoods/carmel-valley.html` via Vercel `cleanUrls` | That is exactly how the old site served them, and ~10 of those URLs are still indexed. GAMEPLAN §4.4 writes them with a trailing slash; that was a drafting slip. Preserving the path exactly is the whole point — a trailing-slash convention would 301 away the equity we are rebuilding to keep. |
-| **No JSON-LD is ever hand-written.** Every block is a Python dict serialised with `json.dumps`; `build/validate.py` re-parses all of it pre-push | Makes the missing-brace failure that broke CitedRealty's homepage graph structurally impossible rather than merely unlikely. |
-| **The full entity graph repeats on every page**, rather than being defined once and referenced | An AI fetcher may only ever see one page. Each page has to stand alone as a complete statement of the entity. (The validator flags one `@id` describing *different* things, which is the real error the schema skill warns about.) |
-| **`sameAs` only lists profiles that are accurate today.** LinkedIn, Yelp and the YouTube channel are withheld in `SAME_AS_PENDING` with reasons | A `sameAs` pointing at a profile carrying "Upstart Real Estate" or the old (619) number tells the knowledge graph that the wrong data is authoritative. They move up as Phase 2 fixes them. |
-| **Fonts self-hosted** (Reem Kufi Fun 400, Lato 400/700 — both SIL OFL, 84 KB total) | Removes a render-blocking third-party request and a dependency the client cannot control, which is the premise of the whole rebuild. |
-| **Reem Kufi Fun's colour layer remapped to the brand gold `#8D7120`** | The typeface is a COLRv1 colour font — the tittles on i/j are small **red hearts**, which is the "Fun" in the name and which the old site shipped unremarked. Red appears nowhere else in the brand and fights the gold accent. Remapping the palette keeps the letterforms and the detail while resolving the clash. One CSS block to delete if the client wants the stock red back. |
-| **Neighborhood market data comes from public sources**, cited and dated: County Auditor CFD reports for Mello-Roos, district boundary maps for schools, published portal medians with named attribution | No client dependency, fully defensible under "no fabrication," and the Mello-Roos and school-boundary data *is* the moat — no competitor publishes it. Revisit if the client grants MLS access. |
-| **No generated imagery on neighborhood pages** | A synthetic photo of a real named community cuts against the no-fabrication doctrine the whole strategy rests on. Generated art is fine for abstract section bands. Wrong-place recovered photos render an honest "photography pending" placeholder instead. |
-| **Neighborhood pages are built as fan-out answer blocks, not narrative** | AI Mode decomposes a query into sub-queries and retrieves *passages*. A flowing page competes for one head term; the same content in self-contained blocks competes for ~19 retrievals. Map in `build/data/fanout.py`; `validate.py` rejects any lead answer that opens with a pronoun or omits the place name, because both make a passage useless once lifted. See GAMEPLAN §4.5. |
-| **Localized imagery, sourced from their own listing photography first** | Original local imagery is a first-hand signal the May 2026 update rewards, and **no competitor publishes any** — a documented open gap. 1,016 closed sales means they already own true street-level photography of every one of the six communities; that beats a shoot for a first pass. Shot list and technical spec: [docs/photography-brief.md](docs/photography-brief.md). |
-| **IndexNow at launch** (key `ce855552…`, `build/indexnow.py`) | ChatGPT retrieval leans on Bing's index, and IndexNow is how you tell Bing a URL changed without waiting to be crawled. Bing/Yandex/Seznam/Naver only — **Google does not participate**. Honest framing for the client: it accelerates discovery, it does not cause ranking or citation. |
-| **Neighborhood-first IA: one named licensee owns each of the six areas** | A page authored by "Team Azizi" is a company talking; a page authored by a named licensee with a DRE number, a direct line and a sold record *in that neighborhood* is a person who can be checked — which is what E-E-A-T rewards and what an assistant needs before it will name someone. `/team` groups by area rather than showing one flat grid of nineteen faces, because "who do I call about Del Sur" is the question visitors arrive with. Person schema carries `areaServed` + `knowsAbout`; the neighborhood page's `WebPage.author` points at that agent. |
-| **Farming assignments are client data — the system ships with confirmable slots** | Nothing published anywhere says which agent works which community. All six start unassigned in `build/data/agents.py`, and pages fall back to the team lead, who is a real, accountable, verifiable licensee — not a placeholder and not a company byline. Six one-line answers turn the whole system on. Question is pre-written in `agents.PROPOSED_ASSIGNMENTS`. |
-| **robots.txt names the AI crawlers explicitly and allows them** | Retrieval bots (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, Google-Extended) are what fetch a page in order to cite it — blocking any would forfeit the engagement. Training bots (GPTBot, ClaudeBot, Applebot-Extended) are also allowed: for a business whose problem is that models don't know it exists, being in the training data is upside. That one is a reversible client call. |
+| **Static HTML/CSS/JS. No framework, no build step at deploy time.** Python generators for repeating page types; output committed to the repo | CitedRealty house style. Fastest Core Web Vitals; **schema server-rendered into the HTML** because AI fetchers and `curl` do not run JS; trivially portable so the client genuinely owns it; anyone can edit it with a text editor. |
+| **Client owns everything** | Their last site vanished when the Luxury Presence relationship ended. That *is* the pitch — they lived the rented-SaaS failure mode. Never build them onto something they can lose again. |
+| **Rebuild at the same URLs; 301 the rest** | ~10 old URLs are still indexed despite dead DNS. URL preservation is the cheapest SEO win available and the window closes as the index decays. |
+| **URLs carry no trailing slash** — `/neighborhoods/carmel-valley` served from `neighborhoods/carmel-valley.html` via Vercel `cleanUrls` | Exactly how the old site served them. GAMEPLAN §4.4 writes them with a trailing slash; that was a drafting slip. A trailing-slash convention would 301 away the very equity we are rebuilding to keep. |
+| **Keep the brand, modernize the bones** | Black/white system, Reem Kufi Fun + Lato, square 2px ghost buttons, gold `#8D7120`/`#CCB091`, video hero. This IS the brand and returning clients should recognise it. Modernize *execution* — fluid type, CSS grid, lighter motion — not identity. |
+| **Fonts self-hosted** (Reem Kufi Fun 400, Lato 400/700, both SIL OFL, 84 KB) | Removes a render-blocking third-party request and a dependency the client cannot control, which is the premise of the whole rebuild. |
+| **Reem Kufi Fun's colour layer remapped to brand gold** | It is a COLRv1 colour font: the tittles on i/j are small **red hearts**. Red appears nowhere else in the brand and fights the gold. Remapping the `@font-palette-values` keeps the letterforms and the detail while resolving the clash. One CSS block to delete if the client wants stock red back. |
+| **NO IDX at launch.** `/home-search/*` → 301 | Fails CitedRealty's own published need-test: a listing-focused team's sellers don't hire them for a search widget, and buyers use Zillow regardless. Costs $50–100+/mo plus MLS fees, adds a vendor whose URLs die on exit, and risks the broken-widget trust failures visible on competitor sites (Whissel's $0 medians, Kolker's "No results found"). Their **own** listings need no IDX licence — generator plus weekly refresh. Revisit only if the team commits to a real buyer nurture pipeline; then noindexed, on their own domain. |
+| **robots.txt names the AI crawlers explicitly and allows all of them** | Retrieval bots (OAI-SearchBot, ChatGPT-User, PerplexityBot, Claude-SearchBot, Google-Extended) are what fetch a page in order to cite it — blocking any forfeits the engagement. Training bots (GPTBot, ClaudeBot, Applebot-Extended) are also allowed: for a business whose problem is that models do not know it exists, being in the training data is upside. Reversible client call. |
+| **IndexNow at launch** (key `ce855552…`, `build/indexnow.py`) | ChatGPT retrieval leans on Bing's index. Bing/Yandex/Seznam/Naver only — **Google does not participate**. Honest framing for the client: it accelerates discovery; it does not cause ranking or citation. Will 422 until DNS points at Vercel and the key file is reachable. |
+
+### Schema and content architecture
+
+| Decision | Why |
+|---|---|
+| **No JSON-LD is ever hand-written.** Every block is a Python dict serialised with `json.dumps`; `validate.py` re-parses all of it pre-push | Makes the missing-brace failure that broke CitedRealty's homepage graph structurally impossible rather than merely unlikely. |
+| **The full entity graph repeats on every page** rather than being defined once and referenced | An AI fetcher may only ever see one page. Each page has to stand alone as a complete statement of the entity. The validator flags one `@id` describing *different* things, which is the real error the schema skill warns about. |
+| **`sameAs` lists only profiles that are accurate today.** LinkedIn, Yelp and the YouTube channel sit in `SAME_AS_PENDING` with per-item reasons | A `sameAs` pointing at a profile carrying "Upstart Real Estate" or the old (619) number tells the knowledge graph that the wrong data is authoritative. They get promoted as Phase 2 fixes them. |
+| **Neighborhood pages are built as fan-out answer blocks, not narrative** | AI Mode decomposes a query into sub-queries and retrieves *passages*, not pages. A flowing page competes for one head term; the same content in self-contained blocks competes for ~19 retrievals. Map in `build/data/fanout.py`. |
+| **Every lead answer must survive being lifted out of the page.** `validate.py` rejects any answer opening with a bare pronoun or omitting the place name | A passage that reads "It has no Mello-Roos" is useless once separated from its heading, which is exactly what retrieval does to it. |
+| **`FAQPage` schema is derived from the visible passages, never authored separately** | Two sources of truth drift, and a mismatch between schema and rendered text is a structured-data violation. `faq_from_blocks()` extracts from the built HTML, so they cannot disagree. Rich results for FAQ were dropped in 2026 — this is for AI parsing, and the client should be told that plainly rather than sold a rich-result promise. |
+| **Neighborhood market data comes from public primary sources**, cited and dated: County Auditor CFD reports for Mello-Roos, district boundary maps for schools | No client dependency, fully defensible under no-fabrication, and the Mello-Roos and school-boundary data *is* the moat — not one competitor page publishes it. Revisit if the client grants MLS access. |
+| **Hand-craft, don't scale by template** | The May 2026 core update explicitly demotes name-swapped geo templates. Sixteen pages sharing a generator but not sharing prose; each carries community-specific district, CFD and boundary facts that had to be looked up individually. |
+| **Primary tracking keyword: "carmel valley san diego real estate agent"** | Sits at their physical office (92130) so it is geogrid-trackable and proximity-favoured; decisive agent-selection intent; genuinely winnable, unlike portal-locked "homes for sale" or RSF head terms owned by Barry Estates and Brizolis Janzen. |
+| **Earned mentions only — never bought** | Google's May 2026 AI-search guide makes buying citations to influence AI results a stated spam risk. Also CitedRealty's compliance line, and it has to survive contact with the Scripps Ranch competitor who *is* using paid press releases. Legit PR announcing real RealTrends results is fine; paid "AI mention" packages are not. |
+
+### People, authorship and attribution
+
+| Decision | Why |
+|---|---|
+| **Neighborhood-first IA: one named licensee owns each area** | A page authored by "Team Azizi" is a company talking. A page authored by a named licensee with a DRE number, a direct line and a sold record in that neighborhood is a person who can be checked — which is what E-E-A-T rewards and what an assistant needs before it will name someone. `/team` groups by area because "who do I call about Del Sur" is the question visitors arrive with. |
+| **Farming assignments are client data; the system ships with confirmable slots** | Nothing published anywhere says which agent works which community. Proposals in `agents.PROPOSED_ASSIGNMENTS` are now evidence-based (drawn from the sales sweep), but only **Del Mar → Michael Angotta** is marked confirmed. Everything else falls back to a real, accountable licensee rather than a company byline. |
+| **Bylines rotate across the three Azizi licensees, weighted to Sofia** | `agents.BYLINE_POOL` is 6 Sofia / 2 Nilab / 2 Zohra, selected by a SHA-256 hash of the page slug so it is deterministic and stable across builds. Client instruction was "most should default to Sofia but do a mix." Nineteen pages all bylined to one person reads as a single-author site pretending to be a team. |
+| **The byline rotation forced two corrections.** `expert_block` used to say "Team lead · covering X" — factually wrong for Sofia and Zohra, i.e. on two-thirds of guides. `/team` separately disagreed with the guides about who covers what | Both fixed. Worth knowing because it is the failure mode of any change that touches authorship: the byline is asserted in three places and they must agree. |
+| **Every agent page carries "Review me on Zillow" with that agent's own profile link** | Client instruction. 15 of 19 have Zillow URLs, 1 has realtor.com (Tiffney), 1 is explicitly marked `no_review_profile` (Candice — Compass profile only), and the remainder fall back to team-level. Review velocity is the single highest-leverage local ranking factor available and it costs nothing to ask. |
+| **No `Review` or `aggregateRating` schema anywhere on the site** | Verified against Google's structured-data policy rather than recalled: *"Don't aggregate reviews or ratings from other websites."* Zillow reviews are Zillow's. Self-collected reviews are also ineligible for the star feature. Testimonials will render as plain text with attribution, carrying no review markup. `build/data/testimonials.py` is deliberately empty pending client-supplied, permissioned quotes. |
+| **Sonia Azizi's profiles are not used** | Founder, died July 6, 2023. Most review equity is stranded on her profiles and the temptation to use it is real. Client decided against; recorded in `site.NOT_USING`. **Do not delete or quietly rewrite anything of hers.** Honour her on `/about` when that page exists. Any future decision here routes through the client and the family. |
+| **Nilab's "0 sales" is an attribution gap, not a real zero** | 779 of 1,009 sales are attributed to a named agent; the rest are not. The team lead showing zero would be worse than showing nothing. `agent_record_block()` handles three cases explicitly and publishes no number rather than a false one. |
+
+### Photography — the longest-running thread in this project
+
+| Decision | Why |
+|---|---|
+| **No generated imagery of real named places** | A synthetic photo of a real community cuts against the no-fabrication doctrine the whole strategy rests on. Generated art is fine for abstract section bands (`build/textures.py` generates four, with explicit prompt bans on buildings, landscapes and photorealism) and for typographic OG cards (`build/og.py`, 20 of them). |
+| **Compass listing photography was rejected as a source** | Three independent reasons, checked rather than assumed: the images carry a "SAN DIEGO \| MLS" watermark and are MLS-licensed rather than the team's own; the agent pages expose no reliable image-to-city mapping, so picking one per neighborhood would be guesswork; and they are interiors. An empty bedroom is not a picture of Escondido. |
+| **Wikimedia Commons and Openverse, with every image verified by a human before install** | Commons gives a licence, an author, a description and often coordinates — everything needed to publish a photograph honestly. Openverse adds Flickr, where people who actually live somewhere post pictures of it, plus US government accounts whose work is public domain. |
+| **Non-commercial and no-derivatives licences excluded at the query, not filtered afterwards** | This is a commercial site and a hero has to be cropped. A crop of a share-alike image is an adaptation and inherits the licence. |
+| **Every borrowed photo renders its attribution on the page, and now also states what was changed** | CC BY and CC BY-SA both require indicating that modifications were made, not merely naming the author. Eleven credits read "Cropped to fit" — cropping to a 16:10 hero is itself a change — and Valley Center reads "Cropped to fit; colour and contrast adjusted." |
+| **Search the DISAMBIGUATED name, and trust the Commons category over the description** | This is the method that actually worked, and it should have been step one. See §5 for the full sequence and the three wrong-place near-misses it caught. |
+| **Tonal grading yes, generative "enhancement" no** | Levels, contrast, saturation and unsharp mask apply a response curve to pixels already in the frame, which is what a darkroom print does. Re-rendering pixels invents detail that is not in a neighborhood a buyer may move to — the same category of error as the Monterey County vineyard, just harder to spot — and it would make a "Photograph by ‹author›" credit false. |
+| **A third-party real estate site's photo was declined** | The client offered a Valley Center image hosted on a competing San Diego agent's site: uncredited, unlicensed, and served behind a captcha wall on direct fetch. Copying it would be infringement with the shortest possible path to a complaint, because the injured party is a competitor who would notice. Options given instead: trace and licence the original, commission a shoot, or keep the CC image. |
 
 ---
 
-## 3. Canonical data block (reuse these exact strings everywhere)
+## 3. Canonical data block — reuse these exact strings everywhere
 
 ```
 Name:        Team Azizi
@@ -83,134 +126,264 @@ Brokerage:   Compass California III, Inc., CA DRE# 01527365
 Website:     https://teamazizi.com
 ```
 
-**These must match GBP exactly** once GBP exists — schema, footer NAP, and GBP are one entity or they're three. Old strings to purge wherever found: `10550 Craftsman Way`, `11682 El Camino Real`, `(619) 929-9691`, `sonia@teamazizi.com`, `Upstart Residential` / `Upstart Real Estate`, DRE `01426453`, and the "45 Ranch" typo.
+Single source of truth: `build/data/site.py`. Never retype these anywhere else.
 
-**Proof points (all third-party verifiable — use these, not the old site's "$90M+ 2024"):**
-$105.59M volume / 92 sides (RealTrends Verified 2025) · #1 Del Mar by sides, #2 by volume · #58 California by volume · #265 nationally · 1,016 closed sales + 43 rentals (Compass) · actives $369K–$5.875M · solds to $6.1M · 7 units at 6710 La Jolla Blvd = whole-building development representation.
+**These must match GBP exactly** once GBP exists — schema, footer NAP and GBP are one entity or they are three.
+
+**Strings to purge wherever found** (`validate.check_stale_strings` enforces this): `10550 Craftsman Way`, `11682 El Camino Real`, `(619) 929-9691`, `sonia@teamazizi.com`, `Upstart Residential`, `Upstart Real Estate`, DRE `01426453`, and the "45 Ranch" typo.
+
+**Recommended canonical name: "Team Azizi"**, long form "Team Azizi Real Estate | Compass San Diego". Matches Compass and RealTrends; the long form disambiguates from **Azizi Developments (Dubai)**, which pollutes generic "Azizi real estate" results. Still pending client confirmation — the validator warns — but everything ships with one string so a change is one edit.
+
+**Proof points, all third-party verifiable.** Use these, not the old site's "$90M+ 2024":
+$105.59M volume / 92 sides (RealTrends Verified, 2026 program reporting 2025 production) · **#58 of all California large teams by volume** · #265 nationally · 1,016 closed sales + 43 rentals (Compass) · actives $369K–$5.875M · solds to $6.1M · 7 units at 6710 La Jolla Blvd = whole-building development representation.
+
+Cite both years or a reader who clicks through thinks the number is stale.
+
+**Two claims were pulled from the site** because the record does not support them:
+- "#1 in Del Mar by sides" — RealTrends ranks within an assigned business city; theirs is Del Mar; they have six Del Mar sales in the entire Compass record. Almost certainly an artifact of registration rather than market share, and a reader will infer market share.
+- "Top 1% in San Diego County" — no published denominator, no source, and it is the identical string their most direct competitor already uses. The RealTrends line is stronger precisely because a reader can click it.
 
 ---
 
-## 4. What exists, where
+## 4. The neighborhood guides — the product
+
+Sixteen areas, 16,107 words, 867–1,204 words each, 10–13 answer blocks each.
+
+**The original six** (from GAMEPLAN, ordered by winnability rather than prestige): Del Sur, 4S Ranch, Scripps Ranch, Carmel Valley, Del Mar, Rancho Santa Fe.
+
+**Ten North County communities** added at client request, ordered by transaction volume in the actual record: Escondido, Oceanside, Fallbrook, San Marcos, Carlsbad, Vista, Poway, Encinitas, Valley Center, Ramona.
+
+Every guide answers, per community, the things that are genuinely hard to look up:
+
+- **Which Community Facilities District applies, and what it costs** — from County Auditor CFD reports, the primary source. `build/data/taxes.py`.
+- **Which school district assigns, and how to check a specific address** — districts, not ratings. `/blog/san-diego-school-district-by-address` carries the method in 1,212 words because it did not belong inside a single guide.
+- **Which county land-use rules bite** — septic, wells, minimum lot size, agricultural zoning. This is what separates Ramona and Valley Center from Carmel Valley in practice.
+
+**Governing content rules**, documented in the `build/data/guides.py` docstring:
+
+- Structural facts only. Which district, which boundary, which agency.
+- **No prices, no medians, no school ratings.** They rot, and a stale median on a real estate site is worse than no median.
+- **Fair Housing: places and processes, never people.** Describe verifiable facts — tax structure, attendance boundaries, commute times, HOA rules. Never "good neighborhood," "safe," "family-friendly," or demographic desirability. The old Luxury Presence pages embedded Census demographic widgets; do not reproduce that pattern as editorial. When answering "is X a good place to live," answer with facts and tradeoffs.
+
+---
+
+## 5. Photography — what was tried, in order, and what it cost
+
+This took four passes and is written down because the failure mode is expensive and non-obvious.
+
+**The failure being guarded against is specific and already happened:** the old Luxury Presence site published a photograph of Carmel Valley, **Monterey County** on the Carmel Valley, San Diego page — four hundred miles from the neighborhood it was selling.
+
+| Pass | Method | Result |
+|---|---|---|
+| 1 | Commons text search on `"<Name>, California"` | 6 areas. Would have shipped **three wrong places** if the captions had not been read: "Vista, California" returns the State Capitol in Sacramento; "Carmel Valley, California" returns Monterey County; "Valley Center, California" returns Fountain Valley and Napa. |
+| 2 | Commons **geosearch** by community centroid (`commons.near()`) | 3 more. Structurally immune to the same-name trap — a file 400 miles away is not within a 6 km radius — but only as good as the geotags, and **Fallbrook's are wrong**: every hit is San Luis Rey Mission Church, which is in Oceanside. |
+| 3 | **Openverse** (`build/openverse.py`) | 1 more (Encinitas). Indexes Flickr and US government accounts. |
+| 4 | Commons text search on the **disambiguated** name | The last 5. `"Carmel Valley San Diego"`, not `"Carmel Valley, California"`. `"4S Ranch"`, not `"4S Ranch, California"`. |
+
+**The lesson, now in `photos.py`:** Commons keeps a **category per community** — `Carmel Valley, San Diego`, `4S Ranch, California`, `Geography of Fallbrook, California`. A file carrying that category was filed by a human who knew which place they meant. **The category is the strongest signal available and the cheapest to check.** Prefer it over description text, which is often just the filename again. This should have been pass one.
+
+**Valley Center needed a different question entirely.** Its one plausible file carries **both** `Valley Center, California` and `Laguna Mountains (California)` — two places fifty kilometres apart, with no coordinates to break the tie. I rejected it on that basis, and that was over-cautious. What settled it was asking not *what does the file claim* but *who relies on it*: it is the lead image on the Valley Center, California article across **27 Wikipedias**, bound to **Wikidata Q2861838**, and in 2020 an editor deliberately recategorised it *to* Valley Center, removing the broader county and CDP categories by hand. **Usage is a stronger signal than metadata, because metadata is one uploader and usage is many editors with something to lose.**
+
+**Rejected during review**, so you know the bar: an upside-down Carmel Valley file; a USDA Fallbrook frame that is a portrait of a named farmer rather than a picture of the place; a Fallbrook crop that landed on bare ground instead of the grove.
+
+**Current state: 16 of 16.**
+
+- **4 from the recovered Luxury Presence asset set** — Del Mar, Del Sur, Rancho Santa Fe, Scripps Ranch. No credit needed; these came with the brand.
+- **12 third-party, all credited on the page** — 10 under CC BY or CC BY-SA, 2 public domain (4S Ranch, San Marcos).
+
+`photos.REJECTED` is now empty but stays in the file, with a note explaining what it is for: when a search returns nothing verifiable, record the reason rather than leaving the slot silently blank. The risk in a repeat search is not finding nothing again — it is someone less careful installing the wrong place.
+
+**The upgrade path is commissioned photography.** Twelve credit lines are a visible tell that the photography is not the team's, and the ten share-alike ones carry an obligation that follows every future crop. A commissioned pass removes all of it at once. Shot lists are in [docs/photography-brief.md](docs/photography-brief.md).
+
+---
+
+## 6. Build system
 
 ```
-team-azizi-website/
-├── GAMEPLAN.md                    ← the plan (strategy, specs, build order)
-├── HANDOFF.md                     ← this file
-├── vercel.json                    ← cleanUrls, 301 map, cache + security headers
-├── build/                         ← generators. Nothing here is deployed.
-│   ├── data/site.py    THE canonical strings — NAP, proof points, services,
-│   │                   sameAs, neighborhoods. Never retype these elsewhere.
-│   ├── schema.py       JSON-LD builders (dicts → json.dumps, never strings)
-│   ├── components.py   <head>, nav, footer, page shell
-│   ├── generate.py     writes site/
-│   ├── validate.py     PRE-PUSH GATE — run before every commit
-│   └── fetch_fonts.py  one-shot: self-hosts the webfonts
-├── site/                          ← the deployable site (output is committed)
-│   ├── assets/{css,js,fonts,img}
-│   └── *.html, sitemap.xml, robots.txt
-└── research/
-    ├── site.md          Old-site URL inventory, content, SEO observations, preservation notes
-    ├── design.md        Exact design tokens + section-by-section layouts + Wayback asset URLs
-    ├── compass.md       Roster, DRE numbers, production stats, active/sold listings
-    ├── social.md        Full entity footprint + the 11-item NAP cleanup list
-    ├── aiBaseline.md    14-query AI/SERP baseline + cited-source patterns + opportunity map
-    ├── competitors.md   8 competitor profiles, neighborhood-page teardowns, conversion patterns
-    ├── keywords.md      Keyword→page map, question bank by neighborhood, primary keyword
-    ├── aiPlaybook.md    ai-local-search + entity-authority + local-schema distilled to this client
-    ├── contentPlaybook.md  landing-pages + keyword-research + content-strategy + briefs + GBP
-    └── archive-snapshots/  Saved HTML/CSS of the dead site (homepage, neighborhoods, team, CSS)
-
-retainer-reach/briefs/team-azizi/
-├── _brand.brief.md
-└── san-diego/{location.brief.md, reports/, scans/, drafts/, alerts/}
+build/
+├── data/                  ← all content and facts live here, nowhere else
+│   ├── site.py            THE canonical strings: NAP, proof points, services,
+│   │                      sameAs, the 16 areas, footer link sets
+│   ├── agents.py          19-agent roster, DRE numbers, review profiles,
+│   │                      farming assignments, BYLINE_POOL, author_for()
+│   ├── guides.py          per-community answer blocks for all 16 areas
+│   ├── taxes.py           CFD / Mello-Roos data from County Auditor reports
+│   ├── fanout.py          the query-decomposition map the guides are built against
+│   ├── photos.py          third-party photo provenance + the REJECTED record
+│   ├── posts.py           journal entries
+│   └── testimonials.py    deliberately empty — see §2
+├── schema.py              JSON-LD builders (dicts → json.dumps, never strings)
+├── components.py          <head>, nav, footer, page shell, picture()
+├── generate.py            writes site/ — one build_* function per page type
+├── validate.py            PRE-PUSH GATE — 11 checks, see below
+├── optimize.py            image caps, WebP, narrow renditions, hash manifest
+├── og.py                  20 typographic Open Graph cards
+├── textures.py            4 abstract section-band textures (gpt-image-2)
+├── commons.py             Wikimedia candidate finder — installs nothing
+├── openverse.py           Openverse candidate finder — installs nothing
+├── indexnow.py            ping Bing/Yandex/Seznam/Naver at launch
+└── fetch_fonts.py         one-shot: self-hosts the webfonts
 ```
 
-Also relevant, outside this repo:
-- **CitedRealty site + generators** (`retainer-reach/citedrealty.com/`) — the code patterns to copy: `gen_blog.py`, `gen_services.py`, `assets/`, and its `HANDOFF.md` for house conventions.
-- **Neighborhood page template**, published: `citedrealty.com/blog/how-to-build-a-neighborhood-page.html`
-- **IDX position**, published: `citedrealty.com/blog/what-is-idx.html`
-- **Local SEO skills:** `~/.claude/skills/localseoskills/`
+### The workflow
+
+```bash
+python3 build/generate.py     # writes all 50 HTML pages + sitemap, robots, IndexNow key
+python3 build/optimize.py     # idempotent; safe to run every time
+python3 build/validate.py     # MUST pass before every commit
+```
+
+`generate.py` prints "48 page(s) written". That counter is the sitemap list, and `/404` and `/thank-you` are deliberately kept out of the sitemap — a 404 page and a form-confirmation page have no business being submitted for indexing. All 50 HTML files are generated; nothing in `site/` is hand-maintained.
+
+Expect `1 error` from `validate.py` until `LEAD_ENDPOINT` is set. That is by design — see §0.
+
+### `validate.py` — the 11 checks, and what each one is preventing
+
+| Check | Prevents |
+|---|---|
+| `check_jsonld` | The missing brace that made CitedRealty's entire homepage graph unparsable and got flagged in GSC within hours |
+| `check_answer_blocks` | Passages that die when lifted out of the page — bare-pronoun openers, missing place names, backreferences, over-short answers |
+| `check_lead_forms` | A form with no TCPA consent language, or one pointing at the placeholder endpoint |
+| `check_stale_strings` | The old address, the old phone, "Upstart", the wrong DRE, the "45 Ranch" typo |
+| `check_internal_links` | Orphans and dead internal links |
+| `check_sitemap` | Malformed XML, and URLs in the sitemap that do not exist on disk |
+| `check_unverified` | Publishing a claim the record does not support; emits warnings for the pending canonical name and the withheld `sameAs` entries |
+| `check_faq_matches_visible` | `FAQPage` schema drifting from the rendered text — a structured-data violation |
+| `check_headings` | Skipped heading levels (this caught 17 pages) |
+| `check_testimonials` | Any `Review` or `aggregateRating` markup sneaking in |
+| `check_footer_licensees` | The footer licence block losing a named licensee |
+
+### `optimize.py` — read this before touching an image
+
+Caps by role, doubled for retina: backgrounds 1920, neighborhoods 1280, textures 1600, team 800. Logos and compliance marks are left alone. WebP is written *alongside* the JPEG, and `components.picture()` emits the WebP first with the JPEG as fallback.
+
+**Idempotency is enforced by a content-hash manifest** at `site/assets/img/.optimized.json`, committed alongside the images. Two mechanisms were tried first and both were worse than the bug they fixed:
+
+- **mtime comparison** — git writes files at checkout time in arbitrary order, so on a fresh clone half the derivatives look older than their sources and the whole tree re-encodes. Caught when it dirtied 30 unrelated headshots.
+- **Requiring the `-800` rendition unconditionally** — the team headshots cap at exactly 800, and the narrow rendition is only written when a source is *wider* than 800. Demanding a file that correctly never exists made all twenty headshots re-encode on every run, forever. That condition now lives in `derived_for()` alone so the two checks cannot drift.
+
+**The bug the manifest exists to catch:** replacing a source JPEG in place used to leave the old `.webp` beside it. Because `picture()` emits WebP first, **every browser that can read WebP got the stale frame** while the JPEG fallback nobody looks at was correct. Silent, and invisible in the markup.
+
+`seed_manifest()` adopts already-correct files without re-encoding them, so introducing the manifest cost no lossy generation and no binary diff.
 
 ---
 
-## 5. Build spec quick reference
+## 7. Vercel
 
-Full detail in GAMEPLAN §4. The parts most easily got wrong:
+**These settings are the answer to "it's not pulling for the teamzizi repo."**
 
-- **Schema graph, server-rendered:** `RealEstateAgent` `@id: /#business` with `geo`, `areaServed` (one entry per neighborhood, Wikipedia `sameAs` where the article exists), `hasOfferCatalog` (services **with descriptions**), full `sameAs`. Agent pages get unique `@id`s linked via `Organization`/`department`. Neighborhood pages use `Service` + `areaServed` — **not** fake per-neighborhood business entities with addresses. `FAQPage` for AI parsing only (rich results were dropped in 2026 — say so honestly). `BreadcrumbList` everywhere.
-- **Validate every JSON-LD block with `json.loads` before every push.** A single missing brace made CitedRealty's entire homepage graph unparsable and GSC flagged it within hours. Validate `sitemap.xml` as XML too.
-- **Every page:** footer NAP matching GBP, author byline (the agent who farms that neighborhood), visible updated date, breadcrumbs, ≤3 clicks from home, zero orphans.
-- **Per neighborhood page:** 800–1,500 words hand-written, 5–8 FAQs as H3-question + 2–3-sentence direct answer, a quotable dated market-snapshot opener, the Mello-Roos/school-boundary/commute data nobody else publishes, real solds from that neighborhood, one CTA. Write the semantic brief *before* the page.
-- **Quarterly refresh discipline is a feature.** Competitors ship $0 medians, lorem ipsum, and empty school tables. Nothing on this site may rot unattended; each refresh also becomes GBP post + social content.
-- **Design tokens & asset recovery URLs:** `research/design.md`. Example recovery:
-  ```bash
-  curl -o logo-dark.png "https://web.archive.org/web/20260104120026im_/https://media-production.lp-cdn.com/media/w4vgzllyebehwvwgoc4k"
-  ```
-  Recover now as insurance; request originals from the client for final quality.
+| Setting | Value |
+|---|---|
+| Framework Preset | **Other** — not Next.js. There is no framework and no build step. |
+| Root Directory | **blank** |
+| Output Directory | **`site`** |
+| Build Command | **empty** |
+| Install Command | **empty** |
 
----
+`vercel.json` at the repo root carries `cleanUrls: true`, `trailingSlash: false`, the 301 map, and cache plus security headers (HSTS with preload, nosniff, SAMEORIGIN, strict-origin-when-cross-origin). Fonts get a one-year immutable cache; css/js/img get a week with `stale-while-revalidate`.
 
-## 6. Compliance & sensitivities (real estate ≠ generic marketing)
-
-- **Fair Housing.** Neighborhood content must not steer. Describe *verifiable facts* — prices, days on market, tax structure, school **attendance boundaries**, commute times, amenities, HOA rules. Avoid framing that signals protected classes: "good/safe neighborhood," "family-friendly," religious or ethnic character, demographic desirability. Note the old LP pages embedded Census demographic widgets — do not reproduce that pattern as editorial. When answering "is X a good place to live," answer with facts and tradeoffs, not with who lives there.
-- **MLS data use.** Aggregate stats (medians, DOM, counts) are generally fine and are what makes pages citable — but confirm SDMLS rules before displaying individual listing data; that's where IDX licensing bites.
-- **California DRE.** License numbers on marketing materials — Nilab's DRE and the Compass brokerage DRE go in the sitewide footer, as on the old site. Keep the Compass equal-housing + MLS disclaimers.
-- **TCPA.** Consent language on every lead form (the old site had it; don't lose it).
-- **No fabrication, ever.** No invented stats, testimonials, or `aggregateRating`. Every claim traces to Compass, RealTrends, MLS, or a named source. Languages spoken stay unclaimed until the client confirms.
-- **Sonia.** See §2. Sensitivity over speed on anything touching her profiles.
+**The preview URL sits behind Vercel deployment protection.** `curl -L` against it returns the login page with HTTP 200, which looks exactly like success. I claimed "all 200, preview is fine" once on that basis and it was wrong. Check for `Authentication Required` or `vercel.com/sso` in the body before believing any preview measurement.
 
 ---
 
-## 7. Open items
+## 8. Compliance and sensitivities — real estate is not generic marketing
 
-**Client-dependent (asked; don't block Phase 1 build):**
-- [ ] **⚠️ Are the six communities the farm you have, or the farm you want?** 45 of 1,009 sales (4.5%). Median $650K, 77.5% under $1M. The actual book is Escondido (~96), South Bay, Oceanside, Fallbrook, Spring Valley. Both answers are legitimate; they produce different sites. [research/salesRecord.md](research/salesRecord.md) §1.
-- [ ] **⚠️ Verify "#1 in Del Mar by sides" before it goes back on the site.** Pulled from the homepage 2026-07-25. RealTrends ranks within an assigned business city; theirs is Del Mar; they have six Del Mar sales in the entire Compass record. Very likely an artifact of registration, not market share — and a reader will infer market share. §2.
-- [ ] **Rancho Santa Fe: keep or drop?** One lifetime sale, in the hardest SERP in the county. An expert page there fails the plan's own webspam-team test.
-- [ ] **Michael Angotta — staying, and San Diego-focused?** 136 of his 177 sales are Connecticut, and one of his Instagram accounts links to YB Realty rather than Compass.
-- [ ] **Confirm the four proposed farming assignments** (now evidence-based, not guesses): Del Sur + 4S Ranch → Zohra Azizi · Scripps Ranch → Sofia Azizi · Del Mar → Michael Angotta · Carmel Valley → contested three ways. Also: can they split Del Sur from 4S Ranch? ZIP 92127 covers both plus Rancho Bernardo and Santaluz. Full text in `agents.PROPOSED_ASSIGNMENTS`.
-- [ ] **Nicholas Miele's YouTube channel.** @lifeinsandiego — 12.4K subscribers, 205 videos, ~weekly, and the only real on-location neighborhood video in the estate (Carmel Valley ×2, RSF ×2, 4S/Del Sur, Del Mar, Santaluz). It is in the team's link-in-bio but owned personally. Licensing arrangement? It is the highest-reach asset they have and it is not theirs.
-- [ ] **@soniasellssd — 9,412 followers**, still live, bio "Founder of Team Azizi". Four and a half times the team account and the largest audience in the entity graph. Family decision, not an SEO one.
-- [ ] **The other three link-in-bio URLs on Instagram.** The visible one is `teamazizi.com/home-valuation` — dead, and taking live traffic from 2,055 followers. The other three are almost certainly dead teamazizi.com paths too. This makes `/home-valuation` launch-critical, not a Phase 3 rebuild.
-- [ ] **Replace "Top 1% in SD County" in the Instagram bio with the RealTrends line.** Resolved 2026-07-25: the client supplied the RealTrends listing, confirming **#58 of all California Large Teams by volume** ($105.59M / 92 sides / Del Mar). That does not substantiate "Top 1% in SD County" — different denominator, no published source — it makes it *unnecessary*. "#58 Large Team in California, RealTrends Verified" is the stronger claim because a reader can click it, and unlike "Top 1%" it is not the identical string their most direct competitor already uses. Site now leads with it; the bio should match so profile and site assert the same checkable thing.
-- [ ] Note the citation year: RealTrends publishes this under its **2026 program** reporting **2025 production**. Cite both or a reader who clicks through thinks the number is stale.
-- [ ] Headshots for the six agents without one — Masooma, Charisma, Tiffney, Javier, Malcolm, Mahan
-- [ ] Deanna Colby and Coby Herzog: departed? Their `/agent/` URLs are indexed and need a deliberate 301 either way
-- [ ] Confirm canonical name string
-- [ ] Current roster — old site showed 15, Compass shows 18 public (new: Masooma CFO, Tiffney, Javier, Malcolm, Mahan, Charisma; verify Deanna Colby / Coby Herzog status)
-- [ ] Sonia legacy decisions (memorialize vs. update her profiles) — with the family
-- [ ] Languages spoken per agent (Dari/Farsi/Spanish plausible; strong E-E-A-T + untapped keyword category — never claim unconfirmed)
-- [ ] Founding year + lifetime volume claim (Yelp says est. 2010, housing.info says 2014)
-- [ ] Original photography/video; any drone footage of the six neighborhoods
-- [ ] Testimonial permissions; CRM / lead routing destination
-- [ ] Branded listing-prep program name (riding Compass Concierge)
-- [ ] GBP verification — client must receive/complete it
-- [ ] Scope confirm: this is Local Hero tier ($3,999/mo — site build + neighborhoods)
-
-**Ours:**
-- [x] `git init` — done; repo is live
-- [ ] Vercel project — set **Root Directory = `site`**; `vercel.json` at repo root already carries `cleanUrls`, the 301 map and cache/security headers
-- [ ] Make the repo private (no API for this — GitHub Settings → General → Danger Zone)
-- [ ] Optimise images before launch — `site/assets/img/` is 8.3 MB unoptimised; the hero poster alone is 396 KB and is the LCP element
-- [ ] Get the real **Compass brokerage logo** from Compass's brand kit (the recovered file is the TA monogram, mislabelled)
-- [ ] Replace the Carmel Valley and 4S Ranch neighborhood photos — the archived ones show the wrong places
-- [ ] Verify the office **geo coordinates** against the GBP pin once GBP exists (currently approximate; `validate.py` warns)
-- [x] Recover all Wayback assets — done 2026-07-24; **manifest corrected 2026-07-25**, see `assets/recovered/README.md`
-- [ ] Point DNS to Vercel at launch (Jon controls registrar)
-- [ ] Submit to GSC + Bing Webmaster immediately at launch; request re-indexing of preserved URLs
-- [ ] Run `python3 build/indexnow.py` at launch (full sitemap) and after every content deploy — will 422 until DNS points at Vercel and the key file is reachable
-- [ ] Ask the client for rights to their own listing photography — it is the fastest source of true localized neighborhood imagery and they already own 1,016 sales' worth
-- [ ] Lead form endpoint decision (Formspree — watch the ~50/mo free cap — vs. client CRM webhook)
-- [ ] Find owner of `greatersandiegohouses.com` staging site (broken `*.testintegration.com` SSL, indexed) → fix or noindex
-- [ ] Case-study log: screenshot the corrupted AI answers *now*, before they're fixed
+- **Fair Housing.** Content must not steer. Describe verifiable facts: prices, days on market, tax structure, school **attendance boundaries**, commute times, amenities, HOA rules. Avoid framing that signals protected classes — "good/safe neighborhood," "family-friendly," religious or ethnic character, demographic desirability. The old LP pages embedded Census demographic widgets; do not reproduce that as editorial.
+- **No fabrication, ever.** No invented stats, testimonials or `aggregateRating`. Every claim traces to Compass, RealTrends, MLS, or a named source. Languages spoken stay unclaimed until the client confirms.
+- **Reviews.** Google's structured-data policy: *"Don't aggregate reviews or ratings from other websites."* No review markup anywhere. See §2.
+- **TCPA.** Consent language on every lead form. The old site had it; `check_lead_forms` makes losing it a build failure.
+- **California DRE.** Nilab's licence number and the Compass brokerage DRE in the sitewide footer, as on the old site. Keep the Compass equal-housing and MLS disclaimers.
+- **MLS data use.** Aggregate stats (medians, DOM, counts) are generally fine and are what makes pages citable. Confirm SDMLS rules before displaying individual listing data — that is where IDX licensing bites.
+- **Sonia.** Sensitivity over speed on anything touching her profiles. See §2.
 
 ---
 
-## 8. How to do common tasks
+## 9. Open items
 
-- **Add/edit a neighborhood page:** write the semantic brief first (`research/contentPlaybook.md` §5 has the template), then add the data dict to the generator and run it. Never write a second page by copying the first and swapping the name — that's the exact failure mode the plan exists to avoid.
-- **Refresh market snapshots (quarterly):** update the stats block per neighborhood from MLS, bump the visible updated date, then recycle each refresh into a GBP post and an Instagram post.
-- **Before every push:** `json.loads` every `<script type="application/ld+json">`; validate `sitemap.xml`; Rich Results Test on any page whose schema changed.
-- **After publishing pages:** point GBP's website link at the right page, then run a geogrid scan 2–4 weeks later to measure. Log results to `briefs/team-azizi/san-diego/scans/`.
-- **Monthly reporting:** manual AI query panel (ChatGPT / Gemini / Perplexity / AI Overviews) per neighborhood — mentioned yes/no, sentiment, **which sources got cited**, competitor grid; plus GBP actions and conversions rather than raw clicks. File to `reports/`.
-- **Resuming this project cold:** read `GAMEPLAN.md` → this file → `briefs/team-azizi/san-diego/location.brief.md` (Next Action). The `research/` files are the evidence base; don't re-run the research.
+### Blocking launch
+
+- [ ] **`site.LEAD_ENDPOINT`** — Formspree ID (watch the ~50/mo free cap) or the client's CRM webhook. This is the only true blocker.
+
+### Client-dependent
+
+- [ ] **⚠️ Which farm gets the spend?** 45 of 1,009 sales are in the original six. The real book is Escondido, South Bay, Spring Valley, Fallbrook, Oceanside. The site now covers both sets; the marketing decision is still open. [research/salesRecord.md](research/salesRecord.md) §1.
+- [ ] **Rancho Santa Fe: keep or drop?** One lifetime sale, hardest SERP in the county. An expert page there fails the plan's own webspam test.
+- [ ] **Confirm 15 of the 16 farming assignments.** Only Del Mar → Angotta is confirmed. Pre-written in `agents.PROPOSED_ASSIGNMENTS`. Also: can Del Sur be split from 4S Ranch? ZIP 92127 covers both plus Rancho Bernardo and Santaluz, so any split needs street-level data.
+- [ ] **Per-area sales counts for the nine North County communities** — needed to publish a record block on those guides.
+- [ ] **Testimonials** — permissioned quotes with attribution. Pipeline is built and empty.
+- [ ] **Coby Herzog roster status.** Deanna Colby resolved; Coby still open. Their `/agent/` URLs are indexed and need a deliberate 301 either way.
+- [ ] **Confirm the canonical name string** — validator warns until then.
+- [ ] **Nicholas Miele's YouTube channel** (@lifeinsandiego, 12.4K subs, 205 videos, ~weekly). The only real on-location neighborhood video in the estate, in the team's link-in-bio, but owned personally. Highest-reach asset they have and it is not theirs. Licensing arrangement?
+- [ ] **@soniasellssd — 9,412 followers**, still live, bio "Founder of Team Azizi". Four and a half times the team account. Family decision, not an SEO one. A team-level Zillow profile under her name also surfaced and conflicts with `site.NOT_USING`.
+- [ ] **The other three Instagram link-in-bio URLs.** The visible one is `teamazizi.com/home-valuation` — which is why that page was launch-critical rather than a Phase 3 rebuild. The other three are almost certainly dead teamazizi.com paths.
+- [ ] **Replace "Top 1% in SD County" in the Instagram bio** with the RealTrends line, so profile and site assert the same checkable thing.
+- [ ] **Google Maps API key** (`site.GOOGLE_MAPS_KEY` is empty) — for the contact-page map.
+- [ ] **Malcolm Schick's higher-resolution headshot** — current one is soft.
+- [ ] **Privacy policy** — needed before launch for the forms.
+- [ ] **GBP verification** — client must receive and complete the postcard. Nothing else in Phase 2 starts without it.
+- [ ] **Compass brokerage logo** from Compass's brand kit. The recovered file is the TA monogram, mislabelled.
+- [ ] Founding year and lifetime volume (Yelp says 2010, housing.info says 2014).
+- [ ] Languages spoken per agent — Dari/Farsi/Spanish plausible; strong E-E-A-T signal and an untapped keyword category. Never claim unconfirmed.
+- [ ] Branded listing-prep program name, riding Compass Concierge.
+
+### Ours
+
+- [ ] **⚠️ `generate.py` restamps every page's date on every build.** `TODAY = date.today().isoformat()` at line 29 feeds the visible "Last updated" line, `dateModified` in the schema, and `<lastmod>` in the sitemap — at ~18 call sites. Running the generator with no content change therefore bumps the date on all 27 dated pages, which is a **false freshness signal**: it tells Google and any reader that a page was revised when it was not, on a site whose entire premise is that its claims can be checked. It also destroys the one thing the visible date is for, which is letting a buyer see that the Mello-Roos figure is current.
+
+  Caught while committing a docs-only change that arrived with 27 pages of date churn attached. The churn was stripped from that commit; the generator was not fixed, because doing it properly is not a one-line change.
+
+  **The fix, when it is done:** a page's date should change exactly when its content changes. Compare each freshly rendered page against the committed version with all date occurrences normalised to a placeholder; if the bodies are otherwise identical, keep the stored date, and if they differ, stamp today. Same shape as the `optimize.py` hash manifest in §6, and the sitemap `lastmod` should then read each page's own date rather than today's. Until this lands, **do not commit rebuilt HTML unless the content actually changed** — check `git diff` for pages whose only delta is the date, and restore them.
+
+- [ ] **Make the repo private** — no API for this; GitHub Settings → General → Danger Zone.
+- [ ] **Rotate the OpenAI API key.** It lives in a gitignored `.env` at mode 600 and is absent from every staged diff — verified — but it was exposed in a session transcript. Rotate it.
+- [ ] **Point DNS at Vercel:** `A @ → 76.76.21.21`, `CNAME www → cname.vercel-dns.com`. Full sequence in [docs/launch-runbook.md](docs/launch-runbook.md).
+- [ ] **Verify office geo coordinates** against the GBP pin once GBP exists. Currently approximate; `validate.py` warns. Schema and GBP must agree exactly.
+- [ ] Submit to GSC and Bing Webmaster at launch; request re-indexing of the preserved URLs.
+- [ ] Run `python3 build/indexnow.py` at launch and after every content deploy.
+- [ ] Ask the client for rights to their own listing photography — 1,016 sales' worth, and the fastest route to owned imagery even after the Compass-photos rejection in §2, because *permissioned* use is a different question from scraping.
+- [ ] Find the owner of `greatersandiegohouses.com` staging site (broken `*.testintegration.com` SSL, indexed) → fix or noindex.
+- [ ] **Case-study log: screenshot the corrupted AI answers now**, before they are fixed. The zero-visibility "before" is the entire value of customer #1.
+
+---
+
+## 10. How to do common tasks
+
+**Add or edit a neighborhood guide.** Write the semantic brief first (`research/contentPlaybook.md` §5 has the template), add the answer blocks to `build/data/guides.py`, then run the three-command workflow in §6. Never write a second page by copying the first and swapping the name — that is the exact failure mode the plan exists to avoid, and the May 2026 core update targets it specifically.
+
+**Add a neighborhood photograph.** Search Commons on the **disambiguated** name and check the **category** before anything else. Read the description. Look at the image. Add a `photos.CREDITS` entry with the licence URL and a `modified` note, drop the cropped file into `site/assets/img/neighborhoods/`, then run optimize and generate. If nothing verifiable turns up, add a `photos.REJECTED` entry saying why.
+
+**Replace an existing image.** Just overwrite the JPEG. The hash manifest will notice and regenerate every derivative. This did not use to work — see §6.
+
+**Refresh market snapshots.** Update the stats per community, bump the visible updated date, and recycle each refresh into a GBP post and an Instagram post. Quarterly refresh discipline is a feature, not overhead: competitors ship $0 medians, lorem ipsum and empty school tables. Nothing here may rot unattended.
+
+**Before every push.** `python3 build/validate.py`. Rich Results Test on any page whose schema changed.
+
+**After publishing pages.** Point GBP's website link at the right page, then run a geogrid scan 2–4 weeks later. Log to `briefs/team-azizi/san-diego/scans/`.
+
+**Monthly reporting.** Manual AI query panel — ChatGPT, Gemini, Perplexity, AI Overviews — per neighborhood: mentioned yes/no, sentiment, **which sources got cited**, competitor grid. Plus GBP actions and conversions rather than raw clicks.
+
+**Resuming cold.** `GAMEPLAN.md` → this file → `research/salesRecord.md`. The `research/` files are the evidence base; do not re-run the research.
+
+---
+
+## 11. Mistakes made on this project, and what they cost
+
+Kept because every one of them is a trap the next person can fall into, and three of them were only caught by luck.
+
+| What happened | How it was caught | The lesson |
+|---|---|---|
+| Claimed the Vercel preview was healthy — "all 200" | It was not. Deployment protection returns the login page with HTTP 200, so `curl -L` was measuring a login form | A 200 is not a success. Check the body. |
+| A Zillow URL regex attached the wrong agent's profile to Masooma Azizi | Printing **every** pairing individually before committing | A non-greedy match will happily cross record boundaries. Verify pairings one by one, not in aggregate. |
+| `optimize.py` re-encoded every JPEG on every run | Noticed ~40 binary files dirty in git for no reason | Idempotency in a generator is a correctness property, not a nicety. |
+| Then the fix for *that* left stale WebP files after an image was replaced | Only found because a graded image was replaced in place and the WebP was checked by hash | The cache-invalidation fix needs its own invalidation test. |
+| The mtime-based fix reintroduced the churn, dirtying 30 unrelated headshots | git status, immediately | mtime is not a content signal. git rewrites it at checkout. |
+| The byline rotation made `expert_block` say "Team lead" about two people who are not the team lead | Reading the rendered output rather than trusting the diff | Authorship is asserted in three places; changing one means checking all three. |
+| A validator rule for bare-pronoun openers flagged 9 false positives | The failures were obviously fine on inspection | A crude heuristic that fires on good content trains people to ignore the validator. Requiring both conditions fixed it. |
+| San Marcos's licence was recorded as CC BY-SA when it is public domain | Checked against the API before commit | Do not transcribe a licence from memory or from a sibling entry. |
+| A test corrupted `contact.html` and a second test then treated the damaged file as the original | Regenerating from source rather than from a backup | A test that mutates a real file must restore it in a `finally`, and never trust a backup taken after the damage. |
+| Rejected Valley Center's photo as unverifiable | Asking a different question — who *uses* the file | Contradictory metadata is a reason to look harder, not always a reason to stop. |
+| A documentation-only commit arrived with 27 pages of date churn attached, every one claiming an update that never happened | Reading `git show --stat` before pushing, and asking why a docs change touched 29 files | A generator that stamps `date.today()` unconditionally manufactures freshness. **Read the file list on every commit** — if the count surprises you, find out why before pushing. Open item in §9. |
+
+---
+
+*This file is state, decisions and why. `GAMEPLAN.md` is the plan. `docs/launch-runbook.md` is the ordered launch sequence. `research/` is the evidence base.*
