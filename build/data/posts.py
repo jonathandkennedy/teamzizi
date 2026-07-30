@@ -1270,6 +1270,238 @@ POSTS: list[dict] = [
             },
         ],
     },
+    {
+        "slug": "is-escondido-a-good-place-to-live",
+        "title": (
+            "Is Escondido a good place to live? Answer it with facts, "
+            "not adjectives"
+        ),
+        "dek": (
+            "The honest answer depends on which tradeoffs matter to the "
+            "household asking &mdash; and every one of them is checkable. "
+            "The housing stock and what it means for the tax line, the "
+            "two-district school structure, the commute geometry, and an "
+            "open-space inventory most listings never mention."
+        ),
+        "date": "2026-07-30",
+        "author": "sofia-azizi",
+        "description": (
+            "Whether Escondido is a good place to live comes down to "
+            "verifiable tradeoffs: older housing stock with no Mello-Roos "
+            "on most addresses, two school districts, the I-15/SR-78 "
+            "junction and SPRINTER rail, Daley Ranch and the city lakes, "
+            "and where the published data lives for the questions "
+            "adjectives can't answer."
+        ),
+        "footnote": (
+            "      Facility and acreage facts above are from the City of Escondido&rsquo;s\n"
+            "      published pages (Lakes Division, Daley Ranch, Kit Carson Park) as of\n"
+            "      July 2026. District boundaries and hazard-zone designations are\n"
+            "      redrawn from time to time; confirm any specific address with the\n"
+            "      district office and the current maps before relying on it."
+        ),
+        "blocks": [
+            {
+                "anchor": "how-to-answer",
+                "question": "Is Escondido a good place to live?",
+                "lead": (
+                    "Whether Escondido is a good place to live depends on "
+                    "which tradeoffs matter to the household asking, and "
+                    "every one of those tradeoffs is checkable: what era "
+                    "the housing stock is and how that shapes the tax "
+                    "line, how the two school districts assign, what the "
+                    "I-15/SR-78 junction and the SPRINTER actually offer a "
+                    "commute, and what the city&rsquo;s open space "
+                    "contains. Fair housing law &mdash; and plain accuracy "
+                    "&mdash; rule out answering with adjectives about the "
+                    "people who live somewhere, so this page answers with "
+                    "places and processes."
+                ),
+                "body": (
+                    "<p>Escondido is four ZIP codes that behave as "
+                    "separate markets, built in different decades, which "
+                    "is why a single citywide verdict describes none of "
+                    "them well. The "
+                    "<a href=\"/neighborhoods/escondido\">Escondido "
+                    "guide</a> maps the sub-areas; the blocks below cover "
+                    "the decision-level facts the guide does not.</p>"
+                ),
+            },
+            {
+                "anchor": "older-stock",
+                "question": (
+                    "What does buying an older Escondido home involve "
+                    "that a newer tract does not?"
+                ),
+                "lead": (
+                    "Most Escondido homes pre-date the Mello-Roos era, so "
+                    "the typical address carries no community facilities "
+                    "district at all &mdash; the county&rsquo;s FY 2025-26 "
+                    "list shows one active CFD in the city, a school "
+                    "district CFD formed in 2019 that applies to newer "
+                    "development. The tradeoff arrives at inspection "
+                    "instead: housing stock from the 1950s through the "
+                    "1980s makes roof age, electrical panels, plumbing "
+                    "material and sewer laterals the questions that "
+                    "actually price a purchase."
+                ),
+                "body": (
+                    "<p>That is the structural difference between "
+                    "Escondido and the master-planned communities a few "
+                    "exits south &mdash; the "
+                    "<a href=\"/neighborhoods/escondido#vs-san-marcos\">"
+                    "guide&rsquo;s San Marcos comparison</a> puts numbers "
+                    "on it, and <a href=\"/mello-roos\">the Mello-Roos "
+                    "page</a> explains the mechanics. Two edge cases "
+                    "worth knowing before offering: the Old Escondido "
+                    "Historic District applies design review to exterior "
+                    "changes, and several Escondido-addressed communities "
+                    "sit outside the city limits in unincorporated "
+                    "county, where the permitting authority differs.</p>"
+                ),
+            },
+            {
+                "anchor": "schools-check",
+                "question": (
+                    "How should schools figure into an Escondido home "
+                    "decision?"
+                ),
+                "lead": (
+                    "An Escondido address requires two school lookups, "
+                    "not one: Escondido Union School District assigns "
+                    "kindergarten through eighth grade and Escondido "
+                    "Union High School District assigns ninth through "
+                    "twelfth, from two different boundary maps &mdash; "
+                    "and addresses on the city&rsquo;s edges can fall "
+                    "into San Pasqual Union, Valley Center-Pauma or "
+                    "Bonsall districts instead."
+                ),
+                "body": (
+                    "<p>The method matters more than any ranking: run "
+                    "the specific address through both districts&rsquo; "
+                    "boundary tools, then confirm with the district "
+                    "office before relying on it. The "
+                    "<a href=\"/neighborhoods/escondido#schools-structure\">"
+                    "guide</a> explains why the structure is split, and "
+                    "<a href=\"/blog/san-diego-school-district-by-address\">"
+                    "the district-by-address post</a> covers how North "
+                    "County boundaries cross city lines generally.</p>"
+                ),
+            },
+            {
+                "anchor": "open-space",
+                "question": (
+                    "What outdoor space does Escondido actually have?"
+                ),
+                "lead": (
+                    "Escondido&rsquo;s open-space inventory is larger "
+                    "than most listings suggest: the city&rsquo;s Lakes "
+                    "Division manages more than 4,500 acres, including "
+                    "Daley Ranch &mdash; a habitat preserve of more than "
+                    "3,000 acres the city bought in 1996 to protect in "
+                    "perpetuity &mdash; plus Dixon Lake with fishing, "
+                    "boating and camping, and seasonal Lake Wohlford."
+                ),
+                "body": (
+                    "<p>Kit Carson Park adds 285 acres on the "
+                    "city&rsquo;s south side &mdash; 100 developed, 185 "
+                    "kept as natural habitat &mdash; and holds Queen "
+                    "Califia&rsquo;s Magical Circle, the only American "
+                    "sculpture garden by Niki de Saint Phalle. East of "
+                    "the city, the San Pasqual Valley carries the San "
+                    "Diego Zoo Safari Park and working agricultural "
+                    "land. For a buyer weighing Escondido against "
+                    "denser, newer communities, this inventory is a "
+                    "real part of the ledger.</p>"
+                ),
+            },
+            {
+                "anchor": "is-it-safe",
+                "question": "Is Escondido safe?",
+                "lead": (
+                    "&ldquo;Safe&rdquo; is a characterization no honest "
+                    "professional can certify for Escondido or anywhere "
+                    "else &mdash; what exists instead is published data, "
+                    "and Escondido&rsquo;s is unusually accessible: the "
+                    "city runs its own police department, whose "
+                    "published route is the beat map plus ARJIS, the "
+                    "regional crime-mapping system, and SANDAG&rsquo;s "
+                    "Criminal Justice Research Division publishes the "
+                    "county&rsquo;s crime statistics reports."
+                ),
+                "body": (
+                    "<p>The workable method for any specific address: "
+                    "look up its beat in ARJIS, read the trend over "
+                    "several years rather than a single incident map, "
+                    "and treat block-level differences as real &mdash; "
+                    "citywide figures blur four distinct ZIP codes. On "
+                    "the rural edges the hazard that actually prices "
+                    "into a purchase is fire: CAL&nbsp;FIRE&rsquo;s "
+                    "severity-zone maps carry the designations, and "
+                    "<a href=\"/blog/california-fair-plan-san-diego\">"
+                    "the FAIR Plan post</a> covers what they mean for "
+                    "insurance.</p>"
+                ),
+            },
+            {
+                "anchor": "downtown",
+                "question": (
+                    "What is there to actually do in Escondido?"
+                ),
+                "lead": (
+                    "Escondido&rsquo;s downtown is a functioning core "
+                    "rather than a themed district: Grand Avenue runs "
+                    "the historic commercial spine, Cruisin&rsquo; Grand "
+                    "fills it with pre-1973 American classics on Friday "
+                    "nights from April through September, and the "
+                    "California Center for the Arts &mdash; a city-owned "
+                    "campus with a concert hall, theater and museum, "
+                    "open since 1994 &mdash; anchors the civic center."
+                ),
+                "body": (
+                    "<p>The practical read for a buyer: the downtown "
+                    "blocks and Old Escondido behind them are where the "
+                    "city&rsquo;s older, character housing concentrates "
+                    "&mdash; with the design-review overlay that "
+                    "protects it &mdash; while the newer stock sits on "
+                    "the edges. Which end of that range fits is a "
+                    "housing-stock question, not a verdict about the "
+                    "city.</p>"
+                ),
+            },
+            {
+                "anchor": "tradeoffs",
+                "question": (
+                    "What are the honest tradeoffs of living in "
+                    "Escondido?"
+                ),
+                "lead": (
+                    "The costs of Escondido are inland summer heat "
+                    "compared with the coastal cities, an older housing "
+                    "core whose systems need real inspection attention, "
+                    "a two-district school structure that takes two "
+                    "lookups, and fire-hazard designations on the rural "
+                    "fringes. The offsets: the I-15/SR-78 junction and a "
+                    "SPRINTER rail option, no Mello-Roos on most "
+                    "addresses, more than 4,500 acres of city-managed "
+                    "open space, and a downtown with working "
+                    "institutions."
+                ),
+                "body": (
+                    "<p>Households weigh those differently, which is the "
+                    "whole point of answering with facts. Before an "
+                    "offer on the rural edges, run the insurance check "
+                    "&mdash; "
+                    "<a href=\"/blog/california-fair-plan-san-diego#buyer-sequence\">"
+                    "the FAIR Plan post walks the buyer sequence</a> "
+                    "&mdash; and for the commute reality, the "
+                    "<a href=\"/neighborhoods/escondido#getting-around\">"
+                    "guide&rsquo;s transit block</a> covers the "
+                    "junction and the rail connection.</p>"
+                ),
+            },
+        ],
+    },
 ]
 
 
