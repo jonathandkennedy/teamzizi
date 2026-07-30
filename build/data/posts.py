@@ -335,6 +335,39 @@ POSTS: list[dict] = [
                 ),
             },
             {
+                "anchor": "assessment-surcharge",
+                "question": (
+                    "Why is there a FAIR Plan charge on a regular San "
+                    "Diego insurance bill?"
+                ),
+                "lead": (
+                    "To cover Los Angeles fire losses, the FAIR Plan "
+                    "levied a $1 billion assessment on its member "
+                    "insurers in early 2025 &mdash; every admitted "
+                    "property carrier in California &mdash; and "
+                    "Department of Insurance bulletins allow carriers to "
+                    "recover a share as a temporary supplemental fee on "
+                    "ordinary policies statewide, San Diego included. A "
+                    "Los Angeles superior court upheld that pass-through "
+                    "framework on June 30, 2026; the department "
+                    "describes the typical fee as a median of roughly "
+                    "$28, recoverable over at most two years."
+                ),
+                "body": (
+                    "<p>The practical readings: a household nowhere near "
+                    "a fire zone still shares in the plan&rsquo;s losses "
+                    "through this line item, the fee is a surcharge "
+                    "rather than a coverage change, and the consumer "
+                    "group that challenged it says it is weighing an "
+                    "appeal &mdash; so the framework is settled for now, "
+                    "not forever. Sacramento is also in motion: AB 1680, "
+                    "which would restructure how the plan is financed, "
+                    "passed the Assembly in May 2026 and is in Senate "
+                    "committee process as of this revision. This page "
+                    "updates as either moves.</p>"
+                ),
+            },
+            {
                 "anchor": "which-communities",
                 "question": (
                     "Which San Diego County communities rely on the FAIR "
@@ -388,7 +421,10 @@ POSTS: list[dict] = [
                     "the contingency still allows a clean exit. A lender "
                     "will not fund without bound coverage, which makes a "
                     "late insurance surprise an escrow-ending event rather "
-                    "than a budgeting nuisance.</p>"
+                    "than a budgeting nuisance. "
+                    "<a href=\"/blog/home-insurance-before-you-offer\">The "
+                    "full pre-offer sequence</a> walks each step with the "
+                    "maps, forms and deadlines.</p>"
                 ),
             },
             {
@@ -680,7 +716,11 @@ POSTS: list[dict] = [
                     "<p>AB 1033 is opt-in: a city has to pass its own "
                     "ordinance before an ADU there can be sold separately, "
                     "so the answer changes at the city line rather than the "
-                    "mailing address. The trap that runs through school "
+                    "mailing address &mdash; and the map is moving. "
+                    "Escondido opted in with its June 2026 ADU ordinance "
+                    "overhaul, which makes ADU approval ministerial and "
+                    "allows separate sale under the state framework. The "
+                    "trap that runs through school "
                     "districts runs through zoning too &mdash; a "
                     "&ldquo;Fallbrook&rdquo; or &ldquo;Escondido&rdquo; "
                     "mailing address does not say which jurisdiction "
@@ -1492,12 +1532,690 @@ POSTS: list[dict] = [
                     "whole point of answering with facts. Before an "
                     "offer on the rural edges, run the insurance check "
                     "&mdash; "
-                    "<a href=\"/blog/california-fair-plan-san-diego#buyer-sequence\">"
-                    "the FAIR Plan post walks the buyer sequence</a> "
-                    "&mdash; and for the commute reality, the "
+                    "<a href=\"/blog/home-insurance-before-you-offer\">"
+                    "insurability before you offer</a> walks the "
+                    "sequence &mdash; and for the commute reality, the "
                     "<a href=\"/neighborhoods/escondido#getting-around\">"
                     "guide&rsquo;s transit block</a> covers the "
                     "junction and the rail connection.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "escondido-housing-pipeline",
+        "title": (
+            "What is actually being built in Escondido &mdash; and what "
+            "the state is demanding"
+        ),
+        "dek": (
+            "A wave of downtown approvals is remaking Valley Parkway "
+            "block by block while the state formally questions the "
+            "city&rsquo;s housing-element compliance. The projects with "
+            "real approvals, the scoreboard against the 9,607-unit "
+            "mandate, and the one big project that is going nowhere. "
+            "Revised quarterly."
+        ),
+        "date": "2026-07-30",
+        "author": "zohra-azizi",
+        "description": (
+            "Escondido's housing pipeline in mid-2026: the downtown "
+            "Valley Parkway approvals (The Maple, Valley Parkway "
+            "Townhomes, KB Home, Quince Street), RHNA progress of "
+            "roughly a quarter of 9,607 units, the December 2025 HCD "
+            "letter of inquiry, and the stalled Harvest Hills proposal."
+        ),
+        "footnote": (
+            "      Project facts above are from City of Escondido hearing notices and\n"
+            "      council records, the California HCD letter of December 3, 2025, and\n"
+            "      named local reporting (The Coast News, Voice of San Diego), as of the\n"
+            "      dates cited. Approvals are not completions; construction status\n"
+            "      changes. The city&rsquo;s agendas are the record, and this page is\n"
+            "      revised quarterly."
+        ),
+        "blocks": [
+            {
+                "anchor": "whats-being-built",
+                "question": (
+                    "What housing is actually approved or under "
+                    "construction in Escondido right now?"
+                ),
+                "lead": (
+                    "Escondido&rsquo;s pipeline concentrates on and "
+                    "around downtown&rsquo;s Valley Parkway: The Maple, "
+                    "128 apartments in five stories across from City "
+                    "Hall, approved January 2026; Valley Parkway "
+                    "Townhomes, 94 for-sale homes approved unanimously "
+                    "in June 2026; a 70-townhome KB Home project by the "
+                    "transit center approved December 2025; and Quince "
+                    "Street Senior Apartments, 145 affordable senior "
+                    "homes already under construction across from the "
+                    "transit center."
+                ),
+                "body": (
+                    "<p>Behind those sit the wave&rsquo;s two largest "
+                    "pieces: Palomar Heights, the 510-home redevelopment "
+                    "of the former hospital site approved in 2021, and "
+                    "the county&rsquo;s Valley Creek project at 620 E. "
+                    "Valley Parkway &mdash; 134 affordable senior homes "
+                    "plus a childcare facility on surplus county land, "
+                    "in environmental review as of May 2026 with "
+                    "construction expected in 2028. The pattern is "
+                    "consistent: density is going downtown, near "
+                    "transit, on already-developed land.</p>"
+                ),
+            },
+            {
+                "anchor": "rhna-scoreboard",
+                "question": (
+                    "Is Escondido on pace for its state housing "
+                    "mandate?"
+                ),
+                "lead": (
+                    "Escondido&rsquo;s state-assigned target for the "
+                    "2021&ndash;2029 cycle is 9,607 homes, and the "
+                    "city&rsquo;s own annual progress reporting puts "
+                    "permits at roughly 2,300 through 2025 &mdash; about "
+                    "a quarter of the mandate with the cycle past "
+                    "half-run, and heavily tilted toward "
+                    "market-rate homes."
+                ),
+                "body": (
+                    "<p>The tilt is the part regulators watch: as "
+                    "reported by Voice of San Diego from the city&rsquo;s "
+                    "2025 figures, roughly 70% of that year&rsquo;s 369 "
+                    "permits were above-moderate-income homes, and the "
+                    "affordable categories sit far behind &mdash; on the "
+                    "order of 11% of the very-low-income target and 6% "
+                    "of moderate. Escondido is not unusual in lagging, "
+                    "but the gap is what gives the state&rsquo;s "
+                    "December letter its teeth.</p>"
+                ),
+            },
+            {
+                "anchor": "state-pressure",
+                "question": (
+                    "Why is the state questioning Escondido's housing "
+                    "plan?"
+                ),
+                "lead": (
+                    "On December 3, 2025, the state housing department "
+                    "sent Escondido a formal letter of inquiry listing "
+                    "eight overdue housing-element programs &mdash; from "
+                    "an unadopted ADU ordinance to the never-established "
+                    "affordable-housing trust fund &mdash; and warning "
+                    "it may revoke the city&rsquo;s compliance finding, "
+                    "an outcome that would expose the city to the "
+                    "builder&rsquo;s remedy, under which qualifying "
+                    "projects can bypass local zoning."
+                ),
+                "body": (
+                    "<p>The first visible response landed in June 2026: "
+                    "a unanimous overhaul of the city&rsquo;s ADU rules "
+                    "making approval ministerial and allowing separate "
+                    "ADU sale under state law. The harder item is "
+                    "structural &mdash; the letter formally identifies "
+                    "Proposition S, the 1998 measure requiring voter "
+                    "approval for General Plan density increases, as a "
+                    "constraint the city must mitigate. That collision "
+                    "between a voter-approved measure and a state "
+                    "mandate is the live storyline of Escondido "
+                    "land-use politics.</p>"
+                ),
+            },
+            {
+                "anchor": "for-sale-shift",
+                "question": (
+                    "Is any of the new Escondido housing for sale, or "
+                    "is it all apartments?"
+                ),
+                "lead": (
+                    "The 2025&ndash;26 approvals mark a shift toward "
+                    "ownership product in Escondido: 94 for-sale "
+                    "townhomes on West Valley Parkway and 70 by the "
+                    "transit center were approved within seven months, "
+                    "and the council has been explicit about wanting "
+                    "&ldquo;missing middle&rdquo; homes &mdash; the "
+                    "duplex-to-cottage-court range &mdash; as an "
+                    "ownership on-ramp."
+                ),
+                "body": (
+                    "<p>The June 2026 approval came with a developer "
+                    "expectation, per The Coast News, of pricing from "
+                    "the low $600,000s &mdash; a dated, attributed "
+                    "figure that will move, but a marker of what new "
+                    "for-sale product downtown looks like. For buyers "
+                    "priced against the newer master-planned inventory "
+                    "elsewhere in North County, new construction "
+                    "without Mello-Roos is a combination worth "
+                    "understanding &mdash; "
+                    "<a href=\"/blog/is-escondido-a-good-place-to-live\">"
+                    "the Escondido decision post</a> covers the tax "
+                    "structure.</p>"
+                ),
+            },
+            {
+                "anchor": "harvest-hills",
+                "question": (
+                    "What happened to Harvest Hills (Safari Highlands "
+                    "Ranch)?"
+                ),
+                "lead": (
+                    "Harvest Hills &mdash; the proposed 550-home "
+                    "annexation on 1,098 unincorporated acres on "
+                    "Escondido&rsquo;s eastern edge, east of Rancho San "
+                    "Pasqual &mdash; remains where it has been for "
+                    "years: application under review, no council vote "
+                    "ever scheduled, and no hearing on any posted "
+                    "agenda as of July 2026."
+                ),
+                "body": (
+                    "<p>Its environmental review ran back in 2017, and "
+                    "a council vote once expected in 2020 never "
+                    "happened. Buyers near the eastern edges sometimes "
+                    "hear the project cited as imminent in both "
+                    "directions &mdash; as a threat and as a promise. "
+                    "The checkable fact is narrower: the city&rsquo;s "
+                    "own project page lists the application as pending "
+                    "with staff, nothing more. Treat any claim beyond "
+                    "that as unpublished until an agenda says "
+                    "otherwise.</p>"
+                ),
+            },
+            {
+                "anchor": "how-to-track",
+                "question": (
+                    "How do you track what gets built next in "
+                    "Escondido?"
+                ),
+                "lead": (
+                    "Escondido&rsquo;s development record lives in "
+                    "three public places: the City Council and Planning "
+                    "Commission agendas, the city&rsquo;s project pages "
+                    "for named developments, and the annual housing "
+                    "progress report each spring &mdash; the same "
+                    "sources this page is built from."
+                ),
+                "body": (
+                    "<p>This post is revised quarterly as approvals "
+                    "land or stall. For the community-level picture "
+                    "&mdash; the four ZIP codes, the two school "
+                    "districts, what the tax line looks like &mdash; "
+                    "start with the "
+                    "<a href=\"/neighborhoods/escondido\">Escondido "
+                    "guide</a> and "
+                    "<a href=\"/blog/is-escondido-a-good-place-to-live\">"
+                    "the decision post</a>.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "oceanside-mission-avenue-mixed-use",
+        "title": (
+            "Mission Avenue is the spine of downtown Oceanside&rsquo;s "
+            "build-out"
+        ),
+        "dek": (
+            "Two high-rises totaling 503 homes were approved on adjacent "
+            "Mission Avenue blocks within eight months &mdash; and they "
+            "are the visible edge of a bigger wave: four more entitled "
+            "projects, a rewritten density cap, a state transit-housing "
+            "law, and a transit-center redevelopment waiting on one last "
+            "approval. Revised as milestones land."
+        ),
+        "date": "2026-07-30",
+        "author": "nilab-azizi",
+        "description": (
+            "Downtown Oceanside development in mid-2026: the 901 and "
+            "801 Mission Avenue approvals (503 homes), the 86 du/acre "
+            "density cap certified in February 2026, SB 79's arrival, "
+            "the NCTD transit-center project awaiting Coastal "
+            "Commission review, and what owners and buyers should "
+            "actually track."
+        ),
+        "footnote": (
+            "      Project and policy facts above are from City of Oceanside staff\n"
+            "      reports and hearing records, California Coastal Commission and\n"
+            "      CEQA filings, NCTD announcements, and named local reporting (The\n"
+            "      Coast News, inewsource, KPBS), as of the dates cited. Approvals\n"
+            "      are not completions, and construction status changes; this page is\n"
+            "      revised as milestones land."
+        ),
+        "blocks": [
+            {
+                "anchor": "mission-pair",
+                "question": (
+                    "What are the two big projects approved on Mission "
+                    "Avenue in Oceanside?"
+                ),
+                "lead": (
+                    "The pair reshaping Mission Avenue sits on adjacent "
+                    "blocks across from Oceanside High School: 901 "
+                    "Mission, eight stories with 273 apartments "
+                    "including 28 deed-restricted low-income homes, "
+                    "approved October 2025; and 801 Mission, seven "
+                    "stories with 230 apartments including 23 "
+                    "affordable, approved unanimously in May 2026 "
+                    "&mdash; 503 homes between them, both under state "
+                    "density-bonus law."
+                ),
+                "body": (
+                    "<p>Both replace low-rise and vacant parcels a few "
+                    "blocks inland from the pier, and both cleared "
+                    "under applications filed before the city&rsquo;s "
+                    "current density and inclusionary rules took their "
+                    "2024&ndash;26 form &mdash; part of why the "
+                    "approvals came scaled as they did. Neither had "
+                    "broken ground as of this writing; entitlement is "
+                    "the milestone that has actually happened.</p>"
+                ),
+            },
+            {
+                "anchor": "bigger-wave",
+                "question": (
+                    "What else is entitled in downtown Oceanside right "
+                    "now?"
+                ),
+                "lead": (
+                    "Beyond the Mission Avenue pair, downtown "
+                    "Oceanside&rsquo;s entitled wave includes 401 "
+                    "Mission (326 homes plus a public plaza enlarged "
+                    "60% after community pushback, approved October "
+                    "2025), the 373-home Blocks 5 &amp; 20 project on "
+                    "the North Myers parking site behind the Mission "
+                    "Pacific hotel (approved January 2026), and Modera "
+                    "Neptune on North Coast Highway &mdash; 360 homes "
+                    "plus a 62-room hotel, approved 2024. One project "
+                    "is verifiably under construction: the 179-studio "
+                    "tower at 712 Seagaze Drive."
+                ),
+                "body": (
+                    "<p>The honest distinction runs through every "
+                    "conversation about this list: approved is not "
+                    "built. Construction financing, permits and phasing "
+                    "decide what rises when, and as of July 2026 the "
+                    "public record confirms construction only at "
+                    "Seagaze. What the approvals do settle is land use "
+                    "&mdash; the downtown blocks now carry entitlements "
+                    "measured in hundreds of homes each, and that fact "
+                    "alone changes the calculus for owners around "
+                    "them.</p>"
+                ),
+            },
+            {
+                "anchor": "why-now",
+                "question": (
+                    "Why is downtown Oceanside suddenly getting "
+                    "high-rises?"
+                ),
+                "lead": (
+                    "The rules changed twice: Oceanside&rsquo;s 1984 "
+                    "coastal plan capped downtown at 43 homes per acre, "
+                    "a 2019 amendment effective 2022 removed the cap "
+                    "entirely &mdash; average approved density downtown "
+                    "reached roughly 175 per acre &mdash; and in "
+                    "February 2026 the Coastal Commission certified a "
+                    "new 86-per-acre base maximum that state "
+                    "density-bonus law can roughly double, which the "
+                    "council accepted in June 2026."
+                ),
+                "body": (
+                    "<p>Two state layers stack on top: the inclusionary "
+                    "ordinance now requires 15% affordable homes on "
+                    "projects of seven or more units with a 55-year "
+                    "term, and SB 79 &mdash; effective July 1, 2026 in "
+                    "San Diego County &mdash; permits mid-rise housing "
+                    "near major transit stops regardless of some local "
+                    "zoning, with the city adopting a phased "
+                    "implementation plan across seven station areas. "
+                    "The era of arguing about whether downtown gets "
+                    "density is over; the live questions are which "
+                    "blocks, and with what obligations.</p>"
+                ),
+            },
+            {
+                "anchor": "transit-center",
+                "question": (
+                    "What is happening with the Oceanside Transit "
+                    "Center redevelopment?"
+                ),
+                "lead": (
+                    "The largest single piece of downtown "
+                    "Oceanside&rsquo;s build-out is the transit "
+                    "center&rsquo;s redevelopment by NCTD and Toll "
+                    "Brothers &mdash; 547 apartments with 15% "
+                    "affordable, a 170-room hotel, retail and a new "
+                    "NCTD headquarters &mdash; approved by the city in "
+                    "late 2025 along with a companion 206-home project "
+                    "at 810 Mission, and now waiting on its final "
+                    "gate: California Coastal Commission review."
+                ),
+                "body": (
+                    "<p>The commission&rsquo;s calendar puts it in "
+                    "Oceanside itself on October 7, 2026 &mdash; the "
+                    "date worth watching, though the project&rsquo;s "
+                    "agenda placement is not yet published. For "
+                    "context on what the site means beyond housing: "
+                    "the transit center is where the SPRINTER, "
+                    "COASTER, Amtrak and Metrolink meet &mdash; the "
+                    "connection the "
+                    "<a href=\"/neighborhoods/oceanside\">Oceanside "
+                    "guide</a> covers for commuters.</p>"
+                ),
+            },
+            {
+                "anchor": "what-it-means",
+                "question": (
+                    "What does the downtown build-out mean for "
+                    "Oceanside owners and buyers?"
+                ),
+                "lead": (
+                    "For downtown Oceanside owners the near-term "
+                    "realities are construction years and parking "
+                    "transitions &mdash; the Blocks 5 &amp; 20 project "
+                    "alone replaces a roughly 200-space public surface "
+                    "lot &mdash; while the entitlements set what the "
+                    "skyline and the rental stock look like by the "
+                    "2030s. For buyers, the checkable question before "
+                    "any downtown purchase is what is entitled on the "
+                    "surrounding blocks, because several quiet parcels "
+                    "now carry approvals measured in hundreds of "
+                    "homes."
+                ),
+                "body": (
+                    "<p>Add the street itself: the Coast Highway "
+                    "corridor project &mdash; four lanes to two with "
+                    "roundabouts from Surfrider Way to Oceanside "
+                    "Boulevard &mdash; has construction plans due in "
+                    "summer 2026 and a construction start targeted for "
+                    "spring 2027. None of this is speculation; all of "
+                    "it is on published city timelines, and all of it "
+                    "belongs in a disclosure-era conversation about "
+                    "any downtown block.</p>"
+                ),
+            },
+            {
+                "anchor": "how-to-track",
+                "question": (
+                    "How do you track downtown Oceanside projects from "
+                    "here?"
+                ),
+                "lead": (
+                    "Downtown Oceanside&rsquo;s development record "
+                    "lives in the city council and planning commission "
+                    "agendas, the state&rsquo;s CEQA database for each "
+                    "project&rsquo;s filings, and the Coastal "
+                    "Commission&rsquo;s meeting agendas for anything "
+                    "in the coastal zone &mdash; the sources this page "
+                    "is built from, and the ones that will say what "
+                    "actually breaks ground next."
+                ),
+                "body": (
+                    "<p>This post is revised as milestones land "
+                    "&mdash; the Coastal Commission&rsquo;s October "
+                    "Oceanside meeting is the next one on the "
+                    "calendar. For the citywide picture &mdash; the "
+                    "neighborhoods, schools and tax structure &mdash; "
+                    "start with the "
+                    "<a href=\"/neighborhoods/oceanside\">Oceanside "
+                    "guide</a>, and the "
+                    "<a href=\"/blog/north-county-market-pulse\">market "
+                    "pulse</a> carries the county-level numbers.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "home-insurance-before-you-offer",
+        "title": (
+            "Check the insurance before you write the offer: a San "
+            "Diego buyer&rsquo;s sequence"
+        ),
+        "dek": (
+            "In San Diego County&rsquo;s fire-hazard zones, insurability "
+            "is a purchase question, not a closing formality &mdash; and "
+            "the standard purchase contract quietly agrees: it makes "
+            "insurance the buyer&rsquo;s investigation-contingency "
+            "problem on a default 17-day clock. The lookup, the quote, "
+            "the paperwork the law attaches, and the fallback plan, in "
+            "order."
+        ),
+        "date": "2026-07-30",
+        "author": "zohra-azizi",
+        "description": (
+            "How a San Diego buyer checks home insurability before "
+            "writing an offer: the CAL FIRE hazard-map lookup on the "
+            "2025 maps, quotes and claims history inside the "
+            "investigation contingency, AB 38 disclosures in high-hazard "
+            "zones, hardening discounts, and the FAIR Plan plus DIC "
+            "fallback."
+        ),
+        "footnote": (
+            "      Statutes, maps, contract forms and insurance programs above are as of\n"
+            "      the dates cited and change with regulatory and legislative action;\n"
+            "      the current form and filing control. A licensed insurance broker is\n"
+            "      the source of a real quote for a specific address &mdash; Team Azizi\n"
+            "      is a real estate team, not an insurance broker, and nothing here is\n"
+            "      insurance or legal advice."
+        ),
+        "blocks": [
+            {
+                "anchor": "why-before-offer",
+                "question": (
+                    "Why check home insurance before writing an offer "
+                    "in San Diego?"
+                ),
+                "lead": (
+                    "Because the standard California purchase agreement "
+                    "already assigns the problem to the buyer: the "
+                    "C.A.R. contract states that the ability to obtain "
+                    "insurance, fire insurance included, is part of the "
+                    "buyer&rsquo;s investigation-of-property contingency "
+                    "&mdash; a window that defaults to 17 days &mdash; "
+                    "and expressly not part of the loan contingency. In "
+                    "a San Diego fire-hazard zone, an insurability "
+                    "surprise discovered after that window closes has "
+                    "no clean exit."
+                ),
+                "body": (
+                    "<p>The lender side makes the deadline real: a "
+                    "mortgage does not fund without proof of coverage, "
+                    "per the federal consumer bureau&rsquo;s own "
+                    "guidance, and coverage bound late arrives at "
+                    "whatever price the last available market sets. The "
+                    "sequence below front-loads every checkable fact "
+                    "into the days when walking away is still free.</p>"
+                ),
+            },
+            {
+                "anchor": "hazard-map-lookup",
+                "question": (
+                    "How do you look up a San Diego property's fire "
+                    "hazard zone?"
+                ),
+                "lead": (
+                    "The State Fire Marshal&rsquo;s online viewers map "
+                    "every parcel&rsquo;s fire hazard severity zone "
+                    "&mdash; Moderate, High or Very High &mdash; and "
+                    "San Diego County is on fresh maps: the state "
+                    "released the county&rsquo;s updated local-area "
+                    "maps on March 24, 2025, the first refresh in "
+                    "roughly 14 years, and the county&rsquo;s "
+                    "very-high acreage grew about 26% in the update."
+                ),
+                "body": (
+                    "<p>Two readings keep the map honest. First, zones "
+                    "climbed into ordinarily suburban territory &mdash; "
+                    "which is why the lookup belongs in every San Diego "
+                    "purchase, not just backcountry ones. Second, the "
+                    "map measures physical hazard, not your quote: the "
+                    "State Fire Marshal himself notes the zones do not "
+                    "directly drive insurance decisions. Carriers price "
+                    "from their own wildfire risk scores &mdash; which "
+                    "state regulation since 2022 gives you the right "
+                    "to see, and to appeal.</p>"
+                ),
+            },
+            {
+                "anchor": "quote-and-claims",
+                "question": (
+                    "What insurance diligence fits inside the "
+                    "17-day investigation window?"
+                ),
+                "lead": (
+                    "Three moves fit a San Diego escrow&rsquo;s "
+                    "investigation window, all address-specific: get a "
+                    "real quote on the property early in the window, ask the "
+                    "listing side for the current carrier and premium "
+                    "&mdash; an existing admitted policy that will "
+                    "rewrite for a new owner is worth real money "
+                    "&mdash; and get the property&rsquo;s claims "
+                    "history, which in California&rsquo;s standard "
+                    "contract the seller must disclose for the past "
+                    "five years."
+                ),
+                "body": (
+                    "<p>The claims file has a formal version: a "
+                    "C.L.U.E. report covers seven years of insurance "
+                    "claims on the property, and only the owner can "
+                    "order it &mdash; so the buyer&rsquo;s move is to "
+                    "ask the seller to pull their free annual copy. "
+                    "Claims history moves premiums the way a carfax "
+                    "moves a used-car price; a property that looks "
+                    "identical to its neighbor can quote differently "
+                    "for reasons only that report shows.</p>"
+                ),
+            },
+            {
+                "anchor": "high-zone-paperwork",
+                "question": (
+                    "What extra paperwork does a high fire-hazard zone "
+                    "add to a San Diego sale?"
+                ),
+                "lead": (
+                    "In a designated high or very high zone &mdash; "
+                    "common across inland San Diego County &mdash; "
+                    "California law attaches three things to the sale "
+                    "itself: the "
+                    "natural-hazard disclosure naming the zone, a "
+                    "home-hardening disclosure for homes built before "
+                    "2010 &mdash; listing specific vulnerabilities like "
+                    "unenclosed vents, single-pane windows and "
+                    "combustibles within five feet &mdash; and "
+                    "documentation of defensible-space compliance, or a "
+                    "written agreement that the buyer will obtain it "
+                    "after closing."
+                ),
+                "body": (
+                    "<p>Those documents are legal obligations under the "
+                    "civil code, but the sharper way to read them is as "
+                    "underwriting evidence: the same vent, roof and "
+                    "clearance facts the disclosures force into the "
+                    "open are what a carrier&rsquo;s inspection will "
+                    "price. A seller who assembles them early is "
+                    "building the insurability story; a buyer who reads "
+                    "them closely is previewing the quote. The "
+                    "<a href=\"/blog/california-fair-plan-san-diego\">"
+                    "FAIR Plan post</a> covers the seller-side "
+                    "preparation in detail.</p>"
+                ),
+            },
+            {
+                "anchor": "hardening-discounts",
+                "question": (
+                    "Do home-hardening upgrades actually lower "
+                    "California insurance costs?"
+                ),
+                "lead": (
+                    "For a San Diego owner the discount answer is set "
+                    "by regulation: since late 2022, California "
+                    "insurers that use wildfire risk in pricing must "
+                    "file discounts for the state&rsquo;s Safer from "
+                    "Wildfires measures &mdash; a Class-A roof, a "
+                    "five-foot ember-resistant zone, upgraded vents, "
+                    "multi-pane windows, cleared decks and the rest "
+                    "&mdash; and even the FAIR Plan now applies up to "
+                    "twelve hardening discounts on policies effective "
+                    "November 15, 2025 or later."
+                ),
+                "body": (
+                    "<p>For a buyer comparing two inland properties, "
+                    "the hardening ledger is therefore part of the "
+                    "price ledger &mdash; a retrofitted 1980s home and "
+                    "an untouched one can carry meaningfully different "
+                    "premiums for decades. The discount list is also "
+                    "the negotiation list: work the seller already did "
+                    "should be documented in the transaction, and work "
+                    "not done is a knowable future cost, not a "
+                    "mystery.</p>"
+                ),
+            },
+            {
+                "anchor": "fallback-plan",
+                "question": (
+                    "What is the fallback if no regular insurer will "
+                    "write a San Diego home?"
+                ),
+                "lead": (
+                    "The fallback for a San Diego home the admitted "
+                    "market declines is the California FAIR Plan plus a "
+                    "difference-in-conditions policy: the FAIR Plan "
+                    "writes named-peril fire coverage up to $3 million "
+                    "for dwellings when the admitted market declines, "
+                    "and a DIC policy from a separate carrier &mdash; "
+                    "the state insurance department lists roughly "
+                    "nineteen offering one &mdash; layers back the "
+                    "liability, theft and water coverages a lender and "
+                    "a household actually need."
+                ),
+                "body": (
+                    "<p>The fallback works; the point of this "
+                    "post&rsquo;s sequence is to price it while the "
+                    "contingency still allows a clean exit, because "
+                    "the combination generally costs materially more "
+                    "than the standard policy it replaces &mdash; and "
+                    "FAIR Plan rates change on October 15, 2026. "
+                    "<a href=\"/blog/california-fair-plan-san-diego\">"
+                    "The FAIR Plan post</a> carries that change, the "
+                    "statewide assessment surcharge, and the "
+                    "communities where placement concentrates.</p>"
+                ),
+            },
+            {
+                "anchor": "market-direction",
+                "question": (
+                    "Is the California home-insurance market actually "
+                    "improving in 2026?"
+                ),
+                "lead": (
+                    "The direction in 2026, San Diego County included, "
+                    "is re-entry on the "
+                    "record: Farmers removed its cap on new California "
+                    "homeowners policies in November 2025, Mercury and "
+                    "CSAA won the first approvals under the "
+                    "state&rsquo;s new catastrophe-modeling rules in "
+                    "December 2025 with commitments to write in "
+                    "wildfire-distressed areas, and Travelers "
+                    "announced its own expansion in April 2026 &mdash; "
+                    "each committed to writing more, not less, in the "
+                    "zones this post is about."
+                ),
+                "body": (
+                    "<p>Re-entry is not a guarantee for any single "
+                    "address &mdash; underwriting stays "
+                    "parcel-specific, which is the whole reason the "
+                    "check-first sequence exists. But it does mean a "
+                    "declined property from 2023 or 2024 may quote "
+                    "differently today, and a quote worth having "
+                    "expires: ask the broker to shop the admitted "
+                    "market fresh rather than assuming last "
+                    "year&rsquo;s answer. For what this looks like in "
+                    "the communities that lean on the FAIR Plan most, "
+                    "see <a href=\"/neighborhoods/fallbrook\">"
+                    "Fallbrook</a>, <a href=\"/neighborhoods/valley-center\">"
+                    "Valley Center</a> and "
+                    "<a href=\"/neighborhoods/ramona\">Ramona</a>.</p>"
                 ),
             },
         ],

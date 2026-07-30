@@ -1487,8 +1487,9 @@ GUIDES.update({
                 "community of the City of San Diego with its own postal "
                 "identity (92037) &mdash; and an active incorporation "
                 "effort is testing that: LAFCO advanced a cityhood "
-                "application in 2025, the state-required fiscal analysis "
-                "began in 2026, and organizers aim for a 2028 ballot."
+                "application in 2025, commissioned the state-required "
+                "fiscal analysis in mid-2026 with fieldwork starting that "
+                "August, and organizers aim for a November 2028 ballot."
             ),
             "body": (
                 "<p>Two facts keep the question honest. Incorporation "
@@ -2385,8 +2386,10 @@ GUIDES.update({
             "question": "Are new Mello-Roos districts still being formed in Murrieta?",
             "lead": (
                 "New community facilities districts are still being formed "
-                "in Murrieta &mdash; the city noticed the Gierson Ranch "
-                "district for bond authorization in 2026 &mdash; so a "
+                "in Murrieta &mdash; the city took the Gierson Ranch "
+                "district (CFD 2026-1) through formation hearings in June "
+                "2026 and adopted its special-tax ordinance, with bonded "
+                "indebtedness authorized up to $8 million &mdash; so a "
                 "brand-new tract&rsquo;s special-tax load is set at "
                 "formation, before the first home sells."
             ),
@@ -2394,9 +2397,13 @@ GUIDES.update({
                 "<p>For a new-construction buyer the sequence matters: the "
                 "special tax exists before the sales office opens, it is "
                 "disclosed in the purchase documents, and it is knowable "
-                "to the dollar before contract. The Mello-Roos block above "
-                "carries the district list and the city&rsquo;s own source "
-                "for it.</p>"
+                "to the dollar before contract. Gierson Ranch shows the "
+                "full arc in one year &mdash; intention resolutions in "
+                "March, hearings in June, ordinance adopted before any "
+                "home sold &mdash; per the city council&rsquo;s "
+                "legislative record. The Mello-Roos block above carries "
+                "the district list and the city&rsquo;s own source for "
+                "it.</p>"
             ),
         },
     ],

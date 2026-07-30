@@ -2102,7 +2102,7 @@ def build_blog() -> None:
 
 {blocks}
 {footnote_html}
-    <p class="updated">Published {post['date']}</p>
+    <p class="updated">Published {post['date']}{f" &middot; Revised {post['updated']}" if post.get('updated') else ""}</p>
   </div>
 </section>"""
         write(

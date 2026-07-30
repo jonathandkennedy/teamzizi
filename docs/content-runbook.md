@@ -78,11 +78,11 @@ Ordered for impact, not date. ✔ = shipped (slug is live under `/blog/`) · ✖
 | 5 ✔ **shipped 2026-07-30** | `north-county-market-pulse` | News (recurring) | san diego housing market (1.6K/mo, KD 38) long-tail. Shipped on SDAR's June 2026 indicators ($950K combined median +4.4%, 3.2 mo supply, detached listings −11.6% H1), attributed and dated; **update-in-place** — one URL accumulates authority. The weaker July blog-sourced figure was dropped; SDAR-published data only. | SDAR monthly indicators | All 16; the market-report vehicle until `/market-report/` ships |
 | 6 ✔ **shipped 2026-07-30** | `selling-a-house-with-solar-panels-san-diego` | Journal | **210/mo, KD 0, transactional** — owned-vs-leased, lease assumption in escrow, UCC-1 release, legacy NEM transfer mechanics (term stated as confirm-with-SDG&E rather than an unverified number), disclosure package. | Process facts framed as process; tariff/term specifics deferred to SDG&E/CPUC by name | Escondido, San Marcos, 92127, all newer-tract areas |
 | 7 ✔ **shipped 2026-07-30** | `del-mar-bluff-rail-what-owners-should-know` | News | The property-owner framing nobody serves: 1.7-mile bluff segment, the published route alternatives (I-5 / under-town / coastal), mid-2030s horizon, what bluff vs inland owners watch, comment windows as the influence point. **Update in place per SANDAG milestone** (72-hour SLA). Closes the Del Mar coverage gap. | SANDAG published realignment materials, City of Del Mar project pages | Del Mar, Solana Beach edge of Encinitas |
-| 8 | `poway-unified-enrollment-windows` | News (annual) | District enrollment/transfer dates + address-lookup method, published when windows open (~Feb). Extends the school-district post; same pattern later for SDUHSD/Escondido/Carlsbad clusters. | District announcements + boundary tools | 4S Ranch, Del Sur, Poway, (RB) |
-| 9 | `is-escondido-a-good-place-to-live` | Journal | 170/mo, KD 0 — answered the Fair-Housing-safe way: two-district structure, CFD-free older pockets vs newer CFD tracts, commute reality, land-use edges. The reframe-table showcase. | District maps, taxes.py, Census commute data (cited, not embedded as demographics) | Escondido — their single largest market |
-| 10 | `escondido-housing-pipeline` | News (quarterly) | "What's being built in Escondido and where": RHNA 9,607, 200+ units in review, County affordable groundbreaking. Permanent reference value; quarterly refresh. | City agendas/staff reports, Coast News + Daily Star reporting | Escondido, San Marcos, Oceanside variants later |
-| 11 | `home-insurance-before-you-offer` | Journal | Buyer-process companion to #1: check insurability *before* writing the offer — CalFIRE hazard map lookup, carrier quote timing in escrow, FAIR+DIC as the fallback plan. | CalFIRE FHSZ maps, CDI consumer guides | Inland/rural areas; every buyer rep |
-| 12 | `oceanside-mission-avenue-mixed-use` | News | 500+ units in two downtown projects — what it means for Oceanside owners/buyers; the city is their #2 volume market among the ten added areas. | City of Oceanside planning docs | Oceanside, Vista, Carlsbad |
+| 8 | `poway-unified-enrollment-windows` | News (annual) | District enrollment/transfer dates + address-lookup method, published when windows open (~Feb). Extends the school-district post; same pattern later for SDUHSD/Escondido/Carlsbad clusters. **Holding for its January window (client may pull it early).** | District announcements + boundary tools | 4S Ranch, Del Sur, Poway, (RB) |
+| 9 ✔ **shipped 2026-07-30** | `is-escondido-a-good-place-to-live` | Journal | 170/mo, KD 0 — answered the Fair-Housing-safe way. Shipped as seven blocks: facts-not-adjectives frame, older-stock/one-CFD reality, two-district check method, the city-sourced open-space inventory (Daley Ranch 3,000+ ac, Lakes Division 4,500+ ac, Kit Carson/Queen Califia), the "is it safe" reframe (EPD beat map + ARJIS + SANDAG CJRD — data locations, no characterization), downtown institutions, honest tradeoffs. Links to the guide rather than restating its schools/commute blocks. | City of Escondido pages (Lakes Division, Daley Ranch, Kit Carson), EPD/ARJIS, taxes.py | Escondido — their single largest market |
+| 10 ✔ **shipped 2026-07-30** | `escondido-housing-pipeline` | News (quarterly) | Shipped on the verified mid-2026 record: the Valley Parkway cluster (The Maple 128 approved 1/28/26 · Valley Parkway Townhomes 94 for-sale 6/10/26 · KB Home 70 for-sale 12/10/25 · Quince Street 145 affordable senior under construction · Palomar Heights 510 approved 2021 · county Valley Creek 134 in env. review, construction expected 2028), RHNA scoreboard (~2,300 of 9,607 through 2025 per the city's APR as reported by VOSD), the **HCD letter of inquiry 12/3/25** (eight overdue programs, revocation warning, builder's-remedy stakes) and the 6/24/26 ADU-ordinance response, Prop S as the named constraint, Harvest Hills honestly stalled. Quarterly refresh. | City hearing notices/agendas, HCD letter PDF, Coast News, Voice of San Diego | Escondido, San Marcos variant later |
+| 11 ✔ **shipped 2026-07-30** | `home-insurance-before-you-offer` | Journal | Buyer-process companion to #1, shipped with the legal spine verified: C.A.R. RPA makes insurability an **investigation-contingency item (default 17 days), not the loan contingency**; the 2025 FHSZ maps (SD County batch 3/24/25, VH acreage +26%), hazard-vs-insurer-risk-score distinction + the see-and-appeal right, CLUE mechanics (owner orders; seller's 5-yr claims disclosure), AB 38 sale paperwork as underwriting evidence, Safer-from-Wildfires discounts (FAIR Plan: up to 12 discounts since 11/15/25), FAIR+DIC fallback (~19 DIC carriers per CDI), dated 2026 carrier re-entry (Farmers, Mercury/CSAA, Travelers). | Leginfo statute texts, OSFM/CalFIRE, CDI releases + consumer guides, CFPB, C.A.R. RPA sample | Inland/rural areas; every buyer rep |
+| 12 ✔ **shipped 2026-07-30** | `oceanside-mission-avenue-mixed-use` | News | Shipped wider than the brief: the Mission Ave pair (901 Mission 273 approved 10/15/25 + 801 Mission 230 approved 5/20/26 = 503), the entitled wave behind it (401 Mission 326 · Blocks 5/20 373 · Modera Neptune 360+62-room hotel · 712 Seagaze 179 under construction), the rules story (43→uncapped→**86 du/ac base certified by CCC 2/2026**, inclusionary 15%/7+/55-yr, SB 79 eff. 7/1/26), the NCTD transit-center 547+hotel awaiting CCC (commission meets **in Oceanside 10/7/26**), Coast Hwy road-diet construction targeted spring 2027. Approved-is-not-built stated throughout. Revised per milestone. | City staff reports/Legistar, CEQAnet, CCC staff reports + calendar, NCTD, Coast News, inewsource | Oceanside, Vista, Carlsbad |
 
 Cadence per GAMEPLAN §7: **2–4/month** — realistically 2 journal + 1–2 news. The twelve above are ~4 months of runway; the monthly listening pass refills the bank.
 
@@ -114,7 +114,7 @@ The client asked for faster needle movement. Honesty first, then the plan.
 - [x] Paperwork trio that kills escrows: insurance (FAIR Plan), solar-sale, Mello-Roos payoff *(shipped 2026-07-30)*
 - [x] Market pulse live with current, attributed data *(shipped 2026-07-30 — refresh if >1 month stale at cutover)*
 - [x] Del Mar coverage gap closed *(bluff/rail post shipped 2026-07-30)*
-- [ ] Remaining calendar foundation posts: #8 enrollment-windows *(or hold to its January window — see row)*, #9 is-Escondido, #10 Escondido pipeline, #11 insurance-before-offer, #12 Oceanside Mission Ave
+- [x] Remaining calendar foundation posts *(#9, #10, #11, #12 all shipped 2026-07-30; #8 enrollment-windows deliberately holds for its January news window per its row)*
 - [ ] Quarterly guide-refresh pass #1 — every guide's facts re-verified, dated current
 - [ ] **`LEAD_ENDPOINT` set** — forms must deliver from minute one (client)
 - [ ] Privacy policy page (client-dependent item in HANDOFF §9 — forms require it)
@@ -136,20 +136,28 @@ The client asked for faster needle movement. Honesty first, then the plan.
 
 **Fast-lane SLA:** a CDI action, SANDAG board decision, district boundary/enrollment change, or council approval affecting a farm area gets its post — or an update-in-place to the existing one — within **72 hours**. Being the first fact-dense page on a local change is how a small site beats portals to a citation.
 
+**Fast-lane log (movement sweep 2026-07-30, all revisions applied same day):**
+- **Gierson Ranch CFD 2026-1 formed** — Murrieta took it through hearings June 2 and passed the special-tax ordinance's second reading June 16 (Legistar record), bonds authorized to $8M. Murrieta guide `#new-districts` + taxes.py revised from "noticed" to "formed."
+- **FAIR Plan assessment pass-through upheld** — LA Superior Court 6/30/26, CDI release 7/1/26 (~$28 median temporary fee, ≤2-yr recovery; challenger weighing appeal; AB 1680 in Senate committee). New `#assessment-surcharge` block added to the FAIR post.
+- **La Jolla CFA timeline concrete** — LAFCO approved the London Moeder contract 5/4/26; fieldwork starts August 2026, draft June 2027, final by Jan 2028, Nov 2028 ballot target; next LAFCO date 8/3/26. Guide lead refined; full detail feeds the cityhood-tracker post (bank).
+- **Escondido adopted ADU separate-sale** — 6/24/26 ordinance overhaul (ministerial approval + AB 1033 opt-in). ADU post `#city-vs-county` body updated.
+- No movement: SANDAG Del Mar (technical-studies notice 7/23/26 only), SDAR (July data ~mid-August). Banked from the sweep: record $845B county tax roll (Assessor, 7/13/26) for the tax batch; PB Chalcifica redesign + Nov 13 hearing; Hillcrest promenade end-of-2026 + post-office relocation (feeds the Hillcrest explainer brief); Midway Rising "delayed indefinitely" (KPBS).
+- **Mechanics added:** posts now support an `"updated"` key — renders "Published X · Revised Y" and drives schema `dateModified` — so lane-2 update-in-place revisions carry a visible date without a new URL.
+
 **Batch production is the multiplier.** One verification pass feeds several posts: today's single research pass shipped three (insurance, solar, ADU). Future themed batches: the schools batch (one enrollment post per district cluster, each January), the development batch (one pipeline post per city, quarterly), the tax batch (payoff + assessment appeals + Prop 19, off one Auditor/Assessor reading).
 
 ### 6.3 Per-area coverage matrix
 
-Every area gets touched at least quarterly by a post that serves it, a guide refresh, or a fast-lane news item. State as of 2026-07-30, seven posts live; the market pulse serves all sixteen, so rows list area-specific coverage beyond it:
+Every area gets touched at least quarterly by a post that serves it, a guide refresh, or a fast-lane news item. State as of 2026-07-30 (end of day), eleven posts live; the market pulse serves all sixteen, so rows list area-specific coverage beyond it:
 
 | Area | Guide | Served by posts today | Next planned touch |
 |---|---|---|---|
-| Fallbrook | ✅ | FAIR Plan · ADU separate-sale · school-district | #11 insurance-before-offer |
-| Valley Center | ✅ | FAIR Plan · ADU separate-sale | #11; water-district explainer (bank) |
-| Ramona | ✅ | FAIR Plan · ADU separate-sale | #11 |
-| Escondido | ✅ | FAIR Plan · solar · school-district (two-district block) | #9 is-escondido · #10 pipeline (quarterly) |
+| Fallbrook | ✅ | FAIR Plan · ADU separate-sale · school-district · **insurance-before-offer ✔** | quarterly refresh pass |
+| Valley Center | ✅ | FAIR Plan · ADU separate-sale · **insurance-before-offer ✔** | water-district explainer (bank) |
+| Ramona | ✅ | FAIR Plan · ADU separate-sale · **insurance-before-offer ✔** | quarterly refresh pass |
+| Escondido | ✅ | FAIR Plan · solar · school-district · **is-escondido ✔ · pipeline ✔ (quarterly)** | pipeline refresh ~Oct 2026 |
 | San Marcos | ✅ | solar · payoff (91-CFD city) | #10 variant: San Marcos leads RHNA |
-| Oceanside | ✅ | ADU (jurisdiction block) | #12 Mission Ave mixed-use |
+| Oceanside | ✅ | ADU (jurisdiction block) · **Mission Ave build-out ✔ (revised per milestone; CCC in Oceanside 10/7/26)** | transit-center CCC decision (fast lane) |
 | Vista | ✅ | ADU (jurisdiction block) · pulse | "no Vista CFD" fact worth a payoff-post block on refresh |
 | Carlsbad | ✅ | school-district (boundary block) · ADU (jurisdiction) | enrollment-windows batch (Jan) |
 | Encinitas | ✅ | school-district (Cardiff block) · bluff/rail (Solana edge) | enrollment batch |
@@ -161,7 +169,7 @@ Every area gets touched at least quarterly by a post that serves it, a guide ref
 | Del Mar | ✅ | **bluff/rail ✔ (gap closed 2026-07-30)** | update-in-place per SANDAG milestone |
 | Rancho Santa Fe | ✅ | — deliberate gap | Guide already carries Covenant/Art-Jury/septic blocks; a post would cannibalize. Holds pending the client's keep-or-drop call (HANDOFF §9) |
 | **Temecula** *(added 2026-07-30)* | ✅ new | pulse (county-level context) | Wine Country jurisdiction post (bank); Riverside listening added to the monthly pass; photography |
-| **Murrieta** *(added 2026-07-30)* | ✅ new | pulse | Gierson Ranch CFD 2026-1 formation is a live fast-lane story — track the bond authorization; photography |
+| **Murrieta** *(added 2026-07-30)* | ✅ new | pulse · **Gierson Ranch CFD formation reflected in guide (formed June 2026, $8M authorized)** | track first bond issuance (fast lane); photography |
 | **Menifee** *(added 2026-07-30)* | ✅ new | pulse | EMWD/CFD new-construction explainer variant (bank); photography |
 
 **Riverside note:** the three corridor guides cite city-published district records (the SD Auditor's list doesn't reach Riverside County), publish no volume claims (no Compass record there), and ship on designed plate heroes until a photography pass — same §5-of-HANDOFF verification method when it runs. Add `Temecula Murrieta Menifee` phrasings to the monthly listening sweeps and the AI query panel.
@@ -170,7 +178,7 @@ Every area gets touched at least quarterly by a post that serves it, a guide ref
 
 ### 6.4 30 / 60 / 90 (re-baselined 2026-07-30 after the foundation sprint)
 
-- **By day 30:** posts #9, #10, #11, #12 shipped — the calendar's foundation set complete (#8 enrollment-windows holds for its January news window unless the client wants it early); guide-refresh pass #1 underway; first local `/last30days` Reddit pass appended to communityVoice.md; client actions requested in writing: `LEAD_ENDPOINT`, privacy policy, GBP postcard, RSF call.
+- **By day 30:** ~~posts #9, #10, #11, #12 shipped~~ **done day one (2026-07-30)** — the calendar's foundation set is complete (#8 enrollment-windows holds for its January news window unless the client wants it early). Remaining day-30 items: guide-refresh pass #1; first local `/last30days` Reddit pass appended to communityVoice.md; client actions requested in writing: `LEAD_ENDPOINT`, privacy policy, GBP postcard, RSF call.
 - **By day 60:** foundation gate fully checked → **DNS cutover** (launch-runbook sequence), GSC/Bing submission, IndexNow, re-index requests; GBP website field pointed at the live domain; every post backfilled as GBP posts.
 - **By day 90:** AI panel re-run against the 14-query zero baseline with the site live — the case study's first "after" measurement; market pulse on its third monthly revision; listening pass #4; double down on whatever earned citations.
 

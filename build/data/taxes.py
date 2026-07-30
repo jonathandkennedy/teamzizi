@@ -385,7 +385,7 @@ DISTRICTS.update({
         "has_cfd": True,
         "districts": [
             ("Springbrook", "2005-1", "City of Murrieta", "murrietaca.gov"),
-            ("Gierson Ranch — noticed for bond authorization in 2026", "2026-1", "City of Murrieta", "murrietaca.gov"),
+            ("Gierson Ranch — formed June 2026, bonds authorized to $8M", "2026-1", "City of Murrieta", "murrietaca.gov"),
             ("Murrieta Valley USD districts", "2001-4 and 2004-1 among them", "the school district", "murrieta.k12.ca.us"),
         ],
         "lead": (
@@ -395,12 +395,13 @@ DISTRICTS.update({
             "levies special taxes through districts of its own."
         ),
         "note": (
-            "New districts are still being formed — the city noticed the "
-            "Gierson Ranch district for bond authorization in 2026 — so a "
-            "brand-new tract's special-tax load is set at formation, before "
-            "the first home sells. Western Municipal Water District also "
-            "operates community facilities financing in the area. The tax "
-            "bill names every district that applies."
+            "New districts are still being formed — the city formed the "
+            "Gierson Ranch district in June 2026 with bonds authorized up "
+            "to $8 million — so a brand-new tract's special-tax load is "
+            "set at formation, before the first home sells. Western "
+            "Municipal Water District also operates community facilities "
+            "financing in the area. The tax bill names every district "
+            "that applies."
         ),
         "source_name": "City of Murrieta, Community Facilities District pages",
         "source_url": "https://www.murrietaca.gov/1304/Community-Facilities-District",

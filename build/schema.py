@@ -386,7 +386,7 @@ def article(post: dict[str, Any], author: dict[str, Any]) -> dict[str, Any]:
         "headline": post["title"],
         "description": post["description"],
         "datePublished": post["date"],
-        "dateModified": post["date"],
+        "dateModified": post.get("updated", post["date"]),
         "author": {"@id": f"{site.DOMAIN}/agent/{author['slug']}#person"},
         "publisher": {"@id": f"{site.DOMAIN}/#organization"},
         "mainEntityOfPage": {"@id": f"{site.DOMAIN}/blog/{post['slug']}"},
