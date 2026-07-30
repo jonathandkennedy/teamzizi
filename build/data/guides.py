@@ -1674,10 +1674,10 @@ GUIDES.update({
             "lead": (
                 "San Diego&rsquo;s City Council adopted the Hillcrest "
                 "Focused Plan Amendment on July 30, 2024, creating "
-                "capacity for roughly 17,000 additional homes with "
-                "densities that allow high-rise construction &mdash; a "
-                "generational rezoning of the neighborhood&rsquo;s "
-                "core."
+                "capacity for 17,200 additional homes &mdash; the "
+                "city&rsquo;s own figure &mdash; with densities that "
+                "allow high-rise construction: a generational rezoning "
+                "of the neighborhood&rsquo;s core."
             ),
             "body": (
                 "<p>A plan sets capacity; construction follows financing "

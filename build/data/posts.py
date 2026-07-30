@@ -2919,6 +2919,473 @@ POSTS: list[dict] = [
             },
         ],
     },
+    {
+        # Southern-expansion batch, post 4 of 5. Update-in-place tracker.
+        # The litigation chronology is from the loaded primary documents —
+        # the unpublished 6/4/26 Court of Appeal opinion (D085121), the
+        # 10/1/24 judgment and writ the city itself posted, the 6/12/25 NOD.
+        # Precision points that survive from that read: the appellate court
+        # did NOT order a public vote (it reversed the Elections Code
+        # finding while affirming the set-aside), and the grounds differ by
+        # round — 2022 was wildfire-evacuation CEQA, 2024 was general-plan
+        # consistency. Do not conflate them in revisions.
+        "slug": "fanita-ranch-where-it-stands",
+        "title": (
+            "Fanita Ranch: where Santee's 3,000-home question actually "
+            "stands"
+        ),
+        "dek": (
+            "Approved three times, stopped in court three times &mdash; "
+            "most recently by two rulings on the same June 2026 day. "
+            "What the courts actually decided about Santee&rsquo;s "
+            "largest-ever housing proposal, what they didn&rsquo;t, and "
+            "what the site&rsquo;s status is right now. Revised as the "
+            "record moves."
+        ),
+        "date": "2026-07-30",
+        "author": "sofia-azizi",
+        "description": (
+            "The Fanita Ranch record from primary documents: the 2020, "
+            "2022 and 2025 approvals, what each court ruling held, the "
+            "Measure N voter-approval question, and the project's "
+            "actual status as of mid-2026 — unentitled, ungraded, no "
+            "vote scheduled."
+        ),
+        "footnote": (
+            "      The chronology above is from the Court of Appeal&rsquo;s June 4, 2026\n"
+            "      opinion in case D085121, the superior-court judgment and writ the City\n"
+            "      of Santee posted with its project file, the city&rsquo;s hearing\n"
+            "      records and CEQA notices, and California Department of Finance housing\n"
+            "      estimates, as of July 2026 &mdash; with party statements attributed to\n"
+            "      the parties. Litigation status changes; this page is revised as the\n"
+            "      record moves."
+        ),
+        "blocks": [
+            {
+                "anchor": "what-it-is",
+                "question": (
+                    "What is Fanita Ranch, and how big is it really?"
+                ),
+                "lead": (
+                    "Fanita Ranch is a proposal by HomeFed for about "
+                    "2,638 acres of open space on Santee&rsquo;s "
+                    "northern edge: roughly 2,949 homes in three "
+                    "villages under the plan with a school site "
+                    "&mdash; 3,008 without one &mdash; against a "
+                    "general-plan baseline the courts put at about "
+                    "1,395 units for the same land. That gap between "
+                    "what the plan allows and what is proposed is "
+                    "the entire fight."
+                ),
+                "body": (
+                    "<p>Scale explains the heat. Santee counts "
+                    "22,614 housing units in the state Department "
+                    "of Finance&rsquo;s 2026 estimates, so the "
+                    "proposal amounts to roughly an eighth of the "
+                    "existing city in one project &mdash; on "
+                    "hillsides the city&rsquo;s plan designates for "
+                    "much less, with about 63 percent of the site "
+                    "kept as habitat preserve under the "
+                    "city&rsquo;s description. Supply at that scale "
+                    "would move a small city&rsquo;s market "
+                    "whichever way the record resolves &mdash; the "
+                    "reason the <a href=\"/neighborhoods/santee\">"
+                    "Santee guide</a> calls it the variable rather "
+                    "than a fact.</p>"
+                ),
+            },
+            {
+                "anchor": "three-rounds",
+                "question": (
+                    "How many times has Fanita Ranch been approved "
+                    "and struck down?"
+                ),
+                "lead": (
+                    "The Santee City Council has approved Fanita "
+                    "Ranch three times &mdash; September 23, 2020, "
+                    "September 14, 2022, and June 11, 2025 &mdash; "
+                    "and a court has blocked the project after each "
+                    "approval, most recently in two rulings issued "
+                    "the same day, June 4, 2026."
+                ),
+                "body": (
+                    "<p>Each round leaned on a different legal "
+                    "path. The 2020 approval amended the general "
+                    "plan directly &mdash; then a citizen "
+                    "referendum qualified against the amendment "
+                    "and a court found the environmental review "
+                    "inadequate. The 2022 approval skipped the "
+                    "plan amendment, relying instead on a city "
+                    "&ldquo;Essential Housing Program&rdquo; "
+                    "certification adopted by urgency ordinance. "
+                    "The 2025 approval added 445 age-restricted "
+                    "units and invoked density-bonus provisions. "
+                    "Understanding that sequence is what makes the "
+                    "court record legible &mdash; each ruling "
+                    "answers the specific workaround in front of "
+                    "it.</p>"
+                ),
+            },
+            {
+                "anchor": "courts-said",
+                "question": (
+                    "What did the courts actually decide about "
+                    "Fanita Ranch?"
+                ),
+                "lead": (
+                    "Three separate holdings stopped Fanita Ranch, "
+                    "on three different grounds: a 2022 ruling "
+                    "found the environmental report&rsquo;s "
+                    "wildfire-evacuation analysis inadequate; an "
+                    "October 2024 judgment set aside the second "
+                    "approval for conflicting with Santee&rsquo;s "
+                    "general plan; and on June 4, 2026, the Court "
+                    "of Appeal affirmed that set-aside while the "
+                    "trial court separately ruled against the "
+                    "third approval&rsquo;s density-bonus path."
+                ),
+                "body": (
+                    "<p>The details resist slogans from either "
+                    "side. The 2022 ruling turned on evacuation "
+                    "disclosure &mdash; including a claimed escape "
+                    "route on a street that dead-ends &mdash; but "
+                    "the 2024 judgment expressly spared the "
+                    "report&rsquo;s wildfire chapter while faulting "
+                    "the general-plan analysis. And the 2026 "
+                    "appellate opinion, while affirming that the "
+                    "approvals must be set aside, actually "
+                    "<em>reversed</em> the one elections-law "
+                    "finding &mdash; no court has ordered a public "
+                    "vote. What the opinion did say, pointedly, is "
+                    "that approving the project without a plan "
+                    "amendment &ldquo;bypassed the will of the "
+                    "voters as expressed in Measure N.&rdquo;</p>"
+                ),
+            },
+            {
+                "anchor": "measure-n",
+                "question": (
+                    "Does Measure N mean Santee voters get to "
+                    "decide Fanita Ranch?"
+                ),
+                "lead": (
+                    "Measure N &mdash; passed by Santee voters "
+                    "51.5 to 48.5 percent in November 2020 &mdash; "
+                    "requires voter approval for development that "
+                    "increases residential density beyond what the "
+                    "general plan allows, which is why every "
+                    "post-2020 version of Fanita Ranch has tried "
+                    "to reach approval without amending the "
+                    "general plan."
+                ),
+                "body": (
+                    "<p>The mechanics matter: a general-plan "
+                    "amendment is the act that triggers a Measure "
+                    "N vote, so the project&rsquo;s recent history "
+                    "is a search for a lawful route around that "
+                    "trigger &mdash; the Essential Housing "
+                    "certification in 2022, density-bonus and "
+                    "senior-housing provisions in 2025 &mdash; and "
+                    "the courts have now rejected the first and, "
+                    "at the trial level, the second. The practical "
+                    "consequence: either a future version "
+                    "conforms to the existing plan&rsquo;s "
+                    "capacity, or it amends the plan and faces "
+                    "the electorate, or a higher court changes "
+                    "the analysis. Those are the branches to "
+                    "watch.</p>"
+                ),
+            },
+            {
+                "anchor": "now",
+                "question": (
+                    "Can Fanita Ranch start construction now?"
+                ),
+                "lead": (
+                    "Fanita Ranch in Santee is not entitled and not "
+                    "clear to grade as of late July 2026: the "
+                    "affirmed writ "
+                    "orders all project approvals set aside and "
+                    "suspends any activity that would change the "
+                    "physical environment until the defects are "
+                    "corrected, no public vote is scheduled, and "
+                    "no construction timeline exists."
+                ),
+                "body": (
+                    "<p>HomeFed&rsquo;s stated position after the "
+                    "June 2026 rulings, to East County Magazine, "
+                    "was that it is &ldquo;looking at all our "
+                    "options&rdquo;; no petition to the state "
+                    "Supreme Court had been reported as of this "
+                    "writing. For Santee owners and buyers the "
+                    "honest framing is unchanged: a 3,000-home "
+                    "variable with no date attached, worth "
+                    "tracking through the city&rsquo;s project "
+                    "page and the court dockets rather than "
+                    "through advocacy from either direction. This "
+                    "page updates as the record does.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        # Southern-expansion batch, post 5 of 5. Journal lane. The method
+        # post promised by the Chula Vista guide's #east-west block. No
+        # current-year city CFD rates are published anywhere loadable, so
+        # the post teaches the lookup instead of printing numbers — the only
+        # dollar figures are the Citrus Bay assigned rates, published in the
+        # city's own 2024 staff report and dated as such. Computed per-unit
+        # averages from the school districts' levy totals were deliberately
+        # left out (our arithmetic, not a published rate).
+        "slug": "chula-vista-mello-roos-east-vs-west",
+        "title": (
+            "Chula Vista Mello-Roos: pricing the east&ndash;west "
+            "difference before you offer"
+        ),
+        "dek": (
+            "One Chula Vista address can carry up to five separate "
+            "Mello-Roos lines; another a mile west carries none. How "
+            "the stack actually works, how to pull the exact figures "
+            "for any parcel in minutes, when each layer ends &mdash; "
+            "and the new exceptions that make &ldquo;west of 805 means "
+            "no Mello-Roos&rdquo; no longer quite true."
+        ),
+        "date": "2026-07-30",
+        "author": "sofia-azizi",
+        "description": (
+            "How Mello-Roos works across eastern and western Chula "
+            "Vista: the city, elementary and high-school district "
+            "layers, the parcel lookup method, escalators and end "
+            "dates, the disclosure notice buyers are owed, and the "
+            "west-side exceptions."
+        ),
+        "footnote": (
+            "      District inventories and mechanics above are from the San Diego\n"
+            "      County Auditor &amp; Controller&rsquo;s active Mello-Roos list for FY\n"
+            "      2025&ndash;26, the City of Chula Vista&rsquo;s published district\n"
+            "      records, the two school districts&rsquo; special-tax reports and\n"
+            "      explainers, and the cited state code sections, as of July 2026.\n"
+            "      Special taxes are parcel-specific &mdash; pull the figures for the\n"
+            "      actual parcel before relying on any of this in a transaction."
+        ),
+        "blocks": [
+            {
+                "anchor": "why-east",
+                "question": (
+                    "Why does eastern Chula Vista carry Mello-Roos "
+                    "while the west side mostly does not?"
+                ),
+                "lead": (
+                    "Eastern Chula Vista&rsquo;s master-planned "
+                    "communities &mdash; the Otay Ranch villages, "
+                    "EastLake, Sunbow, San Miguel Ranch, Rolling "
+                    "Hills Ranch, Millenia &mdash; financed their "
+                    "streets, schools and open-space maintenance "
+                    "through community facilities districts formed "
+                    "as they were built, while western Chula "
+                    "Vista&rsquo;s older neighborhoods were largely "
+                    "complete before that financing tool existed: "
+                    "the county&rsquo;s active Mello-Roos list "
+                    "shows 33 City of Chula Vista district line "
+                    "items, every community-wide one of them east "
+                    "of Interstate 805."
+                ),
+                "body": (
+                    "<p>The concentration is a matter of public "
+                    "record, not reputation &mdash; Chula Vista "
+                    "carries the densest Mello-Roos presence in "
+                    "the county&rsquo;s list, formed under both "
+                    "the state Mello-Roos Act and the city&rsquo;s "
+                    "own 1998 district ordinance. The "
+                    "<a href=\"/neighborhoods/chula-vista\">Chula "
+                    "Vista guide</a> covers what the east&ndash;west "
+                    "split means beyond taxes; this post is the "
+                    "tax math itself.</p>"
+                ),
+            },
+            {
+                "anchor": "the-stack",
+                "question": (
+                    "How many Mello-Roos lines can one Chula Vista "
+                    "tax bill carry?"
+                ),
+                "lead": (
+                    "A single eastern Chula Vista home can sit in "
+                    "as many as five community facilities "
+                    "districts at once &mdash; the Sweetwater "
+                    "Union High School District&rsquo;s own "
+                    "explainer states exactly that &mdash; because "
+                    "the layers stack: a city infrastructure "
+                    "district, a city maintenance district, a "
+                    "Chula Vista Elementary district and a "
+                    "Sweetwater district can all levy on the same "
+                    "parcel, each as its own line on the county "
+                    "tax bill."
+                ),
+                "body": (
+                    "<p>The inventory behind the stack: the city "
+                    "lists 31 districts of its own &mdash; "
+                    "fourteen-plus bonded for backbone "
+                    "infrastructure, eighteen for perpetual "
+                    "maintenance &mdash; while Chula Vista "
+                    "Elementary&rsquo;s portal lists seventeen and "
+                    "Sweetwater&rsquo;s twenty. One more wrinkle "
+                    "in the newest Otay Ranch villages: recent "
+                    "phases financed through the California "
+                    "Municipal Finance Authority&rsquo;s BOLD "
+                    "program show a CMFA line rather than a "
+                    "&ldquo;City of Chula Vista&rdquo; line, so a "
+                    "bill that looks light on city districts may "
+                    "simply name a different issuer.</p>"
+                ),
+            },
+            {
+                "anchor": "find-exact",
+                "question": (
+                    "How do you find the exact Mello-Roos amount "
+                    "for a Chula Vista address?"
+                ),
+                "lead": (
+                    "The exact special taxes on any Chula Vista "
+                    "parcel are public and take minutes to pull: "
+                    "enter the parcel number at the San Diego "
+                    "County special-assessments lookup for the "
+                    "current-year breakdown of every fixed-charge "
+                    "line, then match district names against the "
+                    "County Auditor&rsquo;s active Mello-Roos "
+                    "list, which carries the administrator phone "
+                    "number for each &mdash; Spicer Consulting for "
+                    "the city districts, the elementary and "
+                    "high-school district offices for theirs."
+                ),
+                "body": (
+                    "<p>In escrow the law does part of this "
+                    "unprompted: sellers of property in a district "
+                    "must make a good-faith effort to deliver a "
+                    "Notice of Special Tax &mdash; Civil Code "
+                    "section 1102.6b and Government Code section "
+                    "53340.2 &mdash; and that notice states the "
+                    "maximum tax, the annual increase, what it "
+                    "funds and when it ends, with a short right to "
+                    "cancel after receipt. The notice is the "
+                    "authoritative per-parcel document; the lookup "
+                    "is how a buyer runs the same numbers before "
+                    "writing the offer instead of after opening "
+                    "escrow.</p>"
+                ),
+            },
+            {
+                "anchor": "end-dates",
+                "question": (
+                    "When do Chula Vista Mello-Roos taxes actually "
+                    "end?"
+                ),
+                "lead": (
+                    "End dates in Chula Vista are set district by "
+                    "district, and the honest summary is a split: "
+                    "the school-district bond taxes run for "
+                    "defined terms &mdash; 25 to 30 years from "
+                    "each home&rsquo;s building permit, per "
+                    "Sweetwater&rsquo;s explainer, and some have "
+                    "already ended &mdash; while the city&rsquo;s "
+                    "eighteen maintenance districts are perpetual "
+                    "by design, funding open-space upkeep with no "
+                    "end date at all."
+                ),
+                "body": (
+                    "<p>Both halves are checkable rather than "
+                    "arguable: the elementary district&rsquo;s "
+                    "parcel lookup returns the final year of its "
+                    "tax for a specific address, and districts "
+                    "that no longer levy &mdash; Sweetwater&rsquo;s "
+                    "Bonita Long Canyon district among them "
+                    "&mdash; simply drop off the county&rsquo;s "
+                    "active list. Escalators vary the same way, "
+                    "from flat 2 percent to "
+                    "greater-of-inflation-or-4-percent formulas, "
+                    "and the Notice of Special Tax states which "
+                    "applies. One 2025 change moved in "
+                    "buyers&rsquo; favor: an August 2025 city "
+                    "refunding refinanced four eastern "
+                    "districts&rsquo; bonds at lower rates, with "
+                    "the savings flowing to the taxed parcels per "
+                    "the city&rsquo;s announcement.</p>"
+                ),
+            },
+            {
+                "anchor": "west-exceptions",
+                "question": (
+                    "Does western Chula Vista have any Mello-Roos "
+                    "at all?"
+                ),
+                "lead": (
+                    "Western Chula Vista&rsquo;s existing "
+                    "neighborhoods carry no community-wide "
+                    "Mello-Roos &mdash; verified against the "
+                    "county&rsquo;s active district list rather "
+                    "than assumed &mdash; but the blanket version "
+                    "of that claim is going stale: new west-side "
+                    "construction now comes with districts of its "
+                    "own, starting with the townhome project at "
+                    "the former Sears site on Broadway, where the "
+                    "city&rsquo;s 2024 formation documents set "
+                    "assigned special taxes of roughly $2,700 to "
+                    "$2,800 per home with 2 percent annual "
+                    "escalation."
+                ),
+                "body": (
+                    "<p>The other west-side entries are "
+                    "narrower: the bayfront project&rsquo;s "
+                    "special-tax district taxes the resort and "
+                    "convention-center project area rather than "
+                    "existing homes, a 2016 district exists to "
+                    "finance impact fees for new western "
+                    "development, and a clean-energy financing "
+                    "district appears only on parcels whose owners "
+                    "opted in. The rule that survives: age of the "
+                    "home, not side of the freeway, is what "
+                    "predicts the line items &mdash; resale west "
+                    "side usually clean, new construction "
+                    "anywhere worth checking.</p>"
+                ),
+            },
+            {
+                "anchor": "compare",
+                "question": (
+                    "How should a buyer compare east and west "
+                    "Chula Vista homes at the same price?"
+                ),
+                "lead": (
+                    "Comparing an eastern and a western Chula "
+                    "Vista home at the same list price means "
+                    "pricing the tax lines, not the sticker: pull "
+                    "each parcel&rsquo;s fixed charges from the "
+                    "county lookup, divide the annual total by "
+                    "twelve, and put that number next to the "
+                    "newer home&rsquo;s newer systems and the "
+                    "older home&rsquo;s absence of special taxes "
+                    "&mdash; then check how much of the "
+                    "eastern burden expires and when."
+                ),
+                "body": (
+                    "<p>Two structural facts calibrate the "
+                    "comparison. At original sale the city "
+                    "requires developers to prepay district taxes "
+                    "down to a 2-percent-of-price total burden, "
+                    "as Sweetwater&rsquo;s explainer describes "
+                    "&mdash; resale buyers inherit whatever "
+                    "remains of that math. And maintenance "
+                    "districts outlive bond districts, so an "
+                    "eastern bill never quite reaches zero even "
+                    "after the school bonds retire. The "
+                    "<a href=\"/mello-roos\">Mello-Roos lookup "
+                    "page</a> carries every phone number and "
+                    "fund reference for the districts named "
+                    "here.</p>"
+                ),
+            },
+        ],
+    },
 ]
 
 
