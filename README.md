@@ -14,7 +14,7 @@ Built and maintained by [CitedRealty](https://citedrealty.com).
 
 ## Status
 
-Research and strategy complete. **The site is built** — 50 pages, including 16 neighborhood guides (16,107 words), 19 agent pages, the `/mello-roos` and `/home-valuation` lead magnets, and a photograph on every neighborhood page.
+Research and strategy complete. **The site is built** — 71 pages, including 31 neighborhood guides (the countywide set from La Jolla and Chula Vista to Ramona, plus the Temecula/Murrieta/Menifee corridor), 19 agent pages, the `/mello-roos` and `/home-valuation` lead magnets, a seven-post journal running on [docs/content-runbook.md](docs/content-runbook.md), and a photograph on 16 of the 31 area pages (the fifteen newest await a photography pass).
 
 **One thing blocks launch:** `site.LEAD_ENDPOINT` is a placeholder, so every lead form posts into nothing. `validate.py` fails the build on it deliberately. Full state and the open-items list: [HANDOFF.md](HANDOFF.md).
 
@@ -46,10 +46,13 @@ build/                   Generators (not deployed)
   schema.py              JSON-LD builders — dicts, never hand-written strings
   validate.py            Pre-push gate
 site/                    The deployable site (output committed)
+docs/                    Operational runbooks (launch, photography, content)
 research/                Research pack (9-agent pass, 2026-07-24)
   archive-snapshots/     Saved HTML/CSS of the dead Luxury Presence site
 assets/recovered/        Brand assets pulled back from the Wayback Machine
   README.md              Manifest + 2026-07-25 corrections (several were wrong)
+.claude/skills/          last30days — community-listening skill for the
+                         content engine (docs/content-runbook.md §3)
 ```
 
 ## Notes
