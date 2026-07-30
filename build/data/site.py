@@ -510,11 +510,52 @@ NORTH_COUNTY = [
     },
 ]
 
+# Southwest Riverside County — the I-15 corridor over the county line, added
+# at client request 2026-07-30. A different county: Riverside's own district
+# records govern the tax facts (taxes.py carries per-entry sources), and the
+# Compass sales sweep has no record here, so every page publishes structural
+# facts and no volume claims. Fallbrook is the geographic hinge between this
+# list and North County.
+SW_RIVERSIDE = [
+    {
+        "slug": "temecula",
+        "name": "Temecula",
+        "zip": "92590, 92591, 92592",
+        "district": "Temecula Valley Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Temecula,_California",
+        "video": None,
+        "priority": 1,
+        "angle": "The corridor anchor. City CFDs plus school-district CFDs, and a Wine Country jurisdiction trap nobody explains.",
+    },
+    {
+        "slug": "murrieta",
+        "name": "Murrieta",
+        "zip": "92562, 92563",
+        "district": "Murrieta Valley Unified School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Murrieta,_California",
+        "video": None,
+        "priority": 2,
+        "angle": "The 15/215 hinge. La Cresta's county-estate edge and districts still forming in 2026.",
+    },
+    {
+        "slug": "menifee",
+        "name": "Menifee",
+        "zip": "92584, 92585, 92586, 92587",
+        "district": "Menifee Union School District (K-8) and Perris Union High School District",
+        "wikipedia": "https://en.wikipedia.org/wiki/Menifee,_California",
+        "video": None,
+        "priority": 3,
+        "angle": "2008 incorporation, three school systems, heaviest new-construction CFD load on the corridor.",
+    },
+]
+
 # Everything the site covers. The original six stay first in navigation
-# because the client claims them; North County follows in record order.
-ALL_AREAS = NEIGHBORHOODS + NORTH_COUNTY
+# because the client claims them; North County follows in record order;
+# the Riverside corridor closes the list.
+ALL_AREAS = NEIGHBORHOODS + NORTH_COUNTY + SW_RIVERSIDE
 
 NORTH_COUNTY_ORDER = [a["slug"] for a in sorted(NORTH_COUNTY, key=lambda x: x["priority"])]
+SW_RIVERSIDE_ORDER = [a["slug"] for a in sorted(SW_RIVERSIDE, key=lambda x: x["priority"])]
 
 NAV_ORDER = [
     "carmel-valley",

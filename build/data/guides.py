@@ -1467,6 +1467,261 @@ GUIDES.update({
     ],
 })
 
+# --------------------------------------------------------------------------
+# Southwest Riverside County, added 2026-07-30 at client request. Same rules
+# as everything above: structural facts only, no prices, no ratings, places
+# and processes never people. Sources: city CFD/debt pages (see taxes.py
+# entries), district boundary tools, county land-use records. The recurring
+# theme is deliberate — mailing addresses cross jurisdiction lines here just
+# as they cross district lines in San Diego County.
+# --------------------------------------------------------------------------
+
+GUIDES.update({
+    "temecula": [
+        {
+            "anchor": "wine-country-jurisdiction",
+            "question": "Is Wine Country part of the city of Temecula?",
+            "lead": (
+                "Temecula Valley Wine Country is not inside the city of "
+                "Temecula: the vineyard district east of the city line is "
+                "unincorporated Riverside County territory with Temecula "
+                "mailing addresses, governed by the county&rsquo;s Wine "
+                "Country policies rather than by city hall."
+            ),
+            "body": (
+                "<p>The distinction decides practical things &mdash; which "
+                "planning counter permits a project, whose short-term-rental "
+                "rules apply, and which agency answers a zoning question. A "
+                "&ldquo;Temecula&rdquo; address settles none of it; the "
+                "parcel&rsquo;s jurisdiction does, and the county&rsquo;s "
+                "and city&rsquo;s own maps are where to check.</p>"
+            ),
+        },
+        {
+            "anchor": "tvusd-reach",
+            "question": "Does Temecula Valley Unified stop at the Temecula city line?",
+            "lead": (
+                "Temecula Valley Unified School District extends beyond the "
+                "city of Temecula &mdash; the French Valley area to the "
+                "north, with Winchester mailing addresses, feeds TVUSD "
+                "schools &mdash; and the district&rsquo;s own boundary maps, "
+                "not the city line, decide any specific address."
+            ),
+            "body": (
+                "<p>The same reading applies in reverse for buyers "
+                "comparing across the valley: a Murrieta-adjacent address "
+                "does not by itself mean Murrieta Valley Unified. Districts "
+                "publish attendance lookups, and the guide&rsquo;s standing "
+                "advice holds &mdash; confirm the exact address with the "
+                "district before an offer, not after.</p>"
+            ),
+        },
+        {
+            "anchor": "commute-south",
+            "question": "What is the commute from Temecula into San Diego County?",
+            "lead": (
+                "Temecula sits at the top of the Interstate 15 corridor "
+                "into San Diego County &mdash; roughly thirty miles north "
+                "of Escondido &mdash; and the southbound run through the "
+                "Rainbow and Fallbrook grades is the trade that buys "
+                "Riverside County pricing on a San Diego County paycheck."
+            ),
+            "body": (
+                "<p>The corridor is the connective tissue of this whole "
+                "guide set: <a href=\"/neighborhoods/fallbrook\">"
+                "Fallbrook</a> sits just over the county line to the "
+                "southwest, and <a href=\"/neighborhoods/escondido\">"
+                "Escondido</a> anchors the San Diego end of the same "
+                "freeway. Peak-window congestion northbound in the evening "
+                "is the honest cost to test-drive before committing to "
+                "it.</p>"
+            ),
+        },
+        {
+            "anchor": "airport-noise",
+            "question": "Does airplane noise affect north Temecula?",
+            "lead": (
+                "French Valley Airport sits just north of the Temecula "
+                "city limits, and its traffic pattern crosses the northern "
+                "tracts &mdash; a general-aviation field rather than a "
+                "commercial airport, but audible, and worth visiting a "
+                "specific street at different hours before an offer."
+            ),
+            "body": (
+                "<p>Airport influence areas are mapped land-use facts, not "
+                "matters of opinion: the county&rsquo;s airport land-use "
+                "compatibility plans define them, and disclosure obligations "
+                "attach near an airport. A buyer sensitive to overflight "
+                "noise gets a better answer from an evening on the street "
+                "than from any listing description.</p>"
+            ),
+        },
+    ],
+    "murrieta": [
+        {
+            "anchor": "la-cresta",
+            "question": "Is La Cresta part of the city of Murrieta?",
+            "lead": (
+                "La Cresta and the Santa Rosa Plateau estates west of "
+                "Interstate 15 carry Murrieta mailing addresses but sit in "
+                "unincorporated Riverside County &mdash; large-acreage "
+                "ranch parcels under county zoning, commonly on private "
+                "wells and septic rather than city services."
+            ),
+            "body": (
+                "<p>That makes the west-of-15 estates a different purchase "
+                "from a Murrieta tract home in every way that costs money: "
+                "well yield and septic condition need their own "
+                "inspections, fire-zone insurance needs quoting early, and "
+                "the county &mdash; not city hall &mdash; is the planning "
+                "authority. The same rural checklist that governs "
+                "<a href=\"/neighborhoods/valley-center\">Valley Center</a> "
+                "and <a href=\"/neighborhoods/ramona\">Ramona</a> applies "
+                "here.</p>"
+            ),
+        },
+        {
+            "anchor": "district-edges",
+            "question": "Do all Murrieta addresses feed Murrieta Valley Unified schools?",
+            "lead": (
+                "A Murrieta mailing address does not guarantee Murrieta "
+                "Valley Unified assignment: the postal city reaches into "
+                "unincorporated French Valley, where addresses feed "
+                "Temecula Valley Unified, and the district&rsquo;s own "
+                "boundary maps decide every edge case."
+            ),
+            "body": (
+                "<p>School assignment by mailing address is the single "
+                "most repeated mistake in this valley, exactly as it is in "
+                "San Diego County &mdash; the method for checking an "
+                "address is the same one <a href=\"/blog/san-diego-school-"
+                "district-by-address\">the school-district guide</a> "
+                "teaches, applied to a different county&rsquo;s "
+                "districts.</p>"
+            ),
+        },
+        {
+            "anchor": "i15-i215-split",
+            "question": "Why does the I-15 / I-215 split matter in Murrieta?",
+            "lead": (
+                "Murrieta sits at the junction where Interstate 215 "
+                "splits from Interstate 15, which makes it the "
+                "corridor&rsquo;s hinge: the 15 runs south toward Temecula "
+                "and San Diego County, the 215 north toward Menifee and "
+                "Riverside, and commute direction is the practical "
+                "difference between otherwise similar Murrieta tracts."
+            ),
+            "body": (
+                "<p>A household commuting south cares about on-ramp "
+                "position relative to the merge; one working north up the "
+                "215 prices a different morning entirely. The split is "
+                "also why Murrieta pairs naturally with "
+                "<a href=\"/neighborhoods/menifee\">Menifee</a> in a "
+                "search &mdash; same corridor, one freeway apart.</p>"
+            ),
+        },
+        {
+            "anchor": "new-districts",
+            "question": "Are new Mello-Roos districts still being formed in Murrieta?",
+            "lead": (
+                "New community facilities districts are still being formed "
+                "in Murrieta &mdash; the city noticed the Gierson Ranch "
+                "district for bond authorization in 2026 &mdash; so a "
+                "brand-new tract&rsquo;s special-tax load is set at "
+                "formation, before the first home sells."
+            ),
+            "body": (
+                "<p>For a new-construction buyer the sequence matters: the "
+                "special tax exists before the sales office opens, it is "
+                "disclosed in the purchase documents, and it is knowable "
+                "to the dollar before contract. The Mello-Roos block above "
+                "carries the district list and the city&rsquo;s own source "
+                "for it.</p>"
+            ),
+        },
+    ],
+    "menifee": [
+        {
+            "anchor": "newest-city",
+            "question": "When did Menifee become a city?",
+            "lead": (
+                "Menifee incorporated in 2008, making it one of Riverside "
+                "County&rsquo;s newest cities &mdash; a municipal "
+                "government younger than much of its housing stock, which "
+                "is why districts formed under the county still appear on "
+                "Menifee tax bills alongside the city&rsquo;s own."
+            ),
+            "body": (
+                "<p>Incorporation date is not trivia here: it explains the "
+                "layered special-district landscape the Mello-Roos block "
+                "documents, and it explains why service questions &mdash; "
+                "roads, lighting, landscape maintenance &mdash; route to "
+                "different agencies depending on when a tract was "
+                "built.</p>"
+            ),
+        },
+        {
+            "anchor": "three-districts",
+            "question": "Which school districts serve Menifee?",
+            "lead": (
+                "Menifee splits across school systems the way Escondido "
+                "does: Menifee Union School District runs kindergarten "
+                "through eighth grade for most of the city, Perris Union "
+                "High School District runs the high schools, and the "
+                "northern Romoland area is served by Romoland School "
+                "District for the elementary years."
+            ),
+            "body": (
+                "<p>Elementary and high-school assignment are therefore "
+                "two separate questions with two separate answers, and a "
+                "north-Menifee address needs the third check. The "
+                "verification method is the same one that governs every "
+                "guide on this site: the district office and the exact "
+                "street address, never the city name.</p>"
+            ),
+        },
+        {
+            "anchor": "sun-city",
+            "question": "What is Sun City, and is all of Menifee age-restricted?",
+            "lead": (
+                "Sun City is the historic core of Menifee &mdash; a Del "
+                "Webb retirement development dating to the early 1960s "
+                "&mdash; and its age-qualified communities operate under "
+                "federal senior-housing rules, while most of modern "
+                "Menifee is conventional all-ages housing."
+            ),
+            "body": (
+                "<p>Age qualification is a recorded, community-specific "
+                "legal status &mdash; not something to assume from the Sun "
+                "City name in either direction. The governing documents "
+                "state it, escrow discloses it, and a buyer or heir "
+                "dealing with a specific property should verify that "
+                "community&rsquo;s status rather than the "
+                "neighborhood&rsquo;s reputation.</p>"
+            ),
+        },
+        {
+            "anchor": "water-sewer",
+            "question": "Who provides water and sewer in Menifee?",
+            "lead": (
+                "Water and sewer service in Menifee comes from Eastern "
+                "Municipal Water District rather than city hall, and EMWD "
+                "participates in community facilities financing for new "
+                "development &mdash; one more line on a new-construction "
+                "tax bill that predates any individual buyer."
+            ),
+            "body": (
+                "<p>On the corridor&rsquo;s newer tracts the practical "
+                "consequence is a tax bill with city, school and water "
+                "lines from three different agencies &mdash; each with its "
+                "own contact, each answerable, none of them guessable "
+                "from the listing. The Mello-Roos block above names the "
+                "districts and sources.</p>"
+            ),
+        },
+    ],
+})
+
 
 def for_hood(slug: str) -> list[dict]:
     """Extra answer blocks for a community, in page order. May be empty."""

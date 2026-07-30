@@ -13,7 +13,7 @@
 
 Two things will waste your time if you don't know them.
 
-**One: the farm in the plan is not the farm in the record.** GAMEPLAN is built on six affluent north-coastal communities. A full sweep of all 1,009 Compass sales found only 45 of them (4.5%) in those six, a median sale price of $650,000, and exactly one lifetime sale in Rancho Santa Fe. The real book is Escondido (~96 sales, the single largest market), South Bay, Spring Valley, Fallbrook, Oceanside, Santee, El Cajon. See [research/salesRecord.md](research/salesRecord.md). The site now covers **sixteen** areas rather than six, which is the resolution: the original six are kept because the client asked for them, and ten North County communities were added because that is where the transactions are. The unanswered client question is which set gets the marketing spend.
+**One: the farm in the plan is not the farm in the record.** GAMEPLAN is built on six affluent north-coastal communities. A full sweep of all 1,009 Compass sales found only 45 of them (4.5%) in those six, a median sale price of $650,000, and exactly one lifetime sale in Rancho Santa Fe. The real book is Escondido (~96 sales, the single largest market), South Bay, Spring Valley, Fallbrook, Oceanside, Santee, El Cajon. See [research/salesRecord.md](research/salesRecord.md). The site now covers **nineteen** areas rather than six, which is the resolution: the original six are kept because the client asked for them, ten North County communities were added because that is where the transactions are, and three Southwest Riverside cities — Temecula, Murrieta, Menifee — were added 2026-07-30 at client request (§2 records how a second county is handled honestly). The unanswered client question is which set gets the marketing spend.
 
 **Two: there is exactly one launch blocker.** `site.LEAD_ENDPOINT` is still `https://formspree.io/f/PLACEHOLDER`. Every lead form on the site posts into nothing. `build/validate.py` fails the build on it deliberately, and that single failure is the "1 error" you will see on every validate run. Nothing else is blocking DNS.
 
@@ -26,21 +26,21 @@ Two things will waste your time if you don't know them.
 | **Research** | ✅ Complete (9-agent workflow, ~684k tokens) — `research/` |
 | **Strategy** | ✅ Complete — `GAMEPLAN.md` |
 | **AI baseline** | ✅ Captured — absent from 14/14 tested queries — `research/aiBaseline.md` |
-| **Site** | ✅ **56 pages** built and deployed to the Vercel preview |
-| **Neighborhood guides** | ✅ **16 areas**, 16,107 words total, 867–1,204 words each, 10–13 answer blocks each |
+| **Site** | ✅ **59 pages** built and deployed to the Vercel preview |
+| **Neighborhood guides** | ✅ **19 areas** — the 16 San Diego originals (16,107 words, measured 2026-07-26) plus Temecula, Murrieta and Menifee, added 2026-07-30 |
 | **Agent pages** | ✅ 19, all with headshots; 18 of 19 carry a review CTA |
-| **Photography** | ✅ **16 of 16** areas have a real photograph; 12 are third-party with rendered credits |
+| **Photography** | ✅ **16 of 19** areas have a real photograph; 12 are third-party with rendered credits. The three Riverside pages ship on designed plate heroes — photography pass pending |
 | **Validation** | ✅ 0 errors other than the deliberate `LEAD_ENDPOINT` blocker |
 | **DNS** | ❌ Not pointed. This is the last step, not the first — see [docs/launch-runbook.md](docs/launch-runbook.md) |
 | **GBP** | ❌ Does not exist. Phase 2, and it needs the client to receive the postcard |
 | **Repo visibility** | ⚠️ Still public. No API for this — GitHub Settings → General → Danger Zone |
 
-### The 56 pages
+### The 59 pages
 
 ```
 /                                  home
 /neighborhoods                     hub
-/neighborhoods/{16}                the product — see §4
+/neighborhoods/{19}                the product — see §4
 /team                              grouped by area, not a flat grid of 19 faces
 /agent/{19}                        one per licensee
 /home-valuation                    two-step lead magnet
@@ -63,6 +63,7 @@ Two things will waste your time if you don't know them.
 | **Client owns everything** | Their last site vanished when the Luxury Presence relationship ended. That *is* the pitch — they lived the rented-SaaS failure mode. Never build them onto something they can lose again. |
 | **Rebuild at the same URLs; 301 the rest** | ~10 old URLs are still indexed despite dead DNS. URL preservation is the cheapest SEO win available and the window closes as the index decays. |
 | **Content foundation completes before DNS points** (client, 2026-07-30) | The client's sequencing call: crawlers meet a finished, deep site on first fetch rather than a thin one assembling in public. The accepted cost — recorded, not hidden — is that the old index decays and the corrupted brand answers stand while we build, which is why the foundation gate is a finishable checklist (docs/content-runbook.md §6.1), not an open-ended standard. GBP, reviews and entity cleanup run in parallel, not after. |
+| **Three Southwest Riverside cities added: Temecula, Murrieta, Menifee** (client, 2026-07-30) | Client-directed expansion up the I-15 — where many North County searches end when budget meets map, with Fallbrook as the geographic hinge. A different county, handled honestly: taxes.py entries carry their own city-published sources (the SD Auditor's list says nothing about Riverside), `areaServed` names them "{City}, California" rather than folding them into San Diego, and the Compass record has no sales there so the pages publish structural facts and no volume claims. Photography pass pending — designed plate heroes until then. |
 | **URLs carry no trailing slash** — `/neighborhoods/carmel-valley` served from `neighborhoods/carmel-valley.html` via Vercel `cleanUrls` | Exactly how the old site served them. GAMEPLAN §4.4 writes them with a trailing slash; that was a drafting slip. A trailing-slash convention would 301 away the very equity we are rebuilding to keep. |
 | **Keep the brand, modernize the bones** | Black/white system, Reem Kufi Fun + Lato, square 2px ghost buttons, gold `#8D7120`/`#CCB091`, video hero. This IS the brand and returning clients should recognise it. Modernize *execution* — fluid type, CSS grid, lighter motion — not identity. |
 | **Fonts self-hosted** (Reem Kufi Fun 400, Lato 400/700, both SIL OFL, 84 KB) | Removes a render-blocking third-party request and a dependency the client cannot control, which is the premise of the whole rebuild. |
@@ -148,7 +149,7 @@ Cite both years or a reader who clicks through thinks the number is stale.
 
 ## 4. The neighborhood guides — the product
 
-Sixteen areas, 16,107 words, 867–1,204 words each, 10–13 answer blocks each.
+Nineteen areas. The sixteen San Diego originals measured 16,107 words (2026-07-26), 867–1,204 words each, 10–13 answer blocks each; the three Riverside corridor guides (2026-07-30) follow the same template with city-published tax sources.
 
 **The original six** (from GAMEPLAN, ordered by winnability rather than prestige): Del Sur, 4S Ranch, Scripps Ranch, Carmel Valley, Del Mar, Rancho Santa Fe.
 

@@ -219,3 +219,95 @@ DISTRICTS.update({
         "the comparison inland buyers are trying to make, and almost nobody "
         "spells it out.")},
 })
+
+# --------------------------------------------------------------------------
+# Southwest Riverside County, added 2026-07-30. A DIFFERENT COUNTY: the San
+# Diego Auditor's list above says nothing about these cities, so each entry
+# below carries its own source (the city's published CFD/debt records) and
+# its own lead sentence, and tax_block/mello-roos render those instead of
+# the San Diego defaults. The last tuple element is a website rather than a
+# phone number — the renderers detect the "(" prefix to decide tel: linking.
+# Facts verified 2026-07-30 against the pages cited per entry.
+# --------------------------------------------------------------------------
+
+DISTRICTS.update({
+    "temecula": {
+        "has_cfd": True,
+        "districts": [
+            ("Crowne Hill", "03-01", "City of Temecula", "temeculaca.gov"),
+            ("Roripaugh Ranch", "03-02", "City of Temecula", "temeculaca.gov"),
+            ("Wolf Creek", "03-03", "City of Temecula", "temeculaca.gov"),
+            ("Harveston II", "03-06", "City of Temecula", "temeculaca.gov"),
+        ],
+        "lead": (
+            "Temecula does carry Mello-Roos, extensively: the City of "
+            "Temecula's own debt disclosures name city community facilities "
+            "districts including Crowne Hill, Roripaugh Ranch, Wolf Creek "
+            "and Harveston II, and Temecula Valley Unified School District "
+            "levies its own special taxes in many tracts on top of the "
+            "city's."
+        ),
+        "note": (
+            "The city's districts are obligations of the property owners "
+            "within each district boundary, not of the City of Temecula — "
+            "and the school district's levies are separate again, so a "
+            "Temecula tax bill can carry both a city and a school CFD line. "
+            "The bill names each district that applies to the parcel."
+        ),
+        "source_name": "City of Temecula, Debt Management (community facilities district disclosures)",
+        "source_url": "https://temeculaca.gov/509/Debt-Management",
+        "retrieved": "2026-07-30",
+    },
+    "murrieta": {
+        "has_cfd": True,
+        "districts": [
+            ("Springbrook", "2005-1", "City of Murrieta", "murrietaca.gov"),
+            ("Gierson Ranch — noticed for bond authorization in 2026", "2026-1", "City of Murrieta", "murrietaca.gov"),
+            ("Murrieta Valley USD districts", "2001-4 and 2004-1 among them", "the school district", "murrieta.k12.ca.us"),
+        ],
+        "lead": (
+            "Murrieta does carry Mello-Roos: the City of Murrieta has "
+            "formed ten community facilities districts to date under the "
+            "Mello-Roos Act, and Murrieta Valley Unified School District "
+            "levies special taxes through districts of its own."
+        ),
+        "note": (
+            "New districts are still being formed — the city noticed the "
+            "Gierson Ranch district for bond authorization in 2026 — so a "
+            "brand-new tract's special-tax load is set at formation, before "
+            "the first home sells. Western Municipal Water District also "
+            "operates community facilities financing in the area. The tax "
+            "bill names every district that applies."
+        ),
+        "source_name": "City of Murrieta, Community Facilities District pages",
+        "source_url": "https://www.murrietaca.gov/1304/Community-Facilities-District",
+        "retrieved": "2026-07-30",
+    },
+    "menifee": {
+        "has_cfd": True,
+        "districts": [
+            ("Citywide maintenance CFD — every new development annexes in; 34 zones to date", "2015-2", "City of Menifee", "menifee.ca.gov"),
+            ("Original city bond districts", "four formed at incorporation era", "City of Menifee", "menifee.ca.gov"),
+            ("Menifee Union School District CFDs", "2014-3 among them", "the school district", "menifeeusd.org"),
+        ],
+        "lead": (
+            "Menifee does carry Mello-Roos, and more of it on newer homes: "
+            "the City of Menifee established four original bond districts "
+            "and, since April 2015, a citywide maintenance district that "
+            "every new development annexes into — thirty-four development "
+            "zones so far — while the school and water districts levy "
+            "separately."
+        ),
+        "note": (
+            "Menifee's special taxes are billed through the County of "
+            "Riverside and appear as separate line items on the property "
+            "tax bill — the same reading skill the San Diego pages teach "
+            "applies here, with different district names. Eastern Municipal "
+            "Water District participates in community facilities financing "
+            "for new development as well."
+        ),
+        "source_name": "City of Menifee, Special Districts (LLMD, CSA & CFD)",
+        "source_url": "https://www.menifee.ca.gov/680/Special-Districts",
+        "retrieved": "2026-07-30",
+    },
+})

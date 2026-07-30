@@ -35,14 +35,31 @@ def _postal_address() -> dict[str, Any]:
 
 
 def _area_served() -> list[dict[str, Any]]:
-    """One entry per neighborhood, with a Wikipedia sameAs where an article
+    """One entry per covered area, with a Wikipedia sameAs where an article
     genuinely exists. Del Sur has none; we leave it off rather than invent one.
+
+    Naming differs by list on purpose. The original six are San Diego
+    communities and keep the "{name}, San Diego, CA" form they shipped with.
+    The North County and Riverside additions are (mostly) their own cities —
+    "Escondido, San Diego, CA" would be wrong, and "Temecula, San Diego, CA"
+    would be wrong by a county — so they are named "{name}, California" and
+    anchored by their Wikipedia sameAs. Added 2026-07-30; before that the
+    graph claimed only the six, under-stating the service area the site
+    actually documents.
     """
     areas: list[dict[str, Any]] = []
     for hood in site.NEIGHBORHOODS:
         entry: dict[str, Any] = {
             "@type": "Place",
             "name": f"{hood['name']}, {site.CITY}, {site.REGION}",
+        }
+        if hood["wikipedia"]:
+            entry["sameAs"] = hood["wikipedia"]
+        areas.append(entry)
+    for hood in site.NORTH_COUNTY + site.SW_RIVERSIDE:
+        entry = {
+            "@type": "Place",
+            "name": f"{hood['name']}, California",
         }
         if hood["wikipedia"]:
             entry["sameAs"] = hood["wikipedia"]

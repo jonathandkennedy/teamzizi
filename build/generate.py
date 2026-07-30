@@ -50,6 +50,8 @@ def hood(slug: str) -> dict:
 # on the page whose entire SEO problem is being confused with Monterey.
 HOOD_IMAGE_MISSING = ({"carmel-valley", "4s-ranch"} | {
     a["slug"] for a in site.NORTH_COUNTY
+} | {
+    a["slug"] for a in site.SW_RIVERSIDE
 }) - set(photos.CREDITS)
 
 
@@ -260,15 +262,17 @@ def build_neighborhood_hub() -> None:
     path = "/neighborhoods"
     corridor = "\n".join(hood_card(slug) for slug in site.NAV_ORDER)
     north = "\n".join(hood_card(slug) for slug in site.NORTH_COUNTY_ORDER)
+    riverside = "\n".join(hood_card(slug) for slug in site.SW_RIVERSIDE_ORDER)
     total = len(site.ALL_AREAS)
 
     body = f"""<section class="band band--hero" style="padding-top:calc(var(--nav-h) + 4rem)">
   {c.picture("/assets/img/neighborhoods/_hub-hero.jpg", width=1920, height=1440,
              cls="band__media", eager=True)}
   <div class="container">
-    <h1>North San Diego Neighborhood Guides</h1>
+    <h1>North San Diego &amp; Temecula Valley Neighborhood Guides</h1>
     <p style="margin-inline:auto">
-      {total} communities, from the Del Mar coast to the Ramona backcountry.
+      {total} communities, from the Del Mar coast to the Ramona backcountry
+      and up the I-15 to Temecula.
     </p>
   </div>
 </section>
@@ -308,6 +312,19 @@ def build_neighborhood_hub() -> None:
     </p>
     <div class="grid grid--3" style="margin-top:2rem">
 {corridor}
+    </div>
+
+    <h3 id="temecula-valley" class="rule-gold" style="margin-top:3.5rem">
+      Over the county line &mdash; the Temecula Valley
+    </h3>
+    <p>
+      Temecula, Murrieta and Menifee, up the I&#8209;15 in southwest
+      Riverside County &mdash; where many North County searches end when the
+      budget meets the map. A different county, with its own district
+      records: each guide states whose list governs and links it.
+    </p>
+    <div class="grid grid--3" style="margin-top:2rem">
+{riverside}
     </div>
 
     <p class="updated" style="margin-top:2.5rem">Last updated {TODAY}</p>
@@ -364,6 +381,9 @@ SOLD_RECORD = {
     "oceanside": None, "fallbrook": None, "san-marcos": None,
     "carlsbad": None, "vista": None, "poway": None, "encinitas": None,
     "valley-center": None, "ramona": None,
+    # Southwest Riverside — absent from the Compass sales sweep entirely.
+    # None means the page says nothing about volume rather than guessing.
+    "temecula": None, "murrieta": None, "menifee": None,
 }
 
 
@@ -414,7 +434,10 @@ def tax_block(h: dict) -> str:
             f"administered by {c.esc(d[2])}, {d[3]}</li>"
             for d in t["districts"]
         )
-        lead = (
+        # Riverside entries carry their own lead — the default sentence
+        # names the San Diego County Auditor, which would be the wrong
+        # source for a Temecula or Menifee parcel.
+        lead = t.get("lead") or (
             f"{name} does carry Mello-Roos. The County Auditor's active "
             f"FY&nbsp;2025-26 list shows {len(t['districts'])} community "
             f"facilities district{'s' if len(t['districts']) > 1 else ''} "
@@ -431,11 +454,14 @@ def tax_block(h: dict) -> str:
         )
         body = f"<p>{c.esc(t['note'])}</p>"
 
+    src_url = t.get("source_url", taxes.SOURCE_URL)
+    src_name = t.get("source_name", taxes.SOURCE_NAME)
+    retrieved = t.get("retrieved", taxes.RETRIEVED)
     body += (
         f'<p class="answer__source">{c.esc(taxes.VERIFY_NOTE)}</p>'
-        f'<p class="answer__source">Source: <a href="{taxes.SOURCE_URL}" '
-        f'rel="nofollow noopener" target="_blank">{c.esc(taxes.SOURCE_NAME)}</a>, '
-        f"retrieved {taxes.RETRIEVED}.</p>"
+        f'<p class="answer__source">Source: <a href="{src_url}" '
+        f'rel="nofollow noopener" target="_blank">{c.esc(src_name)}</a>, '
+        f"retrieved {retrieved}.</p>"
     )
     return c.answer_block(
         heading="h2",
@@ -557,6 +583,12 @@ def build_neighborhood(slug: str) -> None:
             tax_fact = ("91", "active CFDs &mdash; most in the county")
         elif slug == "poway":
             tax_fact = ("19", "Poway Unified CFDs")
+        elif slug == "temecula":
+            tax_fact = ("4", "city CFDs &mdash; schools levy more")
+        elif slug == "murrieta":
+            tax_fact = ("10", "city CFDs formed to date")
+        elif slug == "menifee":
+            tax_fact = ("34", "zones in the citywide CFD")
         elif cfd.get("has_cfd"):
             tax_fact = (str(districts), "Mello-Roos district" + ("s" if districts != 1 else ""))
         else:
@@ -687,7 +719,7 @@ def build_neighborhood(slug: str) -> None:
 
 
 def build_neighborhoods() -> None:
-    for slug in site.NAV_ORDER + site.NORTH_COUNTY_ORDER:
+    for slug in site.NAV_ORDER + site.NORTH_COUNTY_ORDER + site.SW_RIVERSIDE_ORDER:
         build_neighborhood(slug)
 
 
@@ -798,7 +830,7 @@ def build_home_valuation() -> None:
         ),
     ])
 
-    # Grouped rather than a flat list of sixteen: a homeowner scanning for
+    # Grouped rather than a flat list of nineteen: a homeowner scanning for
     # their own city finds it faster, and the group label tells the agent
     # reading the lead email roughly where the property is before they open it.
     def _optgroup(label: str, slugs: list[str]) -> str:
@@ -1467,7 +1499,7 @@ def build_buy() -> None:
                 "<p>Mello-Roos is the one buyers most often miss, because it "
                 "is invisible in a listing price and varies parcel by parcel. "
                 "The <a href=\"/mello-roos\">Mello-Roos lookup</a> gives the "
-                "active districts for all sixteen communities we cover, "
+                "active districts for all nineteen communities we cover, "
                 "including the seven where the answer is none.</p>"
             ),
             heading="h2",
@@ -1528,7 +1560,7 @@ def build_buy() -> None:
                 "decision."
             ),
             body=(
-                "<p>All sixteen guides state the tax position, the school "
+                "<p>All nineteen guides state the tax position, the school "
                 "districts and our actual record in that community, including "
                 "where it is thin. <a href=\"/neighborhoods\">Start "
                 "there</a>.</p>"
@@ -1663,7 +1695,7 @@ def build_mello_roos() -> None:
     92127. Everyone writes around it because getting it right means reading a
     county PDF. `build/data/taxes.py` is that PDF, parsed.
 
-    Every one of the sixteen panels is server-rendered and present in the
+    Every one of the nineteen panels is server-rendered and present in the
     HTML, hidden with CSS rather than built on demand. An AI fetcher does not
     run JavaScript, and a lookup tool whose answers only exist after a click
     is a lookup tool no model can ever cite. The <select> is a convenience
@@ -1682,9 +1714,18 @@ def build_mello_roos() -> None:
         )
 
         if cfd.get("districts"):
+            # A "(xxx) ..." value is a phone and gets a tel: link; the
+            # Riverside entries carry a website string instead, which a
+            # tel: link would mangle.
             rows = "\n".join(
-                f"        <tr><td>{c.esc(d[0])}</td><td>{c.esc(d[1])}</td>"
-                f"<td>{c.esc(d[2])}<br><a href=\"tel:{d[3].replace(' ', '').replace('(', '').replace(')', '').replace('-', '')}\">{c.esc(d[3])}</a></td></tr>"
+                "        <tr><td>{}</td><td>{}</td><td>{}<br>{}</td></tr>".format(
+                    c.esc(d[0]), c.esc(d[1]), c.esc(d[2]),
+                    (
+                        f"<a href=\"tel:{d[3].replace(' ', '').replace('(', '').replace(')', '').replace('-', '')}\">{c.esc(d[3])}</a>"
+                        if d[3].startswith("(")
+                        else c.esc(d[3])
+                    ),
+                )
                 for d in cfd["districts"]
             )
             table = f"""      <table class="cfd">

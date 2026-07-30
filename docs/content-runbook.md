@@ -109,6 +109,7 @@ The client asked for faster needle movement. Honesty first, then the plan.
 **The foundation-complete gate (DNS points when every box is checked):**
 
 - [x] 16 neighborhood guides, photograph on every page *(done pre-sprint)*
+- [x] Temecula / Murrieta / Menifee corridor guides *(added 2026-07-30 at client request — photography pass still open)*
 - [x] Money-page layer: `/mello-roos`, `/home-valuation`, sell/buy/concierge *(done pre-sprint)*
 - [x] Paperwork trio that kills escrows: insurance (FAIR Plan), solar-sale, Mello-Roos payoff *(shipped 2026-07-30)*
 - [x] Market pulse live with current, attributed data *(shipped 2026-07-30 — refresh if >1 month stale at cutover)*
@@ -159,6 +160,11 @@ Every area gets touched at least quarterly by a post that serves it, a guide ref
 | Carmel Valley | ✅ | school-district (DMUSD/SDUHSD block) · pulse | SDUHSD enrollment batch |
 | Del Mar | ✅ | **bluff/rail ✔ (gap closed 2026-07-30)** | update-in-place per SANDAG milestone |
 | Rancho Santa Fe | ✅ | — deliberate gap | Guide already carries Covenant/Art-Jury/septic blocks; a post would cannibalize. Holds pending the client's keep-or-drop call (HANDOFF §9) |
+| **Temecula** *(added 2026-07-30)* | ✅ new | pulse (county-level context) | Wine Country jurisdiction post (bank); Riverside listening added to the monthly pass; photography |
+| **Murrieta** *(added 2026-07-30)* | ✅ new | pulse | Gierson Ranch CFD 2026-1 formation is a live fast-lane story — track the bond authorization; photography |
+| **Menifee** *(added 2026-07-30)* | ✅ new | pulse | EMWD/CFD new-construction explainer variant (bank); photography |
+
+**Riverside note:** the three corridor guides cite city-published district records (the SD Auditor's list doesn't reach Riverside County), publish no volume claims (no Compass record there), and ship on designed plate heroes until a photography pass — same §5-of-HANDOFF verification method when it runs. Add `Temecula Murrieta Menifee` phrasings to the monthly listening sweeps and the AI query panel.
 
 ### 6.4 30 / 60 / 90 (re-baselined 2026-07-30 after the foundation sprint)
 
