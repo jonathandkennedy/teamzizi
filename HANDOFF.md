@@ -26,7 +26,7 @@ Two things will waste your time if you don't know them.
 | **Research** | ✅ Complete (9-agent workflow, ~684k tokens) — `research/` |
 | **Strategy** | ✅ Complete — `GAMEPLAN.md` |
 | **AI baseline** | ✅ Captured — absent from 14/14 tested queries — `research/aiBaseline.md` |
-| **Site** | ✅ **53 pages** built and deployed to the Vercel preview |
+| **Site** | ✅ **56 pages** built and deployed to the Vercel preview |
 | **Neighborhood guides** | ✅ **16 areas**, 16,107 words total, 867–1,204 words each, 10–13 answer blocks each |
 | **Agent pages** | ✅ 19, all with headshots; 18 of 19 carry a review CTA |
 | **Photography** | ✅ **16 of 16** areas have a real photograph; 12 are third-party with rendered credits |
@@ -35,7 +35,7 @@ Two things will waste your time if you don't know them.
 | **GBP** | ❌ Does not exist. Phase 2, and it needs the client to receive the postcard |
 | **Repo visibility** | ⚠️ Still public. No API for this — GitHub Settings → General → Danger Zone |
 
-### The 53 pages
+### The 56 pages
 
 ```
 /                                  home
@@ -45,7 +45,7 @@ Two things will waste your time if you don't know them.
 /agent/{19}                        one per licensee
 /home-valuation                    two-step lead magnet
 /mello-roos                        2,671 words — the deepest single asset on the site
-/blog  +  /blog/{4}                journal — calendar in docs/content-runbook.md §4
+/blog  +  /blog/{7}                journal — calendar in docs/content-runbook.md §4
 /sell  /buy  /concierge            service pages
 /contact  /thank-you  /404
 /properties/sale  /properties/sold 301 targets for ~10 indexed legacy listing URLs
@@ -62,6 +62,7 @@ Two things will waste your time if you don't know them.
 | **Static HTML/CSS/JS. No framework, no build step at deploy time.** Python generators for repeating page types; output committed to the repo | CitedRealty house style. Fastest Core Web Vitals; **schema server-rendered into the HTML** because AI fetchers and `curl` do not run JS; trivially portable so the client genuinely owns it; anyone can edit it with a text editor. |
 | **Client owns everything** | Their last site vanished when the Luxury Presence relationship ended. That *is* the pitch — they lived the rented-SaaS failure mode. Never build them onto something they can lose again. |
 | **Rebuild at the same URLs; 301 the rest** | ~10 old URLs are still indexed despite dead DNS. URL preservation is the cheapest SEO win available and the window closes as the index decays. |
+| **Content foundation completes before DNS points** (client, 2026-07-30) | The client's sequencing call: crawlers meet a finished, deep site on first fetch rather than a thin one assembling in public. The accepted cost — recorded, not hidden — is that the old index decays and the corrupted brand answers stand while we build, which is why the foundation gate is a finishable checklist (docs/content-runbook.md §6.1), not an open-ended standard. GBP, reviews and entity cleanup run in parallel, not after. |
 | **URLs carry no trailing slash** — `/neighborhoods/carmel-valley` served from `neighborhoods/carmel-valley.html` via Vercel `cleanUrls` | Exactly how the old site served them. GAMEPLAN §4.4 writes them with a trailing slash; that was a drafting slip. A trailing-slash convention would 301 away the very equity we are rebuilding to keep. |
 | **Keep the brand, modernize the bones** | Black/white system, Reem Kufi Fun + Lato, square 2px ghost buttons, gold `#8D7120`/`#CCB091`, video hero. This IS the brand and returning clients should recognise it. Modernize *execution* — fluid type, CSS grid, lighter motion — not identity. |
 | **Fonts self-hosted** (Reem Kufi Fun 400, Lato 400/700, both SIL OFL, 84 KB) | Removes a render-blocking third-party request and a dependency the client cannot control, which is the premise of the whole rebuild. |

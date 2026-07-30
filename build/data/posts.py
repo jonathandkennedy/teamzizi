@@ -774,6 +774,502 @@ POSTS: list[dict] = [
             },
         ],
     },
+    # ------------------------------------------------------------------
+    # 2026-07-30 batch #2 — the foundation-before-DNS build-out (client
+    # direction). Payoff mechanics anchored to the Mello-Roos Act and the
+    # district administrators already named in taxes.py; market figures are
+    # SDAR's published June 2026 indicators, dated and attributed; rail
+    # facts are SANDAG's published LOSSAN realignment materials.
+    # ------------------------------------------------------------------
+    {
+        "slug": "mello-roos-payoff-early",
+        "title": (
+            "Paying off Mello-Roos early: how it works in San Diego County"
+        ),
+        "dek": (
+            "The tax bill names the district; the district&rsquo;s own "
+            "formation documents decide whether an early payoff exists and "
+            "on what terms. How a payoff quote is obtained, what it removes "
+            "from the bill and what it doesn&rsquo;t, and the three moments "
+            "when the arithmetic is worth running."
+        ),
+        "date": "2026-07-30",
+        "author": "sofia-azizi",
+        "description": (
+            "Whether Mello-Roos can be paid off early in San Diego County, "
+            "how to get a parcel-specific payoff quote from the district "
+            "administrator, why the services component survives a payoff, "
+            "and when the math is worth running."
+        ),
+        "footnote": (
+            "      Prepayment terms are set by each district&rsquo;s formation documents\n"
+            "      and quoted by its administrator; tax consequences vary by owner. The\n"
+            "      payoff decision is a numbers decision to run with the\n"
+            "      administrator&rsquo;s quote and a tax professional &mdash; nothing above\n"
+            "      is tax advice."
+        ),
+        "blocks": [
+            {
+                "anchor": "can-you-prepay",
+                "question": (
+                    "Can you pay off Mello-Roos early in San Diego County?"
+                ),
+                "lead": (
+                    "Early payoff of a Mello-Roos special tax is possible in "
+                    "San Diego County when the district&rsquo;s own formation "
+                    "documents provide for it &mdash; the Mello-Roos "
+                    "Community Facilities Act lets a district offer "
+                    "prepayment, and each district&rsquo;s rate-and-method "
+                    "decides whether, and on what terms."
+                ),
+                "body": (
+                    "<p>Prepayment is therefore a district fact, not a "
+                    "countywide rule: some rate-and-method documents "
+                    "publish a full payoff formula, some allow partial "
+                    "prepayment, and some provide none at all. The "
+                    "governing document travels with the district, and the "
+                    "administrator who levies the tax is the party who "
+                    "states what applies to a given parcel. "
+                    "<a href=\"/mello-roos\">The Mello-Roos lookup</a> "
+                    "covers which districts operate in which "
+                    "communities.</p>"
+                ),
+            },
+            {
+                "anchor": "payoff-quote",
+                "question": "How do you get a Mello-Roos payoff quote?",
+                "lead": (
+                    "A payoff quote for a San Diego County parcel comes "
+                    "from the district&rsquo;s administrator: the "
+                    "Mello-Roos line on the property tax bill names the "
+                    "district and a contact number, and that administrator "
+                    "produces the parcel-specific payoff figure on request."
+                ),
+                "body": (
+                    "<p>Parcel-specific is the operative word &mdash; the "
+                    "figure depends on the district, the improvement area "
+                    "and the phase the home was built in, which is why two "
+                    "similar homes on one street can carry different "
+                    "quotes. In the 92127 communities, the Poway Unified "
+                    "districts that cover <a href=\"/neighborhoods/"
+                    "del-sur\">Del Sur</a> and <a href=\"/neighborhoods/"
+                    "4s-ranch\">4S Ranch</a> are handled by a named "
+                    "administrator whose number appears on the bill "
+                    "itself. Treat the quote like a loan payoff demand: "
+                    "dated, expiring, and the only figure worth acting "
+                    "on.</p>"
+                ),
+            },
+            {
+                "anchor": "what-payoff-removes",
+                "question": (
+                    "Does an early payoff remove the whole Mello-Roos line "
+                    "from the tax bill?"
+                ),
+                "lead": (
+                    "An early payoff on a San Diego County parcel retires "
+                    "the bond-funded portion of the Mello-Roos levy, and "
+                    "only that portion &mdash; many districts also levy a "
+                    "services component for ongoing maintenance that does "
+                    "not prepay and stays on the bill."
+                ),
+                "body": (
+                    "<p>The <a href=\"/neighborhoods/del-sur#cfd-term\">"
+                    "Del Sur guide</a> draws the same distinction about "
+                    "district end dates, and it binds payoffs equally: ask "
+                    "the administrator to split the quote into its bond "
+                    "and services parts before treating a payoff as "
+                    "removing the line item. A payoff that retires the "
+                    "bonds and leaves a services charge is still worth "
+                    "understanding &mdash; it is just a different number "
+                    "than the bill&rsquo;s total suggests.</p>"
+                ),
+            },
+            {
+                "anchor": "resale-effect",
+                "question": (
+                    "Does paying off Mello-Roos change what a home sells "
+                    "for?"
+                ),
+                "lead": (
+                    "A paid-off Mello-Roos parcel in San Diego County "
+                    "competes on total monthly cost: two otherwise similar "
+                    "homes in the same community can carry materially "
+                    "different special-tax lines, and buyers comparing "
+                    "payment to payment see the difference directly."
+                ),
+                "body": (
+                    "<p>Escrow surfaces the fact on its own &mdash; the "
+                    "special-tax disclosure and the preliminary report "
+                    "both carry it &mdash; so a documented payoff is a "
+                    "checkable listing claim rather than marketing. "
+                    "Whether the capital spent on a payoff comes back in "
+                    "the sale price is a pricing question to run against "
+                    "actual comparable sales, not a promise; what the "
+                    "payoff verifiably changes is the monthly figure a "
+                    "buyer&rsquo;s lender underwrites.</p>"
+                ),
+            },
+            {
+                "anchor": "when-to-run",
+                "question": (
+                    "When is the Mello-Roos payoff math worth running?"
+                ),
+                "lead": (
+                    "The payoff arithmetic on a San Diego County parcel "
+                    "earns its half hour at three moments: before listing "
+                    "a home whose special-tax line makes buyers hesitate, "
+                    "during a refinance when funds are already moving, and "
+                    "at purchase when a seller credit could retire the "
+                    "levy instead of buying down the rate."
+                ),
+                "body": (
+                    "<p>Each is the same comparison &mdash; the "
+                    "administrator&rsquo;s payoff quote against what the "
+                    "same capital does elsewhere &mdash; run with real "
+                    "numbers rather than the neighborhood&rsquo;s folklore "
+                    "about what Mello-Roos costs. The inputs are one phone "
+                    "call and one tax conversation, and the answer differs "
+                    "by parcel, which is precisely why no blanket "
+                    "recommendation appears here.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "north-county-market-pulse",
+        "title": (
+            "North County market pulse: what the mid-2026 numbers actually "
+            "say"
+        ),
+        "dek": (
+            "More homes for sale than at any point since 2020, and still "
+            "not enough to tip the market. The June 2026 read from the "
+            "REALTORS&rsquo; association&rsquo;s published indicators, "
+            "what it means on each side of a deal, and why a single "
+            "month&rsquo;s median deserves suspicion. Revised as new "
+            "months publish."
+        ),
+        "date": "2026-07-30",
+        "author": "sofia-azizi",
+        "description": (
+            "San Diego housing market, mid-2026: SDAR's June indicators — "
+            "$950,000 combined median (+4.4% YoY), 3.2 months of supply, "
+            "new listings down — and what the numbers mean for North "
+            "County buyers and sellers."
+        ),
+        "footnote": (
+            "      Market figures are the Greater San Diego Association of\n"
+            "      REALTORS&rsquo; published monthly indicators as of the revision date\n"
+            "      shown, quoted with their definitions; they describe the county-level\n"
+            "      market, not any specific home. Figures are replaced, not\n"
+            "      accumulated, as new months publish."
+        ),
+        "blocks": [
+            {
+                "anchor": "where-market-sits",
+                "question": (
+                    "Where does the San Diego housing market sit in "
+                    "mid-2026?"
+                ),
+                "lead": (
+                    "The San Diego market in mid-2026 is tighter than the "
+                    "inventory headlines suggest: the Greater San Diego "
+                    "Association of REALTORS&rsquo; June 2026 indicators "
+                    "put the combined median sale price at $950,000, up "
+                    "4.4% year over year, with detached homes at "
+                    "$1,125,000 (up 5.1%) and attached homes at $670,000 "
+                    "(up 1.1%)."
+                ),
+                "body": (
+                    "<p>Every figure above is the association&rsquo;s "
+                    "published series, quoted with its definitions and "
+                    "dated &mdash; which matters, because market numbers "
+                    "circulate stripped of both. Prices firmed while "
+                    "supply grew, and holding those two facts together, "
+                    "rather than picking one, is the honest read of "
+                    "mid-2026.</p>"
+                ),
+            },
+            {
+                "anchor": "inventory-up",
+                "question": (
+                    "Is San Diego housing inventory actually improving in "
+                    "2026?"
+                ),
+                "lead": (
+                    "San Diego County carries more months of housing "
+                    "supply in 2026 than at any point since 2020 &mdash; "
+                    "roughly 3.2 months &mdash; and that is still barely "
+                    "half of the six months conventionally treated as a "
+                    "balanced market."
+                ),
+                "body": (
+                    "<p>Both halves are true at once: buyers have more "
+                    "choice than in any recent year, and the market has "
+                    "stepped down from its sellers&rsquo;-market extremes "
+                    "without tipping into a buyers&rsquo; market. The "
+                    "supply side explains why &mdash; new listings fell "
+                    "13.9% in June, and first-half detached listings ran "
+                    "11.6% below last year, consistent with owners holding "
+                    "low-rate mortgages staying put.</p>"
+                ),
+            },
+            {
+                "anchor": "sellers",
+                "question": (
+                    "What do the mid-2026 numbers mean for a North County "
+                    "seller?"
+                ),
+                "lead": (
+                    "A North County seller in mid-2026 faces more "
+                    "competition than the 2021&ndash;2024 market supplied "
+                    "and less than a balanced market would: pricing "
+                    "against current comparable sales, rather than against "
+                    "a neighbor&rsquo;s 2024 result, is what the supply "
+                    "numbers reward."
+                ),
+                "body": (
+                    "<p>With alternatives on the market, buyers can afford "
+                    "to penalise the fixable &mdash; condition, "
+                    "presentation, and the paperwork problems that surface "
+                    "late. The two that kill North County escrows in the "
+                    "final week are insurance and solar documentation, "
+                    "both preparable in advance: see "
+                    "<a href=\"/blog/california-fair-plan-san-diego\">the "
+                    "FAIR Plan explainer</a> and <a href=\"/blog/"
+                    "selling-a-house-with-solar-panels-san-diego\">the "
+                    "solar-sale guide</a>.</p>"
+                ),
+            },
+            {
+                "anchor": "buyers",
+                "question": (
+                    "What do the mid-2026 numbers mean for a North County "
+                    "buyer?"
+                ),
+                "lead": (
+                    "A North County buyer in mid-2026 has more homes to "
+                    "choose from than in any recent year and still little "
+                    "pricing leverage on the well-presented ones &mdash; "
+                    "3.2 months of supply rations patience, not price."
+                ),
+                "body": (
+                    "<p>Leverage concentrates on the homes with a story: "
+                    "condition issues, a solar lease mid-transfer, an "
+                    "insurance bill that scared two earlier buyers off. "
+                    "Those stories are checkable facts rather than "
+                    "reasons to walk, and a buyer who can price a fire "
+                    "zone or a lease assumption calmly &mdash; the "
+                    "homework in the posts above &mdash; is bidding where "
+                    "the competition thins out.</p>"
+                ),
+            },
+            {
+                "anchor": "median-caution",
+                "question": (
+                    "Why did the median price move — and does that mean "
+                    "home values changed?"
+                ),
+                "lead": (
+                    "A median sale price in San Diego County moves for two "
+                    "reasons &mdash; homes repricing, and a different mix "
+                    "of homes selling &mdash; and one month&rsquo;s median "
+                    "cannot say which happened."
+                ),
+                "body": (
+                    "<p>Mid-2026 is a live example: detached listings ran "
+                    "11.6% below last year&rsquo;s first half, and when "
+                    "the composition of what sells shifts, the median "
+                    "shifts with it &mdash; no home need have changed "
+                    "value. Read medians in runs of months, read the "
+                    "detached and attached series separately, and treat "
+                    "any single-month move quoted without its series as "
+                    "a headline rather than a fact.</p>"
+                ),
+            },
+            {
+                "anchor": "data-source",
+                "question": (
+                    "Where do these San Diego market numbers come from, "
+                    "and when do they update?"
+                ),
+                "lead": (
+                    "Figures in this North County market pulse are the "
+                    "Greater San Diego Association of REALTORS&rsquo; "
+                    "published monthly indicators &mdash; the June 2026 "
+                    "release in the current revision &mdash; and the page "
+                    "is revised as new months publish rather than left to "
+                    "age."
+                ),
+                "body": (
+                    "<p>County-level numbers set context; they do not "
+                    "price a home. The per-community picture &mdash; what "
+                    "is actually closing in a particular school boundary "
+                    "or tax district &mdash; is the conversation to have "
+                    "with an agent working that area, and the "
+                    "<a href=\"/neighborhoods\">sixteen neighborhood "
+                    "guides</a> carry the structural facts that frame "
+                    "it.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "del-mar-bluff-rail-what-owners-should-know",
+        "title": (
+            "The Del Mar bluff rail move: what property owners actually "
+            "need to track"
+        ),
+        "dek": (
+            "SANDAG plans to take the coastal tracks off the Del Mar "
+            "bluffs and underground &mdash; a project measured in "
+            "billions of dollars and ownership cycles, with no route yet "
+            "chosen. The milestones that turn general concern into "
+            "parcel-specific fact, for owners on the bluff and away from "
+            "it. Revised as milestones land."
+        ),
+        "date": "2026-07-30",
+        "author": "sofia-azizi",
+        "description": (
+            "SANDAG's LOSSAN rail realignment in Del Mar: the 1.7-mile "
+            "bluff segment, the tunnel route alternatives under study, "
+            "the mid-2030s horizon, and what bluff-area and inland "
+            "property owners should watch at each milestone."
+        ),
+        "footnote": (
+            "      Project facts above are from SANDAG&rsquo;s published LOSSAN Rail\n"
+            "      Realignment materials and the City of Del Mar&rsquo;s project pages as\n"
+            "      of July 2026; alignments, costs and dates are provisional until a\n"
+            "      route is selected and funded. This page is revised as milestones\n"
+            "      land."
+        ),
+        "blocks": [
+            {
+                "anchor": "whats-planned",
+                "question": (
+                    "What is actually planned for the Del Mar bluff rail "
+                    "line?"
+                ),
+                "lead": (
+                    "SANDAG&rsquo;s LOSSAN Rail Realignment would move the "
+                    "1.7-mile segment of coastal track that runs atop the "
+                    "Del Mar bluffs into a tunnel inland, replacing the "
+                    "corridor&rsquo;s most fragile stretch &mdash; the "
+                    "project is in environmental review, and no route has "
+                    "been selected."
+                ),
+                "body": (
+                    "<p>The stretch matters beyond Del Mar: the LOSSAN "
+                    "corridor is among the busiest intercity passenger "
+                    "rail corridors in the country, and the bluff segment "
+                    "is its chokepoint &mdash; eroding, single-tracked, "
+                    "and periodically closed for emergency stabilization. "
+                    "SANDAG&rsquo;s rail realignment project pages are the "
+                    "official record, and the claims worth acting on all "
+                    "live there.</p>"
+                ),
+            },
+            {
+                "anchor": "routes",
+                "question": (
+                    "Which tunnel routes are under study in Del Mar?"
+                ),
+                "lead": (
+                    "The alternatives SANDAG has published for the Del Mar "
+                    "realignment differ in where the tunnel runs &mdash; "
+                    "one tracks Interstate 5 with the longest tunnel, one "
+                    "runs more directly beneath Del Mar itself, and one "
+                    "keeps the shortest tunnel closest to the coast &mdash; "
+                    "with published cost figures in the billions per "
+                    "alignment."
+                ),
+                "body": (
+                    "<p>The under-town options are what put easements on "
+                    "the community&rsquo;s agenda: a tunnel passes beneath "
+                    "somebody&rsquo;s parcel, and which parcels is exactly "
+                    "what route selection decides. Route selection is "
+                    "therefore the milestone that converts general concern "
+                    "into parcel-specific fact &mdash; and the public "
+                    "comment windows SANDAG runs before it are the point "
+                    "of influence, not the construction hearings years "
+                    "later.</p>"
+                ),
+            },
+            {
+                "anchor": "timeline",
+                "question": (
+                    "When would trains actually leave the Del Mar bluffs?"
+                ),
+                "lead": (
+                    "Published planning for the Del Mar realignment points "
+                    "at completion in the mid-2030s, with environmental "
+                    "work and route selection still ahead of construction "
+                    "&mdash; a horizon measured in ownership cycles, not "
+                    "escrow periods."
+                ),
+                "body": (
+                    "<p>The near-term reality is the opposite of the "
+                    "long-term plan: continued stabilization work on the "
+                    "existing bluff alignment to keep it running until a "
+                    "replacement exists. Both timelines are trackable "
+                    "&mdash; SANDAG for the realignment, the City of Del "
+                    "Mar&rsquo;s project repository for bluff work &mdash; "
+                    "and any specific completion year deserves to be "
+                    "treated as provisional until a route is chosen and "
+                    "funded.</p>"
+                ),
+            },
+            {
+                "anchor": "bluff-owners",
+                "question": (
+                    "What should bluff-area Del Mar owners watch?"
+                ),
+                "lead": (
+                    "For Del Mar owners near the bluffs, the near-term "
+                    "facts are stabilization construction on the existing "
+                    "track and, on the long horizon, the question of what "
+                    "replaces the rail corridor after trains move &mdash; "
+                    "access, trails and slope work all route through the "
+                    "city&rsquo;s and SANDAG&rsquo;s published project "
+                    "records."
+                ),
+                "body": (
+                    "<p>Construction windows, staging areas and closure "
+                    "schedules are published facts, not rumors to trade "
+                    "on &mdash; and a transaction near the corridor is "
+                    "better served by citing them than by either "
+                    "catastrophizing or waving them off. The "
+                    "<a href=\"/neighborhoods/del-mar\">Del Mar guide</a> "
+                    "carries the community-level picture, coastal-zone "
+                    "rules included.</p>"
+                ),
+            },
+            {
+                "anchor": "inland-owners",
+                "question": (
+                    "Does the rail project matter for Del Mar homes away "
+                    "from the bluff?"
+                ),
+                "lead": (
+                    "Del Mar homes nowhere near the bluff still intersect "
+                    "the rail project through route selection: an inland "
+                    "tunnel passes beneath somebody, and easement, "
+                    "vibration and staging questions attach to the chosen "
+                    "alignment rather than to the coastline."
+                ),
+                "body": (
+                    "<p>Until a route is selected, the parcel-specific "
+                    "answer does not exist &mdash; which cuts both ways: "
+                    "no inland parcel can claim immunity, and none should "
+                    "be discounted on speculation. The actionable habit is "
+                    "unglamorous: know which alternatives touch which "
+                    "parts of town, and use the comment windows while the "
+                    "decision is still open.</p>"
+                ),
+            },
+        ],
+    },
 ]
 
 

@@ -14,7 +14,7 @@ Built and maintained by [CitedRealty](https://citedrealty.com).
 
 ## Status
 
-Research and strategy complete. **The site is built** — 53 pages, including 16 neighborhood guides (16,107 words), 19 agent pages, the `/mello-roos` and `/home-valuation` lead magnets, a four-post journal running on [docs/content-runbook.md](docs/content-runbook.md), and a photograph on every neighborhood page.
+Research and strategy complete. **The site is built** — 56 pages, including 16 neighborhood guides (16,107 words), 19 agent pages, the `/mello-roos` and `/home-valuation` lead magnets, a seven-post journal running on [docs/content-runbook.md](docs/content-runbook.md), and a photograph on every neighborhood page.
 
 **One thing blocks launch:** `site.LEAD_ENDPOINT` is a placeholder, so every lead form posts into nothing. `validate.py` fails the build on it deliberately. Full state and the open-items list: [HANDOFF.md](HANDOFF.md).
 
