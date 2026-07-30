@@ -2220,6 +2220,243 @@ POSTS: list[dict] = [
             },
         ],
     },
+    {
+        # Southern-expansion batch, post 1 of 5. The highest-intent topic the
+        # twelve new coastal/city guides surfaced: the STRO system governs
+        # every beach-area rental-income purchase, and no local competitor
+        # publishes the actual counts. Counts verified on the live Treasurer
+        # page 2026-07-30; they move, so the block cites its as-of date.
+        "slug": "san-diego-short-term-rental-license",
+        "title": (
+            "The San Diego short-term rental license, explained for "
+            "buyers and sellers"
+        ),
+        "dek": (
+            "Whole-home short-term rentals in the City of San Diego run "
+            "under a licensing system with hard caps &mdash; and the "
+            "license dies at close of escrow rather than transferring "
+            "with the deed. What the four tiers mean, where the caps "
+            "stand right now, and what to verify before pricing rental "
+            "income into an offer in Pacific Beach, La Jolla, Ocean "
+            "Beach or Mission Beach."
+        ),
+        "date": "2026-07-30",
+        "author": "zohra-azizi",
+        "description": (
+            "San Diego's STRO license system: the four tiers, the "
+            "Tier 3 and Mission Beach caps with current availability, "
+            "why licenses do not transfer on sale, fees and taxes, and "
+            "which neighborhoods the ordinance covers."
+        ),
+        "footnote": (
+            "      License counts, fees and tax rates above are from the Office of the\n"
+            "      City Treasurer&rsquo;s STRO pages and the San Diego Municipal Code as\n"
+            "      of July 2026. Counts change as licenses issue and expire, and the caps\n"
+            "      recalculate every two years &mdash; confirm current availability with\n"
+            "      the City Treasurer&rsquo;s STRO program before relying on it in a\n"
+            "      transaction."
+        ),
+        "blocks": [
+            {
+                "anchor": "how-it-works",
+                "question": (
+                    "How does San Diego's short-term rental license "
+                    "system work?"
+                ),
+                "lead": (
+                    "Short-term rentals inside the City of San Diego "
+                    "&mdash; any stay under one month &mdash; have "
+                    "required a Short-Term Residential Occupancy "
+                    "license since May 1, 2023, under Municipal Code "
+                    "chapter 5, article 10. Licenses come in four "
+                    "tiers: part-time (20 days a year or less), "
+                    "home-sharing while the host lives onsite, "
+                    "whole-home citywide, and whole-home Mission "
+                    "Beach, which has its own rules."
+                ),
+                "body": (
+                    "<p>Two structural facts drive everything else. "
+                    "The license is issued to a <em>host</em> &mdash; "
+                    "a natural person, not an LLC &mdash; and one "
+                    "host may hold one license for one dwelling unit "
+                    "at a time, so an owner of several rentals needs "
+                    "a separate person as host for each. And the "
+                    "whole-home tiers are capped in number citywide, "
+                    "which is what makes the license a scarce asset "
+                    "in the beach communities rather than a "
+                    "formality.</p>"
+                ),
+            },
+            {
+                "anchor": "tier-3",
+                "question": (
+                    "Are whole-home short-term rental licenses still "
+                    "available in San Diego?"
+                ),
+                "lead": (
+                    "Tier 3 &mdash; whole-home rentals anywhere in "
+                    "the City of San Diego outside Mission Beach "
+                    "&mdash; is capped at one percent of the "
+                    "city&rsquo;s housing stock, and the cap has not "
+                    "yet been reached: the City Treasurer&rsquo;s "
+                    "table showed 4,840 licenses issued and 821 "
+                    "remaining as of July 17, 2026, with "
+                    "applications open."
+                ),
+                "body": (
+                    "<p>The margin is the number to watch. If the "
+                    "cap is reached, the application period closes "
+                    "within 45 days and later applicants go to a "
+                    "waitlist ordered by a lottery held per "
+                    "community planning area &mdash; the "
+                    "Treasurer&rsquo;s 2025 lottery-administration "
+                    "rule spells out the mechanics. A purchase "
+                    "premised on Tier 3 income is therefore a "
+                    "purchase premised on a number that moves "
+                    "monthly, and checking the current count is a "
+                    "thirty-second job on the Treasurer&rsquo;s STRO "
+                    "page before an offer, not after.</p>"
+                ),
+            },
+            {
+                "anchor": "mission-beach",
+                "question": (
+                    "Why is Mission Beach different for short-term "
+                    "rentals?"
+                ),
+                "lead": (
+                    "Mission Beach has its own tier in San "
+                    "Diego&rsquo;s STRO system &mdash; Tier 4 "
+                    "&mdash; capped at 30 percent of the "
+                    "community&rsquo;s housing units in recognition "
+                    "of its century-old vacation-rental economy, and "
+                    "that tier is currently closed: 1,098 licenses "
+                    "issued, zero remaining, with a lottery-ordered "
+                    "waitlist from the July&ndash;August 2025 "
+                    "application window."
+                ),
+                "body": (
+                    "<p>The waitlist itself is published on the "
+                    "Treasurer&rsquo;s site and updates as licenses "
+                    "become available; applications reopen for 45 "
+                    "days once the list runs down to 25 names. For "
+                    "buyers comparing Mission Beach against "
+                    "<a href=\"/neighborhoods/pacific-beach\">Pacific "
+                    "Beach</a> on rental income, the tiers cut both "
+                    "ways: Mission Beach&rsquo;s cap is "
+                    "proportionally thirty times more generous, but "
+                    "today a Pacific Beach buyer can still apply for "
+                    "a license and a Mission Beach buyer joins a "
+                    "queue.</p>"
+                ),
+            },
+            {
+                "anchor": "buying-selling",
+                "question": (
+                    "Does a short-term rental license transfer when "
+                    "the house is sold?"
+                ),
+                "lead": (
+                    "A San Diego STRO license does not transfer with "
+                    "the property &mdash; the Municipal Code states "
+                    "that licenses are not transferable and the City "
+                    "will not accept any request to transfer or "
+                    "assign ownership or location of a license. The "
+                    "seller&rsquo;s license is cancelled, and the "
+                    "buyer applies new, subject to whatever "
+                    "availability exists at that moment."
+                ),
+                "body": (
+                    "<p>This is the fact that breaks deals priced on "
+                    "\"turnkey Airbnb\" listings. The workable "
+                    "sequence: a buyer in escrow may apply before "
+                    "closing by attaching ownership-transfer "
+                    "documentation, per the Treasurer&rsquo;s FAQ "
+                    "&mdash; so the license application can run "
+                    "parallel to the transaction rather than after "
+                    "it. Two operating rules matter to the same "
+                    "math: whole-home licenses require a minimum of "
+                    "90 rental days a year with quarterly reports to "
+                    "keep the license, and whole-home stays carry a "
+                    "two-night minimum. There is no tier at all for "
+                    "renting a non-primary home 21 to 89 days a "
+                    "year &mdash; the ordinance simply does not "
+                    "allow that pattern.</p>"
+                ),
+            },
+            {
+                "anchor": "costs",
+                "question": (
+                    "What does a San Diego short-term rental license "
+                    "cost to hold?"
+                ),
+                "lead": (
+                    "A whole-home San Diego STRO license costs "
+                    "$1,129 plus a $41 application fee for its "
+                    "two-year term at the rates effective March 1, "
+                    "2025, and the "
+                    "operating taxes are larger: transient occupancy "
+                    "tax on every stay under one month at 11.75, "
+                    "12.75 or 13.75 percent depending on the "
+                    "property&rsquo;s zone, plus the city&rsquo;s "
+                    "annual rental unit business tax."
+                ),
+                "body": (
+                    "<p>The three-zone TOT structure dates to May 1, "
+                    "2025, when Measure C took effect &mdash; the "
+                    "zones tier by proximity to the Convention "
+                    "Center, and the city publishes a lookup map. "
+                    "Home-sharing tiers cost less to license ($33 "
+                    "application, $193&ndash;$284 license) and carry "
+                    "no caps. Renewal is not automatic protection: "
+                    "the license runs two years from issuance, the "
+                    "renewal notice arrives by email 60 days out, "
+                    "and a missed expiration date means reapplying "
+                    "from zero &mdash; against whatever remains of "
+                    "the cap at that point.</p>"
+                ),
+            },
+            {
+                "anchor": "where-it-applies",
+                "question": (
+                    "Which neighborhoods does the San Diego STRO "
+                    "ordinance actually cover?"
+                ),
+                "lead": (
+                    "The STRO ordinance applies only inside City of "
+                    "San Diego limits &mdash; which includes "
+                    "<a href=\"/neighborhoods/la-jolla\">La Jolla</a>, "
+                    "<a href=\"/neighborhoods/pacific-beach\">Pacific "
+                    "Beach</a>, Mission Beach, "
+                    "<a href=\"/neighborhoods/ocean-beach\">Ocean "
+                    "Beach</a>, <a href=\"/neighborhoods/north-park\">"
+                    "North Park</a>, "
+                    "<a href=\"/neighborhoods/hillcrest\">Hillcrest</a> "
+                    "and <a href=\"/neighborhoods/downtown-san-diego\">"
+                    "Downtown</a> &mdash; while every neighboring "
+                    "city runs its own separate short-term rental "
+                    "rules: Chula Vista, Del Mar, Encinitas, "
+                    "Oceanside and Carlsbad each license under their "
+                    "own ordinances."
+                ),
+                "body": (
+                    "<p>So the first question about any \"San "
+                    "Diego\" short-term rental is which jurisdiction "
+                    "the parcel actually sits in &mdash; Del "
+                    "Mar&rsquo;s own ordinance, for instance, was "
+                    "certified by the Coastal Commission in February "
+                    "2026 with a citywide cap of 129 permits. One "
+                    "more date worth knowing inside the city: the "
+                    "tier-and-cap rules sunset in the Coastal "
+                    "Overlay Zone on January 1, 2030, unless amended "
+                    "or extended &mdash; meaning the coastal rules "
+                    "get renegotiated with the Coastal Commission "
+                    "before then. A license strategy with a horizon "
+                    "past 2030 should watch that docket.</p>"
+                ),
+            },
+        ],
+    },
 ]
 
 
