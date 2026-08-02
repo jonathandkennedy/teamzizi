@@ -125,3 +125,31 @@ Twelve briefed posts, cadence, compliance reframes, and the monthly re-run proce
 ---
 
 *Method: WebSearch sweeps (site-scoped and news-cycle queries) + OpenSEO keyword metrics, from the remote session of 2026-07-30. Reddit pass deferred to the first local `/last30days` run — see runbook §3 for the exact invocation. This file is a snapshot; re-run monthly and append, do not overwrite.*
+
+---
+
+## Team Azizi — Community Listening Pass #2 (opened 2026-08-02, August cycle)
+
+Client-initiated: three sources supplied directly. Dispositions below; the pass stays open for the local Reddit run.
+
+### Items and dispositions
+
+**1. Reddit — r/Moving2SanDiego thread (share link `AjtJ3ut1pD`), supplied 2026-08-02.**
+Status: **unreadable from cloud** — Reddit's datacenter block re-confirmed today (both share links 403). Pending either (a) the client pastes the thread text, or (b) the local `/last30days moving to San Diego` run per runbook §3a. Parked, not dropped — the share link is recorded here so the local pass can resolve it.
+
+**2. Quora — "What are the best neighborhoods to live in San Diego if you want to be close to the city but avoid crazy beach prices?"** (question text supplied by client; Quora page itself login-walls fetchers.)
+Disposition: **cross-area query → post.** Shipped same day as `/blog/san-diego-neighborhoods-close-to-downtown` (calendar #18) — answers the underlying decision with the guides' verified structural facts (corridors, stock eras, tax structure, transit), no medians, no "best" verdicts. This is the router post for the whole southeast-of-Balboa-Park value pattern; the guides carry the depth.
+
+**Quora answer draft — for Jon to post under his own name, disclosure included (per HANDOFF §2 no profile is operated by the site team; posting is a human act):**
+
+> Full disclosure: I run a real-estate team here, so read accordingly. The honest pattern: the "close to the city, not beach-priced" neighborhoods run east and southeast of Balboa Park — North Park and Hillcrest if you want walkable-urban (pre-war houses and conversion condos; the condo lane is the realistic entry), the College Area if a trolley stop under the neighborhood matters, Lemon Grove/Spring Valley at the 94/125 junction (closer than most people's mental map — Lemon Grove has an Orange Line stop), and El Cajon or western Chula Vista for the full-city version. The reason they cost less is structural, not a bargain: older stock that predates Mello-Roos and HOA-financed development, so a given price carries fewer monthly lines. The mistake to avoid is crossing I-805 eastward in Chula Vista without checking the tax bill — same list price, very different monthly. We keep sourced, no-medians guides for each of these (with the official district/county links to verify everything yourself): [link to /blog/san-diego-neighborhoods-close-to-downtown]
+
+**3. Nextdoor — "friendliest places to live" rankings page (nextdoor.com/rankings/...), supplied 2026-08-02.**
+Disposition: **no response possible, and none appropriate.** Fetched and inspected: it is a static SEO/marketing rankings page (twenty neighborhoods, opaque "friendliness scores," no comment surface). Two rules apply: (a) there is nothing to respond *to* — it is not a neighbor post; (b) ranking communities by friendliness is characterization-of-people territory our Fair Housing line bars us from echoing or citing (runbook §2 table — same family as "what kind of people live there"). The Nextdoor lane remains §3c as designed: resident agents sharing factual guide content in their own neighborhoods, disclosed, human. Logged so the next person who finds the rankings page knows why we didn't engage it.
+
+### Pass #2 open items
+- Local `/last30days` Reddit run (resolves item 1 + the monthly sweep proper).
+- AI query panel re-run scheduled with the pass close (~early Sept).
+- Topic bank additions this pass: the Quora phrasing joins the panel question list ("close to downtown san diego without beach prices").
+
+*Method note: items supplied by client 2026-08-02; dispositions same day from the remote session. Reddit remains local-only.*
