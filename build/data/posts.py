@@ -3386,6 +3386,259 @@ POSTS: list[dict] = [
             },
         ],
     },
+    {
+        # August listening cycle, item 1. Source: a Quora question supplied
+        # by the client 2026-08-02 ("best neighborhoods close to the city but
+        # avoid crazy beach prices") — a cross-area query no single guide can
+        # answer, which is exactly what earns a post under the bar. Every
+        # factual claim is reused from the verified guide blocks it links;
+        # the post adds the pattern, not new facts. "Best" is deliberately
+        # absent from title and answers — fit, not verdicts (HANDOFF §8).
+        "slug": "san-diego-neighborhoods-close-to-downtown",
+        "title": (
+            "Close to downtown San Diego without the beach premium: "
+            "where that actually exists"
+        ),
+        "dek": (
+            "The question arrives weekly in one form or another: near "
+            "the city, not at coastal prices. The answer is a pattern, "
+            "not a secret &mdash; the close-in value sits east and "
+            "southeast of Balboa Park, along the freeway and trolley "
+            "corridors, in neighborhoods whose cost structure differs "
+            "from the coast for reasons you can look up."
+        ),
+        "date": "2026-08-02",
+        "author": "zohra-azizi",
+        "description": (
+            "Which San Diego neighborhoods put you near downtown "
+            "without coastal pricing: North Park, Hillcrest, the "
+            "College Area, Lemon Grove, Spring Valley, El Cajon and "
+            "western Chula Vista — the structure of each, and how to "
+            "compare real monthly cost."
+        ),
+        "footnote": (
+            "      Transit, jurisdiction and tax-structure facts above are carried, with\n"
+            "      sources, on the neighborhood guides this post links. We publish no\n"
+            "      medians or price figures &mdash; they go stale &mdash; and no ranking\n"
+            "      of neighborhoods or the people in them. Which of these places fits is\n"
+            "      a fit question, answered against your commute, stock preference and\n"
+            "      monthly-cost math."
+        ),
+        "blocks": [
+            {
+                "anchor": "the-pattern",
+                "question": (
+                    "Which San Diego neighborhoods are close to "
+                    "downtown but cost less than the beach "
+                    "communities?"
+                ),
+                "lead": (
+                    "The close-to-downtown value in San Diego runs "
+                    "east and southeast of Balboa Park rather than "
+                    "toward the water: North Park, Hillcrest and "
+                    "the College Area inside the city, Lemon Grove "
+                    "and Spring Valley at the SR-94/SR-125 "
+                    "junction, El Cajon up Interstate 8, western "
+                    "Chula Vista down the Blue Line corridor &mdash; "
+                    "and downtown itself, in condominium form. The "
+                    "coastal premium prices distance to sand, and "
+                    "none of these pay it."
+                ),
+                "body": (
+                    "<p>What &ldquo;costs less&rdquo; means here "
+                    "is structural, not a number we publish: older "
+                    "housing stock that predates Mello-Roos and "
+                    "HOA-financed development, so the monthly "
+                    "payment at a given price carries fewer added "
+                    "lines. We publish no medians &mdash; they go "
+                    "stale the month they print &mdash; but the "
+                    "structure is checkable for any parcel, and "
+                    "the last block below shows how. Which of "
+                    "these neighborhoods is &ldquo;best&rdquo; is "
+                    "a fit question the guides equip you to answer "
+                    "&mdash; not a ranking anyone should hand "
+                    "you.</p>"
+                ),
+            },
+            {
+                "anchor": "urban-ring",
+                "question": (
+                    "Are North Park and Hillcrest cheaper "
+                    "alternatives to the beach neighborhoods?"
+                ),
+                "lead": (
+                    "North Park and Hillcrest offer the walkable-"
+                    "urban life buyers cross-shop against the "
+                    "beach communities, at the cost structure of "
+                    "an inland ZIP: pre-war Craftsman and bungalow "
+                    "stock, mid-century apartment courts, and "
+                    "&mdash; the practical entry path &mdash; "
+                    "condo segments including the 1970s&ndash;80s "
+                    "conversion era, all minutes from downtown by "
+                    "SR-163 or Park Boulevard."
+                ),
+                "body": (
+                    "<p>The age that makes the stock affordable "
+                    "is also the inspection agenda &mdash; "
+                    "foundations, laterals, original wiring on "
+                    "the houses; HOA reserves and building "
+                    "systems on the conversion condos &mdash; and "
+                    "both guides carry those blocks in full. One "
+                    "forward-looking fact separates Hillcrest: "
+                    "the 2024 rezone opened capacity for 17,200 "
+                    "homes, which makes it the close-in "
+                    "neighborhood with the largest supply "
+                    "pipeline on paper &mdash; the "
+                    "<a href=\"/blog/whats-changing-in-hillcrest\">"
+                    "what&rsquo;s-changing tracker</a> follows it. "
+                    "Guides: <a href=\"/neighborhoods/north-park\">"
+                    "North Park</a> &middot; "
+                    "<a href=\"/neighborhoods/hillcrest\">"
+                    "Hillcrest</a>.</p>"
+                ),
+            },
+            {
+                "anchor": "college-area",
+                "question": (
+                    "Does the College Area work for a downtown "
+                    "commute?"
+                ),
+                "lead": (
+                    "The College Area carries something none of "
+                    "the beach neighborhoods can claim: a trolley "
+                    "station under the neighborhood &mdash; the "
+                    "Green Line&rsquo;s SDSU Transit Center &mdash; "
+                    "connecting through Mission Valley toward "
+                    "downtown, inside postwar housing stock priced "
+                    "as inland suburbia."
+                ),
+                "body": (
+                    "<p>The fit question is the university "
+                    "itself: SDSU&rsquo;s enrollment shapes the "
+                    "rental market, which cuts both ways &mdash; "
+                    "investor competition on entry stock, and "
+                    "streets where owner-occupancy and rental "
+                    "patterns vary block by block. Transit "
+                    "adjacency also relaxes density and parking "
+                    "rules under the city&rsquo;s code &mdash; a "
+                    "development-potential fact as much as a "
+                    "commute fact. The "
+                    "<a href=\"/neighborhoods/college-area\">"
+                    "College Area guide</a> carries the SDSU "
+                    "economics and the December 2025 community-"
+                    "plan update.</p>"
+                ),
+            },
+            {
+                "anchor": "southeast-ring",
+                "question": (
+                    "Are Lemon Grove and Spring Valley actually "
+                    "close to downtown San Diego?"
+                ),
+                "lead": (
+                    "Lemon Grove sits at the SR-94/SR-125 "
+                    "junction with an Orange Line trolley stop "
+                    "toward downtown &mdash; centrality is the "
+                    "community&rsquo;s structural argument &mdash; "
+                    "and Spring Valley adjoins it with mid-century "
+                    "stock, no community facilities district on "
+                    "the county&rsquo;s active list, and the same "
+                    "freeway position. Both are closer to "
+                    "downtown than most buyers&rsquo; mental map "
+                    "puts them."
+                ),
+                "body": (
+                    "<p>The honest caveats are the ones the "
+                    "guides state: freeway adjacency is not "
+                    "peak-hour speed &mdash; the commute deserves "
+                    "a test drive at your actual hour &mdash; and "
+                    "value stock earns its price at inspection, "
+                    "where permit history on older systems and "
+                    "additions is the real work. Spring Valley "
+                    "adds the unincorporated wrinkle: county "
+                    "jurisdiction, not a city hall. Guides: "
+                    "<a href=\"/neighborhoods/lemon-grove\">Lemon "
+                    "Grove</a> &middot; "
+                    "<a href=\"/neighborhoods/spring-valley\">"
+                    "Spring Valley</a>.</p>"
+                ),
+            },
+            {
+                "anchor": "east-and-south",
+                "question": (
+                    "What about El Cajon and western Chula Vista "
+                    "for value near San Diego?"
+                ),
+                "lead": (
+                    "El Cajon and western Chula Vista are the "
+                    "full-sized-city versions of the same "
+                    "structure: El Cajon up Interstate 8 with no "
+                    "active community facilities district and "
+                    "stock that predates HOA-financed development; "
+                    "western Chula Vista down I-5 and the Blue "
+                    "Line with the mid-century half of a city "
+                    "whose Mello-Roos concentration sits almost "
+                    "entirely east of Interstate 805."
+                ),
+                "body": (
+                    "<p>Chula Vista is the one that punishes "
+                    "inattention: cross the 805 eastward and the "
+                    "same list price can carry city, elementary "
+                    "and high-school special-tax lines at once "
+                    "&mdash; the "
+                    "<a href=\"/blog/chula-vista-mello-roos-east-vs-west\">"
+                    "east-versus-west method post</a> prices the "
+                    "difference line by line. And for buyers "
+                    "whose &ldquo;close to the city&rdquo; means "
+                    "<em>in</em> it, the downtown condo is the "
+                    "remaining lane &mdash; where the HOA budget "
+                    "and reserve study, not the unit finishes, "
+                    "are the purchase documents. Guides: "
+                    "<a href=\"/neighborhoods/el-cajon\">El "
+                    "Cajon</a> &middot; "
+                    "<a href=\"/neighborhoods/chula-vista\">Chula "
+                    "Vista</a> &middot; "
+                    "<a href=\"/neighborhoods/downtown-san-diego\">"
+                    "Downtown</a>.</p>"
+                ),
+            },
+            {
+                "anchor": "run-the-numbers",
+                "question": (
+                    "How do you compare these San Diego "
+                    "neighborhoods on real monthly cost?"
+                ),
+                "lead": (
+                    "Comparing close-in San Diego neighborhoods "
+                    "honestly means comparing total monthly cost "
+                    "at the same purchase price: base property "
+                    "tax on the older stock against base plus "
+                    "special taxes plus HOA in newer communities "
+                    "&mdash; a difference that is structural, "
+                    "checkable per parcel, and larger than most "
+                    "buyers expect."
+                ),
+                "body": (
+                    "<p>The method takes minutes per address: "
+                    "the county&rsquo;s special-assessments "
+                    "lookup returns every fixed-charge line for "
+                    "a parcel (older stock in these "
+                    "neighborhoods mostly returns none), the "
+                    "<a href=\"/mello-roos\">Mello-Roos page</a> "
+                    "carries the district contacts where lines "
+                    "do appear, an insurance quote belongs "
+                    "inside the inspection window per "
+                    "<a href=\"/blog/home-insurance-before-you-offer\">"
+                    "the insurance-first sequence</a>, and on "
+                    "any condo the HOA&rsquo;s budget and "
+                    "reserve study arrive in escrow &mdash; read "
+                    "them. Every neighborhood named here ends "
+                    "its guide with the official sources to "
+                    "check the record yourself.</p>"
+                ),
+            },
+        ],
+    },
 ]
 
 

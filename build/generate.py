@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 import components as c  # noqa: E402
 import schema  # noqa: E402
 import textures  # noqa: E402
-from data import agents, guides, photos, posts, site, taxes, testimonials  # noqa: E402
+from data import agents, guides, photos, posts, resources, site, taxes, testimonials  # noqa: E402
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 TODAY = date.today().isoformat()
@@ -655,6 +655,33 @@ def build_neighborhood(slug: str) -> None:
         )
         hero_facts = f'\n    <div class="plate">\n{cells}\n    </div>'
 
+    # The "check the record" layer: every authority the guide names, linked.
+    # Official sources only, each verified before listing — see
+    # build/data/resources.py for the rule. Followed links, deliberately:
+    # these are citations to the agencies that hold the record.
+    res = resources.for_hood(slug)
+    resources_html = ""
+    if res:
+        items = "\n".join(
+            f'      <li><a href="{r["url"]}" rel="noopener" target="_blank">'
+            f'{c.esc(r["label"])}</a> &mdash; {c.esc(r["note"])}.</li>'
+            for r in res
+        )
+        resources_html = f"""
+<section class="section section--tight">
+  <div class="container container--narrow">
+    <h2 class="rule-gold">Check the record: official {name} sources</h2>
+    <p class="sources__intro">
+      Every figure above names its source. These are the official pages where
+      those records actually live &mdash; verified {resources.VERIFIED}, and
+      worth more than any summary of them, ours included.
+    </p>
+    <ul class="sources">
+{items}
+    </ul>
+  </div>
+</section>"""
+
     credit = photos.for_hood(slug)
     credit_html = ""
     if credit:
@@ -700,7 +727,7 @@ def build_neighborhood(slug: str) -> None:
 {blocks}
   </div>
 </section>
-
+{resources_html}
 {video_html}
 
 <section class="section">
@@ -727,6 +754,7 @@ def build_neighborhood(slug: str) -> None:
             name=f"{h['name']} Real Estate Guide",
             author_slug=agent["slug"],
             updated=TODAY,
+            significant_links=[r["url"] for r in res] or None,
         ),
         schema.agent(agent, hood=h if confirmed else None),
         schema.faq_page(faq),
