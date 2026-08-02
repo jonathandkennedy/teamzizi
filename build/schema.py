@@ -264,6 +264,7 @@ def web_page(
     author_slug: str,
     updated: str,
     about: dict[str, Any] | None = None,
+    significant_links: list[str] | None = None,
 ) -> dict[str, Any]:
     """`WebPage` carrying explicit authorship and a visible-matching date.
 
@@ -282,6 +283,11 @@ def web_page(
         "publisher": {"@id": ORG_ID},
         "dateModified": updated,
     }
+    # The visible "check the record" links, restated for machines. Only set
+    # on pages that render the corresponding list — schema must not claim
+    # links the page doesn't show.
+    if significant_links:
+        node["significantLink"] = significant_links
     if about:
         node["about"] = about
     return node
