@@ -133,6 +133,10 @@ Single source of truth: `build/data/site.py`. Never retype these anywhere else.
 
 **These must match GBP exactly** once GBP exists — schema, footer NAP and GBP are one entity or they are three.
 
+**Phone is now a call-tracking number: (858) 201-2899** (client-supplied 2026-08-03). It replaced the main line *and* all nineteen agent direct lines, so every inbound call from the site is measurable. Two consequences that are the client's to close:
+1. **Set this same number on GBP at creation**, and on Compass/Zillow/social profiles as the cleanup sweep reaches them. A tracking number on the site while GBP shows the old (858) 847-8067 is precisely the split-entity failure this section exists to prevent — worse than not tracking at all, because it splits the signal *and* measures nothing.
+2. **Routing:** nineteen licensees' "call me" links now resolve to one line. If "call this agent" is still meant to reach that agent, the tracking provider has to route or forward per destination. The agents' original direct numbers are not recoverable from the repo — they were replaced, deliberately, and would have to be re-supplied.
+
 **Strings to purge wherever found** (`validate.check_stale_strings` enforces this): `10550 Craftsman Way`, `11682 El Camino Real`, `(619) 929-9691`, `sonia@teamazizi.com`, `Upstart Residential`, `Upstart Real Estate`, DRE `01426453`, and the "45 Ranch" typo.
 
 **Recommended canonical name: "Team Azizi"**, long form "Team Azizi Real Estate | Compass San Diego". Matches Compass and RealTrends; the long form disambiguates from **Azizi Developments (Dubai)**, which pollutes generic "Azizi real estate" results. Still pending client confirmation — the validator warns — but everything ships with one string so a change is one edit.
@@ -323,7 +327,8 @@ Caps by role, doubled for retina: backgrounds 1920, neighborhoods 1280, textures
 - [ ] **Google Maps API key** (`site.GOOGLE_MAPS_KEY` is empty) — for the contact-page map.
 - [ ] **Malcolm Schick's higher-resolution headshot** — current one is soft.
 - [ ] **Privacy policy** — needed before launch for the forms.
-- [ ] **GBP verification** — client must receive and complete the postcard. Nothing else in Phase 2 starts without it.
+- [ ] **GBP verification** — client must receive and complete the postcard. Nothing else in Phase 2 starts without it. **Use the tracking number (858) 201-2899 as the GBP phone** so site and profile assert one number (see the NAP block above).
+- [ ] **Call-tracking routing** — confirm with the provider how the single tracked line reaches individual agents, since all nineteen agent pages now point at it.
 - [ ] **Compass brokerage logo** from Compass's brand kit. The recovered file is the TA monogram, mislabelled.
 - [ ] Founding year and lifetime volume (Yelp says 2010, housing.info says 2014).
 - [ ] Languages spoken per agent — Dari/Farsi/Spanish plausible; strong E-E-A-T signal and an untapped keyword category. Never claim unconfirmed.

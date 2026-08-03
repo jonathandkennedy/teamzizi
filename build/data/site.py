@@ -29,9 +29,24 @@ REGION = "CA"
 POSTAL = "92130"
 COUNTRY = "US"
 
-PHONE_DISPLAY = "(858) 847-8067"
-PHONE_SCHEMA = "+18588478067"
-PHONE_HREF = "tel:+18588478067"
+# Call-tracking number (client-supplied 2026-08-03). Every Team Azizi number
+# on the site — this one and all nineteen in agents.py — points here so the
+# tracking provider sees every inbound call; a site that leaves untracked
+# numbers lying around measures nothing.
+#
+# Two consequences the client owns, recorded so nobody has to rediscover them:
+#   1. NAP consistency. This number is what the site, its schema and its
+#      footer now assert. GBP, Compass, Zillow and the social profiles must
+#      carry the SAME number, or the entity cleanup in HANDOFF §2 is fighting
+#      itself — a knowledge graph reading two phone numbers for one business
+#      trusts neither. Set it on the GBP profile at creation.
+#   2. Routing. Nineteen licensees' direct lines now resolve to one line, so
+#      the tracking provider has to route (or forward) per destination if
+#      "call this agent" is still meant to reach that agent.
+# The prior main line was (858) 847-8067 — Nilab's direct number.
+PHONE_DISPLAY = "(858) 201-2899"
+PHONE_SCHEMA = "+18582012899"
+PHONE_HREF = "tel:+18582012899"
 EMAIL = "teamazizi@compass.com"
 
 # Approximate rooftop coordinates for the Carmel Valley Compass office.

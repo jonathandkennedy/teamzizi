@@ -22,6 +22,12 @@ from __future__ import annotations
 
 # Neighborhood slug each agent farms, or None until the client confirms.
 # See PROPOSED_ASSIGNMENTS below for the question to put to them.
+#
+# `phone` is deliberately identical for every licensee: the call-tracking
+# number set 2026-08-03 (see site.PHONE_DISPLAY for the reasoning and the two
+# client-owned consequences). Each agent's own direct line was replaced, so
+# restoring per-agent numbers means asking the client for them again — do not
+# reconstruct them from an old build or a third-party profile.
 ROSTER: list[dict] = [
     {
         "slug": "nilab-azizi",
@@ -29,7 +35,7 @@ ROSTER: list[dict] = [
         "name": "Nilab Azizi",
         "title": "Team Lead | REALTOR®",
         "dre": "02047962",
-        "phone": "858.847.8067",
+        "phone": "858.201.2899",
         "compass": "nilab-azizi",
         # Zillow profile, for the "review me on Zillow" call to action on the
         # agent page. See ZILLOW_NOTE at the bottom of this file: this is the
@@ -49,7 +55,7 @@ ROSTER: list[dict] = [
         "name": "Sofia Azizi",
         "title": "REALTOR® | DRE 02108624",
         "dre": "02108624",
-        "phone": "858.705.5454",
+        "phone": "858.201.2899",
         "compass": "sofia-azizi",
         "photo": "/assets/img/team/headshot-sofia-azizi.jpg",
         "farms": None,
@@ -61,7 +67,7 @@ ROSTER: list[dict] = [
         "name": "Zohra Azizi",
         "title": "Realtor® | DRE# 01992847",
         "dre": "01992847",
-        "phone": "619.876.0110",
+        "phone": "858.201.2899",
         "compass": "zohra-legler",  # Compass slug uses a surname variant
         "photo": "/assets/img/team/headshot-zohra-azizi.jpg",
         "farms": None,
@@ -73,7 +79,7 @@ ROSTER: list[dict] = [
         "name": "Masooma Azizi",
         "title": "Chief Financial Officer",
         "dre": None,
-        "phone": "619.746.3669",
+        "phone": "858.201.2899",
         "compass": "masooma-azizi",
         # Client-supplied studio headshot, 2026-07-25.
         "photo": "/assets/img/team/headshot-masooma-azizi.jpg",
@@ -89,7 +95,7 @@ ROSTER: list[dict] = [
         "name": "Dari Ahranjani",
         "title": "REALTOR® | DRE# 02130344",
         "dre": "02130344",
-        "phone": "760.505.2340",
+        "phone": "858.201.2899",
         "compass": "dari-ahranjani",
         "photo": "/assets/img/team/headshot-dari-ahranjani.jpg",
         "farms": None,
@@ -101,7 +107,7 @@ ROSTER: list[dict] = [
         "name": "Candice Casares",
         "title": "REALTOR® | DRE# 02160651",
         "dre": "02160651",
-        "phone": "760.505.5493",
+        "phone": "858.201.2899",
         "compass": "candice-medina",
         "photo": "/assets/img/team/headshot-candice-casares.jpg",
         "farms": None,
@@ -115,7 +121,7 @@ ROSTER: list[dict] = [
         "name": "Sara Forgnone",
         "title": "Realtor® | DRE# 02045480",
         "dre": "02045480",
-        "phone": "858.859.8527",
+        "phone": "858.201.2899",
         "compass": "sara-forgnone",
         "photo": "/assets/img/team/headshot-sara-forgnone.jpg",
         "farms": None,
@@ -127,7 +133,7 @@ ROSTER: list[dict] = [
         "name": "Charisma Gallegos",
         "title": "Assistant to The Azizi Team",
         "dre": None,
-        "phone": "619.300.5530",
+        "phone": "858.201.2899",
         "compass": "charisma-gallegos-sd",
         # From the recovered Luxury Presence assets, client-pointed 2026-07-25.
         "photo": "/assets/img/team/headshot-charisma-gallegos.jpg",
@@ -141,7 +147,7 @@ ROSTER: list[dict] = [
         "name": "Melissa Lopez",
         "title": "REALTOR® | DRE# 01329108",
         "dre": "01329108",
-        "phone": "760.855.3081",
+        "phone": "858.201.2899",
         "compass": "melissa-gutierrez",
         "photo": "/assets/img/team/headshot-melissa-lopez.jpg",
         "farms": None,
@@ -153,7 +159,7 @@ ROSTER: list[dict] = [
         "name": "Candace Kirk",
         "title": "Realtor® | DRE# 02059754",
         "dre": "02059754",
-        "phone": "619.988.1143",
+        "phone": "858.201.2899",
         "compass": "candace-kirk",
         "photo": "/assets/img/team/headshot-candace-kirk.jpg",
         "farms": None,
@@ -165,7 +171,7 @@ ROSTER: list[dict] = [
         "name": "Sarah Rivas",
         "title": "REALTOR® | DRE# 02112696",
         "dre": "02112696",
-        "phone": "619.607.9000",
+        "phone": "858.201.2899",
         "compass": "sarah-rivas",
         "photo": "/assets/img/team/headshot-sarah-rivas.jpg",
         "farms": None,
@@ -178,7 +184,7 @@ ROSTER: list[dict] = [
         "name": "Nicholas Miele",
         "title": "REALTOR® | DRE# 02089615",
         "dre": "02089615",
-        "phone": "760.685.7956",
+        "phone": "858.201.2899",
         "compass": "nicholas-miele",
         "photo": "/assets/img/team/headshot-nicholas-miele.jpg",
         "farms": None,
@@ -190,7 +196,7 @@ ROSTER: list[dict] = [
         "name": "Jared Stransky",
         "title": "Realtor® | DRE# 02081146",
         "dre": "02081146",
-        "phone": "908.752.3747",
+        "phone": "858.201.2899",
         "compass": "jared-stransky",
         "photo": "/assets/img/team/headshot-jared-stransky.jpg",
         "farms": None,
@@ -203,7 +209,7 @@ ROSTER: list[dict] = [
         "name": "Gabriela Santiago",
         "title": "Agent | DRE# 01955750",
         "dre": "01955750",
-        "phone": "619.577.2443",
+        "phone": "858.201.2899",
         "compass": "gabriela-santiago",
         "photo": "/assets/img/team/headshot-gabriela-santiago.jpg",
         "farms": None,
@@ -216,7 +222,7 @@ ROSTER: list[dict] = [
         "name": "Tiffney Cipriani",
         "title": "REALTOR® | DRE# 02186323",
         "dre": "02186323",
-        "phone": "314.610.3554",
+        "phone": "858.201.2899",
         "compass": "tiffney-cipriani",
         "photo": "/assets/img/team/headshot-tiffney-cipriani.jpg",
         "farms": None,
@@ -228,7 +234,7 @@ ROSTER: list[dict] = [
         "name": "Javier Hernandez",
         "title": "Realtor® | DRE# 02004707",
         "dre": "02004707",
-        "phone": "619.738.4006",
+        "phone": "858.201.2899",
         "compass": "javier-hernandez",
         "photo": "/assets/img/team/headshot-javier-hernandez.jpg",
         "farms": None,
@@ -241,7 +247,7 @@ ROSTER: list[dict] = [
         "name": "Malcolm Schick",
         "title": "REALTOR® | DRE# 02010355",
         "dre": "02010355",
-        "phone": "619.316.3223",
+        "phone": "858.201.2899",
         "compass": "malcolm-schick",
         "photo": "/assets/img/team/headshot-malcolm-schick.jpg",
         "farms": None,
@@ -255,7 +261,7 @@ ROSTER: list[dict] = [
         "name": "Michael Angotta",
         "title": "REALTOR® | DRE 02177007",
         "dre": "02177007",
-        "phone": "323.533.9452",
+        "phone": "858.201.2899",
         "compass": "michael-angotta",
         "photo": "/assets/img/team/headshot-michael-angotta.jpg",
         "farms": "del-mar",  # confirmed by client 2026-07-25
@@ -268,7 +274,7 @@ ROSTER: list[dict] = [
         "name": "Mahan Taleshpour",
         "title": "REALTOR® | DRE# 02050744",
         "dre": "02050744",
-        "phone": "818.939.1841",
+        "phone": "858.201.2899",
         "compass": "mahan-taleshpour",
         "photo": "/assets/img/team/headshot-mahan-taleshpour.jpg",
         "farms": None,
