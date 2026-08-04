@@ -342,5 +342,52 @@ CREDITS: dict[str, dict[str, str]] = {
 REJECTED: dict[str, str] = {}
 
 
+# --------------------------------------------------------------------------
+# Team photography — client-owned, so no licence question, but provenance
+# still gets recorded. Everything above concerns images of PLACES, where the
+# failure mode is publishing the wrong place. Images of PEOPLE have a
+# different one: publishing a face that was generated, or edited far enough
+# that it is no longer a photograph of what happened.
+#
+# The rule this file already enforces does not soften because the subject is
+# a person. It gets stricter, because a viewer extends more trust to a
+# photograph of people than to a landscape, and a recruiting page is read by
+# someone deciding where to move a licence.
+# --------------------------------------------------------------------------
+
+PEOPLE: dict[str, dict[str, str]] = {
+    "team-group.jpg": {
+        "shows": "The wider team, photographed in a listing interior.",
+        "origin": "Client-supplied, from the recovered brand asset set.",
+        "editing": "None recorded.",
+    },
+    "team-azizi-four.jpg": {
+        "shows": "Masooma, Nilab, Zohra and Sofia Azizi.",
+        "origin": (
+            "Client-supplied 2026-08-04 alongside a careers-page mockup, "
+            "and used on /join."
+        ),
+        # Recorded because it is a real distinction a reader would care
+        # about, and because the extent is genuinely unknown to us.
+        "editing": (
+            "A real photograph of the four, edited with generative tools "
+            "(client-confirmed 2026-08-04). Extent not specified; the "
+            "isolated white background is the visible change. It was "
+            "supplied as a cut-out alongside a mockup whose branding read "
+            "'TEAM AZIZI INJURY LAWYERS' — wrong industry, and the tell "
+            "that an AI design tool was somewhere in the pipeline. That "
+            "mockup is not used; this image is, on the client's "
+            "confirmation that the underlying photograph is real."
+        ),
+        "if_this_changes": (
+            "If it turns out more than the background was generated — "
+            "faces, bodies, clothing — pull it and revert /join to "
+            "team-group.jpg. A recruiting page cannot show colleagues who "
+            "do not look like themselves."
+        ),
+    },
+}
+
+
 def for_hood(slug: str) -> dict | None:
     return CREDITS.get(slug)
