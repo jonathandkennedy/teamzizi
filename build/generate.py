@@ -2128,9 +2128,10 @@ def build_join() -> None:
       </div>
     </div>
     <div class="split__media">
-      {c.picture("/assets/img/team/team-azizi-four.jpg",
+      {c.picture("/assets/img/team/team-azizi-four-terrace.jpg",
                  alt="Masooma, Nilab, Zohra and Sofia Azizi of Team Azizi",
-                 width=1457, height=1080)}
+                 width=1130, height=1392,
+                 sizes="(min-width: 62rem) 45vw, 92vw")}
     </div>
   </div>
 </section>

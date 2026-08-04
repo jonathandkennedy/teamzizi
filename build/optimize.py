@@ -48,6 +48,24 @@ CAPS = {
     "compliance": None,
 }
 
+# Per-file exceptions, by path relative to site/assets/img.
+#
+# `team` is capped at 800 because almost everything in it is a headshot
+# rendered in a 400px slot, where anything larger is bytes nobody sees. One
+# file breaks that assumption: the /join split image renders around 620 CSS
+# px, so an 800px source is barely 1x and visibly soft on the retina screens
+# most agents will open a recruiting page on. Raising the directory cap to
+# fix one image would inflate nineteen headshots instead.
+CAP_OVERRIDES = {
+    "team/team-azizi-four-terrace.jpg": 1400,
+}
+
+
+def cap_for(path: Path) -> int | None:
+    return CAP_OVERRIDES.get(
+        path.relative_to(IMG).as_posix(), CAPS.get(role(path))
+    )
+
 JPEG_QUALITY = 80
 WEBP_QUALITY = 78
 
@@ -157,7 +175,7 @@ def save_manifest(manifest: dict[str, str]) -> None:
 def optimize(path: Path, *, dry_run: bool) -> tuple[int, int, int]:
     """Returns (bytes_before, bytes_after_jpeg, bytes_webp)."""
     before = path.stat().st_size
-    cap = CAPS.get(role(path))
+    cap = cap_for(path)
     if cap is None:
         return before, before, 0
     if already_done(path, cap) and not FORCE:
@@ -230,7 +248,7 @@ def seed_manifest(files: list[Path]) -> int:
         key = path.relative_to(IMG).as_posix()
         if key in MANIFEST or path.suffix.lower() != ".jpg":
             continue
-        cap = CAPS.get(role(path))
+        cap = cap_for(path)
         if cap is None:
             continue
         if not all(d.exists() for d in derived_for(path)):

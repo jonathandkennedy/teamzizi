@@ -383,11 +383,32 @@ PEOPLE: dict[str, dict[str, str]] = {
             "and stops there."
         ),
     },
-    "team-azizi-four.jpg": {
-        "shows": "Masooma, Nilab, Zohra and Sofia Azizi.",
+    "team-azizi-four-terrace.jpg": {
+        "shows": (
+            "Masooma, Nilab, Zohra and Sofia Azizi in black blazers on a "
+            "terrace above a golf course. The split image on /join, where it "
+            "replaced the cream-suit cut-out at the client's request "
+            "2026-08-04."
+        ),
+        "origin": "Client-supplied 2026-08-04. A different shoot to the cream set.",
+        "editing": (
+            "Not stated by the client, and not assumed here. It reads as a "
+            "straight photograph &mdash; flat overcast light, shadows that "
+            "agree with each other, depth of field falling off naturally "
+            "through the planting behind them &mdash; but reading an image "
+            "is not the same as knowing, and the cream set is a standing "
+            "reminder of that. **Ask before this is ever described as "
+            "unretouched.**"
+        ),
+    },
+    # Superseded 2026-08-04 and deleted from the tree; the record stays,
+    # because "why is there no cut-out any more" is a question someone will
+    # ask, and git history is a worse place to answer it than this file.
+    "team-azizi-four.jpg (REMOVED)": {
+        "shows": "Masooma, Nilab, Zohra and Sofia Azizi, cut out on white.",
         "origin": (
             "Client-supplied 2026-08-04 alongside a careers-page mockup, "
-            "and used on /join."
+            "used on /join until the terrace frame replaced it the same day."
         ),
         # Recorded because it is a real distinction a reader would care
         # about, and because the extent is genuinely unknown to us.
