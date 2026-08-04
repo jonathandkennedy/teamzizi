@@ -166,6 +166,9 @@ a {
 
 .grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
 .grid--3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+/* Four short columns — the "why join" band. Narrower minimum than --3 so
+   four sit on one row on a desktop and fold to two, then one. */
+.grid--4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13.5rem), 1fr)); }
 
 /* ---- Eyebrow / meta ----------------------------------------- */
 

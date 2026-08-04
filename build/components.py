@@ -179,23 +179,34 @@ def picture(
     )
 
 
-def action_bar() -> str:
-    """Persistent call / valuation bar, mobile only.
+def action_bar(variant: str = "client") -> str:
+    """Persistent two-action bar, mobile only.
 
     The nav phone number is `display: none` below 62rem — so on a phone,
     which is where most of this traffic arrives, there was no persistent way
     to reach anyone. The tel: links existed but were buried mid-page and in
     the footer.
 
-    Two actions, no more. Calling is the high-intent one and goes first;
-    the valuation flow is the low-commitment one for someone not ready to
-    talk. Everything else is a link in the page.
+    Two actions, no more. Calling is the high-intent one and goes first; the
+    second is the low-commitment one for someone not ready to talk.
+
+    `variant="agent"` swaps that second action on the recruiting pages. A
+    home valuation is a *client* offer, and on a page addressed to licensed
+    agents it is worse than a wasted slot — it tells the reader the page was
+    not written for them. The agent equivalent has to be something they want
+    for their own business, which is what the AI visibility check is.
     """
+    second = (
+        '<a class="actionbar__btn" href="/join#visibility-check">'
+        "AI visibility check</a>"
+        if variant == "agent"
+        else '<a class="actionbar__btn" href="/home-valuation">Home value</a>'
+    )
     return f"""<div class="actionbar" role="group" aria-label="Contact Team Azizi">
   <a class="actionbar__btn actionbar__btn--call" href="{site.PHONE_HREF}">
     <span aria-hidden="true">&#9742;</span> Call {site.PHONE_DISPLAY}
   </a>
-  <a class="actionbar__btn" href="/home-valuation">Home value</a>
+  {second}
 </div>"""
 
 
@@ -297,6 +308,7 @@ def page(
     nodes: list[dict[str, Any]],
     hero: bool | str = False,
     og_image: str = "/assets/img/logos/og-default.png",
+    audience: str = "client",
 ) -> str:
     """`hero=True` tells the nav to start transparent over a full-bleed hero.
 
@@ -322,7 +334,7 @@ def page(
 {body}
 </main>
 {footer()}
-{action_bar()}
+{action_bar(variant=audience)}
 <script src="/assets/js/site.js" defer></script>
 </body>
 </html>

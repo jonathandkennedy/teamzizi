@@ -233,6 +233,60 @@ def check_answer_blocks(pages: list[Path]) -> None:
         anchors_seen.clear()
 
 
+ANSWER_SECTION = re.compile(
+    r'<section class="answer" id="(?P<anchor>[^"]+)">(?P<inner>.*?)</section>',
+    re.DOTALL,
+)
+LINK_DUMP_LABEL = re.compile(
+    r"(?:Guides?|See also|Related|Read next|Keep reading|More)\s*:\s*<a ",
+    re.IGNORECASE,
+)
+
+
+def check_link_context(pages: list[Path]) -> None:
+    """No navigational link dumps at the end of answer blocks.
+
+    An internal link earns its weight from the sentence around it — the
+    entities and verbs that tell a reader (and a retrieval system) what the
+    target answers. A block that ends in "Guides: X · Y" hands over a list
+    where a sentence should be; the link belongs woven into the copy that
+    discusses the place. Shipped three times in one post before the client
+    caught it (2026-08-02); this check makes the lesson structural.
+
+    Heuristic, tuned against the real corpus: the final ~220 characters of a
+    block containing two or more internal links with fewer than ten non-link
+    words around them is a dump. A woven closing sentence ("For what this
+    looks like in the communities that lean on the FAIR Plan most, see
+    Fallbrook, Valley Center and Ramona") carries enough of its own prose to
+    pass; "Guides: Lemon Grove · Spring Valley." does not. The labeled form
+    is also caught outright, anywhere in the block.
+    """
+    for page in pages:
+        html = page.read_text(encoding="utf-8")
+        for match in ANSWER_SECTION.finditer(html):
+            anchor = match.group("anchor")
+            inner = match.group("inner")
+            if LINK_DUMP_LABEL.search(inner):
+                errors.append(
+                    f"{rel(page)}#{anchor}: labeled link dump "
+                    f"('Guides:'/'See also:'-style) — weave the links into "
+                    f"the sentences that discuss their targets instead"
+                )
+                continue
+            tail = inner[-220:]
+            links = re.findall(r'<a href="/[^"]*"[^>]*>(.*?)</a>', tail, re.DOTALL)
+            if len(links) < 2:
+                continue
+            link_words = sum(len(TAGS.sub("", t).split()) for t in links)
+            nonlink_words = len(TAGS.sub(" ", tail).split()) - link_words
+            if nonlink_words < 10:
+                errors.append(
+                    f"{rel(page)}#{anchor}: block ends in a bare cluster of "
+                    f"{len(links)} internal links with almost no surrounding "
+                    f"prose — contextualize them in the body copy"
+                )
+
+
 def check_lead_forms(pages: list[Path]) -> None:
     """A form that does not deliver is worse than no form.
 
@@ -509,6 +563,7 @@ def main() -> int:
     pages = sorted(SITE.rglob("*.html"))
     check_jsonld(pages)
     check_answer_blocks(pages)
+    check_link_context(pages)
     check_lead_forms(pages)
     check_stale_strings(pages)
     check_internal_links(pages)

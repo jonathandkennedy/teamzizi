@@ -342,5 +342,95 @@ CREDITS: dict[str, dict[str, str]] = {
 REJECTED: dict[str, str] = {}
 
 
+# --------------------------------------------------------------------------
+# Team photography — client-owned, so no licence question, but provenance
+# still gets recorded. Everything above concerns images of PLACES, where the
+# failure mode is publishing the wrong place. Images of PEOPLE have a
+# different one: publishing a face that was generated, or edited far enough
+# that it is no longer a photograph of what happened.
+#
+# The rule this file already enforces does not soften because the subject is
+# a person. It gets stricter, because a viewer extends more trust to a
+# photograph of people than to a landscape, and a recruiting page is read by
+# someone deciding where to move a licence.
+# --------------------------------------------------------------------------
+
+PEOPLE: dict[str, dict[str, str]] = {
+    "team-group.jpg": {
+        "shows": "The wider team, photographed in a listing interior.",
+        "origin": "Client-supplied, from the recovered brand asset set.",
+        "editing": "None recorded.",
+    },
+    "backgrounds/join-hero.jpg": {
+        "shows": (
+            "Masooma, Nilab, Zohra and Sofia Azizi, outdoors in a "
+            "Mediterranean-style courtyard. The hero of /join."
+        ),
+        "origin": "Client-supplied 2026-08-04, same set as the cut-out below.",
+        "editing": (
+            "Same answer as the cut-out: a real photograph of the four, "
+            "edited with generative tools. The background here is the "
+            "composed version of the same subjects, and it has the "
+            "characteristics of a generated or replaced backdrop."
+        ),
+        # The distinction that keeps this publishable, and the line not to
+        # cross with it.
+        "caption_rule": (
+            "Never caption this as a place. The people are the claim and the "
+            "client has confirmed them; the courtyard is set dressing and is "
+            "not a Team Azizi office, a listing, or anywhere in San Diego "
+            "County so far as anyone here knows. Alt text names the people "
+            "and stops there."
+        ),
+    },
+    "team-azizi-four-terrace.jpg": {
+        "shows": (
+            "Masooma, Nilab, Zohra and Sofia Azizi in black blazers on a "
+            "terrace above a golf course. The split image on /join, where it "
+            "replaced the cream-suit cut-out at the client's request "
+            "2026-08-04."
+        ),
+        "origin": "Client-supplied 2026-08-04. A different shoot to the cream set.",
+        "editing": (
+            "Not stated by the client, and not assumed here. It reads as a "
+            "straight photograph &mdash; flat overcast light, shadows that "
+            "agree with each other, depth of field falling off naturally "
+            "through the planting behind them &mdash; but reading an image "
+            "is not the same as knowing, and the cream set is a standing "
+            "reminder of that. **Ask before this is ever described as "
+            "unretouched.**"
+        ),
+    },
+    # Superseded 2026-08-04 and deleted from the tree; the record stays,
+    # because "why is there no cut-out any more" is a question someone will
+    # ask, and git history is a worse place to answer it than this file.
+    "team-azizi-four.jpg (REMOVED)": {
+        "shows": "Masooma, Nilab, Zohra and Sofia Azizi, cut out on white.",
+        "origin": (
+            "Client-supplied 2026-08-04 alongside a careers-page mockup, "
+            "used on /join until the terrace frame replaced it the same day."
+        ),
+        # Recorded because it is a real distinction a reader would care
+        # about, and because the extent is genuinely unknown to us.
+        "editing": (
+            "A real photograph of the four, edited with generative tools "
+            "(client-confirmed 2026-08-04). Extent not specified; the "
+            "isolated white background is the visible change. It was "
+            "supplied as a cut-out alongside a mockup whose branding read "
+            "'TEAM AZIZI INJURY LAWYERS' — wrong industry, and the tell "
+            "that an AI design tool was somewhere in the pipeline. That "
+            "mockup is not used; this image is, on the client's "
+            "confirmation that the underlying photograph is real."
+        ),
+        "if_this_changes": (
+            "If it turns out more than the background was generated — "
+            "faces, bodies, clothing — pull it and revert /join to "
+            "team-group.jpg. A recruiting page cannot show colleagues who "
+            "do not look like themselves."
+        ),
+    },
+}
+
+
 def for_hood(slug: str) -> dict | None:
     return CREDITS.get(slug)

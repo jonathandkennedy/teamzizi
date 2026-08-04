@@ -1075,11 +1075,14 @@ POSTS: list[dict] = [
                     "presentation, and the paperwork problems that surface "
                     "late. The two that kill North County escrows in the "
                     "final week are insurance and solar documentation, "
-                    "both preparable in advance: see "
-                    "<a href=\"/blog/california-fair-plan-san-diego\">the "
-                    "FAIR Plan explainer</a> and <a href=\"/blog/"
-                    "selling-a-house-with-solar-panels-san-diego\">the "
-                    "solar-sale guide</a>.</p>"
+                    "both preparable in advance: the "
+                    "<a href=\"/blog/california-fair-plan-san-diego\">FAIR "
+                    "Plan explainer</a> covers the insurance landscape "
+                    "your buyer will be quoting into, and the "
+                    "<a href=\"/blog/"
+                    "selling-a-house-with-solar-panels-san-diego\">"
+                    "solar-sale guide</a> walks the lease-assumption and "
+                    "UCC-1 paperwork that stalls closings.</p>"
                 ),
             },
             {
@@ -1422,7 +1425,8 @@ POSTS: list[dict] = [
                     "boundary tools, then confirm with the district "
                     "office before relying on it. The "
                     "<a href=\"/neighborhoods/escondido#schools-structure\">"
-                    "guide</a> explains why the structure is split, and "
+                    "Escondido guide&rsquo;s two-district block</a> "
+                    "explains why the structure is split, and "
                     "<a href=\"/blog/san-diego-school-district-by-address\">"
                     "the district-by-address post</a> covers how North "
                     "County boundaries cross city lines generally.</p>"
@@ -3479,22 +3483,22 @@ POSTS: list[dict] = [
                 ),
                 "body": (
                     "<p>The age that makes the stock affordable "
-                    "is also the inspection agenda &mdash; "
-                    "foundations, laterals, original wiring on "
-                    "the houses; HOA reserves and building "
-                    "systems on the conversion condos &mdash; and "
-                    "both guides carry those blocks in full. One "
+                    "is also the inspection agenda: the "
+                    "<a href=\"/neighborhoods/north-park\">North "
+                    "Park guide</a> walks the Craftsman-era items "
+                    "&mdash; foundations, laterals, original "
+                    "wiring, permit history &mdash; and the "
+                    "<a href=\"/neighborhoods/hillcrest\">Hillcrest "
+                    "guide</a> sorts its century of stock by era, "
+                    "with the HOA-reserve questions the "
+                    "conversion condos deserve. One "
                     "forward-looking fact separates Hillcrest: "
                     "the 2024 rezone opened capacity for 17,200 "
-                    "homes, which makes it the close-in "
-                    "neighborhood with the largest supply "
-                    "pipeline on paper &mdash; the "
+                    "homes, the largest close-in supply pipeline "
+                    "on paper, and the "
                     "<a href=\"/blog/whats-changing-in-hillcrest\">"
-                    "what&rsquo;s-changing tracker</a> follows it. "
-                    "Guides: <a href=\"/neighborhoods/north-park\">"
-                    "North Park</a> &middot; "
-                    "<a href=\"/neighborhoods/hillcrest\">"
-                    "Hillcrest</a>.</p>"
+                    "what&rsquo;s-changing-in-Hillcrest tracker</a> "
+                    "follows it milestone by milestone.</p>"
                 ),
             },
             {
@@ -3549,18 +3553,20 @@ POSTS: list[dict] = [
                 ),
                 "body": (
                     "<p>The honest caveats are the ones the "
-                    "guides state: freeway adjacency is not "
-                    "peak-hour speed &mdash; the commute deserves "
-                    "a test drive at your actual hour &mdash; and "
-                    "value stock earns its price at inspection, "
-                    "where permit history on older systems and "
-                    "additions is the real work. Spring Valley "
-                    "adds the unincorporated wrinkle: county "
-                    "jurisdiction, not a city hall. Guides: "
+                    "guides state. Freeway adjacency is not "
+                    "peak-hour speed &mdash; the "
                     "<a href=\"/neighborhoods/lemon-grove\">Lemon "
-                    "Grove</a> &middot; "
+                    "Grove guide</a> says test the commute at "
+                    "your actual hour, and prices the Orange "
+                    "Line as the alternative. And value stock "
+                    "earns its price at inspection: the "
                     "<a href=\"/neighborhoods/spring-valley\">"
-                    "Spring Valley</a>.</p>"
+                    "Spring Valley guide</a> puts permit history "
+                    "on older systems, additions and hillside "
+                    "conditions at the top of that agenda, and "
+                    "explains the unincorporated wrinkle &mdash; "
+                    "county jurisdiction and a community "
+                    "planning group, not a city hall.</p>"
                 ),
             },
             {
@@ -3584,22 +3590,24 @@ POSTS: list[dict] = [
                     "<p>Chula Vista is the one that punishes "
                     "inattention: cross the 805 eastward and the "
                     "same list price can carry city, elementary "
-                    "and high-school special-tax lines at once "
-                    "&mdash; the "
+                    "and high-school special-tax lines at once. "
+                    "The <a href=\"/neighborhoods/chula-vista\">"
+                    "Chula Vista guide</a> maps that east&ndash;west "
+                    "split, and the "
                     "<a href=\"/blog/chula-vista-mello-roos-east-vs-west\">"
                     "east-versus-west method post</a> prices the "
-                    "difference line by line. And for buyers "
-                    "whose &ldquo;close to the city&rdquo; means "
-                    "<em>in</em> it, the downtown condo is the "
-                    "remaining lane &mdash; where the HOA budget "
-                    "and reserve study, not the unit finishes, "
-                    "are the purchase documents. Guides: "
-                    "<a href=\"/neighborhoods/el-cajon\">El "
-                    "Cajon</a> &middot; "
-                    "<a href=\"/neighborhoods/chula-vista\">Chula "
-                    "Vista</a> &middot; "
+                    "difference line by line. The "
+                    "<a href=\"/neighborhoods/el-cajon\">El Cajon "
+                    "guide</a> carries the same total-monthly "
+                    "logic for East County, Gillespie Field "
+                    "flight paths included. And for buyers whose "
+                    "&ldquo;close to the city&rdquo; means "
+                    "<em>in</em> it, the "
                     "<a href=\"/neighborhoods/downtown-san-diego\">"
-                    "Downtown</a>.</p>"
+                    "Downtown guide</a> explains the remaining "
+                    "lane &mdash; the condo, where the HOA "
+                    "budget and reserve study, not the unit "
+                    "finishes, are the purchase documents.</p>"
                 ),
             },
             {
@@ -3635,6 +3643,905 @@ POSTS: list[dict] = [
                     "them. Every neighborhood named here ends "
                     "its guide with the official sources to "
                     "check the record yourself.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "san-diego-property-tax-assessment-appeal",
+        "title": (
+            "The assessed value on your San Diego County tax bill is a "
+            "number you can challenge"
+        ),
+        "dek": (
+            "San Diego County&rsquo;s 2026 assessment roll closed at a record "
+            "$845 billion &mdash; and the same office that set it granted a "
+            "record $34.6 billion in assessed-value reductions. Two separate "
+            "processes produce those reductions, each with its own window, "
+            "its own form and its own building. Most owners use neither, "
+            "because the tax bill does not mention that either exists."
+        ),
+        "date": "2026-08-04",
+        "author": "nilab-azizi",
+        "description": (
+            "How to challenge a San Diego County assessed value: the "
+            "Assessor's free decline-in-value review, the Assessment Appeals "
+            "Board filing window, the 60-day clocks on supplemental and "
+            "escape assessments, and what evidence the board expects."
+        ),
+        "footnote": (
+            "      Assessment procedure, deadlines and contacts above come from the San\n"
+            "      Diego County Assessor and the Clerk of the Board of Supervisors as\n"
+            "      published on their own pages, read 2026-08-04. Neither page publishes\n"
+            "      a filing fee for the appeal application &mdash; confirm the current fee,\n"
+            "      form and deadline with the Clerk of the Board before filing. This is a\n"
+            "      description of a public process, not tax advice; a specific assessment\n"
+            "      or refund question belongs with a licensed CPA or tax attorney."
+        ),
+        "blocks": [
+            {
+                "anchor": "record-roll",
+                "question": "What did San Diego County assessments do in 2026?",
+                "lead": (
+                    "San Diego County Assessor Jordan Z. Marks certified the "
+                    "2026 assessment roll at a record $845 billion in gross "
+                    "assessed value &mdash; an increase of 4.86 percent, or "
+                    "roughly $39 billion, over the prior year &mdash; which "
+                    "the office estimates will produce about $8.1 billion in "
+                    "property tax revenue for county, city, school, fire and "
+                    "water agencies."
+                ),
+                "body": (
+                    "<p>A roll that size is the sum of every taxable parcel "
+                    "in the county, and each parcel&rsquo;s number is an "
+                    "appraisal opinion of value as of the January 1 lien "
+                    "date rather than a fact the county looked up. The same "
+                    "announcement records a record $34.6 billion in "
+                    "assessed-value reductions, worth about $346 million in "
+                    "property tax savings, alongside 450,209 homeowners&rsquo; "
+                    "exemptions and 22,817 disabled-veteran exemptions. An "
+                    "aggregate can be accurate &mdash; the office reports "
+                    "99.5 percent appraisal accuracy from a State Board of "
+                    "Equalization audit &mdash; while a specific assessment "
+                    "is still wrong.</p>"
+                ),
+            },
+            {
+                "anchor": "two-processes",
+                "question": (
+                    "What is the difference between an informal review and a "
+                    "formal assessment appeal?"
+                ),
+                "lead": (
+                    "San Diego County offers two separate routes to a lower "
+                    "assessed value: a free informal Review of Assessment "
+                    "handled by the Assessor&rsquo;s own appraisers, and a "
+                    "formal application to the Assessment Appeals Board, an "
+                    "independent citizens&rsquo; board appointed by the Board "
+                    "of Supervisors and staffed by the Clerk of the Board."
+                ),
+                "body": (
+                    "<p>The informal route is the cheaper first move: the "
+                    "Assessor&rsquo;s decline-in-value Review of Assessment "
+                    "form is available from December 1 through April 30, "
+                    "costs nothing, and an owner can file it without a "
+                    "representative &mdash; the office takes questions about "
+                    "the basis of an assessment at (858) 505-6262, and where "
+                    "it finds an error, no appeal is needed. The formal route "
+                    "is a hearing with evidence from both sides. The trap is "
+                    "treating them as sequential: an informal review does not "
+                    "extend the formal filing deadline, so an owner waiting "
+                    "on a review while the appeal window closes has spent the "
+                    "only guaranteed remedy.</p>"
+                ),
+            },
+            {
+                "anchor": "deadlines",
+                "question": "When can I file a property tax appeal in San Diego County?",
+                "lead": (
+                    "Regular annual assessments in San Diego County are "
+                    "appealable between July 2 and November 30 each year, "
+                    "while supplemental assessments and escape assessments "
+                    "carry their own 60-day clocks running from the mailing "
+                    "date printed on the notice or tax bill, or the postmark "
+                    "date, whichever is later."
+                ),
+                "body": (
+                    "<p>For the 2026 roll that regular window opened July 2 "
+                    "and closes November 30, 2026. The November 30 date is "
+                    "county-specific in a way worth understanding: the "
+                    "statutory window closes September 15 in counties whose "
+                    "assessor does not mail annual value notices by August 1, "
+                    "and runs to November 30 where the assessor does. "
+                    "Calamity or misfortune reassessments &mdash; the route "
+                    "after fire or other damage &mdash; run six months from "
+                    "the mailing of that assessment notice. Applications go "
+                    "to the Clerk of the Board of Supervisors, Assessment "
+                    "Appeals, 1600 Pacific Highway, Room 402, which answers "
+                    "at (619) 531-5777.</p>"
+                ),
+            },
+            {
+                "anchor": "prop-8",
+                "question": "What is a Proposition 8 decline-in-value reduction?",
+                "lead": (
+                    "Proposition 8, passed by California voters in November "
+                    "1978, provides for a temporary reduction when a San "
+                    "Diego County property&rsquo;s market value on the "
+                    "January 1 lien date "
+                    "falls below its factored base year value &mdash; the "
+                    "Proposition 13 number that otherwise rises by up to two "
+                    "percent a year."
+                ),
+                "body": (
+                    "<p>Two features of the reduction surprise owners who win "
+                    "one. It is reviewed every year and it can go back up: "
+                    "while a property sits in decline-in-value status its "
+                    "assessed value tracks the market rather than the two "
+                    "percent cap, until the factored base year value is "
+                    "enrolled again. And it is granted at scale &mdash; the "
+                    "$34.6 billion in reductions on the 2026 roll is the "
+                    "Assessor&rsquo;s own figure. What decides it is "
+                    "comparable sales near the January 1 lien date, not "
+                    "today&rsquo;s active listings.</p>"
+                ),
+            },
+            {
+                "anchor": "evidence",
+                "question": "What evidence does a San Diego County assessment appeal need?",
+                "lead": (
+                    "An assessment appeal in San Diego County is decided on "
+                    "the evidence both sides present at the hearing, and the "
+                    "county&rsquo;s filing guide names comparable sales of "
+                    "similar properties as its example of appropriate "
+                    "evidence &mdash; sales positioned around the relevant "
+                    "lien date rather than the date of the hearing."
+                ),
+                "body": (
+                    "<p>One statutory advantage is widely missed by "
+                    "owner-occupants. California Revenue and Taxation Code "
+                    "section 167 creates a rebuttable presumption affecting "
+                    "the burden of proof in favor of the taxpayer on an "
+                    "owner-occupied single-family dwelling that is the "
+                    "owner&rsquo;s principal place of residence and qualifies "
+                    "for the homeowners&rsquo; exemption, provided the owner "
+                    "supplied the assessor with the information required. The "
+                    "presumption does not apply to escape assessments caused "
+                    "by a failure to file a change in ownership statement or "
+                    "business property statement, or to obtain a permit for "
+                    "new construction &mdash; which is its own argument for "
+                    "permitting work properly, a point "
+                    "<a href=\"/blog/adu-rules-san-diego-county-2026\">the "
+                    "ADU rules post</a> makes from the construction side.</p>"
+                ),
+            },
+            {
+                "anchor": "while-pending",
+                "question": "Do I still pay the tax bill while an appeal is pending?",
+                "lead": (
+                    "Filing an assessment appeal in San Diego County does not "
+                    "suspend the tax bill: the Clerk of the Board states that "
+                    "initiating an appeal does not release an owner from the "
+                    "responsibility to pay taxes, and late-payment penalties "
+                    "run regardless of the pending application."
+                ),
+                "body": (
+                    "<p>Property tax appeals must be decided within two years "
+                    "of the date the application is filed, so this is not a "
+                    "fast process, and paying on time while it runs is the "
+                    "normal posture. A successful appeal produces a corrected "
+                    "assessment and a refund of the overpayment &mdash; not a "
+                    "credit an owner can take unilaterally against the "
+                    "current bill, which is the practical reason to pay and "
+                    "let the correction follow.</p>"
+                ),
+            },
+            {
+                "anchor": "not-special-taxes",
+                "question": "Can I appeal Mello-Roos or the other fixed charges on my bill?",
+                "lead": (
+                    "Assessment appeals in San Diego County reach the "
+                    "assessed value that drives the one percent ad valorem "
+                    "tax; they do not reach the Mello-Roos special taxes, "
+                    "fixed charges and direct levies that appear as separate "
+                    "line items lower on the same bill."
+                ),
+                "body": (
+                    "<p>Those lines are levied by school districts, cities, "
+                    "water districts and community facilities districts under "
+                    "their own rate-and-method documents, and each is "
+                    "answerable only at the agency that levied it. "
+                    "<a href=\"/mello-roos\">The Mello-Roos explainer</a> "
+                    "sets out how a community facilities district works and "
+                    "what the bonds funded; "
+                    "<a href=\"/blog/mello-roos-payoff-early\">the "
+                    "payoff-mechanics post</a> covers what retiring one early "
+                    "actually involves, and "
+                    "<a href=\"/blog/chula-vista-mello-roos-east-vs-west\">the "
+                    "Chula Vista method post</a> teaches the parcel-level "
+                    "lookup chain that establishes which districts a specific "
+                    "address carries.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "prop-19-san-diego-inherited-property",
+        "title": (
+            "Prop 19 in San Diego County: what happens to the tax basis when "
+            "a home stays in the family"
+        ),
+        "dek": (
+            "Proposition 19 rewrote two different things in 2021 &mdash; what "
+            "happens to the assessed value when a parent&rsquo;s home passes "
+            "to a child, and what an owner over 55 can carry to the next "
+            "house. Both turn on principal residence, both are claimed on "
+            "forms with deadlines, and the deadline families miss most often "
+            "is not the one they have heard of."
+        ),
+        "date": "2026-08-04",
+        "author": "zohra-azizi",
+        "description": (
+            "Proposition 19 for San Diego County owners: the family home "
+            "exclusion and its inflation-adjusted cap, the residence and "
+            "filing requirements, base year value transfers for owners 55 and "
+            "older, severely disabled owners and disaster victims, and the "
+            "BOE form numbers and deadlines."
+        ),
+        "footnote": (
+            "      Proposition 19 rules, form numbers and the inflation-adjusted\n"
+            "      exclusion amount above are published by the California State Board of\n"
+            "      Equalization and were read 2026-08-04; the adjusted amount changes on\n"
+            "      a two-year cycle. Claims are filed with the San Diego County Assessor.\n"
+            "      This is a description of a public process, not tax or legal advice\n"
+            "      &mdash; an inheritance, a trust or a transfer between family members\n"
+            "      should be reviewed with a licensed CPA or estate attorney before\n"
+            "      anyone signs anything."
+        ),
+        "blocks": [
+            {
+                "anchor": "two-halves",
+                "question": "What did Proposition 19 actually change?",
+                "lead": (
+                    "Proposition 19 changed California property tax in two "
+                    "directions at once, and both reach San Diego County "
+                    "owners: the intergenerational exclusion that "
+                    "keeps a parent&rsquo;s assessed value on an inherited "
+                    "home narrowed on February 16, 2021, while the base year "
+                    "value transfer for owners at least 55 years old, "
+                    "severely disabled owners and disaster victims widened on "
+                    "April 1, 2021."
+                ),
+                "body": (
+                    "<p>For a San Diego County household the two halves "
+                    "usually arrive years apart &mdash; an inheritance in one "
+                    "decade, a downsize in another &mdash; and they are "
+                    "claimed on different forms with different deadlines at "
+                    "the same County Assessor&rsquo;s office. The California "
+                    "State Board of Equalization publishes the governing "
+                    "rules and the claim forms; the county office processes "
+                    "them and answers parcel-specific questions.</p>"
+                ),
+            },
+            {
+                "anchor": "family-home",
+                "question": (
+                    "Does my property tax stay the same if I inherit my "
+                    "parents&rsquo; San Diego home?"
+                ),
+                "lead": (
+                    "An inherited San Diego home keeps its parent&rsquo;s low "
+                    "assessed value only if it qualifies as the family home "
+                    "in the statute&rsquo;s sense &mdash; the property must "
+                    "have been the principal residence of the parent and must "
+                    "become the principal residence of the child &mdash; and "
+                    "the exclusion is capped at the factored base year value "
+                    "plus $1 million, adjusted for inflation."
+                ),
+                "body": (
+                    "<p>The adjusted figure in force from February 16, 2025 "
+                    "through February 15, 2027 is $1,044,586 above the "
+                    "factored base year value. Value above that ceiling is "
+                    "added to the transferred value rather than excluded, so "
+                    "a long-held home whose market value has run far past its "
+                    "Proposition 13 basis is partially reassessed even when "
+                    "the family does everything correctly. Family farms "
+                    "qualify under the same intergenerational exclusion; "
+                    "other real property &mdash; a rental, a second home, raw "
+                    "land &mdash; no longer does.</p>"
+                ),
+            },
+            {
+                "anchor": "keep-living",
+                "question": "What happens if I move out of an inherited family home?",
+                "lead": (
+                    "The Proposition 19 family home exclusion is a continuing "
+                    "condition rather than a one-time test for a San Diego "
+                    "County heir: at least one "
+                    "eligible transferee must continually live in the "
+                    "property as their family home, and when none does, the "
+                    "property takes a new taxable value based on its fair "
+                    "market value at the date of inheritance, adjusted for "
+                    "inflation from there."
+                ),
+                "body": (
+                    "<p>That mechanic bites hardest where families hold homes "
+                    "for decades and heirs live elsewhere. Renting the house "
+                    "out instead of living in it ends the exclusion, which "
+                    "makes the keep-or-sell conversation a tax question as "
+                    "much as a sentimental one &mdash; and it is worth having "
+                    "before probate closes rather than after. On the acreage "
+                    "parcels around <a href=\"/neighborhoods/fallbrook\">"
+                    "Fallbrook</a>, where the guide sets out the well, septic "
+                    "and grove obligations an heir inherits along with the "
+                    "assessment, the carrying cost of a house nobody lives in "
+                    "compounds the same decision.</p>"
+                ),
+            },
+            {
+                "anchor": "forms-deadlines",
+                "question": "What forms and deadlines apply to a Prop 19 claim?",
+                "lead": (
+                    "Parent-child exclusion claims in San Diego County are "
+                    "made on form BOE-19-P and grandparent-grandchild claims "
+                    "on BOE-19-G, filed with the County Assessor within three "
+                    "years of the date of death or transfer, or before the "
+                    "property is transferred to a third party, whichever "
+                    "comes first."
+                ),
+                "body": (
+                    "<p>A second deadline runs alongside it and is the one "
+                    "families miss: the homeowners&rsquo; or disabled "
+                    "veterans&rsquo; exemption must be filed within one year "
+                    "of the date of death or transfer, because that exemption "
+                    "is what evidences the principal-residence requirement "
+                    "the exclusion depends on. Two claims, two clocks, one "
+                    "office &mdash; and a transfer to a third party stops the "
+                    "three-year clock early, so an estate planning to sell "
+                    "part of a portfolio should file before it closes any of "
+                    "those sales.</p>"
+                ),
+            },
+            {
+                "anchor": "over-55",
+                "question": (
+                    "Can a San Diego homeowner over 55 take a low tax basis "
+                    "to a new house?"
+                ),
+                "lead": (
+                    "San Diego County owners at least 55 years old, and "
+                    "severely disabled owners, can transfer the base year "
+                    "value of a principal "
+                    "residence to a replacement primary residence anywhere in "
+                    "California up to three times under Proposition 19, "
+                    "claimed on form BOE-19-B, or BOE-19-D with a certificate "
+                    "of disability on BOE-19-DC."
+                ),
+                "body": (
+                    "<p>The replacement has to be purchased or newly "
+                    "constructed within two years of the sale of the "
+                    "original, and the original must have been eligible for "
+                    "the homeowners&rsquo; or disabled veterans&rsquo; "
+                    "exemption at the time of sale or within two years of the "
+                    "replacement purchase. Buying up is not disqualifying, it "
+                    "is additive: the equal-or-lesser-value threshold is 100 "
+                    "percent when the replacement is bought or built before "
+                    "the sale, 105 percent in the first year after, and 110 "
+                    "percent in the second year, and any amount above the "
+                    "applicable threshold is added to the transferred base "
+                    "year value. The claim itself is due within three years "
+                    "of the purchase or completion of the replacement "
+                    "dwelling.</p>"
+                ),
+            },
+            {
+                "anchor": "disaster",
+                "question": "Does Prop 19 help owners whose home burned in a wildfire?",
+                "lead": (
+                    "Victims of wildfire or other natural disaster can "
+                    "transfer a base year value to a replacement primary "
+                    "residence under Proposition 19 on form BOE-19-V &mdash; "
+                    "a provision with direct application across San Diego "
+                    "County&rsquo;s inland and backcountry communities."
+                ),
+                "body": (
+                    "<p>The insurance side of the same event is a separate "
+                    "problem and an earlier one, better understood before a "
+                    "fire than after: "
+                    "<a href=\"/blog/california-fair-plan-san-diego\">the "
+                    "FAIR Plan post</a> follows what the state&rsquo;s "
+                    "insurer of last resort costs and how its rates have "
+                    "moved, and "
+                    "<a href=\"/blog/home-insurance-before-you-offer\">the "
+                    "insurance-before-you-offer post</a> works through how "
+                    "hazard-zone maps, CLUE claim histories and the "
+                    "investigation contingency interact when a house in a "
+                    "high fire hazard severity zone changes hands.</p>"
+                ),
+            },
+            {
+                "anchor": "why-local",
+                "question": "Why does Prop 19 matter more on some San Diego streets than others?",
+                "lead": (
+                    "Proposition 19&rsquo;s stakes in San Diego County scale "
+                    "with tenure rather than with price: the longer a home "
+                    "has been held under Proposition 13, the wider the gap "
+                    "between its factored base year value and its market "
+                    "value, and the more an heir or a downsizing owner stands "
+                    "to lose by missing a filing."
+                ),
+                "body": (
+                    "<p>Exposure is therefore highest where ownership turns "
+                    "over slowest &mdash; older, long-held stock rather than "
+                    "the newest tracts &mdash; which is why the question "
+                    "arrives at listing appointments as an estate question "
+                    "before it is ever a tax one. An assessed value that "
+                    "looks simply too high is a separate matter with its own "
+                    "calendar, and "
+                    "<a href=\"/blog/san-diego-property-tax-assessment-appeal\">"
+                    "the assessment-appeal post</a> lays out both county "
+                    "routes and the deadlines that govern them.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "temecula-murrieta-menifee-vs-san-diego-county",
+        "title": (
+            "Crossing the county line: what changes when you buy in "
+            "Temecula, Murrieta or Menifee"
+        ),
+        "dek": (
+            "The Interstate 15 corridor north of Fallbrook is one housing "
+            "market and two counties. Buyers move up it for what Riverside "
+            "County pricing buys, then find that every record they were "
+            "taught to check in San Diego County lives somewhere else "
+            "&mdash; a different assessor, a different appeals clerk, a "
+            "different list of special taxes, and one property tax deadline "
+            "that falls a month earlier."
+        ),
+        "date": "2026-08-04",
+        "author": "sofia-azizi",
+        "description": (
+            "What changes for a San Diego County buyer moving up the I-15 to "
+            "Temecula, Murrieta or Menifee: which county holds the records, "
+            "how to check Mello-Roos without the San Diego Auditor list, the "
+            "appeal and decline-in-value deadlines that differ, city versus "
+            "unincorporated jurisdiction, school boundaries and water."
+        ),
+        "footnote": (
+            "      Riverside County assessment deadlines, appeal form and the\n"
+            "      decline-in-value application date above come from the Riverside County\n"
+            "      Assessor and Clerk of the Board, read 2026-08-04; the Murrieta district\n"
+            "      formation record is the city&rsquo;s own legislative file. Deadlines\n"
+            "      move, and neither county publishes an appeal filing fee on the pages\n"
+            "      checked &mdash; confirm both with the county office before filing.\n"
+            "      School assignment must be confirmed with the district for the exact\n"
+            "      address."
+        ),
+        "blocks": [
+            {
+                "anchor": "different-county-records",
+                "question": "Which county records apply to a Temecula, Murrieta or Menifee home?",
+                "lead": (
+                    "Temecula, Murrieta and Menifee sit in Riverside County, "
+                    "so every record that decides a purchase there &mdash; "
+                    "assessed value, special assessments, appeal "
+                    "applications, recorded documents &mdash; is held by "
+                    "Riverside County offices rather than the San Diego "
+                    "County offices a buyer coming up the Interstate 15 has "
+                    "been using."
+                ),
+                "body": (
+                    "<p>The consequence shows up first on the tax side. The "
+                    "San Diego County Auditor&rsquo;s published community "
+                    "facilities district list &mdash; the document "
+                    "<a href=\"/mello-roos\">the Mello-Roos explainer</a> "
+                    "teaches buyers to read &mdash; covers San Diego County "
+                    "districts only and does not reach Riverside County at "
+                    "all. For the corridor, the equivalent facts come from "
+                    "Riverside County Assessor parcel records and from the "
+                    "itemized special-assessment lines on the tax bill "
+                    "itself, each of which carries the levying agency to "
+                    "call.</p>"
+                ),
+            },
+            {
+                "anchor": "special-taxes",
+                "question": "How do you check Mello-Roos on a new Temecula, Murrieta or Menifee tract?",
+                "lead": (
+                    "New community facilities districts are still being "
+                    "formed on the Riverside corridor, so a new-construction "
+                    "buyer in Murrieta or Menifee is buying into a special "
+                    "tax that was set before the sales office opened "
+                    "&mdash; Murrieta took the Gierson Ranch district, CFD "
+                    "2026-1, through formation hearings in June 2026 and "
+                    "adopted its special-tax ordinance with bonded "
+                    "indebtedness authorized up to $8 million."
+                ),
+                "body": (
+                    "<p>Because formation precedes the first sale, the number "
+                    "is knowable to the dollar before contract rather than "
+                    "estimable after it: the district exists, the rate and "
+                    "method is adopted, and the purchase documents disclose "
+                    "it. <a href=\"/neighborhoods/murrieta\">The Murrieta "
+                    "guide</a> tracks those formations as the council record "
+                    "produces them, and "
+                    "<a href=\"/neighborhoods/menifee\">the Menifee guide</a> "
+                    "adds the layer buyers most often miss &mdash; Eastern "
+                    "Municipal Water District participates in community "
+                    "facilities financing, so a newer tract&rsquo;s bill can "
+                    "carry city, school and water lines from three different "
+                    "agencies.</p>"
+                ),
+            },
+            {
+                "anchor": "appeal-deadlines",
+                "question": "Are property tax appeal deadlines the same in Riverside County?",
+                "lead": (
+                    "Formal appeal windows match across the two counties "
+                    "&mdash; Riverside County, like San Diego County, takes "
+                    "regular-assessment applications from July 2 through "
+                    "November 30 on form BOE-305-AH and allows 60 days on "
+                    "supplemental and escape assessments &mdash; but the "
+                    "informal decline-in-value route does not match, and that "
+                    "is where a corridor owner loses a year."
+                ),
+                "body": (
+                    "<p>Riverside County sets a decline-in-value application "
+                    "deadline of November 1, 2026 for the 2026-27 fiscal "
+                    "year, filed through the Assessor&rsquo;s online "
+                    "application. San Diego County instead opens its free "
+                    "Review of Assessment form from December 1 through April "
+                    "30. Same remedy, different calendars, and an owner "
+                    "holding property in both counties who assumes one "
+                    "schedule covers both will miss one of them. "
+                    "<a href=\"/blog/san-diego-property-tax-assessment-appeal\">"
+                    "The assessment-appeal post</a> works through the San "
+                    "Diego side in full &mdash; the evidence standard, the "
+                    "burden-of-proof presumption for owner-occupants, the "
+                    "two-year decision clock &mdash; and the mechanics "
+                    "translate. Riverside&rsquo;s Clerk of the Board takes "
+                    "filings at 4080 Lemon Street in Riverside and answers at "
+                    "(951) 955-1069.</p>"
+                ),
+            },
+            {
+                "anchor": "jurisdiction",
+                "question": "Is every Temecula or Murrieta address inside the city?",
+                "lead": (
+                    "A Temecula or Murrieta mailing address does not "
+                    "establish that a parcel sits inside either city: "
+                    "Temecula Valley Wine Country east of the city line, and "
+                    "the La Cresta and Santa Rosa Plateau estates west of "
+                    "Interstate 15, are unincorporated Riverside County "
+                    "&mdash; county-zoned and county-permitted, with "
+                    "city-named mail."
+                ),
+                "body": (
+                    "<p>Jurisdiction decides which planning counter permits a "
+                    "project, whose short-term-rental rules apply and which "
+                    "agency answers a zoning question &mdash; the same "
+                    "unincorporated-versus-city distinction that governs "
+                    "Fallbrook, Valley Center and Ramona on the San Diego "
+                    "side. <a href=\"/neighborhoods/temecula\">The Temecula "
+                    "guide</a> maps the Wine Country boundary question, and "
+                    "<a href=\"/neighborhoods/murrieta\">the Murrieta "
+                    "guide</a> covers the Plateau estates, where wells and "
+                    "septic replace city services and the rural due-diligence "
+                    "checklist applies in full.</p>"
+                ),
+            },
+            {
+                "anchor": "schools",
+                "question": "Do school district boundaries follow city lines on the corridor?",
+                "lead": (
+                    "School district boundaries cross city lines on the "
+                    "Riverside corridor exactly as they do in San Diego "
+                    "County: Temecula Valley Unified reaches north into "
+                    "French Valley, where addresses carry Winchester mail, "
+                    "and Menifee splits across Menifee Union for the "
+                    "elementary years, Perris Union High School District for "
+                    "secondary, and Romoland School District in the north."
+                ),
+                "body": (
+                    "<p>The verification method does not change with the "
+                    "county: the district&rsquo;s own boundary lookup, run on "
+                    "the exact street address, before an offer rather than "
+                    "after. <a href=\"/blog/san-diego-school-district-by-address\">"
+                    "The school-district post</a> explains why postal city "
+                    "predicts assignment so poorly and how to check one "
+                    "properly, and <a href=\"/neighborhoods/menifee\">the "
+                    "Menifee guide</a> names the three systems a single city "
+                    "spans.</p>"
+                ),
+            },
+            {
+                "anchor": "commute",
+                "question": "What is the commute trade from the corridor into San Diego County?",
+                "lead": (
+                    "Temecula sits at the top of the Interstate 15 corridor "
+                    "into San Diego County, roughly thirty miles north of "
+                    "Escondido, and the southbound run through the Rainbow "
+                    "and Fallbrook grades is the trade that buys Riverside "
+                    "County pricing on a San Diego County paycheck."
+                ),
+                "body": (
+                    "<p>Direction of travel separates otherwise similar "
+                    "tracts. Murrieta sits at the junction where Interstate "
+                    "215 splits from the 15, so a household commuting south "
+                    "prices on-ramp position against the merge while one "
+                    "working north up the 215 prices an entirely different "
+                    "morning. <a href=\"/neighborhoods/temecula\">The "
+                    "Temecula guide</a> is blunt about test-driving the "
+                    "evening northbound window before committing to it, and "
+                    "<a href=\"/neighborhoods/escondido\">Escondido</a> "
+                    "anchors the San Diego end of the same freeway for anyone "
+                    "weighing the corridor against staying in the county.</p>"
+                ),
+            },
+            {
+                "anchor": "services",
+                "question": "Who provides water and services on the Riverside corridor?",
+                "lead": (
+                    "Water and sewer service in Menifee comes from Eastern "
+                    "Municipal Water District rather than city hall, and on "
+                    "the unincorporated estates west of Interstate 15 near "
+                    "Murrieta many parcels run on private wells and septic "
+                    "systems instead of district service."
+                ),
+                "body": (
+                    "<p>Menifee incorporated only in 2008, which is why "
+                    "districts formed under Riverside County still appear on "
+                    "its tax bills alongside the city&rsquo;s own lines, and "
+                    "why service questions route to different agencies "
+                    "depending on when a tract was built. On a well-and-septic "
+                    "parcel the diligence is a different exercise altogether "
+                    "&mdash; yield and water-quality testing, a functional "
+                    "septic inspection, an insurance quote before the offer "
+                    "&mdash; and "
+                    "<a href=\"/blog/buying-a-home-with-well-and-septic-san-diego\">"
+                    "the semi-rural diligence post</a> sets out that sequence "
+                    "in the order it has to happen.</p>"
+                ),
+            },
+        ],
+    },
+    {
+        "slug": "buying-a-home-with-well-and-septic-san-diego",
+        "title": (
+            "Buying on a well and septic in San Diego County: the diligence "
+            "that differs, in the order it has to happen"
+        ),
+        "dek": (
+            "Fallbrook, Valley Center and Ramona are not a cheaper version of "
+            "the tract-home purchase &mdash; they are a different transaction "
+            "with a different failure mode. A handful of items decide whether "
+            "a semi-rural escrow closes, and most of them have to happen "
+            "early, in a particular order, while the investigation "
+            "contingency is still running."
+        ),
+        "date": "2026-08-04",
+        "author": "sofia-azizi",
+        "description": (
+            "What a semi-rural San Diego County purchase requires that a "
+            "tract-home purchase does not: the insurance quote that comes "
+            "first, well yield and water-quality testing, septic inspection "
+            "and leach field, private road maintenance under Civil Code 845, "
+            "Williamson Act contracts, and which agency permits what."
+        ),
+        "footnote": (
+            "      Well, septic, jurisdiction and grove facts above are carried with\n"
+            "      their sources on the Fallbrook, Valley Center, Ramona and Rancho Santa\n"
+            "      Fe guides; the private-road maintenance rule is California Civil Code\n"
+            "      section 845, read 2026-08-04. Every item here is parcel-specific\n"
+            "      &mdash; service district, easement, fire hazard zone and contract\n"
+            "      status are established from the records for the exact parcel, never\n"
+            "      from the community it sits in."
+        ),
+        "blocks": [
+            {
+                "anchor": "insurance-first",
+                "question": "What is the first thing to check when buying in Fallbrook, Valley Center or Ramona?",
+                "lead": (
+                    "Fire insurance availability is the first item to settle "
+                    "on a Fallbrook, Valley Center or Ramona property "
+                    "&mdash; before the inspection and ideally before the "
+                    "offer &mdash; because much of each community sits in a "
+                    "state-designated high or very high fire hazard severity "
+                    "zone where admitted carriers have narrowed what they "
+                    "will write."
+                ),
+                "body": (
+                    "<p>The common outcome in those zones is the California "
+                    "FAIR Plan paired with a difference-in-conditions policy, "
+                    "a combination that costs materially more than a standard "
+                    "homeowner&rsquo;s policy and can decide what a buyer can "
+                    "afford at all &mdash; and no lender funds without bound "
+                    "coverage. <a href=\"/blog/home-insurance-before-you-offer\">"
+                    "The insurance-before-you-offer post</a> places that quote "
+                    "inside the investigation contingency the California "
+                    "purchase agreement defaults to 17 days, and "
+                    "<a href=\"/blog/california-fair-plan-san-diego\">the FAIR "
+                    "Plan post</a> follows what the plan costs and how its "
+                    "rates have moved.</p>"
+                ),
+            },
+            {
+                "anchor": "who-permits",
+                "question": "Who approves construction on unincorporated San Diego County property?",
+                "lead": (
+                    "Fallbrook, Valley Center and Ramona are unincorporated "
+                    "communities governed directly by the County of San "
+                    "Diego, so land-use questions go to County Planning "
+                    "&amp; Development Services rather than to a city "
+                    "planning counter, and there is no city council above "
+                    "that process &mdash; the Board of Supervisors sits at "
+                    "the top instead."
+                ),
+                "body": (
+                    "<p>Community planning groups in each area advise the "
+                    "county and the community plans set the framework, but "
+                    "the decisions are the county&rsquo;s, and for a buyer "
+                    "planning an addition, a second unit or a lot split that "
+                    "changes both the timeline and the counter to approach. "
+                    "The county route also carries an advantage city buyers "
+                    "do not have: the County adopted separate-sale accessory "
+                    "dwelling units under AB 1033 in 2026, which "
+                    "<a href=\"/blog/adu-rules-san-diego-county-2026\">the ADU "
+                    "rules post</a> works through jurisdiction by "
+                    "jurisdiction.</p>"
+                ),
+            },
+            {
+                "anchor": "well",
+                "question": "What does buying a home on a private well actually require?",
+                "lead": (
+                    "A private well on a Fallbrook, Valley Center or Ramona "
+                    "parcel needs yield testing and water-quality analysis "
+                    "rather than a confirmation that a well exists, because a "
+                    "low-producing well and a high-producing one are "
+                    "materially different assets on otherwise identical "
+                    "acreage."
+                ),
+                "body": (
+                    "<p>Neither figure appears in an automated valuation and "
+                    "neither is recoverable after closing. Which parcels are "
+                    "on wells at all is a parcel-level question: "
+                    "<a href=\"/neighborhoods/valley-center\">the Valley "
+                    "Center guide</a> sets out where Valley Center Municipal "
+                    "Water District service ends and private wells begin, "
+                    "including the agricultural rates qualifying growers pay, "
+                    "and <a href=\"/neighborhoods/ramona\">the Ramona "
+                    "guide</a> draws the same line between Ramona Municipal "
+                    "Water District addresses and the outlying parcels.</p>"
+                ),
+            },
+            {
+                "anchor": "septic",
+                "question": "What does a septic system require before closing?",
+                "lead": (
+                    "A septic system on a semi-rural San Diego County "
+                    "property needs a functional inspection and the leach "
+                    "field physically located before the contingency period "
+                    "ends, because replacing a failed system is a five-figure "
+                    "item that no automated valuation and no listing "
+                    "description will disclose."
+                ),
+                "body": (
+                    "<p>Buyers arriving from a city routinely skip both "
+                    "steps, not from carelessness but because nothing in a "
+                    "tract-home purchase teaches them to ask. "
+                    "<a href=\"/neighborhoods/fallbrook\">The Fallbrook "
+                    "guide</a> notes that homes nearer the village core are "
+                    "more often on Fallbrook Public Utility District service "
+                    "while the larger parcels run on wells and septic, and in "
+                    "<a href=\"/neighborhoods/rancho-santa-fe\">Rancho Santa "
+                    "Fe</a> the sewer-versus-septic split is a Covenant-level "
+                    "question the guide answers ahead of the Art Jury "
+                    "ones.</p>"
+                ),
+            },
+            {
+                "anchor": "private-road",
+                "question": "Who maintains a private road in rural San Diego County?",
+                "lead": (
+                    "Private roads serving rural San Diego County parcels are "
+                    "maintained by the owners who hold easement rights over "
+                    "them rather than by the county: California Civil Code "
+                    "section 845 requires the owner of an easement in the "
+                    "nature of a private right-of-way, or of land to which "
+                    "such an easement is attached, to maintain it in repair."
+                ),
+                "body": (
+                    "<p>Where the owners have no agreement in place, section "
+                    "845 apportions the cost of repair proportionately to the "
+                    "use each owner makes of the easement, and an owner who "
+                    "pays more than a proportionate share can pursue "
+                    "contribution or specific performance in court &mdash; "
+                    "small claims where the amount fits its limits. The "
+                    "practical diligence is to request the recorded easement "
+                    "and any road maintenance agreement during escrow, and to "
+                    "establish what the road has actually cost the neighbors "
+                    "before inheriting a share of it.</p>"
+                ),
+            },
+            {
+                "anchor": "ag-land",
+                "question": "What changes if the property has a grove or a Williamson Act contract?",
+                "lead": (
+                    "A working avocado or citrus grove attached to a "
+                    "Fallbrook or Valley Center home is a business with costs "
+                    "rather than a garden, and irrigation water dominates "
+                    "them &mdash; agricultural water rates, grove "
+                    "maintenance and harvest logistics all need pricing "
+                    "before acreage is treated as a straightforward amenity."
+                ),
+                "body": (
+                    "<p>An assessment question arrives with it. Land under a "
+                    "Williamson Act contract carries a reduced property tax "
+                    "assessment in exchange for a commitment to keep it in "
+                    "agricultural use, and those contracts run with the land "
+                    "and take years to unwind, so whether a parcel is under "
+                    "one is a matter of public record to establish before the "
+                    "plans for it are. Where the assessed value itself looks "
+                    "wrong, "
+                    "<a href=\"/blog/san-diego-property-tax-assessment-appeal\">"
+                    "the assessment-appeal post</a> sets out the "
+                    "county&rsquo;s two routes and the deadlines that govern "
+                    "them.</p>"
+                ),
+            },
+            {
+                "anchor": "hoa-and-districts",
+                "question": "Do semi-rural parcels come with an HOA or a special district?",
+                "lead": (
+                    "Semi-rural San Diego County parcels can carry both an "
+                    "association and a special district, and neither is "
+                    "predictable from the community name: San Diego Country "
+                    "Estates in Ramona is a large planned community with its "
+                    "own homeowners association, assessments and equestrian "
+                    "facilities, while open Santa Maria Valley acreage a few "
+                    "miles away has none of it."
+                ),
+                "body": (
+                    "<p>Valley Center runs the clearest example of a district "
+                    "worth having: its one active community facilities "
+                    "district funds fire protection rather than schools or "
+                    "development, which means the line on the tax bill is "
+                    "buying the response time the insurance question turns "
+                    "on. <a href=\"/neighborhoods/valley-center\">The Valley "
+                    "Center guide</a> explains that trade in full, and "
+                    "<a href=\"/mello-roos\">the Mello-Roos explainer</a> "
+                    "covers how community facilities districts work "
+                    "generally.</p>"
+                ),
+            },
+            {
+                "anchor": "sequence",
+                "question": "In what order should a semi-rural purchase actually run?",
+                "lead": (
+                    "The sequence that keeps a semi-rural San Diego County "
+                    "escrow alive puts the insurance quote first, the well "
+                    "and septic inspections second, and the easement, "
+                    "association and district paperwork third &mdash; all "
+                    "inside the investigation contingency, because each of "
+                    "them can change the price or end the transaction."
+                ),
+                "body": (
+                    "<p>Fire insurance leads because it can make a property "
+                    "unaffordable outright and a lender will not fund without "
+                    "it. Well yield and septic condition follow because they "
+                    "are five-figure items with no remedy after closing. "
+                    "Easement, association and district documents come last "
+                    "only because they rarely end a transaction outright, "
+                    "though they routinely change what ownership costs. Each "
+                    "of <a href=\"/neighborhoods/fallbrook\">Fallbrook</a>, "
+                    "<a href=\"/neighborhoods/valley-center\">Valley "
+                    "Center</a> and <a href=\"/neighborhoods/ramona\">"
+                    "Ramona</a> closes its guide with the county, district "
+                    "and fire-agency links to check any of this against the "
+                    "record.</p>"
                 ),
             },
         ],

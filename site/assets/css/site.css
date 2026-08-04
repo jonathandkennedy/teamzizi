@@ -244,12 +244,43 @@
   z-index: 0;
 }
 
+/* Bottom-weighted variant, for a hero whose subject is PEOPLE. The centred
+   default drops the headline straight onto their faces. This anchors the
+   type to the lower third and replaces the flat scrim with a gradient that
+   is nearly clear across the top — so the photograph is doing its job in
+   the part of the frame that matters, and the type still has the contrast
+   it needs where it actually sits. */
+.hero--bottom {
+  align-content: end;
+  min-height: min(100svh, 52rem);
+}
+
+
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
   background: var(--o-hero);
   z-index: 1;
+}
+
+/* MUST stay below `.hero::after`. Same specificity, so source order is the
+   only thing deciding it — written above that rule, the flat scrim silently
+   wins and the gradient never renders. Verified in the browser rather than
+   assumed: computed `::after` background-image was `none` until this moved.
+   Stops tuned against the photograph — nearly clear over the faces in the
+   top third, ramping hard from the middle down, because the type lands on
+   cream suiting and pale paving, which is the weakest contrast pairing on
+   the site. */
+.hero--bottom::after {
+  background: linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 0.12) 0%,
+    rgb(0 0 0 / 0.10) 28%,
+    rgb(0 0 0 / 0.46) 55%,
+    rgb(0 0 0 / 0.72) 82%,
+    rgb(0 0 0 / 0.86) 100%
+  );
 }
 
 .hero__inner {
