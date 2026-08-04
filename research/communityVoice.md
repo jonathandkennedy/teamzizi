@@ -147,6 +147,12 @@ Disposition: **cross-area query → post.** Shipped same day as `/blog/san-diego
 **3. Nextdoor — "friendliest places to live" rankings page (nextdoor.com/rankings/...), supplied 2026-08-02.**
 Disposition: **no response possible, and none appropriate.** Fetched and inspected: it is a static SEO/marketing rankings page (twenty neighborhoods, opaque "friendliness scores," no comment surface). Two rules apply: (a) there is nothing to respond *to* — it is not a neighbor post; (b) ranking communities by friendliness is characterization-of-people territory our Fair Housing line bars us from echoing or citing (runbook §2 table — same family as "what kind of people live there"). The Nextdoor lane remains §3c as designed: resident agents sharing factual guide content in their own neighborhoods, disclosed, human. Logged so the next person who finds the rankings page knows why we didn't engage it.
 
+### Pass #2 additions (2026-08-04) — the data-release feed, not the community feed
+
+Four posts shipped this pass off feed **(d)**, the data-release calendar, with no community input at all: `san-diego-property-tax-assessment-appeal` and `prop-19-san-diego-inherited-property` from one Assessor/Clerk-of-the-Board/BOE reading, plus two router posts (`temecula-murrieta-menifee-vs-san-diego-county`, `buying-a-home-with-well-and-septic-san-diego`) recombining facts the guides already carry. Worth stating plainly: **feed (d) is the only one of the four that works from a cloud session.** Feeds (a) and (b) are throttled by the datacenter-egress wall, feed (c) needs the roster to forward threads. Until the local Reddit run happens, the calendar is doing the work the community listening is supposed to do — which is a reason to close the local-run gap, not a substitute for it.
+
+New question-bank entries these posts target, for the AI panel: "how to lower property taxes san diego", "prop 19 inherited house california", "do I have to pay taxes while appealing assessment", "buying a house with a well and septic san diego", "temecula vs san diego county property tax".
+
 ### Pass #2 open items
 - Local `/last30days` Reddit run (resolves item 1 + the monthly sweep proper).
 - AI query panel re-run scheduled with the pass close (~early Sept).
