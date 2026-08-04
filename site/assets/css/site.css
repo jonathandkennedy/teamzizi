@@ -252,8 +252,20 @@
    it needs where it actually sits. */
 .hero--bottom {
   align-content: end;
-  min-height: min(100svh, 52rem);
+  min-height: min(100svh, 56rem);
 }
+
+/* The crop has to come off the paving, not off their heads.
+   `object-fit: cover` centres its overflow, so on a wide window — where the
+   box keeps getting wider while its height stays capped — the image is
+   scaled to the width and the excess is split evenly top and bottom. At
+   2000px wide that is 250px off the top, and the tops of four heads are the
+   first thing in it. Reported from exactly that window; invisible at 1440,
+   where the same maths only takes 63px.
+   Anchoring to the top means the overflow is taken entirely from the bottom
+   of the frame, which is empty tile. Vertical position is a no-op on narrow
+   viewports, where cover crops horizontally instead. */
+.hero--bottom .hero__media { object-position: 50% 0%; }
 
 
 .hero::after {
