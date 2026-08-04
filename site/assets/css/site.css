@@ -543,6 +543,23 @@
   height: 1rem;
 }
 
+/* Build credit. Scaled down from the kit's native 44px so it sits with the
+   compliance marks rather than shouting over them — the SVG scales cleanly,
+   and `width: auto` keeps its ratio. */
+.footer__powered {
+  margin-top: 1.5rem;
+}
+
+.footer__powered a {
+  display: inline-block;
+  line-height: 0;
+}
+
+.footer__powered svg {
+  height: 2.25rem;
+  width: auto;
+}
+
 /* ---- Utilities ---------------------------------------------- */
 
 .lede {

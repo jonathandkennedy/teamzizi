@@ -31,11 +31,19 @@ TODAY = date.today().isoformat()
 # Pages written so far, for the sitemap. (path, changefreq, priority)
 PAGES: list[tuple[str, str, str]] = []
 
+# Paths whose rendered HTML is byte-identical to the previous build. Their
+# sitemap `lastmod` must not move — see build_sitemap().
+UNCHANGED: set[str] = set()
+
 
 def write(path: str, html: str, *, changefreq="monthly", priority="0.6") -> None:
     target = SITE / (f"{path.strip('/')}.html" if path.strip("/") else "index.html")
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(html, encoding="utf-8")
+    if target.exists() and target.read_text(encoding="utf-8") == html:
+        # Identical output. Skip the write so the file mtime stays put too.
+        UNCHANGED.add(path)
+    else:
+        target.write_text(html, encoding="utf-8")
     PAGES.append((path, changefreq, priority))
     print(f"  {target.relative_to(SITE.parent)}")
 
@@ -3579,10 +3587,38 @@ def build_agents() -> None:
 
 
 def build_sitemap() -> None:
+    """`lastmod` is a claim about the page, not about the build.
+
+    Stamping TODAY on all 85 URLs every run tells every crawler the whole site
+    changed when a single word moved — or when nothing did. That is noise at
+    the best of times, and actively harmful in the weeks after DNS points,
+    when the initial crawl budget is being allocated and a sitemap that cries
+    wolf on every URL is the last thing we want to hand Google and Bing.
+
+    The previous sitemap is its own state file: parse the `lastmod` it already
+    carries, and keep it for any page whose rendered HTML came out
+    byte-identical this run. New pages and genuinely changed pages get TODAY,
+    which is the only thing `lastmod` is supposed to mean.
+    """
+    previous: dict[str, str] = dict(
+        re.findall(
+            r"<loc>([^<]+)</loc>\s*<lastmod>([^<]+)</lastmod>",
+            (SITE / "sitemap.xml").read_text(encoding="utf-8")
+            if (SITE / "sitemap.xml").exists()
+            else "",
+        )
+    )
+
+    def lastmod(path: str) -> str:
+        loc = xml_escape(site.DOMAIN + path)
+        if path in UNCHANGED and loc in previous:
+            return previous[loc]
+        return TODAY
+
     urls = "\n".join(
         f"""  <url>
     <loc>{xml_escape(site.DOMAIN + path)}</loc>
-    <lastmod>{TODAY}</lastmod>
+    <lastmod>{lastmod(path)}</lastmod>
     <changefreq>{freq}</changefreq>
     <priority>{priority}</priority>
   </url>"""

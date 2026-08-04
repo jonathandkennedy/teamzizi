@@ -1,7 +1,7 @@
 # Team Azizi — Handoff & Decision Log
 
 **Client:** Team Azizi (Compass) · San Diego · **CitedRealty customer #1**
-**Domain:** teamazizi.com — registrar controlled by Jon; **DNS not yet pointed** · **Host:** Vercel
+**Domain:** teamazizi.com — registrar controlled by Jon; **DNS pointed and live 2026-08-04** · **Host:** Vercel
 **Repo:** [github.com/jonathandkennedy/teamzizi](https://github.com/jonathandkennedy/teamzizi) — note the missing "a" in the repo name; the domain is team**a**zizi.com
 **Live preview:** https://teamazizi.vercel.app
 **Strategy doc:** [GAMEPLAN.md](GAMEPLAN.md) — that file is *the plan*; this file is *state, decisions, and why*.
@@ -15,7 +15,7 @@ Two things will waste your time if you don't know them.
 
 **One: the farm in the plan is not the farm in the record.** GAMEPLAN is built on six affluent north-coastal communities. A full sweep of all 1,009 Compass sales found only 45 of them (4.5%) in those six, a median sale price of $650,000, and exactly one lifetime sale in Rancho Santa Fe. The real book is Escondido (~96 sales, the single largest market), South Bay, Spring Valley, Fallbrook, Oceanside, Santee, El Cajon. See [research/salesRecord.md](research/salesRecord.md). The site now covers **thirty-one** areas rather than six, which is the resolution: the original six are kept because the client asked for them; ten North County communities were added because that is where the transactions are; twelve more — seven City of San Diego neighborhoods plus Santee, El Cajon, Spring Valley, Lemon Grove and Chula Vista — went in 2026-07-30 at client request, finally covering the East County/South Bay markets the record names; and three Southwest Riverside cities (Temecula, Murrieta, Menifee) extend up the I-15 (§2 records how a second county is handled honestly). The unanswered client question is which set gets the marketing spend.
 
-**Two: there is exactly one launch blocker.** `site.LEAD_ENDPOINT` is still `https://formspree.io/f/PLACEHOLDER`. Every lead form on the site posts into nothing. `build/validate.py` fails the build on it deliberately, and that single failure is the "1 error" you will see on every validate run. Nothing else is blocking DNS.
+**Two: the launch blocker is now a live bug.** `site.LEAD_ENDPOINT` is still `https://formspree.io/f/PLACEHOLDER`. Every lead form on the site posts into nothing — and since DNS pointed on 2026-08-04, that is no longer a gate holding launch back, it is buyers, sellers, agent applicants and visibility-check requests submitting into a void and being shown a success message. `build/validate.py` fails the build on it deliberately, and that single failure is the "1 error" you will see on every validate run. It is a one-line change once the Formspree ID or CRM webhook exists, and it is the most urgent item in the repo.
 
 ---
 
@@ -31,7 +31,8 @@ Two things will waste your time if you don't know them.
 | **Agent pages** | ✅ 19, all with headshots; 18 of 19 carry a review CTA |
 | **Photography** | ✅ **16 of 31** areas have a real photograph; 12 are third-party with rendered credits. The fifteen 2026-07-30 additions ship on designed plate heroes — photography pass pending |
 | **Validation** | ✅ 0 errors other than the deliberate `LEAD_ENDPOINT` blocker |
-| **DNS** | ❌ Not pointed. This is the last step, not the first — see [docs/launch-runbook.md](docs/launch-runbook.md) |
+| **DNS** | ✅ **Pointed 2026-08-04.** Site live at teamazizi.com, 85 URLs in the sitemap, IndexNow key file serving 200 — see [docs/ai-visibility-plan.md](docs/ai-visibility-plan.md) for what happens next |
+| **Indexation** | ❌ Zero. The brand query `team azizi compass san diego` returns twenty results and the site is not among them — ten third-party profiles own the brand instead. Phase 0 of the AI visibility plan |
 | **GBP** | ❌ Does not exist. Phase 2, and it needs the client to receive the postcard |
 | **Repo visibility** | ⚠️ Still public. No API for this — GitHub Settings → General → Danger Zone |
 
