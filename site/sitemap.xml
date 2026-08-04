@@ -259,6 +259,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://teamazizi.com/careers</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://teamazizi.com/concierge</loc>
     <lastmod>2026-08-02</lastmod>
     <changefreq>monthly</changefreq>

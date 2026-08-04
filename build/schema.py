@@ -293,6 +293,65 @@ def web_page(
     return node
 
 
+def job_posting(
+    *,
+    url: str,
+    identifier: str,
+    title: str,
+    description: str,
+    posted: str,
+    salary_min: int,
+    salary_max: int,
+) -> dict[str, Any]:
+    """`JobPosting` for a real, currently-open W-2 role.
+
+    Only ever built for a role the client has confirmed exists AND supplied a
+    pay range for. Two separate reasons, and the second is the load-bearing
+    one:
+
+    1. This markup feeds Google Jobs directly, so an invented range is a
+       fabrication published into a hiring product rather than onto a page.
+    2. California SB 1162 requires the pay scale to appear in the posting
+       itself for covered employers. The rendered page carries the same range
+       this node does — `validate.py` has no check for that pairing, so it is
+       enforced here by only ever taking both from one place in generate.py.
+
+    Deliberately NOT emitted for the 1099 agent roles: commission-only
+    contractor positions have no `baseSalary` to state honestly, and a
+    `JobPosting` without one, for a role that is not employment, misdescribes
+    the arrangement to every job aggregator that reads it.
+    """
+    return {
+        "@type": "JobPosting",
+        "@id": f"{url}#{identifier}",
+        "title": title,
+        "description": description,
+        "identifier": {
+            "@type": "PropertyValue",
+            "name": site.NAME,
+            "value": identifier,
+        },
+        "datePosted": posted,
+        "employmentType": "FULL_TIME",
+        "hiringOrganization": {"@id": ORG_ID},
+        "jobLocation": {
+            "@type": "Place",
+            "address": _postal_address(),
+        },
+        "baseSalary": {
+            "@type": "MonetaryAmount",
+            "currency": "USD",
+            "value": {
+                "@type": "QuantitativeValue",
+                "minValue": salary_min,
+                "maxValue": salary_max,
+                "unitText": "YEAR",
+            },
+        },
+        "directApply": True,
+    }
+
+
 def image(
     *,
     url: str,

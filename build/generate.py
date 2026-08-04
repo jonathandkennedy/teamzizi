@@ -2030,6 +2030,12 @@ def build_join() -> None:
           <a class="btn btn--filled" href="#apply">Start a conversation</a>
           <a class="btn" href="/team">Meet the team</a>
         </div>
+        <p class="updated" style="margin-top:1.75rem">
+          This page is for licensed agents and people working toward the
+          licence &mdash; an independent-contractor role working a territory.
+          Salaried marketing positions are on the
+          <a href="/careers">careers page</a>.
+        </p>
       </div>
       <div class="split__media">
         {c.picture("/assets/img/team/team-azizi-four.jpg",
@@ -2049,61 +2055,71 @@ def build_join() -> None:
   </div>
 </section>
 
-<section class="section section--panel">
+<section class="section">
   <div class="container">
-    <p class="eyebrow">Open roles</p>
-    <h2 class="rule-gold">What the team is hiring for</h2>
+    <p class="eyebrow">What an agent gets</p>
+    <h2 class="rule-gold">The support behind a licensee</h2>
     <p style="max-width:46rem">
-      Three kinds of role, and they are genuinely different jobs. The agent
-      roles are licensed positions working a territory; the two marketing
-      roles support all {len(site.ALL_AREAS)} communities from the Compass
-      office in Carmel&nbsp;Valley rather than carrying a book of clients.
+      An agent joining a team is buying back time and borrowing a platform.
+      Here is what that means specifically at Team Azizi, including the parts
+      that are still being built &mdash; the two marketing openings above
+      exist precisely so licensees are not their own marketing department.
     </p>
-    <div class="grid grid--3" style="margin-top:2.5rem">
+    <div class="grid grid--2" style="margin-top:2.5rem">
       <div>
-        <h3 class="rule-gold">Real estate agents</h3>
-        <p class="eyebrow" style="margin-bottom:0.5rem">Independent contractor</p>
+        <h3 class="rule-gold">Marketing that runs while you sell</h3>
         <p>
-          Licensed California salespersons, or people working toward the
-          licence, taking a named territory on an area-farming team.
-          Commission-based, as agent roles on a team normally are, and the
-          <a href="#who-fits">model section below</a> describes how the
-          territory part works day to day.
+          The content engine is already built &mdash; {len(site.ALL_AREAS)}
+          neighborhood guides and a <a href="/blog">journal</a> of sourced
+          posts, each one written to be recycled into social and email. The
+          social media and paid advertising hires above are what turn that
+          library into consistent distribution, so listing appointments and
+          showings are not competing with content production for the same
+          hours.
         </p>
       </div>
       <div>
-        <h3 class="rule-gold">Social media marketing</h3>
-        <p class="eyebrow" style="margin-bottom:0.5rem">Employee role</p>
+        <h3 class="rule-gold">Discovery that includes AI assistants</h3>
         <p>
-          The team&rsquo;s Instagram is its largest owned audience, and every
-          <a href="/blog">journal post</a> and guide refresh is meant to
-          become a post there. This role runs that pipeline rather than
-          starting a feed from nothing.
+          Every page here is built the way retrieval actually works:
+          self-contained answer blocks rather than flowing essays, and an
+          entity graph that names the licensee who wrote it with their DRE
+          number. That pairing is the point &mdash; the page answers the
+          question, the graph says who answered it. Results are measured
+          monthly against a fixed query panel across ChatGPT, Gemini,
+          Perplexity and AI Overviews, so the claim is checkable rather than
+          atmospheric.
         </p>
       </div>
       <div>
-        <h3 class="rule-gold">Paid advertising</h3>
-        <p class="eyebrow" style="margin-bottom:0.5rem">Employee role</p>
+        <h3 class="rule-gold">Lead flow with a traceable source</h3>
         <p>
-          Paid search and paid social against the pages this site already
-          ranks and answers with &mdash; the
-          <a href="/home-valuation">valuation tool</a> and the
-          <a href="/mello-roos">Mello-Roos lookup</a> are the two proven
-          destinations to point spend at.
+          Enquiries arrive through the pages themselves &mdash; the
+          <a href="/home-valuation">home-valuation tool</a>, the guides, and
+          the <a href="/mello-roos">Mello-Roos lookup</a> that answers the
+          county&rsquo;s most-repeated buyer question &mdash; which means
+          every lead comes with the page and the question that produced it,
+          rather than as a name on a list. How leads are routed and what a
+          licensee owns of the resulting relationship is settled per
+          territory, and belongs in writing.
+        </p>
+      </div>
+      <div>
+        <h3 class="rule-gold">Work that compounds under your name</h3>
+        <p>
+          A guide carries its licensee&rsquo;s byline, DRE number, headshot
+          and direct line, and an <a href="/team">agent page</a> of their own
+          sits behind it. An agent who deepens their area is building an
+          asset that keeps their name on the answer &mdash; which is the
+          practical difference between farming a territory and working a
+          lead queue for someone else&rsquo;s brand.
         </p>
       </div>
     </div>
-    <p class="updated" style="margin-top:2rem">
-      Pay ranges for the two employee roles are being finalised and will be
-      published here rather than held back for the interview. Agent
-      compensation is commission and is settled per territory &mdash; the
-      terms section below sets out exactly what to ask for, and why no team
-      should be describing it to you in averages.
-    </p>
   </div>
 </section>
 
-<section class="section">
+<section class="section section--panel">
   <div class="container">
     <p class="eyebrow">Territory</p>
     <h2 class="rule-gold">Where the team works</h2>
@@ -2164,6 +2180,272 @@ def build_join() -> None:
                     ("Home", f"{site.DOMAIN}/"),
                     ("Join Our Team", f"{site.DOMAIN}/join"),
                 ]),
+            ],
+        ),
+        changefreq="monthly",
+        priority="0.7",
+    )
+
+
+# The two salaried roles. Range and rendered text come from here and nowhere
+# else, so the page copy and the JobPosting markup cannot drift — which
+# matters more than usual because California SB 1162 requires the pay scale
+# to appear in the posting itself, not merely in the structured data.
+W2_ROLES = [
+    {
+        "id": "paid-advertising",
+        "title": "Paid Advertising",
+        "min": 150_000,
+        "max": 175_000,
+        "blurb": (
+            "Paid search and paid social pointed at pages that already "
+            "answer the query &mdash; the "
+            "<a href=\"/home-valuation\">valuation tool</a> and the "
+            "<a href=\"/mello-roos\">Mello-Roos lookup</a> are the two "
+            "proven destinations, and the neighborhood guides give every "
+            "campaign a landing page that is not a search widget."
+        ),
+        "schema_description": (
+            "Run paid search and paid social for a 19-licensee Compass real "
+            "estate team covering 31 San Diego County and Temecula Valley "
+            "communities, pointing spend at an existing library of "
+            "neighborhood guides, a home-valuation tool and a Mello-Roos "
+            "lookup rather than at generic landing pages."
+        ),
+    },
+    {
+        "id": "social-media-management",
+        "title": "Social Media Management",
+        "min": 80_000,
+        "max": 115_000,
+        "blurb": (
+            "The team&rsquo;s Instagram is its largest owned audience, and "
+            "every <a href=\"/blog\">journal post</a> and guide refresh is "
+            "written to become a post there. This role runs that pipeline "
+            "rather than starting a feed from nothing."
+        ),
+        "schema_description": (
+            "Own social media for a 19-licensee Compass real estate team in "
+            "San Diego County: turn an existing pipeline of neighborhood "
+            "guides and sourced journal posts into Instagram and social "
+            "content, and support 19 licensees across 31 communities."
+        ),
+    },
+]
+
+
+def build_careers() -> None:
+    """Salaried roles, split off `/join` at the client's call — correctly.
+
+    Two audiences that share nothing but an employer. A licensed agent is
+    weighing a 1099 territory against the team they are already on; a
+    marketing candidate is comparing a salary band against other salaried
+    jobs and will never read a word about Mello-Roos. One page trying to
+    serve both buries each of them in the other's material, and splits the
+    query too: "join a real estate team san diego" and "paid ads manager san
+    diego" want different pages.
+
+    This is also where the `JobPosting` markup lives, because this is where
+    the salaried openings are. `/join` carries none — see schema.job_posting.
+    """
+    def money(n: int) -> str:
+        return f"${n:,}"
+
+    role_cards = "\n".join(
+        f"""      <div>
+        <h3 class="rule-gold">{r['title']}</h3>
+        <p class="eyebrow" style="margin-bottom:0.5rem">Full-time employee
+        &middot; {money(r['min'])}&ndash;{money(r['max'])}</p>
+        <p>{r['blurb']}</p>
+      </div>"""
+        for r in W2_ROLES
+    )
+    options = "\n".join(
+        f'          <option value="{r["id"]}">{r["title"]}</option>'
+        for r in W2_ROLES
+    )
+
+    blocks = "\n\n".join([
+        c.answer_block(
+            anchor="open-roles",
+            question="What salaried roles is Team Azizi hiring for?",
+            lead=(
+                f"Team Azizi is hiring two full-time employee roles in San "
+                f"Diego County &mdash; Paid Advertising at "
+                f"{money(W2_ROLES[0]['min'])}&ndash;{money(W2_ROLES[0]['max'])} "
+                f"and Social Media Management at "
+                f"{money(W2_ROLES[1]['min'])}&ndash;{money(W2_ROLES[1]['max'])} "
+                f"&mdash; both working from the Compass office at "
+                f"{c.esc(site.STREET)} in Carmel&nbsp;Valley."
+            ),
+            body=(
+                f"<p>Both roles support {len(agents.ROSTER)} licensees across "
+                f"{len(site.ALL_AREAS)} communities rather than carrying a "
+                f"book of clients, which is the practical difference between "
+                f"these and the agent roles on "
+                f"<a href=\"/join\">the join-our-team page</a>. The licensed "
+                f"agent positions are independent-contractor and "
+                f"commission-based; these two are salaried employment.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="what-exists",
+            question="What would I be working with on day one?",
+            lead=(
+                f"The marketing infrastructure at Team Azizi already exists "
+                f"and is public: {len(site.ALL_AREAS)} San Diego County and "
+                f"Temecula Valley neighborhood guides, a journal of sourced "
+                f"posts, a home-valuation tool and a Mello-Roos lookup that "
+                f"answers the county&rsquo;s most-repeated buyer question."
+            ),
+            body=(
+                "<p>Neither role starts from nothing, which is the unusual "
+                "part of both. The social pipeline has a standing supply of "
+                "material &mdash; every <a href=\"/blog\">journal post</a> "
+                "and guide refresh is written to be recycled &mdash; and "
+                "paid campaigns have destinations that answer the query "
+                "rather than a generic landing page. What is missing in both "
+                "cases is the person to run it consistently.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="pay-and-terms",
+            question="Are these employee roles, and is the pay range real?",
+            lead=(
+                "Both San Diego County roles are full-time W-2 employment "
+                "rather than contract, and the ranges published above are "
+                "the ranges &mdash; printed on the page rather than held "
+                "back for a screening call."
+            ),
+            body=(
+                "<p>California requires pay scales in job postings for "
+                "covered employers, and publishing them is the right "
+                "practice regardless of whether a given employer is covered: "
+                "a candidate should not have to spend two interviews finding "
+                "out the job pays less than their current one. Benefits, "
+                "start date and reporting line are settled per role and "
+                "belong in writing before anyone accepts.</p>"
+            ),
+            heading="h2",
+        ),
+        c.answer_block(
+            anchor="apply",
+            question="How do you apply for a salaried role at Team Azizi?",
+            lead=(
+                "Applications for the Team Azizi salaried roles in San Diego "
+                "County go through the form below &mdash; name, contact "
+                "details, which of the two roles, and anything you want to "
+                "point at: campaigns you have run, accounts you have grown, "
+                "a portfolio link."
+            ),
+            body=(
+                "<p>A link to work beats a description of it for both of "
+                "these roles. If you hold a California real estate licence "
+                "as well, say so &mdash; it is not required for either "
+                "position, and the licensed agent path is a separate "
+                "conversation on <a href=\"/join\">the join-our-team "
+                "page</a>.</p>"
+            ),
+            heading="h2",
+        ),
+    ])
+
+    extra = f"""      <div class="field">
+        <label for="careers-role">Which role</label>
+        <select id="careers-role" name="role" required>
+{options}
+        </select>
+      </div>
+      <div class="field">
+        <label for="careers-work">Portfolio, campaigns or accounts to point at</label>
+        <textarea id="careers-work" name="work" rows="4"></textarea>
+      </div>
+"""
+
+    lead_agent = agents.author_for("/careers")
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container container--narrow">
+    <nav aria-label="Breadcrumb" class="updated">
+      <a href="/">Home</a> &rsaquo; Careers
+    </nav>
+    <p class="eyebrow">Careers at Team Azizi</p>
+    <h1>Salaried roles</h1>
+    <p class="lede">
+      Two full-time employee positions at a {len(agents.ROSTER)}-licensee
+      Compass team covering {len(site.ALL_AREAS)} communities across San
+      Diego County and the Temecula Valley &mdash; both supporting the whole
+      team rather than carrying clients, and both with the pay range printed
+      below rather than saved for the interview.
+    </p>
+    <p class="updated">
+      Looking for a licensed agent role instead? Those are
+      independent-contractor positions working a territory, and they live on
+      the <a href="/join">join-our-team page</a>.
+    </p>
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container">
+    <p class="eyebrow">Open positions</p>
+    <h2 class="rule-gold">What the team is hiring for</h2>
+    <div class="grid grid--2" style="margin-top:2.5rem">
+{role_cards}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow">
+
+{blocks}
+
+    <h2 class="rule-gold" style="margin-top:3.5rem" id="apply">Apply</h2>
+    <p>
+      Send the form and a member of the team replies directly. Applications
+      for both San Diego County roles arrive in the same place.
+    </p>
+    {lead_form(kind="careers", subject="Careers application",
+               cta="Send application", address=False, extra=extra)}
+    <p class="updated" style="margin-top:2.5rem">Last updated {TODAY}</p>
+  </div>
+</section>"""
+
+    write(
+        "/careers",
+        c.page(
+            title="Careers — Salaried Marketing Roles | Team Azizi at Compass",
+            description=(
+                "Full-time salaried openings at Team Azizi, a 19-licensee "
+                "Compass real estate team in San Diego County: Paid "
+                "Advertising ($150,000-$175,000) and Social Media Management "
+                "($80,000-$115,000), based in Carmel Valley."
+            ),
+            path="/careers",
+            body=body,
+            nodes=c.base_nodes() + [
+                schema.web_page(
+                    url=f"{site.DOMAIN}/careers", name="Careers",
+                    author_slug=lead_agent["slug"], updated=TODAY,
+                ),
+                schema.faq_page(faq_from_blocks(blocks)),
+                schema.breadcrumbs([
+                    ("Home", f"{site.DOMAIN}/"),
+                    ("Careers", f"{site.DOMAIN}/careers"),
+                ]),
+            ] + [
+                schema.job_posting(
+                    url=f"{site.DOMAIN}/careers",
+                    identifier=r["id"],
+                    title=r["title"],
+                    description=r["schema_description"],
+                    posted=TODAY,
+                    salary_min=r["min"],
+                    salary_max=r["max"],
+                )
+                for r in W2_ROLES
             ],
         ),
         changefreq="monthly",
@@ -2893,14 +3175,17 @@ def build_team() -> None:
     <p class="eyebrow">Careers</p>
     <h2 class="rule-center">Thinking about joining?</h2>
     <p style="margin-top:1.5rem">
-      Team Azizi takes applications from licensed agents and from people
-      working toward the licence. The <a href="/join">careers page</a> sets
-      out the production record with its sources, the brokerage, how territory
-      works on an area-farming team &mdash; and the terms we deliberately do
-      not publish, with the questions to ask instead.
+      Two different routes in. Licensed agents, and people working toward the
+      licence, take a territory as independent contractors &mdash;
+      <a href="/join">the join-our-team page</a> sets out the production
+      record with its sources, the brokerage, how area farming works, and the
+      terms we deliberately do not publish with the questions to ask instead.
+      The team is separately hiring two salaried marketing roles, with ranges
+      printed on <a href="/careers">the careers page</a>.
     </p>
     <p style="margin-top:2rem">
-      <a class="btn btn--filled" href="/join">Join our team</a>
+      <a class="btn btn--filled" href="/join">Agent roles</a>
+      <a class="btn" href="/careers">Salaried roles</a>
     </p>
   </div>
 </section>"""
@@ -3285,6 +3570,7 @@ def main() -> int:
     build_404()
     build_team()
     build_join()
+    build_careers()
     build_agents()
     build_sitemap()
     build_robots()
