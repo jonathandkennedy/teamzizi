@@ -361,6 +361,28 @@ PEOPLE: dict[str, dict[str, str]] = {
         "origin": "Client-supplied, from the recovered brand asset set.",
         "editing": "None recorded.",
     },
+    "backgrounds/join-hero.jpg": {
+        "shows": (
+            "Masooma, Nilab, Zohra and Sofia Azizi, outdoors in a "
+            "Mediterranean-style courtyard. The hero of /join."
+        ),
+        "origin": "Client-supplied 2026-08-04, same set as the cut-out below.",
+        "editing": (
+            "Same answer as the cut-out: a real photograph of the four, "
+            "edited with generative tools. The background here is the "
+            "composed version of the same subjects, and it has the "
+            "characteristics of a generated or replaced backdrop."
+        ),
+        # The distinction that keeps this publishable, and the line not to
+        # cross with it.
+        "caption_rule": (
+            "Never caption this as a place. The people are the claim and the "
+            "client has confirmed them; the courtyard is set dressing and is "
+            "not a Team Azizi office, a listing, or anywhere in San Diego "
+            "County so far as anyone here knows. Alt text names the people "
+            "and stops there."
+        ),
+    },
     "team-azizi-four.jpg": {
         "shows": "Masooma, Nilab, Zohra and Sofia Azizi.",
         "origin": (

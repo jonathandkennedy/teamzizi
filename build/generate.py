@@ -2039,15 +2039,15 @@ def build_join() -> None:
 """
 
     lead_agent = agents.author_for("/join")
-    body = f"""<section class="hero">
-  {c.picture("/assets/img/team/team-group.jpg",
-             alt="The Team Azizi team at Compass", width=1920, height=1528,
-             cls="hero__media", eager=True)}
+    body = f"""<section class="hero hero--bottom">
+  {c.picture("/assets/img/backgrounds/join-hero.jpg",
+             alt="Masooma, Nilab, Zohra and Sofia Azizi of Team Azizi",
+             width=1537, height=1023, cls="hero__media", eager=True)}
   <div class="hero__inner">
-    <h1>Join our team</h1>
-    <p class="hero__sub">Build your name in a territory of your own</p>
+    <h1>Build your career and brand with Team Azizi</h1>
+    <p class="hero__sub">The support, experience and expertise to reach your next level</p>
     <div class="cta-row" style="justify-content:center">
-      <a class="btn btn--light" href="#apply">Apply today</a>
+      <a class="btn btn--light" href="#apply">Find out how we can support you</a>
     </div>
   </div>
 </section>
@@ -2055,12 +2055,14 @@ def build_join() -> None:
 <section class="section section--tight">
   <div class="container" style="text-align:center">
     <p class="eyebrow">Careers at Team Azizi &mdash; licensed agents</p>
-    <h2>A team worth checking before you join it</h2>
+    <h2>Build a business, not a job</h2>
     <p class="lede" style="margin-inline:auto">
-      {len(agents.ROSTER)} licensees at Compass across {len(site.ALL_AREAS)}
-      communities, from La&nbsp;Jolla to the Temecula Valley. Every claim
-      below is published with its source, because you are deciding where to
-      move a licence &mdash; not clicking an ad.
+      The licensees who do best here stop counting transactions and start
+      thinking in territory &mdash; a place they own, a name buyers search
+      for, and a pipeline that does not reset every January. Everything below
+      exists so you are building that instead of building a marketing
+      department. And every claim on this page is published with its source,
+      because you are deciding where to move a licence, not clicking an ad.
     </p>
     <div class="stats">
 {proof_stats}
@@ -2082,7 +2084,7 @@ def build_join() -> None:
 {why_cards}
     </div>
     <div class="cta-row" style="justify-content:center;margin-top:3.5rem">
-      <a class="btn btn--light" href="#apply">Start a conversation</a>
+      <a class="btn btn--light" href="#apply">Find out how we can support you</a>
     </div>
   </div>
 </section>
@@ -2105,7 +2107,7 @@ def build_join() -> None:
         and the room to become the person who answers for it.
       </p>
       <div class="cta-row" style="margin-top:2rem">
-        <a class="btn btn--dark" href="#apply">Apply today</a>
+        <a class="btn btn--dark" href="#apply">Find out how we can support you</a>
         <a class="btn" href="/team">Meet the team</a>
       </div>
     </div>
@@ -2162,7 +2164,7 @@ def build_join() -> None:
       separate them faster than any careers page can.
     </p>
     <div class="cta-row">
-      <a class="btn btn--light" href="#apply">Apply today</a>
+      <a class="btn btn--light" href="#apply">Find out how we can support you</a>
       <a class="btn btn--light" href="{site.PHONE_HREF}">{site.PHONE_DISPLAY}</a>
     </div>
   </div>
@@ -2175,13 +2177,13 @@ def build_join() -> None:
 
 {blocks}
 
-    <h2 class="rule-gold" style="margin-top:3.5rem" id="apply">Start a conversation</h2>
+    <h2 class="rule-gold" style="margin-top:3.5rem" id="apply">Find out how we can support you</h2>
     <p>
       Send this and a member of the team replies directly. Salaried marketing
       roles are on the <a href="/careers">careers page</a>.
     </p>
     {lead_form(kind="join", subject="Agent careers enquiry",
-               cta="Send me the details", address=False, extra=extra)}
+               cta="Find out how we can support you", address=False, extra=extra)}
     <p class="updated" style="margin-top:2.5rem">Last updated {TODAY}</p>
   </div>
 </section>"""
