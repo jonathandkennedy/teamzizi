@@ -1983,36 +1983,60 @@ def build_join() -> None:
       </div>
 """
 
-    lead_agent = agents.author_for("/join")
-    body = f"""<section class="hero">
-  {c.picture("/assets/img/team/team-group.jpg",
-             alt="The Team Azizi team at Compass", width=1920, height=1528,
-             cls="hero__media", eager=True)}
-  <div class="hero__inner">
-    <h1>Join our team</h1>
-    <p class="hero__sub">The team you can check before you join it</p>
-    <div class="cta-row" style="justify-content:center">
-      <a class="btn btn--light" href="#apply">Apply today</a>
-    </div>
-  </div>
-</section>
+    # Regions rather than a flat list of 31: an agent reads this asking
+    # "which part of the county would be mine", which is a map question.
+    regions = [
+        ("The original six", site.NEIGHBORHOODS),
+        ("North County", site.NORTH_COUNTY),
+        ("San Diego city", site.SD_CITY),
+        ("East County &amp; South Bay", site.EAST_SOUTH),
+        ("Southwest Riverside", site.SW_RIVERSIDE),
+    ]
+    region_cards = "\n".join(
+        f"""      <div>
+        <h3 class="rule-gold">{label}</h3>
+        <p>{len(areas)} communities, including
+        {", ".join(f'<a href="/neighborhoods/{a["slug"]}">{c.esc(a["name"])}</a>'
+                   for a in areas[:3])}.</p>
+      </div>"""
+        for label, areas in regions
+    )
 
-<section class="section">
-  <div class="container container--narrow">
+    lead_agent = agents.author_for("/join")
+    body = f"""<section class="section" style="padding-top:calc(var(--nav-h) + 3rem)">
+  <div class="container">
     <nav aria-label="Breadcrumb" class="updated">
       <a href="/">Home</a> &rsaquo; Join Our Team
     </nav>
-    <p class="eyebrow">Careers at Team Azizi</p>
-    <p class="lede">
-      Team Azizi is a team of {len(agents.ROSTER)} licensees at Compass
-      covering {len(site.ALL_AREAS)} communities, from La&nbsp;Jolla and the
-      coast through the urban core, East County and the South Bay, inland to
-      Escondido and the backcountry, and up the I&#8209;15 into the Temecula
-      Valley. Everything a recruiting page normally asks you to take on faith
-      &mdash; the production record, the marketing, the brokerage, the
-      territory &mdash; is published on this site with its sources. Read it
-      first, then decide whether the conversation is worth having.
-    </p>
+    <div class="split" style="margin-top:2rem">
+      <div class="split__body">
+        <p class="eyebrow">Careers at Team Azizi</p>
+        <h1>Join our team</h1>
+        <p class="lede">
+          Team Azizi is {len(agents.ROSTER)} licensees at Compass covering
+          {len(site.ALL_AREAS)} communities &mdash; the coast from
+          La&nbsp;Jolla to Oceanside, the urban core, East County and the
+          South Bay, inland through Escondido to the backcountry, and up the
+          I&#8209;15 into the Temecula Valley.
+        </p>
+        <p>
+          Everything a careers page normally asks an agent to take on faith
+          &mdash; the production record, the marketing, the brokerage, the
+          territory &mdash; is published on this site with its sources. Read
+          it before you talk to anyone here, and ask the questions in the
+          terms section below of every team you are weighing.
+        </p>
+        <div class="cta-row" style="margin-top:2rem">
+          <a class="btn btn--filled" href="#apply">Start a conversation</a>
+          <a class="btn" href="/team">Meet the team</a>
+        </div>
+      </div>
+      <div class="split__media">
+        {c.picture("/assets/img/team/team-group.jpg",
+                   alt="The Team Azizi team at Compass",
+                   width=1920, height=1528, eager=True)}
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2022,6 +2046,74 @@ def build_join() -> None:
     <div class="grid grid--4" style="margin-top:3rem">
 {columns}
     </div>
+  </div>
+</section>
+
+<section class="section section--panel">
+  <div class="container">
+    <p class="eyebrow">Open roles</p>
+    <h2 class="rule-gold">What the team is hiring for</h2>
+    <p style="max-width:46rem">
+      Three kinds of role, and they are genuinely different jobs. The agent
+      roles are licensed positions working a territory; the two marketing
+      roles support all {len(site.ALL_AREAS)} communities from the Compass
+      office in Carmel&nbsp;Valley rather than carrying a book of clients.
+    </p>
+    <div class="grid grid--3" style="margin-top:2.5rem">
+      <div>
+        <h3 class="rule-gold">Real estate agents</h3>
+        <p>
+          Licensed California salespersons, or people working toward the
+          licence, taking a named territory on an area-farming team. The
+          <a href="#who-fits">model section below</a> describes how that
+          works day to day.
+        </p>
+      </div>
+      <div>
+        <h3 class="rule-gold">Social media marketing</h3>
+        <p>
+          The team&rsquo;s Instagram is its largest owned audience, and every
+          <a href="/blog">journal post</a> and guide refresh is meant to
+          become a post there. This role runs that pipeline rather than
+          starting a feed from nothing.
+        </p>
+      </div>
+      <div>
+        <h3 class="rule-gold">Paid advertising</h3>
+        <p>
+          Paid search and paid social against the pages this site already
+          ranks and answers with &mdash; the
+          <a href="/home-valuation">valuation tool</a> and the
+          <a href="/mello-roos">Mello-Roos lookup</a> are the two proven
+          destinations to point spend at.
+        </p>
+      </div>
+    </div>
+    <p class="updated" style="margin-top:2rem">
+      Compensation, employment type and start dates are set per role and are
+      not published here &mdash; ask for them in the first conversation, and
+      see the terms section below for why.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="eyebrow">Territory</p>
+    <h2 class="rule-gold">Where the team works</h2>
+    <p style="max-width:46rem">
+      An agent evaluating a team is really asking which part of the county
+      would be theirs. Team Azizi covers {len(site.ALL_AREAS)} communities in
+      five clusters, each with a published guide an agent inherits and keeps
+      current. Which one you would take is among the first things to settle,
+      and the guides show who covers what today.
+    </p>
+    <div class="grid grid--4" style="margin-top:2.5rem">
+{region_cards}
+    </div>
+    <p style="margin-top:2rem">
+      <a class="btn" href="/neighborhoods">All {len(site.ALL_AREAS)} guides</a>
+    </p>
   </div>
 </section>
 
