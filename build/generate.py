@@ -2038,6 +2038,22 @@ def build_join() -> None:
       </div>
 """
 
+    # The visibility check asks for one thing the careers form does not, and
+    # it is the one field the report cannot be produced without: which market
+    # to run the panel against. Everything else stays minimal, because this
+    # is the low-commitment offer on the page and friction defeats its whole
+    # purpose.
+    vis_extra = """      <div class="field">
+        <label for="visibility-market">Which communities do you work?</label>
+        <input id="visibility-market" name="market" type="text" required
+               placeholder="e.g. Carmel Valley, Del Mar, 92130">
+      </div>
+      <div class="field">
+        <label for="visibility-brokerage">Your brokerage (optional)</label>
+        <input id="visibility-brokerage" name="brokerage" type="text">
+      </div>
+"""
+
     lead_agent = agents.author_for("/join")
     body = f"""<section class="hero hero--bottom">
   {c.picture("/assets/img/backgrounds/join-hero.jpg",
@@ -2152,6 +2168,50 @@ def build_join() -> None:
   </div>
 </section>
 
+<section class="section section--panel" id="visibility-check">
+  <div class="container container--narrow">
+    <p class="eyebrow">Free, and yours whether we ever speak</p>
+    <h2 class="rule-gold">Are you there when a seller asks an AI who to hire?</h2>
+    <p>
+      Buyers and sellers increasingly open ChatGPT, Gemini or Perplexity
+      before they open Zillow, and ask it plainly: who should I hire to sell
+      my house in Carmel&nbsp;Valley. The assistant answers with names, and
+      cites the sources it drew them from. Most agents have never checked
+      whether they are in that answer &mdash; or who is.
+    </p>
+    <p>
+      Send the form and a member of the team runs the same query panel we run
+      on ourselves every month, for your market, and sends you what comes
+      back:
+    </p>
+    <ul>
+      <li>Whether you are named in the answers to the questions sellers and
+      buyers actually ask about your areas, across
+      <strong>ChatGPT, Gemini, Perplexity and Google&rsquo;s AI
+      Overviews</strong>.</li>
+      <li><strong>Which agents and teams do get named</strong> for those same
+      questions in your market.</li>
+      <li><strong>Which sources the assistants cite</strong> when they answer
+      &mdash; the part almost nobody looks at, and the part you can act
+      on.</li>
+    </ul>
+    <p>
+      Two honest notes. A person runs this, so it is not an instant score and
+      it will not land in your inbox in ten seconds. And we know exactly what
+      the report feels like to read, because our own first one came back
+      <strong>absent from fourteen of fourteen queries</strong> &mdash; which
+      is why this site exists in the shape it does.
+    </p>
+    {lead_form(kind="visibility", subject="AI visibility check request",
+               cta="Send me my visibility check", address=False,
+               extra=vis_extra)}
+    <p class="updated" style="margin-top:1.5rem">
+      No obligation to talk about joining anything. If the result is that you
+      are already everywhere, we will tell you that too.
+    </p>
+  </div>
+</section>
+
 <section class="band band--heavy">
   {c.picture("/assets/img/backgrounds/work-with-us.jpg", width=1920,
              height=1200, cls="band__media")}
@@ -2212,6 +2272,7 @@ def build_join() -> None:
                 ]),
             ],
             hero=True,
+            audience="agent",
         ),
         changefreq="monthly",
         priority="0.7",
@@ -2478,6 +2539,7 @@ def build_careers() -> None:
                 )
                 for r in W2_ROLES
             ],
+            audience="agent",
         ),
         changefreq="monthly",
         priority="0.7",
