@@ -305,6 +305,62 @@ Caps by role, doubled for retina: backgrounds 1920, neighborhoods 1280, textures
 
 `vercel.json` at the repo root carries `cleanUrls: true`, `trailingSlash: false`, the 301 map, and cache plus security headers (HSTS with preload, nosniff, SAMEORIGIN, strict-origin-when-cross-origin). Fonts get a one-year immutable cache; css/js/img get a week with `stale-while-revalidate`.
 
+### The recovered-URL map, and why two of them are 302s
+
+JSON takes no comments, so the reasoning lives here. Once GSC was connected
+(2026-08-04) it backfilled sixteen months of the old site, which turned "about
+ten surviving URLs" into an exact list. Auditing the top thirty against the
+live site: the valuable ones were already preserved — `/neighborhoods/scripps-ranch`
+was the old site's single biggest page at **8,353 impressions** and it 200s at
+the same URL, as do `/team`, `/neighborhoods/4s-ranch` and every current agent
+page. The URL-preservation decision paid for itself.
+
+Nine were not. They are now mapped, and **the status code is the interesting
+part**:
+
+| Old URL | → | Code | Why |
+|---|---|---|---|
+| `/blog/adus-in-scripps-ranch…` (341) | `/blog/adu-rules-san-diego-county-2026` | 301 | Live post, same topic, better sourced |
+| `/blog/del-mar-neighborhoods-explained…` (223) | `/neighborhoods/del-mar` | 301 | |
+| `/blog/4s-ranch-vs-del-sur…` (173) | `/neighborhoods/4s-ranch` | 301 | |
+| `/blog/townhome-vs-single-family-in-4s-ranch` (169) | `/neighborhoods/4s-ranch` | 301 | |
+| `/blog/is-4s-ranch-a-smart-long-term-home-purchase` (157) | `/neighborhoods/4s-ranch` | 301 | |
+| `/agent/deanna-colby` (85) | `/team` | 301 | Off the roster, resolved |
+| **`/blog/mello-roos-vs-hoa-in-4s-ranch` (1,682, pos 7.6)** | `/neighborhoods/4s-ranch` | **302** | |
+| **`/testimonials` (561, pos 7.1)** | `/team` | **302** | |
+| **`/agent/coby-herzog` (73)** | `/team` | **302** | Roster status still open — §9 |
+
+**Those last three are temporary on purpose.** A 301 tells Google the URL is
+permanently gone and to transfer its equity elsewhere; a 302 says the resource
+will return *at this address*, so the original stays indexed. Both of these are
+coming back:
+
+- The Mello-Roos post earned 1,682 impressions at position 7.6 **on this
+  domain** — that is not a lost post to mourn, it is proof the Mello-Roos wedge
+  in [docs/ai-visibility-plan.md](docs/ai-visibility-plan.md) §6 already worked
+  here once. It gets rewritten at its original URL as the first district page
+  of that layer, and the 302 comes out when it does.
+- `/testimonials` is not a build task. `build_testimonials()` already exists
+  and deliberately generates nothing while `testimonials.ENTRIES` is empty, and
+  `data/testimonials.py` forbids invented, composite or reworded quotes. Zillow
+  blocks automated access and its terms prohibit scraping, so collection is
+  each agent copying their own reviews by hand from their logged-in profile.
+  The page ships itself the day that list is filled — the 302 holds the URL
+  until then.
+- `/agent/coby-herzog` is 302 rather than 301 because §9 still records their
+  roster status as open. An earlier note here said these agent URLs "need a
+  deliberate 301 either way"; that was written before the impression data
+  existed, and a 301 asserts a permanence nobody has established. If Coby is
+  off the roster it becomes a 301 alongside Deanna's; if they are on it, the
+  page comes back at its own URL with its 73 impressions intact.
+
+The other five old posts are **deliberately not being rebuilt.** Between them
+they earned ~1,463 impressions in sixteen months — about ninety a month — and
+the originals were Luxury Presence content we do not hold the text for, so
+"rebuild" would mean writing five new researched posts. That effort buys more
+pointed at the Mello-Roos district layer, where the head term alone is 2,400/mo
+at KD 1.
+
 **The preview URL sits behind Vercel deployment protection.** `curl -L` against it returns the login page with HTTP 200, which looks exactly like success. I claimed "all 200, preview is fine" once on that basis and it was wrong. Check for `Authentication Required` or `vercel.com/sso` in the body before believing any preview measurement.
 
 ---
@@ -333,8 +389,8 @@ Caps by role, doubled for retina: backgrounds 1920, neighborhoods 1280, textures
 - [ ] **Rancho Santa Fe: keep or drop?** One lifetime sale, hardest SERP in the county. An expert page there fails the plan's own webspam test.
 - [ ] **Confirm 15 of the 16 farming assignments.** Only Del Mar → Angotta is confirmed. Pre-written in `agents.PROPOSED_ASSIGNMENTS`. Also: can Del Sur be split from 4S Ranch? ZIP 92127 covers both plus Rancho Bernardo and Santaluz, so any split needs street-level data.
 - [ ] **Per-area sales counts for the nine North County communities** — needed to publish a record block on those guides.
-- [ ] **Testimonials** — permissioned quotes with attribution. Pipeline is built and empty.
-- [ ] **Coby Herzog roster status.** Deanna Colby resolved; Coby still open. Their `/agent/` URLs are indexed and need a deliberate 301 either way.
+- [ ] **Testimonials** — permissioned quotes with attribution. Pipeline is built and empty, and this is now worth money rather than merely nice: `/testimonials` earned **561 impressions at position 7.1** on the old site and is currently 302'd to `/team` holding the URL, while §2 of [docs/ai-visibility-plan.md](docs/ai-visibility-plan.md) found review counts are the visible differentiator among the agents winning `best real estate agent san diego`. Each agent copies their own Zillow reviews by hand — Zillow blocks automated access and its terms prohibit scraping — into `testimonials.ENTRIES`, and the page generates itself.
+- [ ] **Coby Herzog roster status.** Deanna Colby resolved and 301'd to `/team`. Coby is 302'd there pending the answer: 301 if off the roster, restore the page if on it. 73 impressions either way.
 - [ ] **Confirm the canonical name string** — validator warns until then.
 - [ ] **Nicholas Miele's YouTube channel** (@lifeinsandiego, 12.4K subs, 205 videos, ~weekly). The only real on-location neighborhood video in the estate, in the team's link-in-bio, but owned personally. Highest-reach asset they have and it is not theirs. Licensing arrangement?
 - [ ] **@soniasellssd — 9,412 followers**, still live, bio "Founder of Team Azizi". Four and a half times the team account. Family decision, not an SEO one. A team-level Zillow profile under her name also surfaced and conflicts with `site.NOT_USING`.
