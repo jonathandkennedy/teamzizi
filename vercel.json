@@ -17,6 +17,52 @@
       "source": "/properties/:listing((?!sale$|sold$)[^/]+)",
       "destination": "/properties/sold",
       "permanent": true
+    },
+
+    {
+      "source": "/blog/adus-in-scripps-ranch-what-homeowners-should-know",
+      "destination": "/blog/adu-rules-san-diego-county-2026",
+      "permanent": true
+    },
+    {
+      "source": "/blog/del-mar-neighborhoods-explained-beach-village-and-hills",
+      "destination": "/neighborhoods/del-mar",
+      "permanent": true
+    },
+    {
+      "source": "/blog/4s-ranch-vs-del-sur-which-north-county-community-fits-you",
+      "destination": "/neighborhoods/4s-ranch",
+      "permanent": true
+    },
+    {
+      "source": "/blog/townhome-vs-single-family-in-4s-ranch",
+      "destination": "/neighborhoods/4s-ranch",
+      "permanent": true
+    },
+    {
+      "source": "/blog/is-4s-ranch-a-smart-long-term-home-purchase",
+      "destination": "/neighborhoods/4s-ranch",
+      "permanent": true
+    },
+    {
+      "source": "/agent/deanna-colby",
+      "destination": "/team",
+      "permanent": true
+    },
+    {
+      "source": "/blog/mello-roos-vs-hoa-in-4s-ranch",
+      "destination": "/neighborhoods/4s-ranch",
+      "permanent": false
+    },
+    {
+      "source": "/testimonials",
+      "destination": "/team",
+      "permanent": false
+    },
+    {
+      "source": "/agent/coby-herzog",
+      "destination": "/team",
+      "permanent": false
     }
   ],
   "headers": [
