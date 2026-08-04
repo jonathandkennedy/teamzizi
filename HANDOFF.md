@@ -47,6 +47,7 @@ Two things will waste your time if you don't know them.
 /mello-roos                        2,671 words — the deepest single asset on the site
 /blog  +  /blog/{7}                journal — calendar in docs/content-runbook.md §4
 /sell  /buy  /concierge            service pages
+/join                              careers — see §2, and what it refuses to publish
 /contact  /thank-you  /404
 /properties/sale  /properties/sold 301 targets for ~10 indexed legacy listing URLs
 ```
@@ -86,6 +87,8 @@ Two things will waste your time if you don't know them.
 | **Neighborhood market data comes from public primary sources**, cited and dated: County Auditor CFD reports for Mello-Roos, district boundary maps for schools | No client dependency, fully defensible under no-fabrication, and the Mello-Roos and school-boundary data *is* the moat — not one competitor page publishes it. Revisit if the client grants MLS access. |
 | **Hand-craft, don't scale by template** | The May 2026 core update explicitly demotes name-swapped geo templates. Sixteen pages sharing a generator but not sharing prose; each carries community-specific district, CFD and boundary facts that had to be looked up individually. |
 | **Primary tracking keyword: "carmel valley san diego real estate agent"** | Sits at their physical office (92130) so it is geogrid-trackable and proximity-favoured; decisive agent-selection intent; genuinely winnable, unlike portal-locked "homes for sale" or RSF head terms owned by Barry Estates and Brizolis Janzen. |
+| **`/join` publishes only checkable recruiting claims, and says out loud what it withholds** | Added 2026-08-04 at client request, modelled on a supplied mockup. The genre runs on unfalsifiable promises ("we invest in your future"), and the reader is a licensee deciding where to move a licence. So the four value columns carry the RealTrends and SDBJ placements, the published production figures, the brokerage and its DRE number, and the marketing surface that can be read on this domain before anyone applies. **Splits, caps, desk fees, lead volume, training and benefits are not published** — none are in the record this site was built from, and inventing them to fill the template is the exact failure `check_unverified` exists to prevent. The `#terms` block states that and tells the applicant to get all of it in writing from any team, this one included. If the client wants those terms published, they supply them and they become facts like any other. |
+| **No `JobPosting` schema on `/join`** | `JobPosting` describes a specific opening — title, date posted, employment type, compensation — and Google's policy expects a real, currently-open role behind it. There is no confirmed role list or comp band, so marking one up would be fabrication in structured data, where it is *more* dangerous than in prose because it feeds Google Jobs directly. The page ships as a `WebPage` with `FAQPage` derived from its blocks. Revisit when the client confirms actual openings. |
 | **Earned mentions only — never bought** | Google's May 2026 AI-search guide makes buying citations to influence AI results a stated spam risk. Also CitedRealty's compliance line, and it has to survive contact with the Scripps Ranch competitor who *is* using paid press releases. Legit PR announcing real RealTrends results is fine; paid "AI mention" packages are not. |
 
 ### People, authorship and attribution
@@ -192,6 +195,14 @@ This took four passes and is written down because the failure mode is expensive 
 **Valley Center needed a different question entirely.** Its one plausible file carries **both** `Valley Center, California` and `Laguna Mountains (California)` — two places fifty kilometres apart, with no coordinates to break the tie. I rejected it on that basis, and that was over-cautious. What settled it was asking not *what does the file claim* but *who relies on it*: it is the lead image on the Valley Center, California article across **27 Wikipedias**, bound to **Wikidata Q2861838**, and in 2020 an editor deliberately recategorised it *to* Valley Center, removing the broader county and CDP categories by hand. **Usage is a stronger signal than metadata, because metadata is one uploader and usage is many editors with something to lose.**
 
 **Rejected during review**, so you know the bar: an upside-down Carmel Valley file; a USDA Fallbrook frame that is a portrait of a named farmer rather than a picture of the place; a Fallbrook crop that landed on bare ground instead of the grove.
+
+**Rejected 2026-08-04 — the two images supplied with the careers-page request.** The client sent a finished "Join Our Team" landing-page mockup and a cut-out group shot of four women in cream suits, as the reference for `/join`. The layout was used; **neither image was.** Three separate reasons, any one of which is disqualifying:
+
+1. **It is a different company.** The mockup is branded **Team Azizi Injury Lawyers** — a personal injury law firm that happens to share the name. Its photography is presumptively theirs, and publishing another firm's team photograph on this site is a straightforward misappropriation, quite apart from the brand confusion it would create for a Compass real estate team.
+2. **The people are not this team.** Compared against the nineteen recovered headshots, none of the four is on the roster. A recruiting page exists to show a licensee who they would be working alongside; showing four people who do not work here is the one lie the page cannot survive being caught in.
+3. **The cut-out has the marks of a generated image**, which puts it on the wrong side of the line this section is entirely about. The rule does not bend because the subject is people rather than places.
+
+`/join` ships on `team-group.jpg` — the real thirteen-person photograph already used on the homepage. If the client wants a portrait-format recruiting hero of the kind the mockup shows, that is a shot-list item for the commissioned pass in [docs/photography-brief.md](docs/photography-brief.md), not a stock or generated substitute.
 
 **Current state: 16 of 16.**
 
@@ -324,6 +335,9 @@ Caps by role, doubled for retina: backgrounds 1920, neighborhoods 1280, textures
 - [ ] **@soniasellssd — 9,412 followers**, still live, bio "Founder of Team Azizi". Four and a half times the team account. Family decision, not an SEO one. A team-level Zillow profile under her name also surfaced and conflicts with `site.NOT_USING`.
 - [ ] **The other three Instagram link-in-bio URLs.** The visible one is `teamazizi.com/home-valuation` — which is why that page was launch-critical rather than a Phase 3 rebuild. The other three are almost certainly dead teamazizi.com paths.
 - [ ] **Replace "Top 1% in SD County" in the Instagram bio** with the RealTrends line, so profile and site assert the same checkable thing.
+- [ ] **`/join` — the terms the page deliberately does not publish.** Splits, caps, desk fees, lead flow, training and any benefits. Supply them and they can be published like any other fact; leave them unsupplied and the page keeps saying so, which is defensible but converts worse than a straight answer.
+- [ ] **`/join` — the careers form's consent language needs counsel's eye.** It reuses `site.TCPA_CONSENT` verbatim, which authorises contact "about real estate services" — correct for buyer and seller enquiries, arguably not the right description for a recruiting conversation. It was not rewritten unilaterally because it is an approved legal string. Either counsel confirms it covers recruiting contact, or they supply a careers variant.
+- [ ] **`/join` — are there actual open roles?** If yes, they can carry real `JobPosting` markup (see §2) and appear in Google Jobs. Needs titles, employment type, location and comp band from the client — fabricating any of it is out.
 - [ ] **Google Maps API key** (`site.GOOGLE_MAPS_KEY` is empty) — for the contact-page map.
 - [ ] **Malcolm Schick's higher-resolution headshot** — current one is soft.
 - [ ] **Privacy policy** — needed before launch for the forms.
