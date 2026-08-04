@@ -330,6 +330,13 @@ part**:
 | **`/testimonials` (561, pos 7.1)** | `/team` | **302** | |
 | **`/agent/coby-herzog` (73)** | `/team` | **302** | Roster status still open — §9 |
 
+**Vercel emits 308 and 307, not 301 and 302.** `"permanent": true` produces a
+308 and `false` produces a 307 — the method-preserving equivalents. Google
+treats 308 exactly as 301 and 307 exactly as 302, so the intent above is
+carried precisely, but a `curl -I` shows numbers this section would otherwise
+seem to contradict. Verified against production on 2026-08-04: all nine fire,
+six as 308 and three as 307, each landing on a 200.
+
 **Those last three are temporary on purpose.** A 301 tells Google the URL is
 permanently gone and to transfer its equity elsewhere; a 302 says the resource
 will return *at this address*, so the original stays indexed. Both of these are
