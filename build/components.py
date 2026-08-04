@@ -295,8 +295,47 @@ def footer() -> str:
     <p class="footer__copyright">
       &copy; <span data-year>2026</span> {esc(site.NAME)}.
     </p>
+{powered_by()}
   </div>
 </footer>"""
+
+
+def powered_by() -> str:
+    """The CitedRealty build credit, from the badge kit at
+    citedrealty.com/powered-by.html.
+
+    Option 2 (inline SVG) of the three offered, for the reason the kit gives —
+    it is the one meant for custom builds, and nothing loads from another
+    origin, so the badge cannot slow this page down or break when an asset
+    moves. That also keeps it consistent with the rule the rest of this site
+    is built on: the client owns every byte, with no dependency they can lose.
+
+    Rendered in the kit's light-footer variant, because this footer sits on
+    #ffffff — the two text fills are swapped per its instructions
+    (#8E8EA8 -> #6B6B85, #F5F5FA -> #14142B). The gradient reads on both.
+
+    Anchor text stays branded, and the placement is once, in the footer,
+    which is what the kit asks for and what keeps a build credit reading as
+    attribution rather than link building.
+    """
+    return """    <p class="footer__powered">
+      <a href="https://citedrealty.com/" aria-label="Powered by CitedRealty">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190 44" width="190" height="44"
+             role="img" aria-label="Powered by CitedRealty"
+             font-family="Inter,'Avenir Next',-apple-system,'Segoe UI',Helvetica,Arial,sans-serif">
+          <defs><linearGradient id="cr-pb" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#4F46E5"/><stop offset=".6" stop-color="#8B5CF6"/>
+            <stop offset="1" stop-color="#C084FC"/></linearGradient></defs>
+          <g transform="translate(4,5) scale(0.303) translate(-46,-48)">
+            <path d="M 66 48 h 72 a 20 20 0 0 1 20 20 v 52 a 20 20 0 0 1 -20 20 h -50 l -22 20 v -20 h 0 a 20 20 0 0 1 -20 -20 v -52 a 20 20 0 0 1 20 -20 z" fill="url(#cr-pb)"/>
+            <path d="M 102 72 L 128 92 L 128 122 L 76 122 L 76 92 Z" fill="none" stroke="#fff" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M 134 56 q 2 8 10 10 q -8 2 -10 10 q -2 -8 -10 -10 q 8 -2 10 -10 z" fill="#fff"/>
+          </g>
+          <text x="47" y="18" font-size="8.5" font-weight="600" fill="#6B6B85" letter-spacing="1.3">POWERED BY</text>
+          <text x="47" y="36" font-size="18" font-weight="700" fill="#14142B" letter-spacing="-.4">Cited<tspan fill="url(#cr-pb)">Realty</tspan><tspan dx="2" dy="-7" font-size="9" letter-spacing="0" fill="url(#cr-pb)">[1]</tspan></text>
+        </svg>
+      </a>
+    </p>"""
 
 
 def page(
