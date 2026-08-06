@@ -36,7 +36,24 @@ SITE = ROOT / "site"
 
 # Public by design: the key is proof of domain control, not a credential. It is
 # verified by fetching https://teamazizi.com/<KEY>.txt, which must contain it.
-KEY = "ce855552330a448ca1c9fa0f83e35e5a"
+# That is also why swapping it is a swap and not a rotation — there is no
+# secret here to have leaked.
+KEY = "a5ac16d870d4480e8de36f49e4b2270d"
+
+# Keys that are no longer submitted under but whose files must still be served.
+#
+# IndexNow verifies a submission by fetching the key file at the point it
+# *processes* the batch, which is not the moment the endpoint returns 200. The
+# full 85-URL sitemap went in under ce8555… on 2026-08-04 and may still be in
+# that queue; deleting its file now would fail verification for the one
+# submission that matters most, the launch one. The protocol explicitly allows
+# a host to carry several keys, so both are served and nothing is lost.
+#
+# Empty this list once the launch batch has visibly landed in Bing Webmaster
+# Tools — a week is generous. Nothing breaks if it lingers; it is one 32-byte
+# file, and this note is here so a future tidy-up knows it was deliberate
+# rather than debris.
+PREVIOUS_KEYS = ["ce855552330a448ca1c9fa0f83e35e5a"]
 ENDPOINT = "https://api.indexnow.org/indexnow"
 HOST = site.DOMAIN.replace("https://", "")
 
