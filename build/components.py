@@ -46,11 +46,17 @@ def head(
     og_image: str = "/assets/img/logos/og-default.png",
 ) -> str:
     canonical = f"{site.DOMAIN}{path}"
+    # Bing reads its verification tag at the root and nowhere else, so it ships
+    # on the homepage alone rather than on all 87 pages. See site.py.
+    bing = (
+        f'\n<meta name="msvalidate.01" content="{site.BING_VERIFICATION}">'
+        if path == "/" else ""
+    )
     return f"""<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(description)}">
-<link rel="canonical" href="{canonical}">
+<link rel="canonical" href="{canonical}">{bing}
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{esc(site.NAME)}">

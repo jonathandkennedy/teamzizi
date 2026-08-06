@@ -3675,11 +3675,18 @@ Sitemap: {site.DOMAIN}/sitemap.xml
 
 def build_indexnow_key() -> None:
     """IndexNow verifies domain control by fetching this file. Public by
-    design — it is a proof of control, not a credential."""
+    design — it is a proof of control, not a credential.
+
+    `PREVIOUS_KEYS` are written too. A batch is verified when it is processed,
+    not when the endpoint returns 200, so a key file has to outlive the switch
+    away from it or the submissions still in the queue fail. See indexnow.py
+    for when that list can be emptied.
+    """
     import indexnow
 
-    (SITE / f"{indexnow.KEY}.txt").write_text(indexnow.KEY, encoding="utf-8")
-    print(f"  site/{indexnow.KEY}.txt")
+    for key in [indexnow.KEY, *indexnow.PREVIOUS_KEYS]:
+        (SITE / f"{key}.txt").write_text(key, encoding="utf-8")
+        print(f"  site/{key}.txt")
 
 
 def main() -> int:

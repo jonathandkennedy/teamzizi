@@ -23,6 +23,21 @@ NAME_CONFIRMED_BY_CLIENT = False
 
 DOMAIN = "https://teamazizi.com"
 
+# Bing Webmaster Tools site verification. Public by design, like the IndexNow
+# key — it proves control of the site to Bing, and carries no access to
+# anything. Bing reads it at the root only, so components.head() emits it on
+# the homepage and nowhere else.
+#
+# This one matters more than the usual webmaster-tools box-tick: ChatGPT's
+# retrieval leans on Bing's index, so Bing Webmaster Tools is the only place
+# the ChatGPT-side half of docs/ai-visibility-plan.md can actually be read.
+# Google Search Console tells you nothing about it.
+#
+# Safe to remove once Bing shows the property verified — verification persists
+# — but there is no reason to bother, and removing it risks a silent
+# de-verification if Bing ever re-checks.
+BING_VERIFICATION = "0D1B9F290BC3C17384DABAD725F47C92"
+
 STREET = "12860 El Camino Real, Suite 100"
 CITY = "San Diego"
 REGION = "CA"
