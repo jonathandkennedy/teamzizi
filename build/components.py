@@ -10,7 +10,9 @@ trailing slashes — that would 301 away the equity we are rebuilding to keep.
 
 from __future__ import annotations
 
+import hashlib
 import html
+from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
@@ -18,6 +20,35 @@ import schema
 from data import agents, site
 
 SITE_ROOT = Path(__file__).resolve().parent.parent / "site"
+
+
+@lru_cache(maxsize=None)
+def asset(path: str) -> str:
+    """Append a content hash to a CSS/JS URL so changes actually reach people.
+
+    `vercel.json` caches `/assets/(css|js|img)/*` for a week. That is the right
+    number for bytes that rarely change, but the filenames never changed with
+    them, so a returning visitor kept the stylesheet they already had for up to
+    seven days no matter what shipped.
+
+    This is not hypothetical. The /join hero fix went to production and the
+    client still saw the broken crop, because their browser was serving the CSS
+    it had cached before the fix. The bug was invisible from the server side —
+    the file was correct, the deploy was correct, and every check passed.
+
+    Hashing the contents fixes both halves at once: identical bytes produce an
+    identical URL and stay cached, changed bytes produce a new URL that no
+    cache has ever seen. The week-long lifetime becomes an asset rather than a
+    liability.
+
+    Missing files raise rather than silently shipping an unversioned URL — a
+    quiet fallback here would reintroduce exactly the failure this exists to
+    prevent.
+    """
+    f = SITE_ROOT / path.lstrip("/")
+    if not f.is_file():
+        raise SystemExit(f"asset() — no such file: {f}")
+    return f"{path}?v={hashlib.sha256(f.read_bytes()).hexdigest()[:8]}"
 
 # Built pages only. Sell / Buy / Concierge were here linking at nothing, so
 # the primary navigation on all 43 pages offered three 404s. They come back
@@ -71,10 +102,10 @@ def head(
       type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/lato-400.woff2" as="font"
       type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/assets/css/fonts.css">
-<link rel="stylesheet" href="/assets/css/tokens.css">
-<link rel="stylesheet" href="/assets/css/base.css">
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="{asset('/assets/css/fonts.css')}">
+<link rel="stylesheet" href="{asset('/assets/css/tokens.css')}">
+<link rel="stylesheet" href="{asset('/assets/css/base.css')}">
+<link rel="stylesheet" href="{asset('/assets/css/site.css')}">
 
 {schema.render(nodes)}"""
 
@@ -380,7 +411,7 @@ def page(
 </main>
 {footer()}
 {action_bar(variant=audience)}
-<script src="/assets/js/site.js" defer></script>
+<script src="{asset('/assets/js/site.js')}" defer></script>
 </body>
 </html>
 """
