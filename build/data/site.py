@@ -778,7 +778,7 @@ TCPA_CONSENT = (
 # validate.py fails the build while it still says PLACEHOLDER.
 # --------------------------------------------------------------------------
 
-LEAD_ENDPOINT = "https://formspree.io/f/PLACEHOLDER"
+LEAD_ENDPOINT = "https://formspree.io/f/mnpajnlv"
 LEAD_NOTIFY = EMAIL  # where submissions land
 
 
