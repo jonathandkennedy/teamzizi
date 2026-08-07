@@ -305,6 +305,8 @@ Caps by role, doubled for retina: backgrounds 1920, neighborhoods 1280, textures
 
 `vercel.json` at the repo root carries `cleanUrls: true`, `trailingSlash: false`, the 301 map, and cache plus security headers (HSTS with preload, nosniff, SAMEORIGIN, strict-origin-when-cross-origin). Fonts get a one-year immutable cache; css/js/img get a week with `stale-while-revalidate`.
 
+**That week-long CSS cache is only safe because the URLs are fingerprinted.** `components.asset()` appends a content hash — `/assets/css/site.css?v=da7e9ccf` — so identical bytes keep an identical URL and stay cached, while changed bytes get a URL no cache has seen. Without it a stylesheet fix took up to seven days to reach anyone who had already visited, which is exactly how the `/join` hero fix appeared to fail after it had actually shipped (§11). If you add a stylesheet or script, route it through `asset()`; it raises on a missing file rather than quietly emitting an unversioned URL.
+
 ### The recovered-URL map, and why two of them are 302s
 
 JSON takes no comments, so the reasoning lives here. Once GSC was connected
@@ -476,6 +478,7 @@ Kept because every one of them is a trap the next person can fall into, and thre
 | The byline rotation made `expert_block` say "Team lead" about two people who are not the team lead | Reading the rendered output rather than trusting the diff | Authorship is asserted in three places; changing one means checking all three. |
 | A validator rule for bare-pronoun openers flagged 9 false positives | The failures were obviously fine on inspection | A crude heuristic that fires on good content trains people to ignore the validator. Requiring both conditions fixed it. |
 | San Marcos's licence was recorded as CC BY-SA when it is public domain | Checked against the API before commit | Do not transcribe a licence from memory or from a sibling entry. |
+| The `/join` hero fix shipped to production and the client still saw the bug | They reported it a second time. Every server-side check passed — the file was right, the deploy was right | **A deploy is not a delivery.** `/assets/css/*` had a seven-day cache on an unfingerprinted URL, so returning visitors kept the old stylesheet no matter what shipped. Invisible from the server: you cannot detect it by fetching your own site. `components.asset()` now content-hashes CSS and JS. |
 | A test corrupted `contact.html` and a second test then treated the damaged file as the original | Regenerating from source rather than from a backup | A test that mutates a real file must restore it in a `finally`, and never trust a backup taken after the damage. |
 | Rejected Valley Center's photo as unverifiable | Asking a different question — who *uses* the file | Contradictory metadata is a reason to look harder, not always a reason to stop. |
 | A documentation-only commit arrived with 27 pages of date churn attached, every one claiming an update that never happened | Reading `git show --stat` before pushing, and asking why a docs change touched 29 files | A generator that stamps `date.today()` unconditionally manufactures freshness. **Read the file list on every commit** — if the count surprises you, find out why before pushing. Open item in §9. |
