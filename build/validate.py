@@ -353,6 +353,29 @@ def check_unverified() -> None:
                 f"{person['name']} has both a Zillow and a realtor.com "
                 "profile; the CTA prefers Zillow. Drop one if that is wrong."
             )
+
+    # No profile URL may belong to two people. These now ship inside each
+    # agent's `sameAs`, which is an assertion that the profile IS that person
+    # — so a duplicate does not merely mis-render a link, it tells the
+    # knowledge graph two licensees are the same human.
+    #
+    # This is HANDOFF §11's Masooma bug turned into a machine check: a
+    # non-greedy regex once attached the wrong agent's Zillow profile, and it
+    # was caught only because every pairing was printed and read by hand.
+    # Nobody should have to rely on that twice.
+    seen: dict[str, str] = {}
+    for person in _agents.ROSTER:
+        for field in ("compass", "zillow", "instagram", "website", "realtor_com"):
+            url = person.get(field)
+            if not url:
+                continue
+            if url in seen:
+                errors.append(
+                    f"{field} profile {url!r} is claimed by both "
+                    f"{seen[url]} and {person['name']} — a sameAs cannot "
+                    "assert two people are one person."
+                )
+            seen[url] = person["name"]
     if _agents.ZILLOW_PENDING:
         warnings.append(
             f"{len(_agents.ZILLOW_PENDING)} licensee(s) have no review "
