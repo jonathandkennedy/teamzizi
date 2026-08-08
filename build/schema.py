@@ -243,8 +243,37 @@ def agent(person: dict[str, Any], *, hood: dict[str, Any] | None = None) -> dict
         node["image"] = f"{site.DOMAIN}{person['photo']}"
     if person.get("phone"):
         node["telephone"] = person["phone"]
-    if person.get("compass"):
-        node["sameAs"] = [f"https://www.compass.com/agents/{person['compass']}/"]
+    # Every profile that is genuinely this person, most authoritative first.
+    #
+    # This is the entity-reconciliation half of the graph and it is not
+    # decoration. A ChatGPT trace for "best real estate agent in Del Mar"
+    # (2026-08-08, docs/ai-visibility-plan.md §3) answered almost entirely
+    # out of a local-business/Zillow entity lookup, and it fused three
+    # different people — Heather Caden, Michael Cady and Trent Cady, all of
+    # Coastal Premier — into one recommendation, then attributed Zillow's
+    # transaction numbers to the blend. Resolution is that fragile.
+    #
+    # Zillow matters most after the brokerage: it supplied every hard number
+    # in that answer. Asserting "the person on this page IS that profile" is
+    # the only way the record and the identity travel together.
+    #
+    # Per-agent Yelp and Google Business Profile are deliberately absent —
+    # client decision 2026-08-08, one team listing each (see site.py). Zillow
+    # and Instagram stay per-agent because that is what they are; there is no
+    # team-level equivalent to consolidate them into.
+    same_as = [
+        url
+        for url in (
+            f"https://www.compass.com/agents/{person['compass']}/"
+            if person.get("compass") else None,
+            person.get("zillow"),
+            person.get("instagram"),
+            person.get("website"),
+        )
+        if url
+    ]
+    if same_as:
+        node["sameAs"] = same_as
     if hood:
         area: dict[str, Any] = {
             "@type": "Place",

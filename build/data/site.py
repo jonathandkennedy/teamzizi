@@ -344,6 +344,25 @@ VIDEO_CHANNEL = "https://www.youtube.com/@lifeinsandiego"
 VIDEO_CHANNEL_NAME = "Living in San Diego"
 VIDEO_CHANNEL_OWNER = "Nicholas Miele"
 
+# Client decision 2026-08-08: ONE Team Azizi Google Business Profile and ONE
+# Team Azizi Yelp listing. No per-agent listings on either.
+#
+# Right call, for three reasons worth writing down so it is not relitigated:
+# Google requires genuine reachability at the address for each listing, and
+# nineteen listings at one office is a suspension risk, not a strategy;
+# reviews concentrate instead of splitting nineteen ways, and review *count*
+# is what separates the agents an assistant names (15 vs 82 vs 91 in the
+# 2026-08-08 trace); and one record is the only version that can stay
+# consistent with the footer and the schema, which components.footer() has
+# always required — "schema, footer and GBP are one entity or they are three."
+#
+# The accepted cost, recorded rather than hidden: a single GBP at 12860 El
+# Camino Real is a Carmel Valley business. Every agent ChatGPT named for Del
+# Mar had a Del Mar street address, and that lookup is geographically scoped,
+# so this listing is unlikely to surface there. GBP service areas can name Del
+# Mar, but a service area is weaker than a physical address in a city-scoped
+# query. Del Mar therefore has to be won on Zillow and press, not GBP —
+# docs/ai-visibility-plan.md §3.
 SAME_AS_PENDING = [
     (
         "https://www.linkedin.com/company/teamazizirealestate",
@@ -353,7 +372,17 @@ SAME_AS_PENDING = [
     (
         "https://www.yelp.com/biz/sonia-azizi-team-azizi-san-diego-3",
         "Listing carries the founder's name, the old Craftsman Way address and "
-        "the old (619) phone. Needs the NAP fix and a family decision first.",
+        "the old (619) phone. This IS the team Yelp listing — claim and fix it "
+        "rather than creating a second one; Yelp flags duplicates and the "
+        "stale NAP is already indexed. Needs the NAP fix and a family "
+        "decision first.",
+    ),
+    (
+        "(Google Business Profile — not yet created)",
+        "The single team GBP. It is the gate for the local-business entity "
+        "lookup that answers 'best agent in X' queries, and nothing on the "
+        "site substitutes for it. Add the maps URL here once verified, and "
+        "re-pin GEO against it.",
     ),
 ]
 
